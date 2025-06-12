@@ -1,0 +1,4 @@
+Copyright (c) 2025 Conrad Klaus
+
+All rights reserved. This software and associated documentation files are proprietary
+and confidential. Unauthorized copying, modification, distribution, or use is strictly prohibited.
