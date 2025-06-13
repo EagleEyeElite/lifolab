@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
-import Image from 'next/image';
-import Match from '@public/match.svg'
+import ScrollAnimatedLogo from "@/app/scrollAnimatedLogo";
 
 interface SectionProps {
   bgColor: string;
@@ -10,31 +9,34 @@ interface SectionProps {
 function Section({ bgColor, children }: SectionProps) {
   return (
     <div className={`h-screen ${bgColor} flex items-center justify-center p-8 text-white text-2xl`}>
-        {children}
+      {children}
     </div>
   );
 }
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <Section bgColor="bg-emerald-500">
-        <Image
-          src={Match}
-          alt="Match"
-          width={96}
-          height={96}
-        />
-      </Section>
-      <Section bgColor="bg-violet-600">
-        <p>Welcome to <code className="bg-white/20 px-2 py-1 rounded">Living the Forest Lab!</code></p>
-      </Section>
-      <Section bgColor="bg-rose-500">
-        <p>Explore the wilderness</p>
-      </Section>
-      <Section bgColor="bg-indigo-700">
-        <p>Discover nature&apos;s secrets</p>
-      </Section>
-    </main>
+    <div>
+      <main>
+        <Section bgColor="bg-emerald-600">
+          <p>Welcome to <code className="bg-white/20 px-2 py-1 rounded">Living the Forest Lab!</code></p>
+        </Section>
+        <Section bgColor="bg-green-700">
+          <p>Explore the wilderness</p>
+        </Section>
+        <Section bgColor="bg-teal-600">
+          <p>Discover nature&apos;s secrets</p>
+        </Section>
+        <Section bgColor="bg-lime-600">
+          <p>Find your wild side</p>
+        </Section>
+        <Section bgColor="bg-emerald-800">
+          <p>Deep forest adventures await</p>
+        </Section>
+        <Section bgColor="bg-green-600">
+          <p>Connect with the earth</p>
+        </Section>
+      </main>
+    </div>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import React from "react";
 import "./globals.css";
+import Navbar from "@/app/navbar";
 
 export const metadata: Metadata = {
   title: "Living the Forest Lab",
@@ -16,6 +17,7 @@ export default async function RootLayout({children}: {
   return (
     <html lang="en" suppressHydrationWarning>
     <body>
+      <Navbar />
       {children}
     </body>
     </html>
