@@ -25,8 +25,8 @@ export default function Navbar() {
         ))}
       </ul>
     </nav>
-    <ScrollAnimatedLogo containerRef={containerRef}/>
     <div className="min-h-screen bg-lime-100" ref={containerRef}/>
+    <ScrollAnimatedLogo containerRef={containerRef}/>
     </>
   );
 }

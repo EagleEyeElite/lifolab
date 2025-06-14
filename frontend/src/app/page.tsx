@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import ScrollAnimatedLogo from "@/app/scrollAnimatedLogo";
+import LivingForestLab from "@/app/content";
+
 
 interface SectionProps {
   bgColor: string;
@@ -18,6 +19,7 @@ export default function Home() {
   return (
     <div>
       <main>
+        <LivingForestLab />
         <Section bgColor="bg-emerald-600">
           <p>Welcome to <code className="bg-white/20 px-2 py-1 rounded">Living the Forest Lab!</code></p>
         </Section>
