@@ -1,26 +1,12 @@
 import React from 'react';
-import { Mic, FolderClosed, LucideIcon } from 'lucide-react';
+import { Mic, FolderClosed } from 'lucide-react';
 import LogoTU from '@public/logoTU.png'
 import LogoStiftungHochschullehre from '@public/logoStiftungHochschullehre.png'
 import Image, {StaticImageData} from "next/image";
 import Link from "next/link";
+import SectionHeader from "@/components/sectionHeader";
 
 
-function SectionHeader({ children, icon: Icon }: {
-  children: React.ReactNode;
-  icon: LucideIcon;
-  className?: string;
-}) {
-  return (
-    <header className={`space-y-2`}>
-      <hr className="border-black border-t" />
-      <p className="text-black text-sm font-mono tracking-wide flex items-center gap-2">
-        {children} <Icon size={16} />
-      </p>
-      <hr className="border-black border-t" />
-    </header>
-  );
-}
 
 // Contact Person Component
 function ContactPerson({ name, email }: {
@@ -32,7 +18,7 @@ function ContactPerson({ name, email }: {
       <p className="font-mono text-sm text-black">{name}</p>
       <Link
         href={`mailto:${email}`}
-        className="inline-block px-4 py-2 rounded-full border border-black text-black font-mono text-sm hover:text-[rgba(0,255,94,0.91)]"
+        className="inline-block px-4 py-2 rounded-full border border-black text-black font-mono text-sm"
       >
         {email}
       </Link>
