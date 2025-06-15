@@ -1,93 +1,142 @@
 import React from 'react';
+import { Mic, FolderClosed, LucideIcon } from 'lucide-react';
+import LogoTU from '@public/logoTU.png'
+import LogoStiftungHochschullehre from '@public/logoStiftungHochschullehre.png'
+import Image, {StaticImageData} from "next/image";
+import Link from "next/link";
 
-export default function Footer() {
+
+function SectionHeader({ children, icon: Icon }: {
+  children: React.ReactNode;
+  icon: LucideIcon;
+  className?: string;
+}) {
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-md font-sans text-sm leading-relaxed text-gray-700 antialiased">
-      {/* Header Section */}
-      <div className="grid grid-cols-12 gap-4 mb-8">
-        <div className="col-span-8">
-          <hr className="mb-2 border-gray-300" />
-          <div className="flex items-center uppercase tracking-wide text-xs text-gray-600">
-            <span>Contact</span>
-          </div>
-          <hr className="mt-2 border-gray-300" />
+    <header className={`space-y-2`}>
+      <hr className="border-black border-t" />
+      <p className="text-black text-sm font-mono tracking-wide flex items-center gap-2">
+        {children} <Icon size={16} />
+      </p>
+      <hr className="border-black border-t" />
+    </header>
+  );
+}
+
+// Contact Person Component
+function ContactPerson({ name, email }: {
+  name: string;
+  email: string;
+}) {
+  return (
+    <div className="space-y-2">
+      <p className="font-mono text-sm text-black">{name}</p>
+      <Link
+        href={`mailto:${email}`}
+        className="inline-block px-4 py-2 rounded-full border border-black text-black font-mono text-sm hover:text-[rgba(0,255,94,0.91)]"
+      >
+        {email}
+      </Link>
+    </div>
+  );
+}
+
+// Logo Link Component
+function LogoLink({ href, src, alt, className = "" }: {
+  href: string;
+  src: StaticImageData;
+  alt: string;
+  className?: string;
+}) {
+  return (
+    <Link href={href} target="_blank" rel="noopener noreferrer">
+      <Image
+        src={src}
+        alt={alt}
+        className={`h-12 w-auto object-contain ${className}`}
+      />
+    </Link>
+  );
+}
+
+// Contact Component
+function Contact() {
+  const projectName: string = "Living the Forest Lab | Reallabor Wald";
+  const contacts = [
+    { name: "Athena Grandis", email: "athena.grandis@tu-berlin.de" },
+    { name: "Sara Reichert", email: "s.reichert@tu-berlin.de" }
+  ];
+
+  return (
+    <div className="flex-[2] space-y-4">
+      <SectionHeader icon={Mic}>Contact</SectionHeader>
+
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex-1 space-y-4">
+          <p className="font-mono text-sm text-black font-medium">
+            {projectName}
+          </p>
+          {contacts.map((contact, index: number) => (
+            <ContactPerson
+              key={index}
+              name={contact.name}
+              email={contact.email}
+            />
+          ))}
         </div>
-        <div className="col-span-4">
-          <hr className="mb-2 border-gray-300" />
-          <div className="flex items-center uppercase tracking-wide text-xs text-gray-600">
-            <span>Imprint</span>
-          </div>
-          <hr className="mt-2 border-gray-300" />
-        </div>
+
+        <address className="flex-1 font-mono text-sm text-black not-italic">
+          Technische Universität Berlin<br />
+          Faculty IV Electrical Engineering and Computer Science<br />
+          Communication Systems<br />
+          EN 1<br />
+          Einsteinufer 17<br />
+          10587 Berlin
+        </address>
       </div>
+    </div>
+  );
+}
 
-      {/* Main Content */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Contact Information */}
-        <div className="space-y-4">
-          <div className="text-sm text-gray-600">
-            <div className="font-medium mb-4">Living the Forest Lab | Reallabor Wald</div>
-            <div className="mb-2">Athena Grandis</div>
-            <a
-              href="mailto:athena.grandis@tu-berlin.de"
-              className="inline-block px-3 py-1 rounded bg-gray-100 text-blue-600 hover:bg-gray-200 transition-colors duration-200 mb-4"
-            >
-              athena.grandis@tu-berlin.de
-            </a>
-            <div className="mb-2">Sara Reichert</div>
-            <a
-              href="mailto:s.reichert@tu-berlin.de"
-              className="inline-block px-3 py-1 rounded bg-gray-100 text-blue-600 hover:bg-gray-200 transition-colors duration-200"
-            >
-              s.reichert@tu-berlin.de
-            </a>
-          </div>
+// Imprint Component
+function Imprint() {
+  const logos = [
+    { href: "https://www.tu.berlin", src: LogoTU, alt: "TU Berlin Logo" },
+    { href: "https://stiftung-hochschullehre.de", src: LogoStiftungHochschullehre, alt: "Stiftung Hochschullehre Logo" }
+  ];
+
+  return (
+    <div className="flex-1 space-y-4">
+      <SectionHeader icon={FolderClosed}>Imprint</SectionHeader>
+
+      <div className="space-y-6">
+        <div className="flex items-center justify-center gap-6 flex-wrap">
+          {logos.map((logo, index: number) => (
+            <LogoLink
+              key={index}
+              href={logo.href}
+              src={logo.src}
+              alt={logo.alt}
+            />
+          ))}
         </div>
 
-        {/* Institution Information */}
-        <div className="text-sm text-gray-600 space-y-1">
-          <div>Technische Universität Berlin</div>
-          <div>Faculty IV Electrical Engineering and Computer Science</div>
-          <div>Communication Systems</div>
-          <div>EN 1</div>
-          <div>Einsteinufer 17</div>
-          <div>10587 Berlin</div>
-        </div>
-
-        {/* Logos and Copyright */}
-        <div className="space-y-6">
-          <div className="flex items-center justify-center space-x-6">
-            {/* TU Berlin Logo */}
-            <a
-              href="https://www.tu.berlin"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-80 transition-opacity"
-            >
-              <div className="w-16 h-12 rounded bg-gradient-to-r from-red-600 to-red-700 flex items-center justify-center">
-                <span className="text-white font-bold text-xs">TU</span>
-              </div>
-            </a>
-
-            {/* Stiftung Hochschullehre Logo */}
-            <a
-              href="https://stiftung-hochschullehre.de"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-80 transition-opacity"
-            >
-              <div className="w-20 h-12 rounded bg-gradient-to-r from-blue-600 to-blue-700 flex items-center justify-center">
-                <span className="text-white font-bold text-xs">SHL</span>
-              </div>
-            </a>
-          </div>
-
-          <div className="text-center text-sm text-gray-600">
-            Copyright:<br />
-            Living the Forest Lab | Reallabor Wald
-          </div>
+        <div className="text-center font-mono text-sm text-black space-y-1">
+          <p className="font-medium">Copyright:</p>
+          <p>Living the Forest Lab | Reallabor Wald</p>
         </div>
       </div>
     </div>
+  );
+}
+
+// Main Footer Component
+export default function Footer() {
+  return (
+    <footer className="bg-[rgba(0,255,94,0.91)] rounded-t-3xl border border-black border-b-0 mx-2 p-6">
+      <div className="flex flex-col lg:flex-row gap-8">
+        <Contact />
+        <Imprint />
+      </div>
+    </footer>
   );
 }
