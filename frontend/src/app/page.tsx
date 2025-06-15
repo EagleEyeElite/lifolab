@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import LivingForestLab from "@/app/content";
+import About from "@/app/about";
+import People from "@/app/people";
 
 
 interface SectionProps {
@@ -22,7 +23,8 @@ export default function Home() {
         <Section bgColor="bg-emerald-600">
           <p>Welcome to <code className="bg-white/20 px-2 py-1 rounded">Living the Forest Lab!</code></p>
         </Section>
-        <LivingForestLab />
+        <About />
+        <People />
       </main>
     </div>
   );

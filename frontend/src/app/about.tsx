@@ -4,7 +4,7 @@ import SectionHeader from "@/components/sectionHeader";
 import { Pencil } from "lucide-react";
 import ExampleForest from '@public/exampleForest.jpeg'
 
-export default function LivingForestLab() {
+export default function About() {
   return (
     <div className="max-w-full w-full font-mono bg-white" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
       {/* About section header */}
