@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import About from "@/app/about";
 import People from "@/app/people";
+import Places from "@/app/places";
 
 
 interface SectionProps {
@@ -25,6 +26,7 @@ export default function Home() {
         </Section>
         <About />
         <People />
+        <Places />
       </main>
     </div>
   );
