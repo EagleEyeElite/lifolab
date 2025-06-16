@@ -53,7 +53,7 @@ export default function ScrollAnimatedLogo({ containerRef }: ScrollAnimatedLogoP
   return (
     <>
       <motion.div
-        className="fixed inset-0 grid place-items-center"
+        className="fixed z-100 inset-0 grid place-items-center"
         style={{
           scale,
           x,
