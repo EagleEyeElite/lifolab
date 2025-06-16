@@ -1,11 +1,18 @@
 'use client'
 
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import SectionHeader from "@/components/sectionHeader";
 import { Package } from "lucide-react";
 import Masonry from "react-smart-masonry";
+
+/**
+ *
+ * https://tympanus.net/codrops/2013/07/02/loading-effects-for-grid-items-with-css-animations/
+ *
+ * use this for loading in animation of the news cards
+ */
 
 // Import your original image
 import ExampleForest from '@public/exampleForest.jpeg';
@@ -21,11 +28,11 @@ interface NewsItem {
 
 export default function News() {
   const [isMounted, setIsMounted] = useState(false);
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
+  // Define newsItems
   const newsItems: NewsItem[] = [
     {
       title: "Title Projekt #1",
@@ -133,6 +140,66 @@ export default function News() {
     }
   ];
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Single observer setup with proper cleanup
+  const setupObserver = useCallback(() => {
+    // Clean up existing observer
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    // Create new observer
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const newVisibleCards = new Set(visibleCards);
+        let hasChanges = false;
+
+        entries.forEach((entry) => {
+          const index = parseInt(entry.target.getAttribute('data-index') || '0');
+          if (entry.isIntersecting && !newVisibleCards.has(index)) {
+            newVisibleCards.add(index);
+            hasChanges = true;
+          }
+        });
+
+        if (hasChanges) {
+          setVisibleCards(newVisibleCards);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '20px 0px -20px 0px' // Reduced margins for stability
+      }
+    );
+
+    // Observe all cards
+    cardRefs.current.forEach((ref) => {
+      if (ref && observerRef.current) {
+        observerRef.current.observe(ref);
+      }
+    });
+  }, [visibleCards]);
+
+  // Setup observer after mount and masonry layout
+  useEffect(() => {
+    if (!isMounted) return;
+
+    // Delay to ensure Masonry has completed its layout
+    const timeoutId = setTimeout(() => {
+      setupObserver();
+    }, 300);
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [isMounted, setupObserver]);
+
   const getImageClassName = (size: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive') => {
     switch (size) {
       case 'tiny':
@@ -152,11 +219,26 @@ export default function News() {
     }
   };
 
-  const NewsCard = ({ item }: { item: NewsItem }) => {
+  const NewsCard = ({ item, index }: { item: NewsItem; index: number }) => {
     const imageClassName = getImageClassName(item.imageSize);
+    const isVisible = visibleCards.has(index);
 
     return (
-      <div className="space-y-3 group">
+      <div
+        ref={el => {
+          cardRefs.current[index] = el;
+        }}
+        data-index={index}
+        className={`space-y-3 group transition-all duration-500 ease-out ${
+          isVisible
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-4'
+        }`}
+        style={{
+          // Reduce animation intensity and remove staggered delays
+          transitionDelay: '0s'
+        }}
+      >
         <Link
           href={item.href}
           className="block overflow-hidden rounded-lg hover:shadow-lg transition-shadow duration-300"
@@ -167,6 +249,10 @@ export default function News() {
               alt={item.title}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
+              // Add priority loading for images above the fold
+              priority={index < 6}
+              // Add sizes for better performance
+              sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"
             />
           </div>
         </Link>
@@ -209,7 +295,7 @@ export default function News() {
             </SectionHeader>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {newsItems.map((item, index) => (
-                <NewsCard key={index} item={item} />
+                <NewsCard key={index} item={item} index={index} />
               ))}
             </div>
           </div>
@@ -226,7 +312,7 @@ export default function News() {
             News
           </SectionHeader>
 
-          {/* React Smart Masonry with reduced gutters */}
+          {/* React Smart Masonry with stable configuration */}
           <Masonry
             breakpoints={breakpoints}
             columns={{
@@ -235,14 +321,16 @@ export default function News() {
               desktop: 3
             }}
             gap={{
-              mobile: 12,    // Reduced from 20px
-              tablet: 14,    // Reduced from 30px
-              desktop: 17    // Reduced from 32px
+              mobile: 12,
+              tablet: 14,
+              desktop: 17
             }}
             autoArrange={true}
+            // Add key to force re-render when needed
+            key={`masonry-${isMounted}`}
           >
             {newsItems.map((item, index) => (
-              <NewsCard key={index} item={item} />
+              <NewsCard key={index} item={item} index={index} />
             ))}
           </Masonry>
         </div>
