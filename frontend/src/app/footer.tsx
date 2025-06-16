@@ -118,7 +118,7 @@ function Imprint() {
 // Main Footer Component
 export default function Footer() {
   return (
-    <footer className="bg-[rgba(0,255,94,0.91)] rounded-t-3xl border border-black border-b-0 mx-2 p-6">
+    <footer className="bg-[rgba(0,255,94,0.91)] rounded-t-3xl border border-black border-b-0 mx-6 p-6">
       <div className="flex flex-col lg:flex-row gap-8">
         <Contact />
         <Imprint />

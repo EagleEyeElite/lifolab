@@ -33,7 +33,7 @@ export default function News() {
       tag: "Workshop",
       tagHref: "workshop",
       image: ExampleForest,
-      imageSize: "massive" // Keep your original sizes
+      imageSize: "massive"
     },
     {
       title: "Title Projekt #2",
@@ -166,7 +166,6 @@ export default function News() {
               src={item.image}
               alt={item.title}
               fill
-              sizes="(max-width: 350px) 100vw, (max-width: 750px) 50vw, 33vw"
               className="object-cover group-hover:scale-105 transition-transform duration-300"
             />
           </div>
@@ -175,14 +174,14 @@ export default function News() {
         <div className="space-y-2">
           <Link
             href={item.href}
-            className="block text-lg leading-tight text-black opacity-85 font-normal hover:opacity-75 transition-opacity no-underline"
+            className="block text-black text-sm font-mono tracking-wide leading-[1.2] no-underline"
           >
             {item.title}
           </Link>
-          <div>
+          <div className="mt-2">
             <Link
               href={item.tagHref}
-              className="inline-block px-2 py-1 text-xs font-mono tracking-wide text-black/70 border border-black/20 rounded hover:bg-black/5 transition-colors no-underline"
+              className="inline-flex items-center px-[7px] py-[3px] text-xs font-mono leading-[1.2] text-black bg-[rgba(0,255,94,0.91)] border border-black rounded-full no-underline"
             >
               {item.tag}
             </Link>
@@ -208,7 +207,7 @@ export default function News() {
             <SectionHeader icon={Package}>
               News
             </SectionHeader>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {newsItems.map((item, index) => (
                 <NewsCard key={index} item={item} />
               ))}
@@ -227,7 +226,7 @@ export default function News() {
             News
           </SectionHeader>
 
-          {/* React Smart Masonry - The Perfect Solution! */}
+          {/* React Smart Masonry with reduced gutters */}
           <Masonry
             breakpoints={breakpoints}
             columns={{
@@ -236,11 +235,11 @@ export default function News() {
               desktop: 3
             }}
             gap={{
-              mobile: 20,
-              tablet: 30,
-              desktop: 32 // 2rem = 32px
+              mobile: 12,    // Reduced from 20px
+              tablet: 14,    // Reduced from 30px
+              desktop: 17    // Reduced from 32px
             }}
-            autoArrange={true} // 🎯 This is the magic! Smart balance when gaps get too big
+            autoArrange={true}
           >
             {newsItems.map((item, index) => (
               <NewsCard key={index} item={item} />
