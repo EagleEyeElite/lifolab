@@ -15,6 +15,7 @@ RUN apk add --no-cache make
 COPY --from=ghcr.io/ufoscout/docker-compose-wait:2.12 /wait /wait
 ADD Makefile /scripts/
 COPY uploads /uploads/
+COPY setup /setup/
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 

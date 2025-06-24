@@ -12,23 +12,30 @@ banner:
 configure:
 	@echo "⚙️ Configuring WordPress parameters..."
 	wp core install --url="${WORDPRESS_CMS_PUBLIC_URL}" \
-		--title="" \
-		--admin_user="admin" \
-		--admin_password="${WORDPRESS_ADMIN_PASSWORD}" \
-		--admin_email="noreply@example.com" \
-		--locale="en_US"
+	   --title="" \
+	   --admin_user="admin" \
+	   --admin_password="${WORDPRESS_ADMIN_PASSWORD}" \
+	   --admin_email="noreply@example.com" \
+	   --locale="en_US"
 	@echo "🔒 Disabling search engine indexing..."
 	wp option update blog_public 0
+	@echo "💬 Disabling comments..."
+	wp plugin install disable-comments --version=2.5.2 --activate
+	wp option update disable_comments_options '{"remove_everywhere":true,"disabled_post_types":[],"db_version":6}' --format=json
 	@echo "🗑️ Removing default WordPress plugins..."
 	wp plugin delete hello akismet
 	@echo "🔌 Installing and activating plugins."
-	wp plugin install wp-graphql --activate
+	wp plugin install wp-graphql --version=2.3.3 --activate
 	wp plugin install https://github.com/wp-graphql/wp-graphql-jwt-authentication/archive/refs/tags/v0.7.0.zip --activate
+	wp plugin install updraftplus --version=1.25.6 --activate
+	wp plugin install advanced-custom-fields --version=6.4.2 --activate
+	wp plugin install wpgraphql-acf --version=2.4.1 --activate
+	wp plugin install https://github.com/hoppinger/advanced-custom-fields-wpcli/archive/refs/tags/3.2.0.zip --activate
+	wp eval-file /setup/import-acf-json.php
 	# The GRAPHQL_JWT_AUTH_SECRET_KEY must not be at the end of the file. It has to be before the ABSPATH definition.
 	@awk '/NONCE_SALT/{print;print "define( '\''GRAPHQL_JWT_AUTH_SECRET_KEY'\'', '\''${WORDPRESS_GRAPHQL_JWT_AUTH_SECRET_KEY}'\'' );";next}1' ./wp-config.php > ./wp-config-temp.php
 	@mv ./wp-config-temp.php ./wp-config.php
 	@echo "🔐 JWT Auth secret key appended successfully."
-	wp plugin install updraftplus --activate
 
 delete-default-content:
 	@echo "Deleting default WordPress content..."
@@ -43,8 +50,8 @@ delete-default-content:
 upload_images:
 	@echo "📸 Uploading images from /uploads..."
 	@for file in $$(find /uploads -type f); do \
-		echo "Uploading $$file..."; \
-		wp media import "$$file" --porcelain; \
+	   echo "Uploading $$file..."; \
+	   wp media import "$$file" --porcelain; \
 	done
 
 setup-tags:
@@ -56,12 +63,12 @@ setup-tags:
 posts:
 	@echo "📝 Creating custom post"
 	wp post create \
-		--post_type=post \
-		--post_title='Title Projekt #1' \
-		--post_content='<h2>Explore WordPress Formatting</h2><p><strong>Bold Text</strong> and <em>Italic Text</em> are essential for emphasizing points. Combine them for <strong><em>extra emphasis</em></strong>.</p><blockquote>“To be or not to be, that is the question.” - Shakespeare</blockquote><p>Lists are great for readability:</p><ul><li>First Item</li><li>Second Item with a <a href="https://example.com">link</a></li><li>Third Item</li></ul><p>And don’t forget about <code>inline code</code> for technical content!</p>' \
-		--post_status=publish \
-		--tags_input='Project,Workshop' \
-		--porcelain
+	   --post_type=post \
+	   --post_title='Title Projekt #1' \
+	   --post_content='<h2>Explore WordPress Formatting</h2><p><strong>Bold Text</strong> and <em>Italic Text</em> are essential for emphasizing points. Combine them for <strong><em>extra emphasis</em></strong>.</p><blockquote>"To be or not to be, that is the question." - Shakespeare</blockquote><p>Lists are great for readability:</p><ul><li>First Item</li><li>Second Item with a <a href="https://example.com">link</a></li><li>Third Item</li></ul><p>And dont forget about <code>inline code</code> for technical content!</p>' \
+	   --post_status=publish \
+	   --tags_input='Project,Workshop' \
+	   --porcelain
 	@echo "✅ Post 'Title Projekt #1' created with Project and Workshop tags!"
 
 end_banner:
