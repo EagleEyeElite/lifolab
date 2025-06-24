@@ -14,9 +14,12 @@ The wordPress CMS can be accessed via `http://localhost:8080/wp-admin` with
 the default credentials username:`admin` and password:`pw`.
 
 ### WP CLI
-You can interact with the wordPress instance via wpcli. For example, to change the display name of the admin user:
+You can interact with the wordPress instance via wpcli.
 ```bash
+    # change admin display name:
     docker compose run --rm wpcli wp user update admin --display_name="newDisplayName"
+    # development/ debugging examples, also enables public introspection
+    docker compose run --rm --user 33:33 wpcli wp config set GRAPHQL_DEBUG true --raw
 ```
 
 ### Clean up

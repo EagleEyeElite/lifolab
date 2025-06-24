@@ -8,7 +8,7 @@ echo "Waiting for services..."
 /wait
 
 # Check if WordPress is already configured
-if wp core is-installed --path=/var/www/html --allow-root 2>/dev/null; then
+if wp core is-installed --url="${WORDPRESS_CMS_PUBLIC_URL}" --path=/var/www/html --quiet; then
     echo "WordPress is already installed and configured. Exiting."
     exit 0
 fi
