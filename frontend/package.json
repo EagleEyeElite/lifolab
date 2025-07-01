@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "concurrently -n 'CODEGEN,NEXT' -c 'blue,green' 'npm run codegen:watch' 'npm run dev:nextjs'",
+    "dev:nextjs": "next dev --turbopack",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "codegen:watch": "graphql-codegen --watch",
+    "codegen": "graphql-codegen"
   },
   "dependencies": {
+    "@apollo/client": "^3.13.8",
+    "dotenv-safe": "^9.1.0",
     "lucide-react": "^0.515.0",
     "motion": "^12.18.0",
     "next": "15.3.3",
@@ -18,11 +23,20 @@
     "react-smart-masonry": "^2.0.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/typescript": "^4.1.6",
+    "@graphql-codegen/typescript-graphql-request": "^6.3.0",
+    "@graphql-codegen/typescript-operations": "^4.6.1",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.3",
+    "@parcel/watcher": "^2.5.1",
     "@tailwindcss/postcss": "^4",
+    "@types/dotenv-safe": "^8.1.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-responsive-masonry": "^2.6.0",
+    "concurrently": "^9.2.0",
+    "graphql": "^16.11.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

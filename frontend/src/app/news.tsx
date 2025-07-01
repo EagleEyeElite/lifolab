@@ -6,6 +6,8 @@ import Image from "next/image";
 import SectionHeader from "@/components/sectionHeader";
 import { Package } from "lucide-react";
 import Masonry from "react-smart-masonry";
+import {gql, useQuery} from '@apollo/client';
+import {GetPostQuery} from "@/generated/graphql";
 
 /**
  *
@@ -26,16 +28,34 @@ interface NewsItem {
   imageSize: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive';
 }
 
+const GET_POST = gql`
+    query GetPost {
+        posts(first: 1) {
+            edges {
+                node {
+                    id
+                    title
+                }
+            }
+        }
+    }
+`;
+
 export default function News() {
   const [isMounted, setIsMounted] = useState(false);
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
   const observerRef = useRef<IntersectionObserver | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  // Use Apollo's useQuery hook
+  const { data, loading, error } = useQuery<GetPostQuery>(GET_POST);
+
+  const postTitle = data?.posts?.edges?.[0]?.node?.title || "Default Title";
+
   // Define newsItems
   const newsItems: NewsItem[] = [
     {
-      title: "Title Projekt #1",
+      title: postTitle,
       href: "#human-nature-technology-entangelments",
       tag: "Workshop",
       tagHref: "workshop",

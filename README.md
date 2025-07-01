@@ -19,7 +19,7 @@ You can interact with the wordPress instance via wpcli.
     # change admin display name:
     docker compose run --rm wpcli wp user update admin --display_name="newDisplayName"
     # development/ debugging examples, also enables public introspection
-    docker compose run --rm --user 33:33 wpcli wp config set GRAPHQL_DEBUG true --raw
+    docker compose run --rm wpcli wp config set GRAPHQL_DEBUG true --raw
 ```
 
 ### Clean up

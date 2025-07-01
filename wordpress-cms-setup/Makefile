@@ -17,7 +17,7 @@ configure:
 	   --admin_password="${WORDPRESS_ADMIN_PASSWORD}" \
 	   --admin_email="noreply@example.com" \
 	   --locale="en_US"
-	@echo "🔒 Disabling search engine indexing..."
+	@echo "🔎 Disabling search engine indexing..."
 	@wp option update blog_public 0
 	@echo "💬 Disabling comments..."
 	@wp plugin install disable-comments --version=2.5.2 --activate
@@ -30,11 +30,12 @@ configure:
 	@echo "🔌 Installing plugins."
 	@wp plugin install updraftplus --version=1.25.6 --activate
 	@wp plugin install advanced-custom-fields --version=6.4.2 --activate
-	# @wp plugin install wp-multilang --version=2.4.19.1 --activate # TODO use multilang?
 	@wp plugin install wp-graphql --version=2.3.3 --activate
 	@wp plugin install wpgraphql-acf --version=2.4.1 --activate
 	@wp eval-file /php-scripts/sync-acf-json.php
-	# TODO For auth use this: https://www.wpgraphql.com/docs/authentication-and-authorization
+	@echo "🔒Create application password for Frontend NextJS"
+	@wp eval-file /php-scripts/enable-application-passwords.php
+	@wp eval-file /php-scripts/create-app-password.php
 
 delete-default-content:
 	@echo "Deleting default WordPress content..."
