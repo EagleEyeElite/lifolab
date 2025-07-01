@@ -7,7 +7,6 @@ import SectionHeader from "@/components/sectionHeader";
 import { Package } from "lucide-react";
 import Masonry from "react-smart-masonry";
 import {gql, useQuery} from '@apollo/client';
-import {GetPostQuery} from "@/generated/graphql";
 
 /**
  *
@@ -48,7 +47,7 @@ export default function News() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // Use Apollo's useQuery hook
-  const { data, loading, error } = useQuery<GetPostQuery>(GET_POST);
+  const { data, loading, error } = useQuery<any>(GET_POST);
 
   const postTitle = data?.posts?.edges?.[0]?.node?.title || "Default Title";
 

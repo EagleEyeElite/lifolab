@@ -2,16 +2,27 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run codegen:check"
+    }
+  },
   "scripts": {
     "dev": "concurrently -n 'CODEGEN,NEXT' -c 'blue,green' 'npm run codegen:watch' 'npm run dev:nextjs'",
     "dev:nextjs": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
-    "codegen:watch": "graphql-codegen --watch",
-    "codegen": "graphql-codegen"
+    "start": "node .next/standalone/server.js",
+    "codegen": "graphql-codegen --config codegen.ts",
+    "codegen:watch": "graphql-codegen --watch --config codegen.ts",
+    "codegen:check": "npm run codegen && git diff --exit-code --quiet src/generated/ || (echo 'Generated types are out of date. Run npm run codegen' && exit 1)"
   },
   "dependencies": {
     "@apollo/client": "^3.13.8",
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/typescript": "^4.1.6",
+    "@graphql-codegen/typescript-graphql-request": "^6.3.0",
+    "@graphql-codegen/typescript-operations": "^4.6.1",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.3",
     "dotenv-safe": "^9.1.0",
     "lucide-react": "^0.515.0",
     "motion": "^12.18.0",
@@ -23,11 +34,6 @@
     "react-smart-masonry": "^2.0.2"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^5.0.7",
-    "@graphql-codegen/typescript": "^4.1.6",
-    "@graphql-codegen/typescript-graphql-request": "^6.3.0",
-    "@graphql-codegen/typescript-operations": "^4.6.1",
-    "@graphql-codegen/typescript-react-apollo": "^4.3.3",
     "@parcel/watcher": "^2.5.1",
     "@tailwindcss/postcss": "^4",
     "@types/dotenv-safe": "^8.1.6",

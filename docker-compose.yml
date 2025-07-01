@@ -1,4 +1,14 @@
 services:
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    platform: linux/amd64  # lightning css not compatible with arm
+    profiles: ["frontend"]
+    ports:
+       - ${FRONTEND_EXPOSE_PORT}:3000
+    restart: always
+
   # WordPress cms
   wordpress:
     image: wordpress:6.8.1-php8.2-apache
