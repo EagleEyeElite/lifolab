@@ -10123,6 +10123,16 @@ export type WritingSettings = {
   useSmilies?: Maybe<Scalars['Boolean']['output']>;
 };
 
+export type GetPostQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPostQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', node: { __typename?: 'Post', id: string, title?: string | null } }> } | null };
+
+export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPostsQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', node: { __typename?: 'Post', id: string, title?: string | null, date?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null } }> } | null };
+
 type AuthorDetailsFields_MediaItem_Fragment = { __typename?: 'MediaItem', author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } } | null };
 
 type AuthorDetailsFields_Page_Fragment = { __typename?: 'Page', author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } } | null };
@@ -10145,6 +10155,45 @@ export const AuthorDetailsFieldsFragmentDoc = gql`
   }
 }
     `;
+export const GetPostDocument = gql`
+    query GetPost {
+  posts(first: 1) {
+    edges {
+      node {
+        id
+        title
+      }
+    }
+  }
+}
+    `;
+export const GetPostsDocument = gql`
+    query GetPosts {
+  posts(first: 1) {
+    edges {
+      node {
+        id
+        title
+        date
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        tags {
+          edges {
+            node {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -10153,7 +10202,12 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-
+    GetPost(variables?: GetPostQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPostQuery>({ document: GetPostDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPost', 'query', variables);
+    },
+    GetPosts(variables?: GetPostsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPostsQuery>({ document: GetPostsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPosts', 'query', variables);
+    }
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;
