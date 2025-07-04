@@ -12,17 +12,19 @@ import {gql, useQuery} from '@apollo/client';
  *
  * https://tympanus.net/codrops/2013/07/02/loading-effects-for-grid-items-with-css-animations/
  *
- * use this for loading in animation of the news cards
+ * use this for loading in animation of the projects cards
  */
 
 // Import your original image
 import ExampleForest from '@public/exampleForest.jpeg';
 
-interface NewsItem {
+interface ProjectItem {
   title: string;
   href: string;
-  tag: string;
-  tagHref: string;
+  tag?: string;
+  tagHref?: string;
+  tags?: Array<{ name: string; slug: string }>;
+  date?: string;
   image: any;
   imageSize: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive';
 }
@@ -34,13 +36,28 @@ const GET_POST = gql`
                 node {
                     id
                     title
+                    date
+                    featuredImage {
+                        node {
+                            sourceUrl
+                            altText
+                        }
+                    }
+                    tags {
+                        edges {
+                            node {
+                                name
+                                slug
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 `;
 
-export default function News() {
+export default function Projects() {
   const [isMounted, setIsMounted] = useState(false);
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -49,112 +66,116 @@ export default function News() {
   // Use Apollo's useQuery hook
   const { data, loading, error } = useQuery<any>(GET_POST);
 
-  const postTitle = data?.posts?.edges?.[0]?.node?.title || "Default Title";
+  const postData = data?.posts?.edges?.[0]?.node;
+  const postTitle = postData?.title || "Default Title";
+  const postDate = postData?.date || null;
+  const postTags = postData?.tags?.edges?.map((edge: any) => edge.node) || [];
+  const postFeaturedImage = postData?.featuredImage?.node;
 
-  // Define newsItems
-  const newsItems: NewsItem[] = [
+  // Define projectsItems
+  const projectsItems: ProjectItem[] = [
     {
       title: postTitle,
       href: "#human-nature-technology-entangelments",
-      tag: "Workshop",
-      tagHref: "workshop",
-      image: ExampleForest,
+      tags: postTags,
+      date: postDate,
+      image: postFeaturedImage?.sourceUrl || ExampleForest,
       imageSize: "massive"
     },
     {
-      title: "Title Projekt #2",
+      title: `${postTitle} #2`,
       href: "#living-the-forest-lab-in-corsica",
-      tag: "Excursion",
-      tagHref: "excursion",
-      image: ExampleForest,
+      tags: postTags,
+      date: postDate,
+      image: postFeaturedImage?.sourceUrl || ExampleForest,
       imageSize: "tiny"
     },
     {
-      title: "Title Projekt #3",
+      title: `${postTitle} #3`,
       href: "#girls-day-the-sound-of-electrical-devices",
-      tag: "Workshop",
-      tagHref: "workshop",
-      image: ExampleForest,
+      tags: postTags,
+      date: postDate,
+      image: postFeaturedImage?.sourceUrl || ExampleForest,
       imageSize: "tiny"
     },
     {
-      title: "Title Projekt #4",
+      title: `${postTitle} #4`,
       href: "#digital-forest-twin",
-      tag: "Project",
-      tagHref: "project",
-      image: ExampleForest,
+      tags: postTags,
+      date: postDate,
+      image: postFeaturedImage?.sourceUrl || ExampleForest,
       imageSize: "tiny"
     },
     {
-      title: "Title Projekt #5",
+      title: `${postTitle} #5`,
       href: "#co2ntrol",
-      tag: "Project",
-      tagHref: "project",
-      image: ExampleForest,
+      tags: postTags,
+      date: postDate,
+      image: postFeaturedImage?.sourceUrl || ExampleForest,
       imageSize: "tiny"
     },
     {
-      title: "Title Projekt #6",
+      title: `${postTitle} #6`,
       href: "#offgrid",
-      tag: "Project",
-      tagHref: "project",
-      image: ExampleForest,
+      tags: postTags,
+      date: postDate,
+      image: postFeaturedImage?.sourceUrl || ExampleForest,
       imageSize: "tiny"
     },
     {
-      title: "Title Projekt #7",
+      title: `${postTitle} #7`,
       href: "#spreeberlin-meets-living-the-forest-lab",
-      tag: "Workshop",
-      tagHref: "workshop",
-      image: ExampleForest,
+      tags: postTags,
+      date: postDate,
+      image: postFeaturedImage?.sourceUrl || ExampleForest,
       imageSize: "tiny"
     },
     {
-      title: "Title Projekt #8",
+      title: `${postTitle} #8`,
       href: "#vulca-seminar",
-      tag: "Talk",
-      tagHref: "talk",
-      image: ExampleForest,
+      tags: postTags,
+      date: postDate,
+      image: postFeaturedImage?.sourceUrl || ExampleForest,
       imageSize: "large"
     },
     {
-      title: "Title Projekt #9",
+      title: `${postTitle} #9`,
       href: "#bol-symposium",
-      tag: "Talk",
-      tagHref: "talk",
-      image: ExampleForest,
+      tags: postTags,
+      date: postDate,
+      image: postFeaturedImage?.sourceUrl || ExampleForest,
       imageSize: "medium"
     },
     {
-      title: "Title Projekt #10",
+      title: `${postTitle} #10`,
       href: "#tag-der-offenen-reallabore",
-      tag: "Talk",
-      tagHref: "talk",
-      image: ExampleForest,
+      tags: postTags,
+      date: postDate,
+      image: postFeaturedImage?.sourceUrl || ExampleForest,
       imageSize: "huge"
     },
     {
-      title: "Title Projekt #11",
+      title: `${postTitle} #11`,
       href: "#patching-gone-wild",
-      tag: "Workshop",
-      tagHref: "workshop",
-      image: ExampleForest,
+      tags: postTags,
+      date: postDate,
+      image: postFeaturedImage?.sourceUrl || ExampleForest,
       imageSize: "tiny"
     },
     {
-      title: "Title Projekt #12",
+      title: `${postTitle} #12`,
       href: "#modular-hangout",
-      tag: "Workshop",
-      tagHref: "workshop",
-      image: ExampleForest,
+      tags: postTags,
+      date: postDate,
+      image: postFeaturedImage?.sourceUrl || ExampleForest,
       imageSize: "small"
     },
     {
-      title: "Title Projekt #13",
+      title: `${postTitle} #13`,
       href: "#digital-communication-transfer",
-      tag: "Laboratory",
-      tagHref: "laboratory",
-      image: ExampleForest,
+      tags: postTags,
+      date: postDate,
+      image: postFeaturedImage?.sourceUrl || ExampleForest,
       imageSize: "massive"
     }
   ];
@@ -238,7 +259,7 @@ export default function News() {
     }
   };
 
-  const NewsCard = ({ item, index }: { item: NewsItem; index: number }) => {
+  const ProjectCard = ({ item, index }: { item: ProjectItem; index: number }) => {
     const imageClassName = getImageClassName(item.imageSize);
     const isVisible = visibleCards.has(index);
 
@@ -277,19 +298,37 @@ export default function News() {
         </Link>
 
         <div className="space-y-2">
-          <Link
-            href={item.href}
-            className="block text-black text-sm font-mono tracking-wide leading-[1.2] no-underline"
-          >
-            {item.title}
-          </Link>
-          <div className="mt-2">
+          <div className="flex justify-between items-start">
             <Link
-              href={item.tagHref}
-              className="inline-flex items-center px-[7px] py-[3px] text-xs font-mono leading-[1.2] text-black bg-[rgba(0,255,94,0.91)] border border-black rounded-full no-underline"
+              href={item.href}
+              className="text-black text-sm font-mono tracking-wide leading-[1.2] no-underline flex-1 pr-2"
             >
-              {item.tag}
+              {item.title}
             </Link>
+            {item.date && (
+              <div className="text-xs font-mono text-gray-600 flex-shrink-0">
+                {new Date(item.date).toLocaleDateString()}
+              </div>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-1">
+            {item.tags?.map((tag, index) => (
+              <Link
+                key={index}
+                href={`/tags/${tag.slug}`}
+                className="inline-flex items-center px-[7px] py-[3px] text-xs font-mono leading-[1.2] text-black bg-[rgba(0,255,94,0.91)] border border-black rounded-full no-underline"
+              >
+                {tag.name}
+              </Link>
+            ))}
+            {item.tag && (
+              <Link
+                href={item.tagHref || '#'}
+                className="inline-flex items-center px-[7px] py-[3px] text-xs font-mono leading-[1.2] text-black bg-[rgba(0,255,94,0.91)] border border-black rounded-full no-underline"
+              >
+                {item.tag}
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -310,11 +349,11 @@ export default function News() {
         <div className="w-full">
           <div className="px-[1.6rem] py-[1.6rem] space-y-6">
             <SectionHeader icon={Package}>
-              News
+              Projects
             </SectionHeader>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {newsItems.map((item, index) => (
-                <NewsCard key={index} item={item} index={index} />
+              {projectsItems.map((item, index) => (
+                <ProjectCard key={index} item={item} index={index} />
               ))}
             </div>
           </div>
@@ -328,7 +367,7 @@ export default function News() {
       <div className="w-full">
         <div className="px-[1.6rem] py-[1.6rem] space-y-6">
           <SectionHeader icon={Package}>
-            News
+            Projects
           </SectionHeader>
 
           {/* React Smart Masonry with stable configuration */}
@@ -348,8 +387,8 @@ export default function News() {
             // Add key to force re-render when needed
             key={`masonry-${isMounted}`}
           >
-            {newsItems.map((item, index) => (
-              <NewsCard key={index} item={item} index={index} />
+            {projectsItems.map((item, index) => (
+              <ProjectCard key={index} item={item} index={index} />
             ))}
           </Masonry>
         </div>
