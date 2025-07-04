@@ -10123,6 +10123,11 @@ export type WritingSettings = {
   useSmilies?: Maybe<Scalars['Boolean']['output']>;
 };
 
+export type GetCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: { __typename?: 'RootQueryToCollaboratorConnection', edges: Array<{ __typename?: 'RootQueryToCollaboratorConnectionEdge', node: { __typename?: 'Collaborator', id: string, title?: string | null, content?: string | null, date?: string | null } }> } | null };
+
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -10145,6 +10150,20 @@ export const AuthorDetailsFieldsFragmentDoc = gql`
       lastName
       avatar {
         url
+      }
+    }
+  }
+}
+    `;
+export const GetCollaboratorsDocument = gql`
+    query GetCollaborators {
+  collaborators(first: 100) {
+    edges {
+      node {
+        id
+        title
+        content
+        date
       }
     }
   }
@@ -10185,6 +10204,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    GetCollaborators(variables?: GetCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCollaboratorsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetCollaboratorsQuery>({ document: GetCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCollaborators', 'query', variables);
+    },
     GetPosts(variables?: GetPostsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetPostsQuery>({ document: GetPostsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPosts', 'query', variables);
     }
