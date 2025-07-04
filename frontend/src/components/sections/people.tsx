@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import SectionHeader from "@/components/sectionHeader";
+import SectionHeader from "@/components/ui/sectionHeader";
 import { Command, Plus } from "lucide-react";
 
 interface Person {

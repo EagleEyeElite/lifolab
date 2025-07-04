@@ -1,7 +1,7 @@
-import About from "@/app/about";
-import People from "@/app/people";
-import Places from "@/app/places";
-import Projects from "@/app/projects";
+import About from "@/components/sections/about";
+import People from "@/components/sections/people";
+import Places from "@/components/sections/places";
+import Projects from "@/components/sections/projects";
 
 export default function Home() {
   return (

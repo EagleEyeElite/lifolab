@@ -4,7 +4,8 @@ import LogoTU from '@public/logoTU.png'
 import LogoStiftungHochschullehre from '@public/logoStiftungHochschullehre.png'
 import Image, {StaticImageData} from "next/image";
 import Link from "next/link";
-import SectionHeader from "@/components/sectionHeader";
+import SectionHeader from '../ui/sectionHeader';
+
 
 
 

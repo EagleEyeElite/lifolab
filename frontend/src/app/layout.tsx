@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import React from "react";
 import "./globals.css";
-import Navbar from "@/app/navbar";
-import Footer from "@/app/footer";
+import Navbar from "@/components/layout/navbar";
+import Footer from "@/components/layout/footer";
 
 export const metadata: Metadata = {
   title: "Living the Forest Lab",

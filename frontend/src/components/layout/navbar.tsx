@@ -1,9 +1,10 @@
 "use client"
 
 import Link from "next/link";
-import ScrollAnimatedLogo from "@/app/scrollAnimatedLogo";
+
 import { useRef, useState } from "react";
 import { Package, Pencil, Command, Globe, Mic } from "lucide-react";
+import ScrollAnimatedLogo from "@/components/ui/scrollAnimatedLogo";
 
 export default function Navbar() {
   const navLinks = [

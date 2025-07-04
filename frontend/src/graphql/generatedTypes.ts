@@ -10123,11 +10123,6 @@ export type WritingSettings = {
   useSmilies?: Maybe<Scalars['Boolean']['output']>;
 };
 
-export type GetPostQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetPostQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', node: { __typename?: 'Post', id: string, title?: string | null } }> } | null };
-
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -10150,18 +10145,6 @@ export const AuthorDetailsFieldsFragmentDoc = gql`
       lastName
       avatar {
         url
-      }
-    }
-  }
-}
-    `;
-export const GetPostDocument = gql`
-    query GetPost {
-  posts(first: 1) {
-    edges {
-      node {
-        id
-        title
       }
     }
   }
@@ -10202,9 +10185,6 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    GetPost(variables?: GetPostQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPostQuery>({ document: GetPostDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPost', 'query', variables);
-    },
     GetPosts(variables?: GetPostsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetPostsQuery>({ document: GetPostsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPosts', 'query', variables);
     }

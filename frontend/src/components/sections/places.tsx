@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import SectionHeader from "@/components/sectionHeader";
+import SectionHeader from "@/components/ui/sectionHeader";
 import { Globe, Plus } from "lucide-react";
 
 interface Place {

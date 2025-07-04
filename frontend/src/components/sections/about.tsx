@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import SectionHeader from "@/components/sectionHeader";
+import SectionHeader from "@/components/ui/sectionHeader";
 import { Pencil } from "lucide-react";
 import ExampleForest from '@public/exampleForest.jpeg'
 

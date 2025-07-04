@@ -14,7 +14,7 @@
     "start": "node .next/standalone/server.js",
     "codegen": "graphql-codegen --config codegen.ts",
     "codegen:watch": "graphql-codegen --watch --config codegen.ts",
-    "codegen:check": "npm run codegen && git diff --exit-code --quiet src/generated/ || (echo 'Generated types are out of date. Run npm run codegen' && exit 1)"
+    "codegen:check": "npm run codegen && git diff --exit-code --quiet src/graphql/generatedTypes.ts || (echo 'Generated types are out of date. Run npm run codegen' && exit 1)"
   },
   "dependencies": {
     "dotenv-safe": "^9.1.0",
