@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import TagPill from "./tagPill";
 
 interface ProjectItem {
   title: string;
@@ -49,53 +50,46 @@ const getImageClassName = (size: 'tiny' | 'small' | 'medium' | 'large' | 'huge' 
 
 export default function ProjectCard({ item, index }: ProjectCardProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-  const imageClassName = getImageClassName(item.imageSize);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '20px 0px -20px 0px'
-      }
-    );
+    const element = cardRef.current;
+    if (!element) return;
 
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
+    // Check if already visible on mount
+    const rect = element.getBoundingClientRect();
+    const inViewOnMount = rect.top < window.innerHeight && rect.bottom > 0;
+    
+    if (inViewOnMount) {
+      setIsVisible(true);
+      setShouldAnimate(false);
+      return;
     }
 
-    return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
-    };
+    // Set up for animation - start hidden, enable transitions
+    setShouldAnimate(true);
+    setIsVisible(false);
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => entry.isIntersecting && setIsVisible(true),
+      { threshold: 0.1, rootMargin: '20px 0px -20px 0px' }
+    );
+
+    observer.observe(element);
+    return () => observer.unobserve(element);
   }, []);
 
   return (
     <div
       ref={cardRef}
       data-index={index}
-      className={`space-y-3 group transition-all duration-500 ease-out ${
-        isVisible
-          ? 'opacity-100 translate-y-0'
-          : 'opacity-0 translate-y-4'
+      className={`space-y-3 group ${shouldAnimate ? 'transition-all duration-500 ease-out' : ''} ${
+        isVisible ? 'opacity-100 translate-y-0' : shouldAnimate ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
       }`}
-      style={{
-        transitionDelay: '0s'
-      }}
     >
-      <Link
-        href={item.href}
-        className="block overflow-hidden rounded-lg hover:shadow-lg transition-shadow duration-300"
-      >
-        <div className={`relative ${imageClassName}`}>
+      <Link href={item.href} className="block overflow-hidden rounded-lg hover:shadow-lg transition-shadow duration-300">
+        <div className={`relative ${getImageClassName(item.imageSize)}`}>
           <Image
             src={item.image}
             alt={item.title}
@@ -109,41 +103,25 @@ export default function ProjectCard({ item, index }: ProjectCardProps) {
 
       <div className="space-y-2">
         <div className="flex justify-between items-start">
-          <Link
-            href={item.href}
-            className="text-black text-sm font-mono tracking-wide leading-[1.2] no-underline flex-1 pr-2"
-          >
+          <Link href={item.href} className="text-black text-sm font-mono tracking-wide leading-[1.2] no-underline flex-1 pr-2">
             {item.title}
           </Link>
           {item.date && (
             <div className="text-xs font-mono text-gray-600 flex-shrink-0">
-              {new Date(item.date).toLocaleDateString('de-DE', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-              })}
+              {new Date(item.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
             </div>
           )}
         </div>
-        <div className="flex flex-wrap gap-1">
-          {item.tags?.map((tag, tagIndex) => (
-            <Link
-              key={tagIndex}
-              href={`/tags/${tag.slug}`}
-              className="inline-flex items-center px-[7px] py-[3px] text-xs font-mono leading-[1.2] text-black bg-[rgba(0,255,94,0.91)] border border-black rounded-full no-underline"
-            >
-              {tag.name}
-            </Link>
-          ))}
-          {item.tag && (
-            <Link
-              href={item.tagHref || '#'}
-              className="inline-flex items-center px-[7px] py-[3px] text-xs font-mono leading-[1.2] text-black bg-[rgba(0,255,94,0.91)] border border-black rounded-full no-underline"
-            >
-              {item.tag}
-            </Link>
-          )}
-        </div>
+        {(item.tags?.length || item.tag) && (
+          <div className="flex flex-wrap gap-1">
+            {[
+              ...(item.tags || []).map(tag => ({ name: tag.name, href: `/tags/${tag.slug}` })),
+              ...(item.tag ? [{ name: item.tag, href: item.tagHref || '#' }] : [])
+            ].map((tag, tagIndex) => (
+              <TagPill key={tagIndex} name={tag.name} href={tag.href} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
