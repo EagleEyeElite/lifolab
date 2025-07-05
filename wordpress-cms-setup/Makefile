@@ -44,31 +44,10 @@ delete-default-content:
 	@wp post delete $(shell wp post list --post_type='page' --name='privacy-policy' --format=ids) --force
 
 add_content:
-	@echo "📸 Uploading images from /uploads..."
-	@for file in $$(find /uploads -type f); do \
-	   echo "Uploading $$file..."; \
-	   wp media import "$$file"; \
-	done
-	@echo "Setting up tags..."
-	@wp term create post_tag 'Project'
-	@wp term create post_tag 'Workshop'
-	@echo "📝 Creating custom post and collaborator"
-	@PROJECT_POST_ID=$$(wp post create \
-	   --post_type=post \
-	   --post_title='Title Projekt #1' \
-	   --post_content='<h2>Explore WordPress Formatting</h2><p><strong>Bold Text</strong> and <em>Italic Text</em> are essential for emphasizing points. Combine them for <strong><em>extra emphasis</em></strong>.</p><blockquote>"To be or not to be, that is the question." - Shakespeare</blockquote><p>Lists are great for readability:</p><ul><li>First Item</li><li>Second Item with a <a href="https://example.com">link</a></li><li>Third Item</li></ul><p>And dont forget about <code>inline code</code> for technical content!</p>' \
-	   --post_status=publish \
-	   --tags_input='Project,Workshop' \
-	   --porcelain); \
-	COLLABORATOR_POST_ID=$$(wp post create \
-	   --post_type=collaborator \
-	   --post_title='Max Mustermann' \
-	   --post_content='<p>info text</p>' \
-	   --post_status=publish \
-	   --porcelain); \
-	wp post meta set $$COLLABORATOR_POST_ID referenced_posts $$PROJECT_POST_ID; \
-	wp post meta set $$PROJECT_POST_ID referenced_collaborators $$COLLABORATOR_POST_ID; \
-
+	@wp media import /uploads/exampleUpload1.jpeg
+	@wp media import /uploads/exampleUpload2.jpeg
+	@wp media import /uploads/exampleUpload3.jpeg
+	@wp eval-file /php-scripts/create-content.php
 
 end_banner:
 	@echo "*************************************************************"

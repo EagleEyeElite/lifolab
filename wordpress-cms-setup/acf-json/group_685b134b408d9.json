@@ -3,6 +3,31 @@
   "title": "Post",
   "fields": [
     {
+      "key": "field_686943fc27c25",
+      "label": "When & Where",
+      "name": "when_and_where",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "allow_in_bindings": 0,
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_graphql": 1,
+      "graphql_description": "",
+      "graphql_field_name": "whenAndWhere",
+      "graphql_non_null": 0
+    },
+    {
       "key": "field_685b134b42b7e",
       "label": "Referenced Collaborators",
       "name": "referenced_collaborators",

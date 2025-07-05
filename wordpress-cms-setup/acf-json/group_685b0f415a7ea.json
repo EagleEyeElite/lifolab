@@ -34,6 +34,56 @@
       "graphql_field_name": "referencedPosts",
       "graphql_connection_type": "one_to_many",
       "ui": 1
+    },
+    {
+      "key": "field_686941f85c2b8",
+      "label": "Roles",
+      "name": "roles",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "allow_in_bindings": 0,
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_graphql": 1,
+      "graphql_description": "",
+      "graphql_field_name": "roles",
+      "graphql_non_null": 0
+    },
+    {
+      "key": "field_686942d552773",
+      "label": "Core Member",
+      "name": "core_member",
+      "aria-label": "",
+      "type": "true_false",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "message": "",
+      "default_value": 0,
+      "allow_in_bindings": 0,
+      "ui": 0,
+      "show_in_graphql": 1,
+      "graphql_description": "",
+      "graphql_field_name": "coreMember",
+      "graphql_non_null": 0,
+      "ui_on_text": "",
+      "ui_off_text": ""
     }
   ],
   "location": [
