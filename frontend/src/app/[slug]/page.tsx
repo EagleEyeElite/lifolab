@@ -2,9 +2,7 @@ import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import { notFound } from 'next/navigation';
 import SectionHeader from '@/components/ui/sectionHeader';
-import PostHeader from '@/components/ui/post/PostHeader';
-import PostTags from '@/components/ui/post/PostTags';
-import PostImage from '@/components/ui/post/PostImage';
+import PostOverview from '@/components/ui/post/PostOverview';
 import PostContent from '@/components/ui/post/PostContent';
 import {
   GetPostBySlugQuery,
@@ -14,34 +12,8 @@ import {
 const GetPostBySlug = gql`
     query GetPostBySlug($id: ID!) {
         post(id: $id, idType: SLUG) {
-            title
-            content
-            excerpt
             postCollaborators {
                 whenAndWhere
-                referencedCollaborators {
-                    nodes {
-                        __typename
-                        ... on Collaborator {
-                            title
-                            slug
-                        }
-                    }
-                }
-            }
-            tags {
-                edges {
-                    node {
-                        name
-                        slug
-                    }
-                }
-            }
-            featuredImage {
-                node {
-                    sourceUrl
-                    altText
-                }
             }
         }
     }
@@ -59,22 +31,17 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
   }
 
   return (
-    <div className="pt-[45px]">
-      <header className="px-8 py-8">
-        <SectionHeader>{post.postCollaborators?.whenAndWhere || "Project Details"}</SectionHeader>
-      </header>
+    <div className="pt-[45px] px-8">
+      <SectionHeader className="py-8">{post.postCollaborators?.whenAndWhere || "Project Details"}</SectionHeader>
 
-      <main className="px-8 grid grid-cols-12 gap-8">
-        <div className="col-span-4">
-          <PostHeader title={post.title} excerpt={post.excerpt} />
-          <PostTags tags={post.tags} collaborators={post.postCollaborators} />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="lg:col-span-4">
+          <PostOverview slug={slug} />
         </div>
-        
-        <div className="col-span-6">
-          <PostImage image={post.featuredImage} title={post.title} />
-          <PostContent content={post.content} />
+        <div className="lg:col-span-6">
+          <PostContent slug={slug} />
         </div>
-      </main>
+      </div>
     </div>
   );
 }
