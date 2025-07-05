@@ -17,7 +17,7 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-/** Connection between the Collaborators_Fields type and the ContentNode type */
+/** Connection between the CollaboratorFields_Fields type and the ContentNode type */
 export type AcfContentNodeConnection = Connection & ContentNodeConnection & {
   __typename?: 'AcfContentNodeConnection';
   /** Edges for the AcfContentNodeConnection connection */
@@ -573,20 +573,20 @@ export type CategoryToTaxonomyConnectionEdge = Edge & OneToOneConnection & Taxon
 };
 
 /** The collaborator type */
-export type Collaborator = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCollaborators & {
+export type Collaborator = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCollaboratorFields & {
   __typename?: 'Collaborator';
   /**
    * The ancestors of the content node.
    * @deprecated This content type is not hierarchical and typically will not have ancestors
    */
   ancestors?: Maybe<CollaboratorToCollaboratorConnection>;
+  /** Fields of the CollaboratorFields ACF Field Group */
+  collaboratorFields?: Maybe<CollaboratorFields>;
   /**
    * The id field matches the WP_Post-&gt;ID field.
    * @deprecated Deprecated in favor of the databaseId field
    */
   collaboratorId: Scalars['Int']['output'];
-  /** Fields of the Collaborators ACF Field Group */
-  collaborators?: Maybe<Collaborators>;
   /** The content of the post. */
   content?: Maybe<Scalars['String']['output']>;
   /** Connection between the ContentNode type and the ContentType type */
@@ -731,6 +731,47 @@ export type CollaboratorConnectionPageInfo = {
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
+/** The &quot;CollaboratorFields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type CollaboratorFields = AcfFieldGroup & AcfFieldGroupFields & CollaboratorFields_Fields & {
+  __typename?: 'CollaboratorFields';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;CollaboratorFields&quot; Field Group */
+  referencedPosts?: Maybe<AcfContentNodeConnection>;
+};
+
+
+/** The &quot;CollaboratorFields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type CollaboratorFieldsReferencedPostsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Interface representing fields of the ACF &quot;CollaboratorFields&quot; Field Group */
+export type CollaboratorFields_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;CollaboratorFields&quot; Field Group */
+  referencedPosts?: Maybe<AcfContentNodeConnection>;
+};
+
+
+/** Interface representing fields of the ACF &quot;CollaboratorFields&quot; Field Group */
+export type CollaboratorFields_FieldsReferencedPostsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
 /** Identifier types for retrieving a specific Collaborator. Specifies which unique attribute is used to find an exact Collaborator. */
 export enum CollaboratorIdType {
   /** Identify a resource by the Database ID. */
@@ -801,47 +842,6 @@ export type CollaboratorToPreviewConnectionEdge = CollaboratorConnectionEdge & E
   cursor?: Maybe<Scalars['String']['output']>;
   /** The node of the connection, without the edges */
   node: Collaborator;
-};
-
-/** The &quot;Collaborators&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type Collaborators = AcfFieldGroup & AcfFieldGroupFields & Collaborators_Fields & {
-  __typename?: 'Collaborators';
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;Collaborators&quot; Field Group */
-  referencedPosts?: Maybe<AcfContentNodeConnection>;
-};
-
-
-/** The &quot;Collaborators&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type CollaboratorsReferencedPostsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Interface representing fields of the ACF &quot;Collaborators&quot; Field Group */
-export type Collaborators_Fields = {
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;Collaborators&quot; Field Group */
-  referencedPosts?: Maybe<AcfContentNodeConnection>;
-};
-
-
-/** Interface representing fields of the ACF &quot;Collaborators&quot; Field Group */
-export type Collaborators_FieldsReferencedPostsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** A response or reaction to content submitted by users. Comments are typically associated with a specific content entry. */
@@ -4509,7 +4509,7 @@ export enum PluginStatusEnum {
 }
 
 /** A chronological content entry typically used for blog posts, news articles, or similar date-based content. */
-export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & NodeWithTrackbacks & Previewable & UniformResourceIdentifiable & WithAcfCollaborators & {
+export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & NodeWithTrackbacks & Previewable & UniformResourceIdentifiable & WithAcfPostCollaborators & {
   __typename?: 'Post';
   /**
    * The ancestors of the content node.
@@ -4524,8 +4524,6 @@ export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & 
   authorId?: Maybe<Scalars['ID']['output']>;
   /** Connection between the Post type and the category type */
   categories?: Maybe<PostToCategoryConnection>;
-  /** Fields of the Collaborators ACF Field Group */
-  collaborators?: Maybe<Collaborators>;
   /** The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility. */
   commentCount?: Maybe<Scalars['Int']['output']>;
   /** Whether the comments are open or closed for this particular post. */
@@ -4605,6 +4603,8 @@ export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & 
   pingStatus?: Maybe<Scalars['String']['output']>;
   /** URLs that have been pinged. */
   pinged?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** Fields of the PostCollaborators ACF Field Group */
+  postCollaborators?: Maybe<PostCollaborators>;
   /** Connection between the Post type and the postFormat type */
   postFormats?: Maybe<PostToPostFormatConnection>;
   /**
@@ -4763,6 +4763,47 @@ export type PostCategoriesNodeInput = {
   name?: InputMaybe<Scalars['String']['input']>;
   /** The slug of the category. If no ID is present, this field will be used to make a connection. If no existing term exists with this slug, this field will be used as a fallback to the Name field when creating a new term to connect to, if term creation is enabled as a nested mutation. */
   slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The &quot;PostCollaborators&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PostCollaborators = AcfFieldGroup & AcfFieldGroupFields & PostCollaborators_Fields & {
+  __typename?: 'PostCollaborators';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PostCollaborators&quot; Field Group */
+  referencedCollaborators?: Maybe<AcfContentNodeConnection>;
+};
+
+
+/** The &quot;PostCollaborators&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PostCollaboratorsReferencedCollaboratorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Interface representing fields of the ACF &quot;PostCollaborators&quot; Field Group */
+export type PostCollaborators_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PostCollaborators&quot; Field Group */
+  referencedCollaborators?: Maybe<AcfContentNodeConnection>;
+};
+
+
+/** Interface representing fields of the ACF &quot;PostCollaborators&quot; Field Group */
+export type PostCollaborators_FieldsReferencedCollaboratorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** A paginated collection of post Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of post Nodes */
@@ -10106,10 +10147,16 @@ export type WpPageInfo = {
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
-/** Provides access to fields of the &quot;Collaborators&quot; ACF Field Group via the &quot;collaborators&quot; field */
-export type WithAcfCollaborators = {
-  /** Fields of the Collaborators ACF Field Group */
-  collaborators?: Maybe<Collaborators>;
+/** Provides access to fields of the &quot;CollaboratorFields&quot; ACF Field Group via the &quot;collaboratorFields&quot; field */
+export type WithAcfCollaboratorFields = {
+  /** Fields of the CollaboratorFields ACF Field Group */
+  collaboratorFields?: Maybe<CollaboratorFields>;
+};
+
+/** Provides access to fields of the &quot;PostCollaborators&quot; ACF Field Group via the &quot;postCollaborators&quot; field */
+export type WithAcfPostCollaborators = {
+  /** Fields of the PostCollaborators ACF Field Group */
+  postCollaborators?: Maybe<PostCollaborators>;
 };
 
 /** The writing setting type */
@@ -10123,6 +10170,13 @@ export type WritingSettings = {
   useSmilies?: Maybe<Scalars['Boolean']['output']>;
 };
 
+export type GetPostBySlugQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type GetPostBySlugQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', title?: string | null, content?: string | null, excerpt?: string | null, postCollaborators?: { __typename?: 'PostCollaborators', referencedCollaborators?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator', title?: string | null, slug?: string | null } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Post' }> } | null } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null } | null };
+
 export type GetCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -10131,7 +10185,7 @@ export type GetCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', node: { __typename?: 'Post', id: string, title?: string | null, date?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null } }> } | null };
+export type GetPostsQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', node: { __typename?: 'Post', id: string, title?: string | null, date?: string | null, slug?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null } }> } | null };
 
 type AuthorDetailsFields_MediaItem_Fragment = { __typename?: 'MediaItem', author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } } | null };
 
@@ -10150,6 +10204,40 @@ export const AuthorDetailsFieldsFragmentDoc = gql`
       lastName
       avatar {
         url
+      }
+    }
+  }
+}
+    `;
+export const GetPostBySlugDocument = gql`
+    query GetPostBySlug($id: ID!) {
+  post(id: $id, idType: SLUG) {
+    title
+    content
+    excerpt
+    postCollaborators {
+      referencedCollaborators {
+        nodes {
+          __typename
+          ... on Collaborator {
+            title
+            slug
+          }
+        }
+      }
+    }
+    tags {
+      edges {
+        node {
+          name
+          slug
+        }
+      }
+    }
+    featuredImage {
+      node {
+        sourceUrl
+        altText
       }
     }
   }
@@ -10177,6 +10265,7 @@ export const GetPostsDocument = gql`
         id
         title
         date
+        slug
         featuredImage {
           node {
             sourceUrl
@@ -10204,6 +10293,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    GetPostBySlug(variables: GetPostBySlugQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostBySlugQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPostBySlugQuery>({ document: GetPostBySlugDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostBySlug', 'query', variables);
+    },
     GetCollaborators(variables?: GetCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCollaboratorsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetCollaboratorsQuery>({ document: GetCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCollaborators', 'query', variables);
     },

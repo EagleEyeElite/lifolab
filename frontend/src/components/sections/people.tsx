@@ -2,6 +2,10 @@ import React from "react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import PeopleClient from "@/components/ui/people/PeopleClient";
+import {
+  GetCollaboratorsQuery,
+  GetCollaboratorsQueryVariables,
+} from "@/graphql/generatedTypes";
 
 interface Person {
   name: string;
@@ -29,10 +33,10 @@ const GetCollaborators = gql`
 // Server component for data fetching
 export default async function People() {
   // Fetch collaborators from CMS
-  const data = await graphqlClient.request(GetCollaborators);
+  const data = await graphqlClient.request<GetCollaboratorsQuery, GetCollaboratorsQueryVariables>(GetCollaborators);
   
   // Transform CMS data to Person format
-  const cmsCollaborators: Person[] = (data as any)?.collaborators?.edges?.map((edge: any) => ({
+  const cmsCollaborators: Person[] = data?.collaborators?.edges?.map((edge) => ({
     name: edge.node.title || "Unknown",
     role: edge.node.content ? edge.node.content.replace(/<[^>]*>/g, '').trim() : "collaborator",
     href: "#",

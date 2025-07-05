@@ -8,31 +8,32 @@ import { GetPostsQuery, GetPostsQueryVariables } from "@/graphql/generatedTypes"
 import MasonryLayout from "@/components/ui/masonryLayout";
 
 const GetPosts = gql`
-  query GetPosts {
-    posts(first: 1) {
-      edges {
-        node {
-          id
-          title
-          date
-          featuredImage {
-            node {
-              sourceUrl
-              altText
-            }
-          }
-          tags {
+    query GetPosts {
+        posts(first: 1) {
             edges {
-              node {
-                name
-                slug
-              }
+                node {
+                    id
+                    title
+                    date
+                    slug
+                    featuredImage {
+                        node {
+                            sourceUrl
+                            altText
+                        }
+                    }
+                    tags {
+                        edges {
+                            node {
+                                name
+                                slug
+                            }
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
 `;
 
 export default async function Projects() {
@@ -43,28 +44,29 @@ export default async function Projects() {
   const postData = data?.posts?.edges?.[0]?.node;
   const postTitle = postData?.title || "Default Title";
   const postDate = postData?.date || undefined;
+  const postSlug = postData?.slug || "";
   const postTags = postData?.tags?.edges?.map((edge: any) => edge.node) || [];
   const postFeaturedImage = postData?.featuredImage?.node;
 
   // Simplified array with only imageSize
   const imageSizes = [
-    "massive", "tiny", "tiny", "tiny", "tiny", "tiny", "tiny", 
+    "massive", "tiny", "tiny", "tiny", "tiny", "tiny", "tiny",
     "large", "medium", "huge", "tiny", "small", "massive"
   ];
 
   // Generate projectCards programmatically
   const projectCards = imageSizes.map((size, index) => (
-    <ProjectCard 
-      key={index} 
+    <ProjectCard
+      key={index}
       item={{
         title: `${postTitle} #${index + 1}`,
-        href: `#project-${index + 1}`,
+        href: `/${postSlug}`,
         tags: postTags,
         date: postDate,
         image: postFeaturedImage?.sourceUrl!,
         imageSize: size as ProjectItem['imageSize']
       }}
-      index={index} 
+      index={index}
     />
   ));
 

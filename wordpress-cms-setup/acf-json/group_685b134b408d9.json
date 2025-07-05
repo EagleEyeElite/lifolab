@@ -55,7 +55,7 @@
   "description": "",
   "show_in_rest": 1,
   "show_in_graphql": 1,
-  "graphql_field_name": "collaborators",
+  "graphql_field_name": "postCollaborators",
   "map_graphql_types_from_location_rules": 0,
   "graphql_types": ""
 }
