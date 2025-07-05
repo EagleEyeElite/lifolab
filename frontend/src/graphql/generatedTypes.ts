@@ -734,6 +734,8 @@ export type CollaboratorConnectionPageInfo = {
 /** The &quot;CollaboratorFields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type CollaboratorFields = AcfFieldGroup & AcfFieldGroupFields & CollaboratorFields_Fields & {
   __typename?: 'CollaboratorFields';
+  /** Field of the &quot;true_false&quot; Field Type added to the schema as part of the &quot;CollaboratorFields&quot; Field Group */
+  coreMember?: Maybe<Scalars['Boolean']['output']>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -741,6 +743,8 @@ export type CollaboratorFields = AcfFieldGroup & AcfFieldGroupFields & Collabora
   fieldGroupName?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;CollaboratorFields&quot; Field Group */
   referencedPosts?: Maybe<AcfContentNodeConnection>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CollaboratorFields&quot; Field Group */
+  roles?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -754,6 +758,8 @@ export type CollaboratorFieldsReferencedPostsArgs = {
 
 /** Interface representing fields of the ACF &quot;CollaboratorFields&quot; Field Group */
 export type CollaboratorFields_Fields = {
+  /** Field of the &quot;true_false&quot; Field Type added to the schema as part of the &quot;CollaboratorFields&quot; Field Group */
+  coreMember?: Maybe<Scalars['Boolean']['output']>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -761,6 +767,8 @@ export type CollaboratorFields_Fields = {
   fieldGroupName?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;CollaboratorFields&quot; Field Group */
   referencedPosts?: Maybe<AcfContentNodeConnection>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CollaboratorFields&quot; Field Group */
+  roles?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -4775,6 +4783,8 @@ export type PostCollaborators = AcfFieldGroup & AcfFieldGroupFields & PostCollab
   fieldGroupName?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PostCollaborators&quot; Field Group */
   referencedCollaborators?: Maybe<AcfContentNodeConnection>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PostCollaborators&quot; Field Group */
+  whenAndWhere?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -4795,6 +4805,8 @@ export type PostCollaborators_Fields = {
   fieldGroupName?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PostCollaborators&quot; Field Group */
   referencedCollaborators?: Maybe<AcfContentNodeConnection>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PostCollaborators&quot; Field Group */
+  whenAndWhere?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -10175,12 +10187,12 @@ export type GetPostBySlugQueryVariables = Exact<{
 }>;
 
 
-export type GetPostBySlugQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', title?: string | null, content?: string | null, excerpt?: string | null, postCollaborators?: { __typename?: 'PostCollaborators', referencedCollaborators?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator', title?: string | null, slug?: string | null } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Post' }> } | null } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null } | null };
+export type GetPostBySlugQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', title?: string | null, content?: string | null, excerpt?: string | null, postCollaborators?: { __typename?: 'PostCollaborators', whenAndWhere?: string | null, referencedCollaborators?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator', title?: string | null, slug?: string | null } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Post' }> } | null } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null } | null };
 
 export type GetCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: { __typename?: 'RootQueryToCollaboratorConnection', edges: Array<{ __typename?: 'RootQueryToCollaboratorConnectionEdge', node: { __typename?: 'Collaborator', id: string, title?: string | null, content?: string | null, date?: string | null } }> } | null };
+export type GetCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: { __typename?: 'RootQueryToCollaboratorConnection', edges: Array<{ __typename?: 'RootQueryToCollaboratorConnectionEdge', node: { __typename?: 'Collaborator', id: string, title?: string | null, content?: string | null, date?: string | null, collaboratorFields?: { __typename?: 'CollaboratorFields', coreMember?: boolean | null, roles?: string | null, referencedPosts?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Post', title?: string | null, slug?: string | null }> } | null } | null } }> } | null };
 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10216,6 +10228,7 @@ export const GetPostBySlugDocument = gql`
     content
     excerpt
     postCollaborators {
+      whenAndWhere
       referencedCollaborators {
         nodes {
           __typename
@@ -10252,6 +10265,19 @@ export const GetCollaboratorsDocument = gql`
         title
         content
         date
+        collaboratorFields {
+          coreMember
+          roles
+          referencedPosts {
+            nodes {
+              __typename
+              ... on Post {
+                title
+                slug
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -10259,7 +10285,7 @@ export const GetCollaboratorsDocument = gql`
     `;
 export const GetPostsDocument = gql`
     query GetPosts {
-  posts(first: 1) {
+  posts(first: 50) {
     edges {
       node {
         id

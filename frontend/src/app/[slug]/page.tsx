@@ -18,6 +18,7 @@ const GetPostBySlug = gql`
             content
             excerpt
             postCollaborators {
+                whenAndWhere
                 referencedCollaborators {
                     nodes {
                         __typename
@@ -60,7 +61,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
   return (
     <div className="pt-[45px]">
       <header className="px-8 py-8">
-        <SectionHeader>Custom Text from CMS</SectionHeader>
+        <SectionHeader>{post.postCollaborators?.whenAndWhere || "Project Details"}</SectionHeader>
       </header>
 
       <main className="px-8 grid grid-cols-12 gap-8">

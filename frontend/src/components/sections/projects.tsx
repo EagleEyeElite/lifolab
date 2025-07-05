@@ -9,7 +9,7 @@ import MasonryLayout from "@/components/ui/masonryLayout";
 
 const GetPosts = gql`
     query GetPosts {
-        posts(first: 1) {
+        posts(first: 50) {
             edges {
                 node {
                     id
@@ -41,12 +41,7 @@ export default async function Projects() {
     GetPosts,
   );
 
-  const postData = data?.posts?.edges?.[0]?.node;
-  const postTitle = postData?.title || "Default Title";
-  const postDate = postData?.date || undefined;
-  const postSlug = postData?.slug || "";
-  const postTags = postData?.tags?.edges?.map((edge: any) => edge.node) || [];
-  const postFeaturedImage = postData?.featuredImage?.node;
+  const posts = data?.posts?.edges?.map(edge => edge.node) || [];
 
   // Simplified array with only imageSize
   const imageSizes = [
@@ -54,21 +49,37 @@ export default async function Projects() {
     "large", "medium", "huge", "tiny", "small", "massive"
   ];
 
-  // Generate projectCards programmatically
-  const projectCards = imageSizes.map((size, index) => (
-    <ProjectCard
-      key={index}
-      item={{
-        title: `${postTitle} #${index + 1}`,
-        href: `/${postSlug}`,
-        tags: postTags,
-        date: postDate,
-        image: postFeaturedImage?.sourceUrl!,
-        imageSize: size as ProjectItem['imageSize']
-      }}
-      index={index}
-    />
-  ));
+  // Generate 13 project cards, cycling through available posts
+  const projectCards = imageSizes.map((size, index) => {
+    // Cycle through posts if we have fewer posts than cards needed
+    const postIndex = posts.length > 0 ? index % posts.length : 0;
+    const currentPost = posts[postIndex];
+    
+    if (!currentPost) {
+      return null;
+    }
+
+    const postTitle = currentPost.title || "Default Title";
+    const postDate = currentPost.date || undefined;
+    const postSlug = currentPost.slug || "";
+    const postTags = currentPost.tags?.edges?.map((edge: any) => edge.node) || [];
+    const postFeaturedImage = currentPost.featuredImage?.node;
+
+    return (
+      <ProjectCard
+        key={`${currentPost.id}-${index}`}
+        item={{
+          title: `${postTitle} #${index + 1}`,
+          href: `/${postSlug}`,
+          tags: postTags,
+          date: postDate,
+          image: postFeaturedImage?.sourceUrl!,
+          imageSize: size as ProjectItem['imageSize']
+        }}
+        index={index}
+      />
+    );
+  }).filter(Boolean);
 
   return (
     <div className="flex justify-start w-full">

@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { Plus } from "lucide-react";
+import Link from "next/link";
+import HTMLRenderer from "@/components/ui/htmlRenderer";
 
 interface Person {
   name: string;
@@ -8,6 +10,10 @@ interface Person {
   href: string;
   hasLink: boolean;
   content?: string;
+  projects?: Array<{
+    title: string;
+    slug: string;
+  }>;
 }
 
 interface PersonRowProps {
@@ -57,9 +63,26 @@ export default function PersonRow({ person }: PersonRowProps) {
             isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
           }`}>
             {person.content ? (
-              <div dangerouslySetInnerHTML={{ __html: person.content }} />
+              <HTMLRenderer content={person.content} className="text-sm" />
             ) : (
               <p>More information about {person.name} coming soon...</p>
+            )}
+            
+            {person.projects && person.projects.length > 0 && (
+              <div className="mt-4 pt-4 border-t border-black/20">
+                <div className="space-y-2">
+                  {person.projects.map((project, index) => (
+                    <div key={index} className="block">
+                      <Link 
+                        href={`/${project.slug}`}
+                        className="text-black font-mono text-sm leading-tight block hover:opacity-75 transition-opacity duration-200"
+                      >
+                        {project.title} <span className="inline-block ml-1">↗</span>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
         </div>
