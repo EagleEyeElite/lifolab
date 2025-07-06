@@ -17,6 +17,7 @@
     "codegen:check": "npm run codegen && git diff --exit-code --quiet src/graphql/generatedTypes.ts || (echo 'Generated types are out of date. Run npm run codegen' && exit 1)"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.16",
     "dotenv-safe": "^9.1.0",
     "graphql-request": "^6.1.0",
     "html-react-parser": "^5.2.5",

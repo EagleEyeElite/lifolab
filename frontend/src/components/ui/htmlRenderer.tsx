@@ -1,8 +1,9 @@
-import { ReactNode } from 'react';
 import parse, { DOMNode, domToReact, Element } from 'html-react-parser';
-import { ExternalLink } from 'lucide-react';
+import {ReactNode} from "react";
+import Link from "next/link";
+import {ExternalLink} from "lucide-react";
 import Image from 'next/image';
-import Link from 'next/link';
+
 
 interface CustomLinkProps {
   link: {
@@ -23,6 +24,7 @@ function CustomLink({ link }: CustomLinkProps) {
   );
 }
 
+
 interface HTMLRendererProps {
   content: string | null | undefined;
   className?: string;
@@ -38,7 +40,13 @@ export default function HTMLRenderer({ content, className = '' }: HTMLRendererPr
       if (!(domNode instanceof Element)) {
         return;
       }
+
+      const classes = domNode.attribs?.class || '';
+
       switch (domNode.name) {
+
+
+
         case 'img': {
           const { src, alt, width, height } = domNode.attribs;
           const alignmentClass = (domNode.parent as Element)?.attribs?.class?.match(/align(left|right|center|wide|full)/)?.[0] || '';
@@ -63,6 +71,60 @@ export default function HTMLRenderer({ content, className = '' }: HTMLRendererPr
           );
         }
 
+
+
+
+
+        case 'div': {
+          // Handle WordPress columns
+          if (classes.includes('wp-block-columns')) {
+            const children = domToReact(domNode.children as DOMNode[]);
+            return (
+              <div className="flex flex-col md:flex-row gap-6 my-6">
+                {children}
+              </div>
+            );
+          }
+
+          if (classes.includes('wp-block-column')) {
+            const children = domToReact(domNode.children as DOMNode[]);
+            return (
+              <div className="flex-1">
+                {children}
+              </div>
+            );
+          }
+
+          // For other divs, let them render normally
+          return;
+        }
+
+        case 'figure': {
+          // Handle WordPress galleries
+          if (classes.includes('wp-block-gallery')) {
+            const children = domToReact(domNode.children as DOMNode[]);
+            return (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-6">
+                {children}
+              </div>
+            );
+          }
+
+          // Handle individual images within galleries
+          if (classes.includes('wp-block-image')) {
+            const children = domToReact(domNode.children as DOMNode[]);
+            return (
+              <div className="overflow-hidden rounded-lg">
+                {children}
+              </div>
+            );
+          }
+
+          // For other figures, let them render normally
+          return;
+        }
+
+
         case 'a': {
           const children = domToReact(domNode.children as DOMNode[]);
           return <CustomLink link={{ children, href: domNode.attribs.href }} />;
@@ -75,23 +137,7 @@ export default function HTMLRenderer({ content, className = '' }: HTMLRendererPr
   });
 
   return (
-    <div className={`
-      text-lg leading-relaxed text-black text-justify
-      [&_p]:mb-6
-      [&_h1]:text-4xl [&_h1]:font-normal [&_h1]:leading-tight [&_h1]:my-8 [&_h1]:text-black
-      [&_h2]:text-3xl [&_h2]:font-normal [&_h2]:leading-tight [&_h2]:my-6 [&_h2]:text-black
-      [&_h3]:text-2xl [&_h3]:font-normal [&_h3]:leading-tight [&_h3]:my-4 [&_h3]:text-black
-      [&_br]:block [&_br]:my-3
-      [&_strong]:font-medium
-      [&_em]:italic
-      [&_ul]:my-4 [&_ul]:pl-8
-      [&_ol]:my-4 [&_ol]:pl-8
-      [&_li]:mb-2
-      [&_blockquote]:border-l-4 [&_blockquote]:border-[rgba(0,255,94,0.91)] [&_blockquote]:pl-6 [&_blockquote]:my-6 [&_blockquote]:italic
-      [&_a]:text-black [&_a]:underline [&_a]:decoration-[rgba(0,255,94,0.91)] [&_a]:underline-offset-2 [&_a:hover]:bg-[rgba(0,255,94,0.2)]
-      [&_img]:rounded-lg [&_img]:my-8
-      ${className}
-    `}>
+    <div className={`prose prose-lg max-w-none ${className}`}>
       {processedContent}
     </div>
   );
