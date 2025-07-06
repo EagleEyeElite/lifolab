@@ -1,29 +1,45 @@
 import parse, { DOMNode, domToReact, Element } from 'html-react-parser';
-import {ReactNode} from "react";
-import Link from "next/link";
-import {ExternalLink} from "lucide-react";
 import Image from 'next/image';
+import CustomLink from "@/components/ui/customLink";
+import EmblaCarousel from "@/components/ui/embla-carousel/EmblaCarousel";
+import {EmblaOptionsType} from "embla-carousel";
 
 
-interface CustomLinkProps {
-  link: {
-    href: string;
-    children: ReactNode;
-  };
+
+interface GalleryImage {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
 }
 
-function CustomLink({ link }: CustomLinkProps) {
-  const isExternal = link.href?.startsWith('http://') || link.href?.startsWith('https://');
-  const externalAttrs = isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {};
+// Helper function to extract images from gallery DOM node
+function extractImagesFromGallery(galleryNode: Element): GalleryImage[] {
+  const images: GalleryImage[] = [];
 
-  return (
-    <Link href={link.href} {...externalAttrs} className="inline-flex items-center">
-      {link.children}
-      {isExternal && <ExternalLink size={16} />}
-    </Link>
-  );
+  function traverse(node: DOMNode) {
+    if (node instanceof Element) {
+      if (node.name === 'img') {
+        images.push({
+          src: node.attribs.src,
+          alt: node.attribs.alt || '',
+          width: node.attribs.width ? parseInt(node.attribs.width) : undefined,
+          height: node.attribs.height ? parseInt(node.attribs.height) : undefined,
+        });
+      }
+
+      if (node.children) {
+        node.children.forEach((child) => traverse(child as DOMNode));
+      }
+    }
+  }
+
+  if (galleryNode.children) {
+    galleryNode.children.forEach((child) => traverse(child as DOMNode));
+  }
+
+  return images;
 }
-
 
 interface HTMLRendererProps {
   content: string | null | undefined;
@@ -44,9 +60,6 @@ export default function HTMLRenderer({ content, className = '' }: HTMLRendererPr
       const classes = domNode.attribs?.class || '';
 
       switch (domNode.name) {
-
-
-
         case 'img': {
           const { src, alt, width, height } = domNode.attribs;
           const alignmentClass = (domNode.parent as Element)?.attribs?.class?.match(/align(left|right|center|wide|full)/)?.[0] || '';
@@ -70,10 +83,6 @@ export default function HTMLRenderer({ content, className = '' }: HTMLRendererPr
             />
           );
         }
-
-
-
-
 
         case 'div': {
           // Handle WordPress columns
@@ -100,12 +109,17 @@ export default function HTMLRenderer({ content, className = '' }: HTMLRendererPr
         }
 
         case 'figure': {
-          // Handle WordPress galleries
+          // Handle WordPress galleries with custom Fancybox gallery
           if (classes.includes('wp-block-gallery')) {
-            const children = domToReact(domNode.children as DOMNode[]);
+            const images = extractImagesFromGallery(domNode);
+
+            const OPTIONS: EmblaOptionsType = { containScroll: false }
+            const SLIDE_COUNT = 5
+            const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+
             return (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-6">
-                {children}
+              <div className="not-prose">
+                <EmblaCarousel slides={SLIDES} options={OPTIONS} />
               </div>
             );
           }
@@ -123,7 +137,6 @@ export default function HTMLRenderer({ content, className = '' }: HTMLRendererPr
           // For other figures, let them render normally
           return;
         }
-
 
         case 'a': {
           const children = domToReact(domNode.children as DOMNode[]);
