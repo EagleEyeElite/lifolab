@@ -56,7 +56,7 @@ export const DotButton: React.FC<PropType> = (props) => {
 
   return (
     <button 
-      className="tap-highlight-color-[rgba(49,49,49,0.5)] dark:tap-highlight-color-[rgba(230,230,230,0.5)] appearance-none bg-transparent touch-manipulation inline-flex no-underline cursor-pointer border-0 p-0 m-0"
+      className="tap-highlight-color-[rgba(49,49,49,0.5)] appearance-none bg-transparent touch-manipulation inline-flex no-underline cursor-pointer border-0 p-0 m-0"
       type="button" 
       {...restProps}
     >

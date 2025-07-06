@@ -57,7 +57,7 @@ export const PrevButton: React.FC<PropType> = (props) => {
 
   return (
     <button
-      className="tap-highlight-color-[rgba(49,49,49,0.5)] dark:tap-highlight-color-[rgba(230,230,230,0.5)] appearance-none bg-transparent touch-manipulation inline-flex no-underline cursor-pointer border-0 p-0 m-0 shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] dark:shadow-[inset_0_0_0_0.2rem_rgb(25,25,25)] w-[3.6rem] h-[3.6rem] z-[1] rounded-full text-[rgb(54,49,61)] dark:text-[rgb(222,222,222)] items-center justify-center disabled:text-[rgb(192,192,192)] dark:disabled:text-[rgb(101,101,101)]"
+      className="tap-highlight-color-[rgba(49,49,49,0.5)] appearance-none bg-transparent touch-manipulation inline-flex no-underline cursor-pointer border-0 p-0 m-0 shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] w-[3.6rem] h-[3.6rem] z-[1] rounded-full text-[rgb(54,49,61)] items-center justify-center disabled:text-[rgb(192,192,192)]"
       type="button"
       {...restProps}
     >
@@ -72,7 +72,7 @@ export const NextButton: React.FC<PropType> = (props) => {
 
   return (
     <button
-      className="tap-highlight-color-[rgba(49,49,49,0.5)] dark:tap-highlight-color-[rgba(230,230,230,0.5)] appearance-none bg-transparent touch-manipulation inline-flex no-underline cursor-pointer border-0 p-0 m-0 shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] dark:shadow-[inset_0_0_0_0.2rem_rgb(25,25,25)] w-[3.6rem] h-[3.6rem] z-[1] rounded-full text-[rgb(54,49,61)] dark:text-[rgb(222,222,222)] items-center justify-center disabled:text-[rgb(192,192,192)] dark:disabled:text-[rgb(101,101,101)]"
+      className="tap-highlight-color-[rgba(49,49,49,0.5)] appearance-none bg-transparent touch-manipulation inline-flex no-underline cursor-pointer border-0 p-0 m-0 shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] w-[3.6rem] h-[3.6rem] z-[1] rounded-full text-[rgb(54,49,61)] items-center justify-center"
       type="button"
       {...restProps}
     >
