@@ -9,9 +9,17 @@ import {
   usePrevNextButtons
 } from './EmblaCarouselArrowButtons'
 import useEmblaCarousel from 'embla-carousel-react'
+import Image from 'next/image'
+
+interface GalleryImage {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+}
 
 type PropType = {
-  slides: number[]
+  slides: GalleryImage[]
   options?: EmblaOptionsType
 }
 
@@ -40,8 +48,16 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <div className="overflow-hidden">
           <div className="flex justify-center">
             <div className="flex-[0_0_70%]">
-              <div className="shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] rounded-[1.8rem] text-[4rem] font-semibold flex items-center justify-center h-[19rem] select-none">
-                {slides[0] + 1}
+              <div className="shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] rounded-[1.8rem] overflow-hidden h-[19rem] select-none">
+                {slides[0] && (
+                  <Image
+                    src={slides[0].src}
+                    alt={slides[0].alt}
+                    width={slides[0].width || 800}
+                    height={slides[0].height || 600}
+                    className="w-full h-full object-cover"
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -72,10 +88,16 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     <section className="max-w-3xl mx-auto">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom gap-4">
-          {slides.map((index) => (
+          {slides.map((image, index) => (
             <div className="transform-gpu flex-[0_0_70%] min-w-0" key={index}>
-              <div className="shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] rounded-[1.8rem] text-[4rem] font-semibold flex items-center justify-center h-[19rem] select-none">
-                {index + 1}
+              <div className="shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] rounded-[1.8rem] overflow-hidden h-[19rem] select-none">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={image.width || 800}
+                  height={image.height || 600}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           ))}

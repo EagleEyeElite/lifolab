@@ -114,12 +114,10 @@ export default function HTMLRenderer({ content, className = '' }: HTMLRendererPr
             const images = extractImagesFromGallery(domNode);
 
             const OPTIONS: EmblaOptionsType = { containScroll: false }
-            const SLIDE_COUNT = 5
-            const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
             return (
               <div className="not-prose">
-                <EmblaCarousel slides={SLIDES} options={OPTIONS} />
+                <EmblaCarousel slides={images} options={OPTIONS} />
               </div>
             );
           }
