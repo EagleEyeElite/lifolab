@@ -72,11 +72,11 @@ export default function HTMLRenderer({ content, className = '' }: HTMLRendererPr
               alt={alt || 'image'}
               style={{ objectFit: 'cover' }}
               className={`
-                mt-2 
+                mt-2 w-full h-auto max-w-full
                 [&.alignfull]:w-full 
                 [&.alignwide]:w-full
-                [&.alignleft]:float-left [&.alignleft]:mr-4
-                [&.alignright]:float-right [&.alignright]:ml-4
+                [&.alignleft]:float-left [&.alignleft]:mr-4 [&.alignleft]:w-auto [&.alignleft]:max-w-[50%]
+                [&.alignright]:float-right [&.alignright]:ml-4 [&.alignright]:w-auto [&.alignright]:max-w-[50%]
                 [&.aligncenter]:mx-auto
                 ${alignmentClass}
               `}
@@ -88,8 +88,20 @@ export default function HTMLRenderer({ content, className = '' }: HTMLRendererPr
           // Handle WordPress columns
           if (classes.includes('wp-block-columns')) {
             const children = domToReact(domNode.children as DOMNode[]);
+            // Count the number of wp-block-column children
+            const columnCount = domNode.children?.filter(child =>
+              child instanceof Element &&
+              child.attribs?.class?.includes('wp-block-column')
+            ).length || 1;
+
             return (
-              <div className="flex flex-col md:flex-row gap-6 my-6">
+              <div
+                className="grid gap-6 my-6"
+                style={{
+                  gridTemplateColumns: `repeat(${columnCount}, 1fr)`,
+                  gridTemplateRows: 'auto'
+                }}
+              >
                 {children}
               </div>
             );
@@ -98,7 +110,7 @@ export default function HTMLRenderer({ content, className = '' }: HTMLRendererPr
           if (classes.includes('wp-block-column')) {
             const children = domToReact(domNode.children as DOMNode[]);
             return (
-              <div className="flex-1">
+              <div className="min-w-0 overflow-hidden">
                 {children}
               </div>
             );
