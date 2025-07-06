@@ -47,8 +47,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       <section className="max-w-3xl mx-auto">
         <div className="overflow-hidden">
           <div className="flex justify-center">
-            <div className="flex-[0_0_70%]">
-              <div className="shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] rounded-[1.8rem] overflow-hidden h-[19rem] select-none">
+            <div className="flex-[0_0_auto]">
+              <div className="shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] rounded-[1.8rem] overflow-hidden h-[19rem] select-none w-[25rem]">
                 {slides[0] && (
                   <Image
                     src={slides[0].src}
@@ -88,19 +88,28 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     <section className="max-w-3xl mx-auto">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom gap-4">
-          {slides.map((image, index) => (
-            <div className="transform-gpu flex-[0_0_70%] min-w-0" key={index}>
-              <div className="shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] rounded-[1.8rem] overflow-hidden h-[19rem] select-none">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  width={image.width || 800}
-                  height={image.height || 600}
-                  className="w-full h-full object-cover"
-                />
+          {slides.map((image, index) => {
+            const aspectRatio = image.width && image.height ? image.width / image.height : 1
+            const slideWidth = Math.min(Math.max(aspectRatio * 19, 15), 40) // Between 15rem and 40rem based on aspect ratio
+            
+            return (
+              <div 
+                className="transform-gpu min-w-0" 
+                key={index}
+                style={{ flexBasis: `${slideWidth}rem` }}
+              >
+                <div className="shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] rounded-[1.8rem] overflow-hidden h-[19rem] select-none">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    width={image.width || 800}
+                    height={image.height || 600}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
 
