@@ -68,6 +68,48 @@ export type AcfFieldGroupFields = {
   fieldGroupName?: Maybe<Scalars['String']['output']>;
 };
 
+/** Connection between the FrontendContentImprint_Fields type and the MediaItem type */
+export type AcfMediaItemConnection = Connection & MediaItemConnection & {
+  __typename?: 'AcfMediaItemConnection';
+  /** Edges for the AcfMediaItemConnection connection */
+  edges: Array<AcfMediaItemConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<MediaItem>;
+  /** Information about pagination in a connection. */
+  pageInfo: AcfMediaItemConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type AcfMediaItemConnectionEdge = Edge & MediaItemConnectionEdge & {
+  __typename?: 'AcfMediaItemConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: MediaItem;
+};
+
+/** Pagination metadata specific to &quot;AcfMediaItemConnection&quot; collections. Provides cursors and flags for navigating through sets of AcfMediaItemConnection Nodes. */
+export type AcfMediaItemConnectionPageInfo = MediaItemConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'AcfMediaItemConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Options Page registered by ACF */
+export type AcfOptionsPage = {
+  /** The globally unique ID for the object */
+  id: Scalars['ID']['output'];
+  menuTitle?: Maybe<Scalars['String']['output']>;
+  pageTitle?: Maybe<Scalars['String']['output']>;
+  parentId?: Maybe<Scalars['String']['output']>;
+};
+
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
 export type Avatar = {
   __typename?: 'Avatar';
@@ -2510,6 +2552,143 @@ export type EnqueuedStylesheetConnectionPageInfo = {
   hasPreviousPage: Scalars['Boolean']['output'];
   /** When paginating backwards, the cursor to continue. */
   startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;FrontendContent&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type FrontendContent = AcfFieldGroup & AcfFieldGroupFields & FrontendContent_Fields & {
+  __typename?: 'FrontendContent';
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;FrontendContent&quot; Field Group */
+  contact?: Maybe<FrontendContentContact>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;FrontendContent&quot; Field Group */
+  imprint?: Maybe<FrontendContentImprint>;
+};
+
+/** The &quot;FrontendContentContact&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type FrontendContentContact = AcfFieldGroup & AcfFieldGroupFields & FrontendContentContact_Fields & {
+  __typename?: 'FrontendContentContact';
+  /** Address displayed in the website footer. */
+  address?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;FrontendContentContact&quot; Field Group */
+  info1?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;FrontendContentContact&quot; Field Group */
+  infosContactPerson?: Maybe<Array<Maybe<FrontendContentContactInfosContactPerson>>>;
+};
+
+/** The &quot;FrontendContentContactInfosContactPerson&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type FrontendContentContactInfosContactPerson = AcfFieldGroup & AcfFieldGroupFields & FrontendContentContactInfosContactPerson_Fields & {
+  __typename?: 'FrontendContentContactInfosContactPerson';
+  /** Field of the &quot;email&quot; Field Type added to the schema as part of the &quot;FrontendContentContactInfosContactPerson&quot; Field Group */
+  contactEmail?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;FrontendContentContactInfosContactPerson&quot; Field Group */
+  contactName?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;FrontendContentContactInfosContactPerson&quot; Field Group */
+export type FrontendContentContactInfosContactPerson_Fields = {
+  /** Field of the &quot;email&quot; Field Type added to the schema as part of the &quot;FrontendContentContactInfosContactPerson&quot; Field Group */
+  contactEmail?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;FrontendContentContactInfosContactPerson&quot; Field Group */
+  contactName?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;FrontendContentContact&quot; Field Group */
+export type FrontendContentContact_Fields = {
+  /** Address displayed in the website footer. */
+  address?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;FrontendContentContact&quot; Field Group */
+  info1?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;FrontendContentContact&quot; Field Group */
+  infosContactPerson?: Maybe<Array<Maybe<FrontendContentContactInfosContactPerson>>>;
+};
+
+/** The &quot;FrontendContentImprint&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type FrontendContentImprint = AcfFieldGroup & AcfFieldGroupFields & FrontendContentImprint_Fields & {
+  __typename?: 'FrontendContentImprint';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;gallery&quot; Field Type added to the schema as part of the &quot;FrontendContentImprint&quot; Field Group */
+  imprintImages?: Maybe<AcfMediaItemConnection>;
+};
+
+
+/** The &quot;FrontendContentImprint&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type FrontendContentImprintImprintImagesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Interface representing fields of the ACF &quot;FrontendContentImprint&quot; Field Group */
+export type FrontendContentImprint_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;gallery&quot; Field Type added to the schema as part of the &quot;FrontendContentImprint&quot; Field Group */
+  imprintImages?: Maybe<AcfMediaItemConnection>;
+};
+
+
+/** Interface representing fields of the ACF &quot;FrontendContentImprint&quot; Field Group */
+export type FrontendContentImprint_FieldsImprintImagesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type FrontendContentSettings = AcfOptionsPage & Node & WithAcfFrontendContent & {
+  __typename?: 'FrontendContentSettings';
+  /** Fields of the FrontendContent ACF Field Group */
+  frontendContent?: Maybe<FrontendContent>;
+  /** The globally unique ID for the object */
+  id: Scalars['ID']['output'];
+  menuTitle?: Maybe<Scalars['String']['output']>;
+  pageTitle?: Maybe<Scalars['String']['output']>;
+  parentId?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;FrontendContent&quot; Field Group */
+export type FrontendContent_Fields = {
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;FrontendContent&quot; Field Group */
+  contact?: Maybe<FrontendContentContact>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;FrontendContent&quot; Field Group */
+  imprint?: Maybe<FrontendContentImprint>;
 };
 
 /** The general setting type */
@@ -6302,7 +6481,7 @@ export type RootMutationUpdateUserArgs = {
 };
 
 /** The root entry point into the Graph */
-export type RootQuery = {
+export type RootQuery = WithAcfOptionsPageFrontendContentSettings & {
   __typename?: 'RootQuery';
   /** Entry point to get all settings for the site */
   allSettings?: Maybe<Settings>;
@@ -6333,6 +6512,7 @@ export type RootQuery = {
   contentTypes?: Maybe<RootQueryToContentTypeConnection>;
   /** Fields of the &#039;DiscussionSettings&#039; settings group */
   discussionSettings?: Maybe<DiscussionSettings>;
+  frontendContentSettings?: Maybe<FrontendContentSettings>;
   /** Fields of the &#039;GeneralSettings&#039; settings group */
   generalSettings?: Maybe<GeneralSettings>;
   /** An object of the mediaItem Type.  */
@@ -10165,6 +10345,17 @@ export type WithAcfCollaboratorProfile = {
   collaboratorProfile?: Maybe<CollaboratorProfile>;
 };
 
+/** Provides access to fields of the &quot;FrontendContent&quot; ACF Field Group via the &quot;frontendContent&quot; field */
+export type WithAcfFrontendContent = {
+  /** Fields of the FrontendContent ACF Field Group */
+  frontendContent?: Maybe<FrontendContent>;
+};
+
+/** Access point for the &quot;FrontendContentSettings&quot; ACF Options Page */
+export type WithAcfOptionsPageFrontendContentSettings = {
+  frontendContentSettings?: Maybe<FrontendContentSettings>;
+};
+
 /** Provides access to fields of the &quot;PostDetails&quot; ACF Field Group via the &quot;postDetails&quot; field */
 export type WithAcfPostDetails = {
   /** Fields of the PostDetails ACF Field Group */
@@ -10200,6 +10391,21 @@ export type GetAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetAllTagsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null, count?: number | null } }> } | null };
+
+export type GetContactContentQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetContactContentQuery = { __typename?: 'RootQuery', frontendContentSettings?: { __typename?: 'FrontendContentSettings', frontendContent?: { __typename?: 'FrontendContent', contact?: { __typename?: 'FrontendContentContact', info1?: string | null, address?: string | null, infosContactPerson?: Array<{ __typename?: 'FrontendContentContactInfosContactPerson', contactName?: string | null, contactEmail?: string | null } | null> | null } | null } | null } | null };
+
+export type GetImprintContentQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetImprintContentQuery = { __typename?: 'RootQuery', frontendContentSettings?: { __typename?: 'FrontendContentSettings', frontendContent?: { __typename?: 'FrontendContent', imprint?: { __typename?: 'FrontendContentImprint', imprintImages?: { __typename?: 'AcfMediaItemConnection', nodes: Array<{ __typename?: 'MediaItem', id: string, sourceUrl?: string | null, altText?: string | null }> } | null } | null } | null } | null };
+
+export type GetAboutPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAboutPageQuery = { __typename?: 'RootQuery', page?: { __typename?: 'Page', title?: string | null, content?: string | null } | null };
 
 export type GetCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10291,6 +10497,47 @@ export const GetAllTagsDocument = gql`
         count
       }
     }
+  }
+}
+    `;
+export const GetContactContentDocument = gql`
+    query GetContactContent {
+  frontendContentSettings {
+    frontendContent {
+      contact {
+        info1
+        infosContactPerson {
+          contactName
+          contactEmail
+        }
+        address
+      }
+    }
+  }
+}
+    `;
+export const GetImprintContentDocument = gql`
+    query GetImprintContent {
+  frontendContentSettings {
+    frontendContent {
+      imprint {
+        imprintImages {
+          nodes {
+            id
+            sourceUrl
+            altText
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const GetAboutPageDocument = gql`
+    query GetAboutPage {
+  page(id: "about-section", idType: URI) {
+    title
+    content
   }
 }
     `;
@@ -10427,6 +10674,15 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetAllTags(variables?: GetAllTagsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllTagsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllTagsQuery>({ document: GetAllTagsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllTags', 'query', variables);
+    },
+    GetContactContent(variables?: GetContactContentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetContactContentQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetContactContentQuery>({ document: GetContactContentDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetContactContent', 'query', variables);
+    },
+    GetImprintContent(variables?: GetImprintContentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetImprintContentQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetImprintContentQuery>({ document: GetImprintContentDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetImprintContent', 'query', variables);
+    },
+    GetAboutPage(variables?: GetAboutPageQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAboutPageQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAboutPageQuery>({ document: GetAboutPageDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAboutPage', 'query', variables);
     },
     GetCollaborators(variables?: GetCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCollaboratorsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetCollaboratorsQuery>({ document: GetCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCollaborators', 'query', variables);

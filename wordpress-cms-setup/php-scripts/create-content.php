@@ -159,4 +159,39 @@ $post3_id = wp_insert_post(array(
 update_post_meta($max_id, 'referenced_posts', array($post1_id, $post3_id));
 update_post_meta($conrad_id, 'referenced_posts', array($post2_id, $post3_id));
 
+$about_content = '
+<p>Living the Forest Lab...
+Our mission is...
+We work closely with...
+The project focuses on...
+Through collaborative efforts...
+Our interdisciplinary approach combines...
+Join us in our mission to protect...</p>
+';
+
+// Set up page for the about section
+wp_insert_post(array(
+   'post_type' => 'page',
+   'post_title' => 'about-section',
+   'post_name' => 'about-section',
+   'post_content' => $about_content,
+   'post_status' => 'publish',
+   'post_author' => $admin_id
+));
+
+
+// Set default values
+update_field('contact', [
+    'info_1' => 'Living the Forest Lab | Reallabor Wald',
+    'infos_contact_person' => [
+        [ 'contact_name'  => 'Max Mustermann', 'contact_email' => 'max.mustermann@example.com', ],
+        [ 'contact_name'  => 'Max Mustermann', 'contact_email' => 'max.mustermann@example.com', ],
+    ],
+    'address' => 'Musterstraße 123, 12345 Musterstadt'
+], 'option');
+
+update_field('imprint', [
+    'imprint_images' => [$image_2_id, $image_3_id]
+], 'option');
+
 ?>

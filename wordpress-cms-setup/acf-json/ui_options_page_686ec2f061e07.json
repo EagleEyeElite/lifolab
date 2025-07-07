@@ -1,0 +1,27 @@
+{
+  "key": "ui_options_page_686ec2f061e07",
+  "title": "Frontend Content",
+  "active": true,
+  "menu_order": 0,
+  "page_title": "Frontend Content",
+  "menu_slug": "frontend-content",
+  "parent_slug": "none",
+  "advanced_configuration": 1,
+  "icon_url": "",
+  "menu_title": "Frontend Content",
+  "position": 3,
+  "redirect": 0,
+  "description": "Global content displayed on the frontend.",
+  "menu_icon": {
+    "type": "dashicons",
+    "value": "dashicons-cover-image"
+  },
+  "update_button": "Update",
+  "updated_message": "Content updated",
+  "capability": "edit_posts",
+  "data_storage": "options",
+  "post_id": "",
+  "autoload": 0,
+  "show_in_graphql": 1,
+  "graphql_type_name": "FrontendContentSettings"
+}

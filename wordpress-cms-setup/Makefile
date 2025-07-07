@@ -29,7 +29,7 @@ configure:
 	@cp /acf-json/*.json ./wp-content/themes/$$(wp theme list --status=active --field=name)/acf-json/
 	@echo "🔌 Installing plugins."
 	@wp plugin install updraftplus --version=1.25.6 --activate
-	@wp plugin install advanced-custom-fields --version=6.4.2 --activate
+	@wp plugin install secure-custom-fields --version=6.5.1 --activate
 	@wp plugin install wp-graphql --version=2.3.3 --activate
 	@wp plugin install wpgraphql-acf --version=2.4.1 --activate
 	@wp eval-file /php-scripts/sync-acf-json.php

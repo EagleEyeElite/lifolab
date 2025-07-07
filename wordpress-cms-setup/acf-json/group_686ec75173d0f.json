@@ -1,0 +1,232 @@
+{
+  "key": "group_686ec75173d0f",
+  "title": "Frontend Content",
+  "fields": [
+    {
+      "key": "field_686ed7214d74d",
+      "label": "Contact",
+      "name": "contact",
+      "aria-label": "",
+      "type": "group",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "show_in_graphql": 1,
+      "graphql_description": "",
+      "graphql_field_name": "",
+      "graphql_non_null": 0,
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_686ed73c4d74e",
+          "label": "Info 1",
+          "name": "info_1",
+          "aria-label": "",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "Living the Forest Lab | Reallabor Wald",
+          "maxlength": "",
+          "allow_in_bindings": 0,
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "show_in_graphql": 1,
+          "graphql_description": "",
+          "graphql_field_name": "",
+          "graphql_non_null": 0
+        },
+        {
+          "key": "field_686ed76c4d751",
+          "label": "Infos Contact Person",
+          "name": "infos_contact_person",
+          "aria-label": "",
+          "type": "repeater",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "layout": "table",
+          "pagination": 0,
+          "min": 2,
+          "max": 0,
+          "collapsed": "",
+          "button_label": "Add Row",
+          "show_in_graphql": 1,
+          "graphql_description": "",
+          "graphql_field_name": "infosContactPerson",
+          "graphql_non_null": 0,
+          "rows_per_page": 20,
+          "sub_fields": [
+            {
+              "key": "field_686ed7794d752",
+              "label": "Contact Name",
+              "name": "contact_name",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "Max Mustermann",
+              "maxlength": "",
+              "allow_in_bindings": 0,
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "show_in_graphql": 1,
+              "graphql_description": "",
+              "graphql_field_name": "contactName",
+              "graphql_non_null": 0,
+              "parent_repeater": "field_686ed76c4d751"
+            },
+            {
+              "key": "field_686ed7804d753",
+              "label": "Contact Email",
+              "name": "contact_email",
+              "aria-label": "",
+              "type": "email",
+              "instructions": "",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "max.mustermann@example.com",
+              "allow_in_bindings": 0,
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "show_in_graphql": 1,
+              "graphql_description": "",
+              "graphql_field_name": "contactEmail",
+              "graphql_non_null": 0,
+              "parent_repeater": "field_686ed76c4d751"
+            }
+          ]
+        },
+        {
+          "key": "field_686ec7accf490",
+          "label": "Address",
+          "name": "address",
+          "aria-label": "",
+          "type": "text",
+          "instructions": "Address displayed in the website footer.",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "Musterstraße 123, 12345 Musterstadt",
+          "maxlength": "",
+          "allow_in_bindings": 0,
+          "placeholder": "Musterstraße 123, 12345 Musterstadt",
+          "prepend": "",
+          "append": "",
+          "show_in_graphql": 1,
+          "graphql_description": "",
+          "graphql_field_name": "address",
+          "graphql_non_null": 0
+        }
+      ]
+    },
+    {
+      "key": "field_686ee5a0f4248",
+      "label": "Imprint",
+      "name": "imprint",
+      "aria-label": "",
+      "type": "group",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "block",
+      "show_in_graphql": 1,
+      "graphql_description": "",
+      "graphql_field_name": "imprint",
+      "graphql_non_null": 0,
+      "sub_fields": [
+        {
+          "key": "field_686ee5c3f4249",
+          "label": "Imprint Images",
+          "name": "imprint_images",
+          "aria-label": "",
+          "type": "gallery",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "return_format": "array",
+          "library": "all",
+          "min": "",
+          "max": "",
+          "min_width": "",
+          "min_height": "",
+          "min_size": "",
+          "max_width": "",
+          "max_height": "",
+          "max_size": "",
+          "mime_types": "",
+          "insert": "append",
+          "preview_size": "thumbnail",
+          "show_in_graphql": 1,
+          "graphql_description": "",
+          "graphql_field_name": "imprintImages"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "options_page",
+        "operator": "==",
+        "value": "frontend-content"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "seamless",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "show_in_graphql": 1,
+  "graphql_field_name": "frontendContent",
+  "map_graphql_types_from_location_rules": 0,
+  "graphql_types": ""
+}
