@@ -10189,6 +10189,18 @@ export type GetPostBySlugQueryVariables = Exact<{
 
 export type GetPostBySlugQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', postDetails?: { __typename?: 'PostDetails', whenAndWhere: string } | null } | null };
 
+export type GetPostsByTagQueryVariables = Exact<{
+  tag: Scalars['String']['input'];
+}>;
+
+
+export type GetPostsByTagQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', node: { __typename?: 'Post', id: string, title?: string | null, slug?: string | null, date?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null } }> } | null };
+
+export type GetAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllTagsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null, count?: number | null } }> } | null };
+
 export type GetCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -10245,6 +10257,49 @@ export const GetPostBySlugDocument = gql`
   post(id: $id, idType: SLUG) {
     postDetails {
       whenAndWhere
+    }
+  }
+}
+    `;
+export const GetPostsByTagDocument = gql`
+    query GetPostsByTag($tag: String!) {
+  posts(where: {tag: $tag}) {
+    edges {
+      node {
+        id
+        title
+        slug
+        date
+        excerpt
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        tags {
+          edges {
+            node {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const GetAllTagsDocument = gql`
+    query GetAllTags {
+  tags {
+    edges {
+      node {
+        id
+        name
+        slug
+        count
+      }
     }
   }
 }
@@ -10368,6 +10423,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     GetPostBySlug(variables: GetPostBySlugQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostBySlugQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetPostBySlugQuery>({ document: GetPostBySlugDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostBySlug', 'query', variables);
+    },
+    GetPostsByTag(variables: GetPostsByTagQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostsByTagQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPostsByTagQuery>({ document: GetPostsByTagDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostsByTag', 'query', variables);
+    },
+    GetAllTags(variables?: GetAllTagsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllTagsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAllTagsQuery>({ document: GetAllTagsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllTags', 'query', variables);
     },
     GetCollaborators(variables?: GetCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCollaboratorsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetCollaboratorsQuery>({ document: GetCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCollaborators', 'query', variables);

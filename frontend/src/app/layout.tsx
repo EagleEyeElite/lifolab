@@ -19,7 +19,9 @@ export default async function RootLayout({children}: {
     <html lang="en" suppressHydrationWarning>
     <body>
       <Navbar />
-      {children}
+      <main className="min-h-screen">
+        {children}
+      </main>
       <Footer/>
     </body>
     </html>
