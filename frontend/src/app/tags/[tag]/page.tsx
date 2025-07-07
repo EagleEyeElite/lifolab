@@ -8,24 +8,7 @@ const GetPostsByTag = gql`
             edges {
                 node {
                     id
-                    title
                     slug
-                    date
-                    excerpt
-                    featuredImage {
-                        node {
-                            sourceUrl
-                            altText
-                        }
-                    }
-                    tags {
-                        edges {
-                            node {
-                                name
-                                slug
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -40,24 +23,7 @@ interface TagPageProps {
 
 interface PostNode {
   id: string;
-  title: string;
   slug: string;
-  date?: string;
-  excerpt?: string;
-  featuredImage?: {
-    node: {
-      sourceUrl: string;
-      altText?: string;
-    };
-  };
-  tags?: {
-    edges: {
-      node: {
-        name: string;
-        slug: string;
-      };
-    }[];
-  };
 }
 
 interface GetPostsByTagResponse {
@@ -71,21 +37,12 @@ interface GetPostsByTagResponse {
 export default async function TagPage({ params }: TagPageProps) {
   const { posts } = await graphqlClient.request<GetPostsByTagResponse>(GetPostsByTag, { tag: params.tag });
 
-  const projectCards = posts?.edges?.map(({ node: post }, index) => {
-    const postTags = post.tags?.edges?.map(edge => edge.node) || [];
-
+  const projectCards = posts?.edges?.map(({ node: post }) => {
     return (
       <ProjectCard
         key={post.id}
-        item={{
-          title: post.title,
-          href: `/${post.slug}`,
-          tags: postTags,
-          date: post.date,
-          image: post.featuredImage?.node?.sourceUrl || '',
-          imageSize: "medium"
-        }}
-        index={index}
+        slug={post.slug}
+        imageSize="medium"
       />
     );
   }) || [];

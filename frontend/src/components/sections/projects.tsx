@@ -1,6 +1,6 @@
 import React from "react";
 import SectionHeader from "@/components/ui/sectionHeader";
-import ProjectCard, { ProjectItem } from "@/components/ui/projectCard";
+import ProjectCard from "@/components/ui/projectCard";
 import { Package } from "lucide-react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
@@ -12,24 +12,7 @@ const GetPosts = gql`
         posts(first: 50) {
             edges {
                 node {
-                    id
-                    title
-                    date
                     slug
-                    featuredImage {
-                        node {
-                            sourceUrl
-                            altText
-                        }
-                    }
-                    tags {
-                        edges {
-                            node {
-                                name
-                                slug
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -54,29 +37,16 @@ export default async function Projects() {
     // Cycle through posts if we have fewer posts than cards needed
     const postIndex = posts.length > 0 ? index % posts.length : 0;
     const currentPost = posts[postIndex];
-    
-    if (!currentPost) {
-      return null;
-    }
 
-    const postTitle = currentPost.title || "Default Title";
-    const postDate = currentPost.date || undefined;
-    const postSlug = currentPost.slug || "";
-    const postTags = currentPost.tags?.edges?.map((edge: any) => edge.node) || [];
-    const postFeaturedImage = currentPost.featuredImage?.node;
+    if (!currentPost || !currentPost.slug) {
+      throw new Error(`Post "${currentPost}" with slug not found`);
+    }
 
     return (
       <ProjectCard
-        key={`${currentPost.id}-${index}`}
-        item={{
-          title: `${postTitle} #${index + 1}`,
-          href: `/${postSlug}`,
-          tags: postTags,
-          date: postDate,
-          image: postFeaturedImage?.sourceUrl!,
-          imageSize: size as ProjectItem['imageSize']
-        }}
-        index={index}
+        key={index}
+        slug={currentPost.slug}
+        imageSize={size as 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive'}
       />
     );
   }).filter(Boolean);

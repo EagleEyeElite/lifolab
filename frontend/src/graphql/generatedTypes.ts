@@ -10182,19 +10182,19 @@ export type WritingSettings = {
   useSmilies?: Maybe<Scalars['Boolean']['output']>;
 };
 
-export type GetPostBySlugQueryVariables = Exact<{
+export type GetPostWhenAndWhereQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type GetPostBySlugQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', postDetails?: { __typename?: 'PostDetails', whenAndWhere: string } | null } | null };
+export type GetPostWhenAndWhereQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', postDetails?: { __typename?: 'PostDetails', whenAndWhere: string } | null } | null };
 
 export type GetPostsByTagQueryVariables = Exact<{
   tag: Scalars['String']['input'];
 }>;
 
 
-export type GetPostsByTagQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', node: { __typename?: 'Post', id: string, title?: string | null, slug?: string | null, date?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null } }> } | null };
+export type GetPostsByTagQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', node: { __typename?: 'Post', id: string, slug?: string | null } }> } | null };
 
 export type GetAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10209,7 +10209,7 @@ export type GetCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', node: { __typename?: 'Post', id: string, title?: string | null, date?: string | null, slug?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null } }> } | null };
+export type GetPostsQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', node: { __typename?: 'Post', slug?: string | null } }> } | null };
 
 export type GetAllCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10229,6 +10229,13 @@ export type GetPostOverviewQueryVariables = Exact<{
 
 
 export type GetPostOverviewQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', title?: string | null, excerpt?: string | null, postDetails?: { __typename?: 'PostDetails', referencedCollaborators?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator', slug?: string | null } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Post' }> } | null } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null } | null };
+
+export type GetPostCardQueryVariables = Exact<{
+  slug: Scalars['ID']['input'];
+}>;
+
+
+export type GetPostCardQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', id: string, title?: string | null, date?: string | null, slug?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null } | null };
 
 type AuthorDetailsFields_MediaItem_Fragment = { __typename?: 'MediaItem', author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } } | null };
 
@@ -10252,8 +10259,8 @@ export const AuthorDetailsFieldsFragmentDoc = gql`
   }
 }
     `;
-export const GetPostBySlugDocument = gql`
-    query GetPostBySlug($id: ID!) {
+export const GetPostWhenAndWhereDocument = gql`
+    query GetPostWhenAndWhere($id: ID!) {
   post(id: $id, idType: SLUG) {
     postDetails {
       whenAndWhere
@@ -10267,24 +10274,7 @@ export const GetPostsByTagDocument = gql`
     edges {
       node {
         id
-        title
         slug
-        date
-        excerpt
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-        tags {
-          edges {
-            node {
-              name
-              slug
-            }
-          }
-        }
       }
     }
   }
@@ -10323,24 +10313,7 @@ export const GetPostsDocument = gql`
   posts(first: 50) {
     edges {
       node {
-        id
-        title
-        date
         slug
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-        tags {
-          edges {
-            node {
-              name
-              slug
-            }
-          }
-        }
       }
     }
   }
@@ -10413,6 +10386,31 @@ export const GetPostOverviewDocument = gql`
   }
 }
     `;
+export const GetPostCardDocument = gql`
+    query GetPostCard($slug: ID!) {
+  post(id: $slug, idType: SLUG) {
+    id
+    title
+    date
+    slug
+    excerpt
+    featuredImage {
+      node {
+        sourceUrl
+        altText
+      }
+    }
+    tags {
+      edges {
+        node {
+          name
+          slug
+        }
+      }
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -10421,8 +10419,8 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    GetPostBySlug(variables: GetPostBySlugQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostBySlugQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPostBySlugQuery>({ document: GetPostBySlugDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostBySlug', 'query', variables);
+    GetPostWhenAndWhere(variables: GetPostWhenAndWhereQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostWhenAndWhereQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPostWhenAndWhereQuery>({ document: GetPostWhenAndWhereDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostWhenAndWhere', 'query', variables);
     },
     GetPostsByTag(variables: GetPostsByTagQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostsByTagQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetPostsByTagQuery>({ document: GetPostsByTagDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostsByTag', 'query', variables);
@@ -10444,6 +10442,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetPostOverview(variables: GetPostOverviewQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostOverviewQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetPostOverviewQuery>({ document: GetPostOverviewDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostOverview', 'query', variables);
+    },
+    GetPostCard(variables: GetPostCardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostCardQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPostCardQuery>({ document: GetPostCardDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostCard', 'query', variables);
     }
   };
 }

@@ -5,12 +5,12 @@ import SectionHeader from '@/components/ui/sectionHeader';
 import PostOverview from '@/components/ui/post/PostOverview';
 import PostContent from '@/components/ui/post/PostContent';
 import {
-  GetPostBySlugQuery,
-  GetPostBySlugQueryVariables,
+  GetPostWhenAndWhereQuery,
+  GetPostWhenAndWhereQueryVariables,
 } from "@/graphql/generatedTypes";
 
-const GetPostBySlug = gql`
-    query GetPostBySlug($id: ID!) {
+const GetPostWhenAndWhere = gql`
+    query GetPostWhenAndWhere($id: ID!) {
         post(id: $id, idType: SLUG) {
             postDetails {
                 whenAndWhere
@@ -21,8 +21,8 @@ const GetPostBySlug = gql`
 
 export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const { post } = await graphqlClient.request<GetPostBySlugQuery, GetPostBySlugQueryVariables>(
-    GetPostBySlug,
+  const { post } = await graphqlClient.request<GetPostWhenAndWhereQuery, GetPostWhenAndWhereQueryVariables>(
+    GetPostWhenAndWhere,
     { id: slug }
   );
 

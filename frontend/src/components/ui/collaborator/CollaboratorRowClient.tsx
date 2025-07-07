@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import HTMLRenderer from "@/components/ui/htmlRenderer";
+import { ArrowUpRight } from "lucide-react"
 
 interface Collaborator {
   name: string;
@@ -78,7 +79,7 @@ export default function CollaboratorRowClient(collaborator: Collaborator) {
                       href={`/${project.slug}`}
                       className="text-black font-mono text-sm leading-tight block hover:opacity-75 transition-opacity duration-200"
                     >
-                      {project.title} <span className="inline-block ml-1">↗</span>
+                      {project.title} <ArrowUpRight className="inline-block" size={16} />
                     </Link>
                   </div>
                 ))}

@@ -46,7 +46,7 @@ export default async function PostOverview({ slug }: PostOverviewProps) {
   );
 
   if (!post) {
-    return null;
+    throw new Error(`Post with slug "${slug}" not found`);
   }
 
   const collaboratorSlugs = post.postDetails?.referencedCollaborators?.nodes

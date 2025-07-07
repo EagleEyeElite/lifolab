@@ -1,6 +1,7 @@
-import {ReactNode} from "react";
+import React, {ReactNode} from "react";
 import Link from "next/link";
-import {ExternalLink} from "lucide-react";
+import {ArrowUpRight} from "lucide-react";
+
 
 interface CustomLinkProps {
   link: {
@@ -16,7 +17,7 @@ export default function CustomLink({ link }: CustomLinkProps) {
   return (
     <Link href={link.href} {...externalAttrs} className="inline-flex items-center">
       {link.children}
-      {isExternal && <ExternalLink size={16} />}
+      {isExternal && <ArrowUpRight size={16} />}
     </Link>
   );
 }

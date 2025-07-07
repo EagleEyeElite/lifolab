@@ -33,7 +33,7 @@ export default async function PostContent({ slug }: PostContentProps) {
   );
 
   if (!post) {
-    return null;
+    throw new Error(`Post with slug "${slug}" not found`);
   }
 
   return (
