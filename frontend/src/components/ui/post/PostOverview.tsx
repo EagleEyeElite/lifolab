@@ -13,7 +13,7 @@ const GetPostOverview = gql`
         post(id: $id, idType: SLUG) {
             title
             excerpt
-            postCollaborators {
+            postDetails {
                 referencedCollaborators {
                     nodes {
                         __typename
@@ -49,7 +49,7 @@ export default async function PostOverview({ slug }: PostOverviewProps) {
     return null;
   }
 
-  const collaboratorSlugs = post.postCollaborators?.referencedCollaborators?.nodes
+  const collaboratorSlugs = post.postDetails?.referencedCollaborators?.nodes
     ?.filter((node): node is Extract<typeof node, { __typename: "Collaborator" }> =>
       node.__typename === "Collaborator"
     )

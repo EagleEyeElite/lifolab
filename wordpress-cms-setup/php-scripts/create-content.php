@@ -4,25 +4,21 @@
  * This script creates collaborators and posts with proper relationships
  */
 
-function find_attachment_by_filename($filename) {
-    $attachments = get_posts(array(
+function get_attachment_id($filename) {
+    $attachments = get_posts([
         'post_type' => 'attachment',
-        'post_status' => 'inherit',
-        'numberposts' => 1,
-        'meta_query' => array(
-            array(
-                'key' => '_wp_attached_file',
-                'value' => $filename,
-                'compare' => 'LIKE'
-            )
-        )
-    ));
+        'meta_key' => '_wp_attached_file',
+        'meta_value' => $filename,
+        'meta_compare' => 'LIKE',
+        'numberposts' => 1
+    ]);
     return $attachments[0]->ID;
 }
 
-$image_1_id = find_attachment_by_filename('exampleUpload1.jpeg');
-$image_2_id = find_attachment_by_filename('exampleUpload2.jpeg');
-$image_3_id = find_attachment_by_filename('exampleUpload3.jpeg');
+// Get your image IDs
+$image_1_id = get_attachment_id('exampleUpload1.jpeg');
+$image_2_id = get_attachment_id('exampleUpload2.jpeg');
+$image_3_id = get_attachment_id('exampleUpload3.jpeg');
 
 // Create tags
 echo "Setting up tags...\n";
@@ -53,13 +49,72 @@ $conrad_id = wp_insert_post(array(
     )
 ));
 
-// Post 1: Projekt Workshop Alpha (Max only)
+// Get admin user ID
+$admin_id = get_user_by('login', 'admin')->ID;
+
+$post1_content = '
+<h2>Explore WordPress Formatting</h2>
+
+<p><strong>Bold Text</strong> and <em>Italic Text</em> are essential for emphasizing points. Combine them for <strong><em>extra emphasis</em></strong>.</p>
+
+<!-- wp:gallery {"columns":3,"linkTo":"none","sizeSlug":"full","ids":[' . $image_1_id . ',' . $image_2_id . ',' . $image_3_id . ']} -->
+<figure class="wp-block-gallery has-nested-images columns-3 is-cropped">
+    <!-- wp:image {"id":' . $image_1_id . ',"sizeSlug":"full","linkDestination":"none"} -->
+    <figure class="wp-block-image size-full"><img src="' . wp_get_attachment_image_url($image_1_id, 'full') . '" alt="Gallery image 1" class="wp-image-' . $image_1_id . '"/></figure>
+    <!-- /wp:image -->
+
+    <!-- wp:image {"id":' . $image_2_id . ',"sizeSlug":"full","linkDestination":"none"} -->
+    <figure class="wp-block-image size-full"><img src="' . wp_get_attachment_image_url($image_2_id, 'full') . '" alt="Gallery image 2" class="wp-image-' . $image_2_id . '"/></figure>
+    <!-- /wp:image -->
+
+    <!-- wp:image {"id":' . $image_3_id . ',"sizeSlug":"full","linkDestination":"none"} -->
+    <figure class="wp-block-image size-full"><img src="' . wp_get_attachment_image_url($image_3_id, 'full') . '" alt="Gallery image 3" class="wp-image-' . $image_3_id . '"/></figure>
+    <!-- /wp:image -->
+</figure>
+<!-- /wp:gallery -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns">
+    <!-- wp:column -->
+    <div class="wp-block-column">
+        <!-- wp:paragraph -->
+        <p>This text appears on the left.</p>
+        <!-- /wp:paragraph -->
+    </div>
+    <!-- /wp:column -->
+
+    <!-- wp:column -->
+    <div class="wp-block-column">
+        <!-- wp:image {"id":' . $image_1_id . ',"sizeSlug":"full","linkDestination":"none"} -->
+        <figure class="wp-block-image size-full"><img src="' . wp_get_attachment_image_url($image_1_id, 'full') . '" alt="Workshop image" class="wp-image-' . $image_1_id . '"/></figure>
+        <!-- /wp:image -->
+    </div>
+    <!-- /wp:column -->
+</div>
+<!-- /wp:columns -->
+
+<blockquote>
+    <p>To be or not to be, that is the question. - Shakespeare</p>
+</blockquote>
+
+<p>Lists are great for readability:</p>
+
+<ul>
+    <li>First Item</li>
+    <li>Second Item with a <a href="https://example.com">link</a></li>
+    <li>Third Item</li>
+</ul>
+
+<p>And dont forget about <code>inline code</code> for technical content!</p>
+';
+
 $post1_id = wp_insert_post(array(
     'post_type' => 'post',
     'post_title' => 'Projekt Workshop Alpha',
-    'post_content' => '<h2>Explore WordPress Formatting</h2><p><strong>Bold Text</strong> and <em>Italic Text</em> are essential for emphasizing points. Combine them for <strong><em>extra emphasis</em></strong>.</p><blockquote>"To be or not to be, that is the question." - Shakespeare</blockquote><p>Lists are great for readability:</p><ul><li>First Item</li><li>Second Item with a <a href="https://example.com">link</a></li><li>Third Item</li></ul><p>And dont forget about <code>inline code</code> for technical content!</p>',
+    'post_content' => $post1_content,
     'post_excerpt' => 'An exploration of WordPress formatting features and typography elements.',
     'post_status' => 'publish',
+    'post_author' => $admin_id,
     'tags_input' => array('Projekt'),
     'meta_input' => array(
         'when_and_where' => 'Musterdatum | Musterstadt',
@@ -72,9 +127,10 @@ $post1_id = wp_insert_post(array(
 $post2_id = wp_insert_post(array(
     'post_type' => 'post',
     'post_title' => 'Projekt Workshop Beta',
-    'post_content' => '<h2>Workshop Content</h2><p>This is a workshop focused on collaborative learning and skill development.</p><ul><li>Interactive sessions</li><li>Hands-on experience</li><li>Peer learning</li></ul>',
+    'post_content' => '<h2>Workshop Content</h2><p>Text</p>',
     'post_excerpt' => 'A collaborative workshop focused on learning and skill development.',
     'post_status' => 'publish',
+    'post_author' => $admin_id,
     'tags_input' => array('Workshop'),
     'meta_input' => array(
         'when_and_where' => 'Musterdatum | Musterstadt',
@@ -87,9 +143,10 @@ $post2_id = wp_insert_post(array(
 $post3_id = wp_insert_post(array(
     'post_type' => 'post',
     'post_title' => 'Projekt Workshop Gamma',
-    'post_content' => '<h2>Collaborative Project</h2><p>A comprehensive project that brings together multiple collaborators and combines various skills.</p><blockquote>"Collaboration is the key to innovation."</blockquote><p>Key features:</p><ul><li>Multi-disciplinary approach</li><li>Innovative solutions</li><li>Community impact</li></ul>',
+    'post_content' => '<h2>Workshop Content</h2><p>Text</p>',
     'post_excerpt' => 'A comprehensive collaborative project combining multiple skills and disciplines.',
     'post_status' => 'publish',
+    'post_author' => $admin_id,
     'tags_input' => array('Projekt', 'Workshop'),
     'meta_input' => array(
         'when_and_where' => 'Musterdatum | Musterstadt',
@@ -101,3 +158,5 @@ $post3_id = wp_insert_post(array(
 // Set up reverse relationships (collaborators -> posts)
 update_post_meta($max_id, 'referenced_posts', array($post1_id, $post3_id));
 update_post_meta($conrad_id, 'referenced_posts', array($post2_id, $post3_id));
+
+?>

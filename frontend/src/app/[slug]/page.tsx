@@ -12,7 +12,7 @@ import {
 const GetPostBySlug = gql`
     query GetPostBySlug($id: ID!) {
         post(id: $id, idType: SLUG) {
-            postCollaborators {
+            postDetails {
                 whenAndWhere
             }
         }
@@ -32,7 +32,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
 
   return (
     <div className="pt-[45px] px-8">
-      <SectionHeader className="py-8">{post.postCollaborators?.whenAndWhere || "Project Details"}</SectionHeader>
+      <SectionHeader className="py-8">{post.postDetails?.whenAndWhere || "Project Details"}</SectionHeader>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-4">

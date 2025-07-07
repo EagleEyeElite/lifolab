@@ -1,6 +1,6 @@
 {
   "key": "group_685b0f415a7ea",
-  "title": "Collaborator",
+  "title": "Collaborator Profile",
   "fields": [
     {
       "key": "field_685b105dff534",
@@ -8,7 +8,7 @@
       "name": "referenced_posts",
       "aria-label": "",
       "type": "post_object",
-      "instructions": "",
+      "instructions": "Select posts this collaborator has worked on or contributed to.",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -41,24 +41,24 @@
       "name": "roles",
       "aria-label": "",
       "type": "text",
-      "instructions": "",
-      "required": 0,
+      "instructions": "Enter one or more roles this collaborator has in projects. Separated with '|' .",
+      "required": 1,
       "conditional_logic": 0,
       "wrapper": {
         "width": "",
         "class": "",
         "id": ""
       },
-      "default_value": "",
+      "default_value": "Musterrolle1 | Musterrolle2",
       "maxlength": "",
       "allow_in_bindings": 0,
-      "placeholder": "",
+      "placeholder": "e.g. Student | Designer | Research Associate",
       "prepend": "",
       "append": "",
       "show_in_graphql": 1,
       "graphql_description": "",
       "graphql_field_name": "roles",
-      "graphql_non_null": 0
+      "graphql_non_null": 1
     },
     {
       "key": "field_686942d552773",
@@ -66,7 +66,7 @@
       "name": "core_member",
       "aria-label": "",
       "type": "true_false",
-      "instructions": "",
+      "instructions": "Check to display separately from general collaborators.",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -105,7 +105,7 @@
   "description": "",
   "show_in_rest": 1,
   "show_in_graphql": 1,
-  "graphql_field_name": "collaboratorFields",
+  "graphql_field_name": "collaboratorProfile",
   "map_graphql_types_from_location_rules": 0,
   "graphql_types": ""
 }

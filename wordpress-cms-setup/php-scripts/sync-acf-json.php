@@ -16,3 +16,4 @@ foreach ($json_files as $file) {
         WP_CLI::success("Synced post type: " . $json['title']);
     }
 }
+?>

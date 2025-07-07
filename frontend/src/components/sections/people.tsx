@@ -15,7 +15,7 @@ const GetCollaborators = gql`
       edges {
         node {
           slug
-          collaboratorFields {
+          collaboratorProfile {
             coreMember
           }
         }
@@ -33,7 +33,7 @@ export default async function People() {
   data?.collaborators?.edges?.forEach((edge) => {
     const slug = edge.node.slug;
     if (slug) {
-      if (edge.node.collaboratorFields?.coreMember === true) {
+      if (edge.node.collaboratorProfile?.coreMember === true) {
         teamMemberSlugs.push(slug);
         teamMemberSlugs.push(slug);
         teamMemberSlugs.push(slug);

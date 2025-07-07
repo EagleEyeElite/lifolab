@@ -1,6 +1,6 @@
 {
   "key": "group_685b134b408d9",
-  "title": "Post",
+  "title": "Post Details",
   "fields": [
     {
       "key": "field_686943fc27c25",
@@ -8,24 +8,24 @@
       "name": "when_and_where",
       "aria-label": "",
       "type": "text",
-      "instructions": "",
-      "required": 0,
+      "instructions": "Enter the date and location for this post\/event in the format: 'DD.MM.YYYY | City Name'.",
+      "required": 1,
       "conditional_logic": 0,
       "wrapper": {
         "width": "",
         "class": "",
         "id": ""
       },
-      "default_value": "",
+      "default_value": "DD.MM.YYYY | City Name",
       "maxlength": "",
       "allow_in_bindings": 0,
-      "placeholder": "",
+      "placeholder": "e.g. 15.03.2025 | Berlin",
       "prepend": "",
       "append": "",
       "show_in_graphql": 1,
       "graphql_description": "",
       "graphql_field_name": "whenAndWhere",
-      "graphql_non_null": 0
+      "graphql_non_null": 1
     },
     {
       "key": "field_685b134b42b7e",
@@ -33,7 +33,7 @@
       "name": "referenced_collaborators",
       "aria-label": "",
       "type": "post_object",
-      "instructions": "",
+      "instructions": "Select collaborators who worked on or contributed to this post\/event.",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -80,7 +80,7 @@
   "description": "",
   "show_in_rest": 1,
   "show_in_graphql": 1,
-  "graphql_field_name": "postCollaborators",
+  "graphql_field_name": "postDetails",
   "map_graphql_types_from_location_rules": 0,
   "graphql_types": ""
 }

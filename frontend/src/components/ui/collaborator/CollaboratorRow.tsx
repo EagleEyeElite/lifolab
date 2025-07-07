@@ -11,7 +11,7 @@ const GetAllCollaborators = gql`
                     title
                     content
                     slug
-                    collaboratorFields {
+                    collaboratorProfile {
                         coreMember
                         roles
                         referencedPosts {
@@ -43,11 +43,11 @@ export default async function CollaboratorRow({ collaboratorSlug }: Collaborator
   return (
     <CollaboratorRowClient
       name= {collaboratorData.title}
-      role= {collaboratorData.collaboratorFields?.roles || ''}
+      role= {collaboratorData.collaboratorProfile?.roles || ''}
       href= {`/collaborators/${collaboratorData.slug}`}
       hasLink= {true}
       content= {collaboratorData.content}
-      projects= {collaboratorData.collaboratorFields?.referencedPosts?.nodes?.map((post: any) => ({
+      projects= {collaboratorData.collaboratorProfile?.referencedPosts?.nodes?.map((post: any) => ({
         title: post.title,
         slug: post.slug
       })) || []}

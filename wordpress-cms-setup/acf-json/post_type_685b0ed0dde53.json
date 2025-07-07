@@ -42,7 +42,7 @@
     "item_link": "Collaborator Link",
     "item_link_description": "A link to a collaborator."
   },
-  "description": "",
+  "description": "Team members, contributors, and collaborators involved in projects and events.",
   "public": true,
   "hierarchical": false,
   "exclude_from_search": false,
@@ -82,7 +82,7 @@
   "can_export": true,
   "delete_with_user": false,
   "register_meta_box_cb": "",
-  "enter_title_here": "",
+  "enter_title_here": "Add collaborator's name",
   "show_in_graphql": 1,
   "graphql_single_name": "collaborator",
   "graphql_plural_name": "collaborators"
