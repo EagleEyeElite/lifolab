@@ -16,9 +16,9 @@ const GetPostsByTag = gql`
 `;
 
 interface TagPageProps {
-  params: {
+  params: Promise<{
     tag: string;
-  };
+  }>;
 }
 
 interface PostNode {
@@ -35,7 +35,8 @@ interface GetPostsByTagResponse {
 }
 
 export default async function TagPage({ params }: TagPageProps) {
-  const { posts } = await graphqlClient.request<GetPostsByTagResponse>(GetPostsByTag, { tag: params.tag });
+  const { tag } = await params;
+  const { posts } = await graphqlClient.request<GetPostsByTagResponse>(GetPostsByTag, { tag });
 
   const projectCards = posts?.edges?.map(({ node: post }) => {
     return (
@@ -50,7 +51,7 @@ export default async function TagPage({ params }: TagPageProps) {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-sm mx-auto space-y-6">
-        <h1 className="text-3xl font-bold mb-8">Category: {params.tag}</h1>
+        <h1 className="text-3xl font-bold mb-8">Category: {tag}</h1>
 
         {projectCards.length ? (
           projectCards
