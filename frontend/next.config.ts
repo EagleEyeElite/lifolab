@@ -8,10 +8,10 @@ dotenvSafe.config({
 });
 
 const nextConfig: NextConfig = {
-  output: 'standalone',
   images: {
     remotePatterns: [
       { protocol: "http", hostname: "localhost" },
+      { protocol: "https", hostname: "cms.lifolab.conrad-klaus.de" },
     ],
   }
 };
