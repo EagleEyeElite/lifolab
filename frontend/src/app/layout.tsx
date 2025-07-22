@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import React from "react";
-import "./globals.css";
-import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
+import "@/app/globals.css";
+import Navbar from "@/components/layout/navbar/Navbar";
+import Footer from "@/components/layout/footer/footer";
 
 export const metadata: Metadata = {
   title: "Living the Forest Lab",
@@ -18,13 +18,11 @@ export default async function RootLayout({children}: {
   return (
     <html lang="en" suppressHydrationWarning>
     <body>
-    <div className="min-h-screen">
       <Navbar />
-      <main>
+      <main className="min-h-screen pt-navbar">
         {children}
       </main>
-    </div>
-    <Footer/>
+      <Footer />
     </body>
     </html>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Mic } from 'lucide-react';
 import Link from "next/link";
-import SectionHeader from '../../ui/sectionHeader';
+import SectionHeader from "@/components/ui/sectionHeader";
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import { GetContactContentQuery, GetContactContentQueryVariables } from "@/graphql/generatedTypes";

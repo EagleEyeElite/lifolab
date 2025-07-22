@@ -52,7 +52,7 @@ export default async function Projects() {
   }).filter(Boolean);
 
   return (
-    <div className="flex justify-start w-full">
+    <div className="flex justify-start w-full" id="projects">
       <div className="w-full">
         <div className="px-[1.6rem] py-[1.6rem] space-y-6">
           <SectionHeader icon={Package}>

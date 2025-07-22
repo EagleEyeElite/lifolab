@@ -2,7 +2,7 @@ import React from 'react';
 import { FolderClosed } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
-import SectionHeader from '../../ui/sectionHeader';
+import SectionHeader from "@/components/ui/sectionHeader";
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import { GetImprintContentQuery, GetImprintContentQueryVariables } from "@/graphql/generatedTypes";
