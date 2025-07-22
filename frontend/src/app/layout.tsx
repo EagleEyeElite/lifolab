@@ -18,11 +18,13 @@ export default async function RootLayout({children}: {
   return (
     <html lang="en" suppressHydrationWarning>
     <body>
+    <div className="min-h-screen">
       <Navbar />
-      <main className="min-h-screen">
+      <main>
         {children}
       </main>
-      <Footer/>
+    </div>
+    <Footer/>
     </body>
     </html>
   );
