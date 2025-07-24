@@ -9,6 +9,8 @@ import {
   GetPostWhenAndWhereQueryVariables,
 } from "@/graphql/generatedTypes";
 
+export const revalidate = 10;
+
 const GetPostWhenAndWhere = gql`
     query GetPostWhenAndWhere($id: ID!) {
         post(id: $id, idType: SLUG) {

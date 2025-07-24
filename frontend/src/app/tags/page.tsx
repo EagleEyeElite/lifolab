@@ -1,6 +1,12 @@
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import TagPill from '@/components/ui/tagPill';
+import {
+  GetAllTagsQuery,
+  GetAllTagsQueryVariables,
+} from "@/graphql/generatedTypes";
+
+export const revalidate = 10;
 
 const GetAllTags = gql`
     query GetAllTags {
@@ -17,23 +23,8 @@ const GetAllTags = gql`
     }
 `;
 
-interface TagNode {
-  id: string;
-  name: string;
-  slug: string;
-  count?: number;
-}
-
-interface GetAllTagsResponse {
-  tags: {
-    edges: {
-      node: TagNode;
-    }[];
-  };
-}
-
 export default async function TagsPage() {
-  const { tags } = await graphqlClient.request<GetAllTagsResponse>(GetAllTags);
+  const { tags } = await graphqlClient.request<GetAllTagsQuery, GetAllTagsQueryVariables>(GetAllTags);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -45,7 +36,7 @@ export default async function TagsPage() {
             {tags.edges.map(({ node: tag }) => (
               <TagPill
                 key={tag.id}
-                name={tag.name}
+                name={tag.name!}
                 href={`/tags/${tag.slug}`}
               />
             ))}

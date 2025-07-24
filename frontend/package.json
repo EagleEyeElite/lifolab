@@ -14,9 +14,10 @@
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",
-    "dotenv-safe": "^9.1.0",
+    "dotenv": "16.6.1",
     "embla-carousel": "8.6.0",
     "embla-carousel-react": "^8.6.0",
+    "envalid": "^8.1.0",
     "graphql-request": "^6.1.0",
     "html-react-parser": "^5.2.5",
     "lucide-react": "^0.515.0",
@@ -24,7 +25,8 @@
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-smart-masonry": "^2.0.2"
+    "react-smart-masonry": "^2.0.2",
+    "zod": "^4.0.8"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.7",
@@ -34,7 +36,6 @@
     "@parcel/watcher": "^2.5.1",
     "@playwright/test": "^1.54.1",
     "@tailwindcss/postcss": "^4",
-    "@types/dotenv-safe": "^8.1.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -43,5 +44,8 @@
     "husky": "^9.1.7",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "dotenv": "16.6.1"
   }
 }

@@ -1,22 +1,24 @@
 import type { NextConfig } from "next";
-import * as dotenvSafe from 'dotenv-safe';
+import {schema} from "@/env";
+import dotenv from 'dotenv';
+import {cleanEnv} from "envalid";
 
-// Load environment variables
-dotenvSafe.config({
-  path: '../.env',
-  sample: '.env.local.example',
-});
+if (process.env.NODE_ENV === 'development') {
+  dotenv.config({
+    path: ['.env', '../.env', '../.env.local']
+  });
+}
 
-const { WORDPRESS_CMS_PUBLIC_URL } = process.env;
-
+const env = cleanEnv(process.env, schema)
 
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      {protocol: "http", hostname: "localhost"},
-      {protocol: "https", hostname: "cms.lifolab.conrad-klaus.de"},
+      { protocol: "http", hostname: "localhost" },
+      { protocol: "https", hostname: new URL(env.WORDPRESS_CMS_PUBLIC_URL).hostname},
+      { protocol: "https", hostname: env.WORDPRESS_CMS_PUBLIC_URL},
     ],
   }
-}
+};
 
 export default nextConfig;

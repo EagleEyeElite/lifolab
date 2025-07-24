@@ -1,11 +1,10 @@
-import * as dotenvSafe from 'dotenv-safe';
+const dotenv = require('dotenv');
 
-dotenvSafe.config({
-    path: '../.env',
-    sample: '../.env.example',
+dotenv.config({
+    path: ['../.env.local', '../.env', '../.env.local']
 });
 
-export default {
+module.exports = {
     schema: [
         {
             [`${process.env.WORDPRESS_CMS_PUBLIC_URL}/graphql`]: {

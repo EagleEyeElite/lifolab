@@ -2,6 +2,8 @@ import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import ProjectCard from '@/components/ui/projectCard';
 
+export const revalidate = 10;
+
 const GetPostsByTag = gql`
     query GetPostsByTag($tag: String!) {
         posts(where: { tag: $tag }) {

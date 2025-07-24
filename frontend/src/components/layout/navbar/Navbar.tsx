@@ -1,38 +1,27 @@
 "use client"
 
 import React from "react";
-import { usePathname, useSearchParams } from "next/navigation";
-import ScrollAnimatedLogo from "@/components/ui/scrollAnimatedLogo";
+import Link from "next/link";
+import ScrollAnimatedLogo from "@/components/layout/navbar/ScrollAnimatedLogo";
 import NavigationMenu from "@/components/layout/navbar/NavigationMenu";
 
-// Determine showFullNav based on route and query params
-function getShowFullNav() {
-  const pathname = usePathname();
-  //const searchParams = useSearchParams();
-  if (pathname === '/') {
-    return true;
-  }
-  if (pathname === '/test-layout') {
-    //const fullNavParam = searchParams.get('fullNav');
-    //return fullNavParam === 'true';
-    return true;
-  }
-  return false;
-}
-
 export default function Navbar() {
-  const showFullNav = getShowFullNav();
-
   return <>
-    <nav className="fixed top-0 h-navbar w-full">
+    <nav className="fixed top-0 h-navbar w-full z-20 pointer-events-none">
       <div className="grid grid-cols-[1fr_auto_1fr] items-center h-full">
-        <div />
-        <h1 className="p-0.5 px-4 border rounded-3xl bg-accent-green">
-          Living the Forest Lab
-        </h1>
-        <NavigationMenu/>
+        <div/>
+        <Link href="/">
+          <h1 className="p-0.5 px-4 border rounded-3xl bg-accent-green relative z-30 pointer-events-auto">
+            Living the Forest Lab
+          </h1>
+        </Link>
+        <div className="relative z-30 pointer-events-auto">
+          <NavigationMenu/>
+        </div>
       </div>
     </nav>
-    <ScrollAnimatedLogo showFullNav={showFullNav}/>
+    <div className="relative z-10">
+      <ScrollAnimatedLogo />
+    </div>
   </>;
 }

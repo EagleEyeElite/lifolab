@@ -1,9 +1,8 @@
-import * as dotenvSafe from 'dotenv-safe';
 import type { CodegenConfig } from '@graphql-codegen/cli';
+import dotenv from 'dotenv';
 
-dotenvSafe.config({
-  path: '../.env',
-  sample: '../.env.example',
+dotenv.config({
+  path: ['.env', '../.env', '../.env.local']
 });
 
 const config: CodegenConfig = {

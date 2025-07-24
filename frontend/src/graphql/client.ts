@@ -13,6 +13,7 @@ export const graphqlClient = new GraphQLClient(`${API_URL}/graphql`, {
   fetch: (url: RequestInfo | URL, init?: RequestInit) => {
     return fetch(url, {
       ...init,
+      next: { revalidate: 10 }
     });
   }
 });

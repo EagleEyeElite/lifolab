@@ -15,14 +15,17 @@ export const metadata: Metadata = {
 export default async function RootLayout({children}: {
   children: React.ReactNode
 }) {
+
   return (
     <html lang="en" suppressHydrationWarning>
     <body>
-      <Navbar />
-      <main className="min-h-screen pt-navbar">
-        {children}
-      </main>
-      <Footer />
+    <div className="relative z-10">
+      <Navbar/>
+    </div>
+    <main className="min-h-screen pt-navbar relative z-0">
+      {children}
+    </main>
+    <Footer />
     </body>
     </html>
   );
