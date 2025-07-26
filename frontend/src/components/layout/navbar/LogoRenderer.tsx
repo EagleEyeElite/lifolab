@@ -1,7 +1,7 @@
 "use client"
 
 import Image from 'next/image';
-import {useMotionValue, useSpring, useTransform} from "motion/react"
+import {useMotionValue, useSpring, useTransform, useMotionValueEvent} from "motion/react"
 import * as motion from "motion/react-client"
 import {easeIn, easeOut} from "motion";
 import React, {useEffect, useState, useRef} from 'react';
@@ -17,9 +17,9 @@ interface LogoPositions {
 }
 
 export enum AnimationMode {
-  StartBig,
-  StartSmall,
-  DontAnimate
+  StartBig= "startBig",
+  StartSmall = "startSmall",
+  DontAnimate = "dontAnimate",
 }
 
 interface LogoRendererProps {
@@ -93,19 +93,11 @@ export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps)
   }, [aspectRatio]);
 
   const { scrollYProgress } = useScroll({target: containerRef, offset: ["start start", "end start"]});
-  const fullProgress = useMotionValue(1);
-  const animationProgress = (() => {
-    // Determine which motion value to use based on animation mode
-    switch (animate) {
-      case AnimationMode.StartBig:
-      case AnimationMode.StartSmall:
-        return scrollYProgress;
-      case AnimationMode.DontAnimate:
-      default:
-        return fullProgress;  // Always at 1 (small/final position)
-    }
-  })();
-
+  const shouldAnimate = animate === AnimationMode.StartBig || animate === AnimationMode.StartSmall;
+  const animationProgress = useMotionValue(shouldAnimate ? scrollYProgress.get() : 1);
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    animationProgress.set(shouldAnimate ? value : 1);
+  });
   const scrollYSpring = useSpring(animationProgress, { stiffness: 1500, damping: 100, mass: 1 });
   const [width, height, x, y] = [
     useTransform(scrollYSpring, [0, 1], logoPositions.logoWidthRange, { ease: easeOut }),

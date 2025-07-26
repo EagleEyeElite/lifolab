@@ -7,6 +7,7 @@ import LogoRenderer, {AnimationMode} from '@/components/layout/navbar/LogoRender
 export default function ScrollAnimatedLogo() {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [hasNavigatedInternally, setHasNavigatedInternally] = useState(false);
   const isInitialRender = useRef(true);
 
@@ -22,26 +23,23 @@ export default function ScrollAnimatedLogo() {
     }
   }, [pathname]);
 
-  // Determine animation mode based on page and navigation state
-  const animationMode = ((): AnimationMode => {
-    const supportsAnimation = (() => {
-      if (pathname === '/') {
-        return true;
-      }
-      if (process.env.NODE_ENV !== 'development' && pathname.startsWith('/test')) {
-        const searchParams = useSearchParams();
-        return searchParams.get('fullNav') === 'true';
-      }
-      return false;
-    })();
 
-    if (!supportsAnimation) {
+  const animationMode = ((): AnimationMode => {
+    if (process.env.NODE_ENV === 'development' && pathname.startsWith('/test')) {
+      const animationModeParam = searchParams.get('animationMode');
+
+      if (animationModeParam === AnimationMode.StartBig) return AnimationMode.StartBig;
+      if (animationModeParam === AnimationMode.StartSmall) return AnimationMode.StartSmall;
+      if (animationModeParam === AnimationMode.DontAnimate) return AnimationMode.DontAnimate;
       return AnimationMode.DontAnimate;
     }
-    if (!hasNavigatedInternally) {
-      return AnimationMode.StartBig;
+
+    if (pathname === '/') {
+      if (hasNavigatedInternally) return AnimationMode.StartSmall;
+      else return AnimationMode.StartBig;
     }
-    return AnimationMode.StartSmall;
+    return AnimationMode.DontAnimate;
+
   })();
 
   return (
