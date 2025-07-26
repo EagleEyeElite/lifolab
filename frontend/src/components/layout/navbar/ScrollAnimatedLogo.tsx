@@ -22,26 +22,22 @@ export default function ScrollAnimatedLogo() {
     }
   }, [pathname]);
 
-  // Determine animation mode based on page and navigation state
-  const animationMode = ((): AnimationMode => {
-    const supportsAnimation = (() => {
-      if (pathname === '/') {
-        return true;
-      }
-      if (process.env.NODE_ENV !== 'development' && pathname.startsWith('/test')) {
-        const searchParams = useSearchParams();
-        return searchParams.get('fullNav') === 'true';
-      }
-      return false;
-    })();
 
-    if (!supportsAnimation) {
-      return AnimationMode.DontAnimate;
+  const animationMode = ((): AnimationMode => {
+    if (process.env.NODE_ENV !== 'development' && pathname.startsWith('/test')) {
+      const searchParams = useSearchParams();
+      if(searchParams.get('fullNav') === 'true') return AnimationMode.StartBig;
+      if(pathname.startsWith('/test/id1')) return AnimationMode.DontAnimate;
+      if(pathname.startsWith('/test/id2')) return AnimationMode.StartSmall;
+      if(pathname.startsWith('/test/id3')) return AnimationMode.StartBig;
     }
-    if (!hasNavigatedInternally) {
-      return AnimationMode.StartBig;
+
+    if (pathname === '/') {
+      if (hasNavigatedInternally) return AnimationMode.StartSmall;
+      else return AnimationMode.StartBig;
     }
-    return AnimationMode.StartSmall;
+    return AnimationMode.DontAnimate;
+
   })();
 
   return (

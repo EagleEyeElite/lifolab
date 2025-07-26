@@ -10,24 +10,28 @@ export default async function TestPage({params, searchParams}: {
   }
 
   const { name } = await params;
-  const resolvedSearchParams = searchParams ? await searchParams : {};
+  const resolvedSearchParams = await searchParams;
   const fullNav = resolvedSearchParams?.fullNav === 'true';
 
   if (name === 'blank') {
-    return <div />;
-  }
-
-  if (name === 'text') {
-    return <p>test</p>;
+    if (fullNav) {
+      return <div className={"size-full bg-green-300"}/>;
+    }
+    return <div />
   }
 
   if (name === 'id1') {
-    return <Link id="nav-link-id1" href="/test/id2?fullNav=true">Go to /test/id2?fullNav=true</Link>;
+    return <Link id="nav-link-id1" href="/test/id2">Go to /test/id2</Link>;
   }
 
   if (name === 'id2') {
-    return <Link id="nav-link-id2" href="/test/id1?fullNav=false">Go to /test/id1?fullNav=false</Link>;
+    return <Link id="nav-link-id2" href="/test/id3">Go to /test/id1</Link>;
   }
+
+  if (name === 'id3') {
+    return <Link id="nav-link-id3" href="/test/id1">Go to /test/id1</Link>;
+  }
+
 
   return <div className="bg-red-600"/>;
 }
