@@ -3,7 +3,6 @@
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import TagPill from "./tagPill";
 import HTMLRenderer from "./htmlRenderer";
 
 const getImageClassName = (size: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive') => {
@@ -35,21 +34,21 @@ const getImageClassName = (size: 'tiny' | 'small' | 'medium' | 'large' | 'huge' 
 interface ProjectCardClientProps {
   title: string;
   href: string;
-  tags: Array<{ name: string; slug: string }>;
   date?: string;
   excerpt?: string;
   image: string;
   imageSize: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive';
+  tagList?: React.ReactNode;
 }
 
 export default function ProjectCardClient({ 
   title, 
   href, 
-  tags, 
   date, 
   excerpt,
   image, 
   imageSize,
+  tagList,
 }: ProjectCardClientProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(false);
@@ -117,13 +116,7 @@ export default function ProjectCardClient({
             <HTMLRenderer content={excerpt} />
           </div>
         )}
-        {tags?.length > 0 && (
-          <div className="flex flex-wrap gap-1">
-            {tags.map((tag, tagIndex) => (
-              <TagPill key={tagIndex} name={tag.name} href={`/tags/${tag.slug}`} />
-            ))}
-          </div>
-        )}
+        {tagList}
       </div>
     </div>
   );

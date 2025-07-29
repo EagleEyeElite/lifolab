@@ -10417,6 +10417,13 @@ export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetPostsQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', node: { __typename?: 'Post', slug?: string | null } }> } | null };
 
+export type GetTagsBySlugsQueryVariables = Exact<{
+  slugs: Array<Scalars['String']['input']> | Scalars['String']['input'];
+}>;
+
+
+export type GetTagsBySlugsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null };
+
 export type GetAllCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -10441,7 +10448,7 @@ export type GetPostCardQueryVariables = Exact<{
 }>;
 
 
-export type GetPostCardQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', id: string, title?: string | null, date?: string | null, slug?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null } | null };
+export type GetPostCardQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', id: string, title?: string | null, date?: string | null, slug?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', slug?: string | null } }> } | null } | null };
 
 type AuthorDetailsFields_MediaItem_Fragment = { __typename?: 'MediaItem', author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } } | null };
 
@@ -10566,6 +10573,19 @@ export const GetPostsDocument = gql`
   }
 }
     `;
+export const GetTagsBySlugsDocument = gql`
+    query GetTagsBySlugs($slugs: [String!]!) {
+  tags(where: {slug: $slugs}) {
+    edges {
+      node {
+        id
+        name
+        slug
+      }
+    }
+  }
+}
+    `;
 export const GetAllCollaboratorsDocument = gql`
     query GetAllCollaborators {
   collaborators(first: 100) {
@@ -10650,7 +10670,6 @@ export const GetPostCardDocument = gql`
     tags {
       edges {
         node {
-          name
           slug
         }
       }
@@ -10689,6 +10708,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetPosts(variables?: GetPostsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetPostsQuery>({ document: GetPostsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPosts', 'query', variables);
+    },
+    GetTagsBySlugs(variables: GetTagsBySlugsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetTagsBySlugsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetTagsBySlugsQuery>({ document: GetTagsBySlugsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTagsBySlugs', 'query', variables);
     },
     GetAllCollaborators(variables?: GetAllCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllCollaboratorsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllCollaboratorsQuery>({ document: GetAllCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllCollaborators', 'query', variables);
