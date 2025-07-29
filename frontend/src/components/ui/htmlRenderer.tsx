@@ -43,10 +43,9 @@ function extractImagesFromGallery(galleryNode: Element): GalleryImage[] {
 
 interface HTMLRendererProps {
   content: string | null | undefined;
-  className?: string;
 }
 
-export default function HTMLRenderer({ content, className = '' }: HTMLRendererProps) {
+export default function HTMLRenderer({ content }: HTMLRendererProps) {
   if (!content) {
     return null;
   }
@@ -160,7 +159,7 @@ export default function HTMLRenderer({ content, className = '' }: HTMLRendererPr
   });
 
   return (
-    <div className={`prose prose-lg max-w-none ${className}`}>
+    <div className="prose prose-lg max-w-none">
       {processedContent}
     </div>
   );

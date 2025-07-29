@@ -54,7 +54,7 @@ export default function CollaboratorRowClient(collaborator: Collaborator) {
             isExpanded ? 'translate-y-0' : '-translate-y-2'
           }`}>
             {collaborator.content ? (
-              <HTMLRenderer content={collaborator.content} className="text-sm" />
+              <HTMLRenderer content={collaborator.content} />
             ) : (
               <p>More information about {collaborator.name} coming soon...</p>
             )}
