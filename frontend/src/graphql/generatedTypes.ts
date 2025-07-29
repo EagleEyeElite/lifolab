@@ -10390,7 +10390,7 @@ export type GetPostsByTagQuery = { __typename?: 'RootQuery', posts?: { __typenam
 export type GetAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllTagsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null, count?: number | null } }> } | null };
+export type GetAllTagsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', slug?: string | null } }> } | null };
 
 export type GetContactContentQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10441,7 +10441,14 @@ export type GetPostCardQueryVariables = Exact<{
 }>;
 
 
-export type GetPostCardQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', id: string, title?: string | null, date?: string | null, slug?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null } | null };
+export type GetPostCardQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', id: string, title?: string | null, date?: string | null, slug?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, postDetails?: { __typename?: 'PostDetails', whenAndWhere: string } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', slug?: string | null } }> } | null } | null };
+
+export type GetTagsBySlugsQueryVariables = Exact<{
+  slugs: Array<Scalars['String']['input']> | Scalars['String']['input'];
+}>;
+
+
+export type GetTagsBySlugsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null };
 
 type AuthorDetailsFields_MediaItem_Fragment = { __typename?: 'MediaItem', author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } } | null };
 
@@ -10491,10 +10498,7 @@ export const GetAllTagsDocument = gql`
   tags {
     edges {
       node {
-        id
-        name
         slug
-        count
       }
     }
   }
@@ -10647,12 +10651,27 @@ export const GetPostCardDocument = gql`
         altText
       }
     }
+    postDetails {
+      whenAndWhere
+    }
     tags {
       edges {
         node {
-          name
           slug
         }
+      }
+    }
+  }
+}
+    `;
+export const GetTagsBySlugsDocument = gql`
+    query GetTagsBySlugs($slugs: [String!]!) {
+  tags(where: {slug: $slugs}) {
+    edges {
+      node {
+        id
+        name
+        slug
       }
     }
   }
@@ -10701,6 +10720,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetPostCard(variables: GetPostCardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostCardQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetPostCardQuery>({ document: GetPostCardDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostCard', 'query', variables);
+    },
+    GetTagsBySlugs(variables: GetTagsBySlugsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetTagsBySlugsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetTagsBySlugsQuery>({ document: GetTagsBySlugsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTagsBySlugs', 'query', variables);
     }
   };
 }

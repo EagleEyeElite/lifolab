@@ -3,8 +3,7 @@
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import TagPill from "./tagPill";
-import HTMLRenderer from "./htmlRenderer";
+import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 
 const getImageClassName = (size: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive') => {
   switch (size) {
@@ -35,21 +34,21 @@ const getImageClassName = (size: 'tiny' | 'small' | 'medium' | 'large' | 'huge' 
 interface ProjectCardClientProps {
   title: string;
   href: string;
-  tags: Array<{ name: string; slug: string }>;
-  date?: string;
+  whenAndWhere?: string;
   excerpt?: string;
   image: string;
   imageSize: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive';
+  tagList?: React.ReactNode;
 }
 
 export default function ProjectCardClient({ 
   title, 
   href, 
-  tags, 
-  date, 
+  whenAndWhere, 
   excerpt,
   image, 
   imageSize,
+  tagList,
 }: ProjectCardClientProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(false);
@@ -82,49 +81,37 @@ export default function ProjectCardClient({
     return () => observer.unobserve(element);
   }, []);
 
-  return (
+  return <>
     <div
       ref={cardRef}
-      className={`space-y-3 group ${shouldAnimate ? 'transition-all duration-500 ease-out' : ''} ${
+      className={`group hover:bg-gray-100 rounded-lg hover:-m-2 hover:p-2 ${shouldAnimate ? 'duration-300 ease-out' : ''} ${
         isVisible ? 'opacity-100 translate-y-0' : shouldAnimate ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
       }`}
     >
-      <Link href={href} className="block overflow-hidden rounded-lg hover:shadow-lg transition-shadow duration-300">
-        <div className={`relative ${getImageClassName(imageSize)}`}>
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
-            sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"
-          />
-        </div>
-      </Link>
-
-      <div className="space-y-2">
-        <div className="flex justify-between items-start">
-          <Link href={href} className="text-black text-sm font-mono tracking-wide leading-[1.2] no-underline flex-1 pr-2">
-            {title}
-          </Link>
-          {date && (
-            <div className="text-xs font-mono text-gray-600 flex-shrink-0">
-              {new Date(date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
-            </div>
-          )}
-        </div>
-        {excerpt && (
-          <div className="text-sm text-gray-700 leading-relaxed">
-            <HTMLRenderer content={excerpt} />
+    <Link href={href}>
+      <div className={`relative overflow-hidden rounded-lg group-hover:shadow-lg duration-300 ${getImageClassName(imageSize)}`}>
+        <Image
+          src={image}
+          alt={title}
+          fill
+          className="object-cover group-hover:scale-105 duration-300"
+          sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"
+        />
+        <div className="absolute bottom-0 right-0">
+          <div className="bg-black/30 backdrop-blur-sm px-2 py-1 rounded-tl-lg shadow-sm">
+            <HTMLRenderer content={whenAndWhere} className="text-xs text-gray-300" />
           </div>
-        )}
-        {tags?.length > 0 && (
-          <div className="flex flex-wrap gap-1">
-            {tags.map((tag, tagIndex) => (
-              <TagPill key={tagIndex} name={tag.name} href={`/tags/${tag.slug}`} />
-            ))}
-          </div>
-        )}
+        </div>
       </div>
+      <h1 className="text-xl font-body font-bold pt-2">{title}</h1>
+      <div className="pt-1">
+        <HTMLRenderer content={excerpt}/>
+      </div>
+    </Link>
+    <div className="font-heading pt-3">
+      {tagList}
     </div>
-  );
+    </div>
+    <div className="pt-4" />
+  </>
 }

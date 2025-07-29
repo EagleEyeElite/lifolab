@@ -33,14 +33,13 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
   }
 
   return (
-    <div className="pt-[45px] px-8">
-      <SectionHeader className="py-8">{post.postDetails?.whenAndWhere || "Project Details"}</SectionHeader>
-
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <div className="px-6 py-6">
+      <SectionHeader>{post.postDetails?.whenAndWhere || "Project Details"}</SectionHeader>
+      <div className="pt-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-4">
           <PostOverview slug={slug} />
         </div>
-        <div className="lg:col-span-6">
+        <div className="lg:col-span-6 pb-32">
           <PostContent slug={slug} />
         </div>
       </div>

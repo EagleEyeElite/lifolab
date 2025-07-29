@@ -46,20 +46,22 @@ export default async function People() {
   });
 
   return (
-    <div className="px-[1.6rem] py-[1.6rem] space-y-6" id="people">
-      <SectionHeader icon={Command}>
-        People
-      </SectionHeader>
-      
-      <CollaboratorSection
-        title="Living the Forest Lab Team" 
-        collaboratorSlugs={teamMemberSlugs}
-      />
-      
-      <CollaboratorSection
-        title="Collaborations" 
-        collaboratorSlugs={collaboratorSlugs}
-      />
+    <div className="p-6" id="people">
+      <div className="pb-8">
+        <SectionHeader icon={Command}>People</SectionHeader>
+      </div>
+      <div className="pb-8">
+        <CollaboratorSection
+          title="Living the Forest Lab Team"
+          collaboratorSlugs={teamMemberSlugs}
+        />
+      </div>
+      <div className="pb-8">
+        <CollaboratorSection
+          title="Collaborations"
+          collaboratorSlugs={collaboratorSlugs}
+        />
+      </div>
     </div>
   );
 }

@@ -1,18 +1,17 @@
 import React from "react";
-import {LucideIcon} from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
-export default function SectionHeader({ children, icon: Icon, className }: {
+interface SectionHeaderProps {
   children: React.ReactNode;
   icon?: LucideIcon;
-  className?: string;
-}) {
+}
+
+export default function SectionHeader({children, icon: Icon}: SectionHeaderProps) {
   return (
-    <header className={`space-y-2 ${className || ''}`}>
-      <hr className="border-black border-t" />
-      <p className="text-black text-sm font-mono tracking-wide flex items-center gap-2">
-        {children} {Icon && <Icon size={16} />}
-      </p>
-      <hr className="border-black border-t" />
-    </header>
+    <div className={`border-y-2 border-black py-3`}>
+      <h2 className={`text-lg pl-3 font-heading font-bold tracking-wide flex items-center gap-2`}>
+        {children} {Icon && <Icon size={16} strokeWidth={2.5}  />}
+      </h2>
+    </div>
   );
 }

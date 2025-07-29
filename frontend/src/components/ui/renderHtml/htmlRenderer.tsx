@@ -1,8 +1,9 @@
 import parse, { DOMNode, domToReact, Element } from 'html-react-parser';
 import Image from 'next/image';
 import CustomLink from "@/components/ui/customLink";
-import EmblaCarousel from "@/components/ui/embla-carousel/EmblaCarousel";
+import EmblaCarousel from "@/components/ui/renderHtml/embla-carousel/EmblaCarousel";
 import {EmblaOptionsType} from "embla-carousel";
+import React from "react";
 
 
 
@@ -44,9 +45,10 @@ function extractImagesFromGallery(galleryNode: Element): GalleryImage[] {
 interface HTMLRendererProps {
   content: string | null | undefined;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export default function HTMLRenderer({ content, className = '' }: HTMLRendererProps) {
+export default function HTMLRenderer({ content, className, style }: HTMLRendererProps) {
   if (!content) {
     return null;
   }
@@ -160,7 +162,7 @@ export default function HTMLRenderer({ content, className = '' }: HTMLRendererPr
   });
 
   return (
-    <div className={`prose prose-lg max-w-none ${className}`}>
+    <div className={`prose ${className ? className : "text-gray-500"}`} style={style}>
       {processedContent}
     </div>
   );

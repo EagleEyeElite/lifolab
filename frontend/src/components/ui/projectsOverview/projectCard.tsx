@@ -2,6 +2,7 @@ import React from "react";
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import ProjectCardClient from './ProjectCardClient';
+import TagList from '@/components/ui/tags/TagList';
 import {GetPostCardQuery, GetPostCardQueryVariables} from "@/graphql/generatedTypes";
 
 const GetPostCard = gql`
@@ -18,10 +19,12 @@ const GetPostCard = gql`
                     altText
                 }
             }
+            postDetails {
+                whenAndWhere
+            }
             tags {
                 edges {
                     node {
-                        name
                         slug
                     }
                 }
@@ -44,20 +47,17 @@ export default async function ProjectCard({ slug, imageSize }: ProjectCardProps)
     throw new Error(`Post with slug "${slug}" not found`);
   }
 
-  const postTags = post.tags?.edges?.map((edge) => ({
-    name: edge.node!.name!,
-    slug: edge.node!.slug!
-  })) || [];
+  const tagSlugs = post.tags?.edges?.map((edge) => edge.node!.slug!) || [];
 
   return (
     <ProjectCardClient
       title={post.title!}
       href={`/${post.slug!}`}
-      tags={postTags}
-      date={post.date!}
+      whenAndWhere={post.postDetails?.whenAndWhere || undefined}
       excerpt={post.excerpt || undefined}
       image={post.featuredImage?.node?.sourceUrl || ''}
       imageSize={imageSize}
+      tagList={<TagList tagSlugs={tagSlugs} />}
     />
   );
 }

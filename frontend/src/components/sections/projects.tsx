@@ -1,11 +1,11 @@
 import React from "react";
 import SectionHeader from "@/components/ui/sectionHeader";
-import ProjectCard from "@/components/ui/projectCard";
+import ProjectCard from "@/components/ui/projectsOverview/projectCard";
 import { Package } from "lucide-react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import { GetPostsQuery, GetPostsQueryVariables } from "@/graphql/generatedTypes";
-import MasonryLayout from "@/components/ui/masonryLayout";
+import MasonryLayout from "@/components/ui/projectsOverview/masonryLayout";
 
 const GetPosts = gql`
     query GetPosts {
@@ -54,7 +54,7 @@ export default async function Projects() {
   return (
     <div className="flex justify-start w-full" id="projects">
       <div className="w-full">
-        <div className="px-[1.6rem] py-[1.6rem] space-y-6">
+        <div className="px-6 py-6 space-y-6">
           <SectionHeader icon={Package}>
             Projects
           </SectionHeader>

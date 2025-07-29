@@ -2,7 +2,6 @@ import React from 'react';
 import { FolderClosed } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
-import SectionHeader from "@/components/ui/sectionHeader";
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import { GetImprintContentQuery, GetImprintContentQueryVariables } from "@/graphql/generatedTypes";
@@ -34,10 +33,14 @@ export default async function ImprintSection() {
 
   return (
     <div className="flex-1 space-y-4">
-      <SectionHeader icon={FolderClosed}>Imprint</SectionHeader>
+      <div className={`border-y border-black py-3`}>
+        <h2 className={`text-sm pl-3 font-heading tracking-wide flex items-center gap-2`}>
+          Imprint <FolderClosed size={16} />
+        </h2>
+      </div>
 
       <div className="space-y-6">
-        <div className="flex items-center justify-center gap-6 flex-wrap">
+        <div className="flex items-center gap-6 flex-wrap">
           {imprintImages.map(({ id, sourceUrl, altText }) => {
             if (!sourceUrl) {
               throw new Error(`Invalid sourceUrl for imprint image with id: ${id}`);
@@ -63,10 +66,9 @@ export default async function ImprintSection() {
           })}
         </div>
 
-        <div className="text-center font-mono text-sm text-black space-y-1">
-          <p className="font-medium">Copyright:</p>
-          <p>Living the Forest Lab | Reallabor Wald</p>
-        </div>
+        <p className="font-heading text-sm">
+         Copyright: Living the Forest Lab | Reallabor Wald
+        </p>
       </div>
     </div>
   );

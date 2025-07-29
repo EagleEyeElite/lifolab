@@ -8,17 +8,13 @@ interface CollaboratorSectionProps {
 
 export default function CollaboratorSection({ title, collaboratorSlugs }: CollaboratorSectionProps) {
   return (
-    <div className="space-y-0">
-      <div className="mb-4">
-        <span className="text-black text-sm font-mono tracking-wide">
-          {title}
-        </span>
-      </div>
+    <div>
+      <h1 className="text-xl font-body font-bold pb-4">{title}</h1>
       <div className="space-y-1">
         {collaboratorSlugs.map((slug, index) => (
           <CollaboratorRow
             key={index}
-            collaboratorSlug={slug} 
+            collaboratorSlug={slug}
           />
         ))}
       </div>

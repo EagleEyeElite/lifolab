@@ -39,9 +39,9 @@ export default function MasonryLayout({ children }: MasonryLayoutProps) {
         desktop: 3
       }}
       gap={{
-        mobile: 12,
-        tablet: 14,
-        desktop: 17
+        mobile: 35,
+        tablet: 35,
+        desktop: 35
       }}
       autoArrange={true}
       key={`masonry-${isMounted}`}

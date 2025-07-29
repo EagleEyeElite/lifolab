@@ -5,7 +5,7 @@ import {
   GetPostDetailsQuery,
   GetPostDetailsQueryVariables,
 } from "@/graphql/generatedTypes";
-import HTMLRenderer from "@/components/ui/htmlRenderer";
+import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 
 const GetPostDetails = gql`
     query GetPostDetails($id: ID!) {
@@ -38,10 +38,10 @@ export default async function PostContent({ slug }: PostContentProps) {
 
   return (
     <>
-      <PostImage image={post.featuredImage} title={post.title} />
-      <div className="text-lg leading-relaxed text-black prose-custom">
-        <HTMLRenderer content={post.content} />
+      <div className="pb-8">
+        <PostImage image={post.featuredImage} title={post.title} />
       </div>
+      <HTMLRenderer  className="prose-lg" content={post.content} />
     </>
   );
 }
