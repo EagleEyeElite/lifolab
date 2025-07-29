@@ -46,7 +46,7 @@ export default async function People() {
   });
 
   return (
-    <div className="px-[1.6rem] py-[1.6rem] space-y-6" id="people">
+    <div className="px-6 py-6 space-y-6" id="people">
       <SectionHeader icon={Command}>
         People
       </SectionHeader>

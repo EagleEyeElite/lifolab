@@ -54,7 +54,7 @@ export default async function Projects() {
   return (
     <div className="flex justify-start w-full" id="projects">
       <div className="w-full">
-        <div className="px-[1.6rem] py-[1.6rem] space-y-6">
+        <div className="px-6 py-6 space-y-6">
           <SectionHeader icon={Package}>
             Projects
           </SectionHeader>

@@ -9,7 +9,7 @@ export default function TagPill({ name, href }: TagPillProps) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center px-[7px] py-[3px] text-xs font-heading leading-[1.2] bg-secondary border border-black rounded-full no-underline"
+      className="inline-flex items-center px-2 py-1 text-xs font-heading bg-secondary border border-black rounded-full"
     >
       {name}
     </Link>

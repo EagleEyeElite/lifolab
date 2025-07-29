@@ -36,7 +36,7 @@ export default function CollaboratorRowClient(collaborator: Collaborator) {
           {collaborator.role || ""}
         </span>
 
-        <div className="bg-transparent border-none p-1 rounded-sm flex-shrink-0 @[600px]:justify-self-start">
+        <div className="p-1 rounded-sm flex-shrink-0 @[600px]:justify-self-start">
           <Plus
             size={20}
             className={`transition-transform duration-300 ${
