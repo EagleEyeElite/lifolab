@@ -1,6 +1,7 @@
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import ProjectCard from '@/components/ui/projectCard';
+import TagList from '@/components/ui/TagList';
 
 export const revalidate = 10;
 
@@ -53,8 +54,12 @@ export default async function TagPage({ params }: TagPageProps) {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-sm mx-auto space-y-6">
-        <h1 className="text-3xl font-body mb-8">Category: {tag}</h1>
-
+        <div className="flex items-center">
+          <h1 className="text-3xl font-body">Category:</h1>
+          <div className="pl-2 items-center">
+            <TagList tagSlugs={[tag]} />
+          </div>
+        </div>
         {projectCards.length ? (
           projectCards
         ) : (
