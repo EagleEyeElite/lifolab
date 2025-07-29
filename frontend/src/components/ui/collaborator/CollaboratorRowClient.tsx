@@ -28,15 +28,15 @@ export default function CollaboratorRowClient(collaborator: Collaborator) {
         className="flex items-center justify-between py-2 @[600px]:grid @[600px]:grid-cols-3 @[600px]:gap-8 cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <span className="text-lg leading-tight text-black opacity-85 font-body">
+        <span className="text-lg leading-tight opacity-85 font-body">
           {collaborator.name}
         </span>
 
-        <span className="hidden @[600px]:block text-black text-sm font-heading tracking-wide">
+        <span className="hidden @[600px]:block text-sm font-heading tracking-wide">
           {collaborator.role || ""}
         </span>
 
-        <div className="text-black bg-transparent border-none p-1 rounded-sm flex-shrink-0 @[600px]:justify-self-start">
+        <div className="bg-transparent border-none p-1 rounded-sm flex-shrink-0 @[600px]:justify-self-start">
           <Plus
             size={20}
             className={`transition-transform duration-300 ${
@@ -50,7 +50,7 @@ export default function CollaboratorRowClient(collaborator: Collaborator) {
         isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
       }`}>
         <div className="pt-2 pb-3">
-          <div className={`p-4 rounded-sm text-black text-sm leading-relaxed bg-primary transition-all duration-300 ease-out ${
+          <div className={`p-4 rounded-sm text-sm leading-relaxed bg-primary transition-all duration-300 ease-out ${
             isExpanded ? 'translate-y-0' : '-translate-y-2'
           }`}>
             {collaborator.content ? (
@@ -65,7 +65,7 @@ export default function CollaboratorRowClient(collaborator: Collaborator) {
 
             {collaborator.role && (
               <div className="mb-4 @[600px]:hidden">
-                <span className="text-black text-sm font-heading tracking-wide">
+                <span className="text-sm font-heading tracking-wide">
                   {collaborator.role}
                 </span>
               </div>
@@ -77,7 +77,7 @@ export default function CollaboratorRowClient(collaborator: Collaborator) {
                   <div key={index}>
                     <Link
                       href={`/${project.slug}`}
-                      className="text-black font-heading text-sm leading-tight block hover:opacity-75 transition-opacity duration-200"
+                      className="font-heading text-sm leading-tight block hover:opacity-75 transition-opacity duration-200"
                     >
                       {project.title} <ArrowUpRight className="inline-block" size={16} />
                     </Link>

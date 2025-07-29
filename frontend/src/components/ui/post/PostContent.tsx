@@ -39,7 +39,7 @@ export default async function PostContent({ slug }: PostContentProps) {
   return (
     <>
       <PostImage image={post.featuredImage} title={post.title} />
-      <div className="text-lg leading-relaxed text-black prose-custom">
+      <div className="text-lg leading-relaxed prose-custom">
         <HTMLRenderer content={post.content} />
       </div>
     </>

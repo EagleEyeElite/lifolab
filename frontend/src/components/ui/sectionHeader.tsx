@@ -9,7 +9,7 @@ export default function SectionHeader({ children, icon: Icon, className }: {
   return (
     <header className={`space-y-2 ${className || ''}`}>
       <hr className="border-black border-t" />
-      <p className="text-black text-sm font-heading tracking-wide flex items-center gap-2">
+      <p className="text-sm font-heading tracking-wide flex items-center gap-2">
         {children} {Icon && <Icon size={16} />}
       </p>
       <hr className="border-black border-t" />

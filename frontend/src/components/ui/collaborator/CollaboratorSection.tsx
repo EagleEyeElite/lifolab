@@ -10,7 +10,7 @@ export default function CollaboratorSection({ title, collaboratorSlugs }: Collab
   return (
     <div className="space-y-0">
       <div className="mb-4">
-        <span className="text-black text-sm font-heading tracking-wide">
+        <span className="text-sm font-heading tracking-wide">
           {title}
         </span>
       </div>

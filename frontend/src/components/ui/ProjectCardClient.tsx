@@ -103,7 +103,7 @@ export default function ProjectCardClient({
 
       <div className="space-y-2">
         <div className="flex justify-between items-start">
-          <Link href={href} className="text-black text-sm font-heading tracking-wide leading-[1.2] no-underline flex-1 pr-2">
+          <Link href={href} className="text-sm font-heading tracking-wide leading-[1.2] no-underline flex-1 pr-2">
             {title}
           </Link>
           {date && (
