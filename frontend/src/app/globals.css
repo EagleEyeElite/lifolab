@@ -3,7 +3,8 @@
 
 @theme {
   /* Global */
-  --color-primary: theme(colors.lime.300);
+  --color-primary: theme(colors.amber.100);
+  --color-secondary: theme(colors.lime.200);
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Code", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   /* Navbar */
