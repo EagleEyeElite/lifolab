@@ -10390,7 +10390,7 @@ export type GetPostsByTagQuery = { __typename?: 'RootQuery', posts?: { __typenam
 export type GetAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllTagsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null, count?: number | null } }> } | null };
+export type GetAllTagsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', slug?: string | null } }> } | null };
 
 export type GetContactContentQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10498,10 +10498,7 @@ export const GetAllTagsDocument = gql`
   tags {
     edges {
       node {
-        id
-        name
         slug
-        count
       }
     }
   }

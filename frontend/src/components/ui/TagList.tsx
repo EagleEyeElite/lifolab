@@ -18,10 +18,9 @@ const GetTagsBySlugs = gql`
 
 interface TagListProps {
   tagSlugs: string[];
-  className?: string;
 }
 
-export default async function TagList({ tagSlugs, className = "flex flex-wrap gap-1" }: TagListProps) {
+export default async function TagList({ tagSlugs }: TagListProps) {
   if (!tagSlugs.length) {
     return null;
   }
@@ -34,7 +33,7 @@ export default async function TagList({ tagSlugs, className = "flex flex-wrap ga
     }
 
     return (
-      <div className={className}>
+      <div className="flex flex-wrap gap-1">
         {tags.edges.map(({ node: tag }: any) => (
           <TagPill
             key={tag.id}
