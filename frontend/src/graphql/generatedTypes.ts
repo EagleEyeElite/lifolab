@@ -10448,7 +10448,7 @@ export type GetPostCardQueryVariables = Exact<{
 }>;
 
 
-export type GetPostCardQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', id: string, title?: string | null, date?: string | null, slug?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', slug?: string | null } }> } | null } | null };
+export type GetPostCardQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', id: string, title?: string | null, date?: string | null, slug?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, postDetails?: { __typename?: 'PostDetails', whenAndWhere: string } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', slug?: string | null } }> } | null } | null };
 
 type AuthorDetailsFields_MediaItem_Fragment = { __typename?: 'MediaItem', author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } } | null };
 
@@ -10663,6 +10663,9 @@ export const GetPostCardDocument = gql`
         sourceUrl
         altText
       }
+    }
+    postDetails {
+      whenAndWhere
     }
     tags {
       edges {

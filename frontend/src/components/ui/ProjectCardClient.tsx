@@ -34,7 +34,7 @@ const getImageClassName = (size: 'tiny' | 'small' | 'medium' | 'large' | 'huge' 
 interface ProjectCardClientProps {
   title: string;
   href: string;
-  date?: string;
+  whenAndWhere?: string;
   excerpt?: string;
   image: string;
   imageSize: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive';
@@ -44,7 +44,7 @@ interface ProjectCardClientProps {
 export default function ProjectCardClient({ 
   title, 
   href, 
-  date, 
+  whenAndWhere, 
   excerpt,
   image, 
   imageSize,
@@ -105,9 +105,9 @@ export default function ProjectCardClient({
           <Link href={href} className="text-sm font-heading tracking-wide flex-1 pr-2">
             {title}
           </Link>
-          {date && (
+          {whenAndWhere && (
             <div className="text-xs font-heading text-gray-600 flex-shrink-0">
-              {new Date(date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+              {whenAndWhere}
             </div>
           )}
         </div>

@@ -19,6 +19,9 @@ const GetPostCard = gql`
                     altText
                 }
             }
+            postDetails {
+                whenAndWhere
+            }
             tags {
                 edges {
                     node {
@@ -50,7 +53,7 @@ export default async function ProjectCard({ slug, imageSize }: ProjectCardProps)
     <ProjectCardClient
       title={post.title!}
       href={`/${post.slug!}`}
-      date={post.date!}
+      whenAndWhere={post.postDetails?.whenAndWhere || undefined}
       excerpt={post.excerpt || undefined}
       image={post.featuredImage?.node?.sourceUrl || ''}
       imageSize={imageSize}
