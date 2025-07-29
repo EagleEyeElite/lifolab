@@ -11,7 +11,7 @@ export default function Navbar() {
       <div className="grid grid-cols-[1fr_auto_1fr] items-center h-full">
         <div/>
         <Link href="/">
-          <h1 className="p-0.5 px-4 border rounded-3xl bg-accent-green relative z-30 pointer-events-auto">
+          <h1 className="p-0.5 px-4 border rounded-3xl bg-primary relative z-30 pointer-events-auto">
             Living the Forest Lab
           </h1>
         </Link>

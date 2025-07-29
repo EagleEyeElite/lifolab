@@ -50,7 +50,7 @@ export default function CollaboratorRowClient(collaborator: Collaborator) {
         isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
       }`}>
         <div className="pt-2 pb-3">
-          <div className={`p-4 rounded-sm text-black text-sm leading-relaxed bg-accent-green transition-all duration-300 ease-out ${
+          <div className={`p-4 rounded-sm text-black text-sm leading-relaxed bg-primary transition-all duration-300 ease-out ${
             isExpanded ? 'translate-y-0' : '-translate-y-2'
           }`}>
             {collaborator.content ? (

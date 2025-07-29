@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 enum AnimationMode {
   StartBig= "startBig",
@@ -12,8 +13,9 @@ export default async function TestPage({params, searchParams}: {
 }) {
   // Only show in development mode
   if (process.env.NODE_ENV !== 'development') {
-    return null;
+    notFound();
   }
+
   const { name } = await params;
   // const resolvedSearchParams = await searchParams;
   // const paramAnimationMode = typeof resolvedSearchParams?.animationMode === "string"

@@ -7,7 +7,6 @@ import LogoRenderer, {AnimationMode} from '@/components/layout/navbar/LogoRender
 export default function ScrollAnimatedLogo() {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [hasNavigatedInternally, setHasNavigatedInternally] = useState(false);
   const isInitialRender = useRef(true);
 
@@ -26,6 +25,7 @@ export default function ScrollAnimatedLogo() {
 
   const animationMode = ((): AnimationMode => {
     if (process.env.NODE_ENV === 'development' && pathname.startsWith('/test')) {
+      const searchParams = useSearchParams();
       const animationModeParam = searchParams.get('animationMode');
 
       if (animationModeParam === AnimationMode.StartBig) return AnimationMode.StartBig;

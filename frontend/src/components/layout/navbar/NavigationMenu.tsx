@@ -16,7 +16,7 @@ interface NavPillProps {
 function NavPill({ children, ...props }: NavPillProps) {
   return (
     <div
-      className="border border-r-0 rounded-l-3xl p-0.5 pl-4 bg-accent-green"
+      className="border border-r-0 rounded-l-3xl p-0.5 pl-4 bg-primary"
       {...props}
     >
       {children}
