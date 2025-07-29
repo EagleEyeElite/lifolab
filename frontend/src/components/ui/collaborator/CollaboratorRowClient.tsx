@@ -24,7 +24,10 @@ export default function CollaboratorRowClient(collaborator: Collaborator) {
     <div className="mb-1 @container">
       <div className="h-px bg-black/75 w-full"></div>
 
-      <div className="flex items-center justify-between py-2 @[600px]:grid @[600px]:grid-cols-3 @[600px]:gap-8">
+      <div
+        className="flex items-center justify-between py-2 @[600px]:grid @[600px]:grid-cols-3 @[600px]:gap-8 cursor-pointer"
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
         <span className="text-lg leading-tight text-black opacity-85 font-normal">
           {collaborator.name}
         </span>
@@ -33,17 +36,14 @@ export default function CollaboratorRowClient(collaborator: Collaborator) {
           {collaborator.role || ""}
         </span>
 
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="text-black hover:opacity-75 bg-transparent border-none p-1 cursor-pointer rounded-sm flex-shrink-0 @[600px]:justify-self-start"
-        >
+        <div className="text-black bg-transparent border-none p-1 rounded-sm flex-shrink-0 @[600px]:justify-self-start">
           <Plus
             size={20}
             className={`transition-transform duration-300 ${
               isExpanded ? 'rotate-45' : 'rotate-0'
             }`}
           />
-        </button>
+        </div>
       </div>
 
       <div className={`overflow-hidden transition-all duration-300 ease-out ${
