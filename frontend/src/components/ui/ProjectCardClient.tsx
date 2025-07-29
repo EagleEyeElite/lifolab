@@ -103,11 +103,11 @@ export default function ProjectCardClient({
 
       <div className="space-y-2">
         <div className="flex justify-between items-start">
-          <Link href={href} className="text-black text-sm font-mono tracking-wide leading-[1.2] no-underline flex-1 pr-2">
+          <Link href={href} className="text-black text-sm font-heading tracking-wide leading-[1.2] no-underline flex-1 pr-2">
             {title}
           </Link>
           {date && (
-            <div className="text-xs font-mono text-gray-600 flex-shrink-0">
+            <div className="text-xs font-heading text-gray-600 flex-shrink-0">
               {new Date(date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
             </div>
           )}

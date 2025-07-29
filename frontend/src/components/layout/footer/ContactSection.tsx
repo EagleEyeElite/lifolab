@@ -30,10 +30,10 @@ function ContactPerson({ name, email }: {
 }) {
   return (
     <div className="space-y-2">
-      <p className="font-mono text-sm text-black">{name}</p>
+      <p className="font-heading text-sm text-black">{name}</p>
       <Link
         href={`mailto:${email}`}
-        className="inline-block px-4 py-2 rounded-full border border-black text-black font-mono text-sm"
+        className="inline-block px-4 py-2 rounded-full border border-black text-black font-heading text-sm"
       >
         {email}
       </Link>
@@ -70,7 +70,7 @@ export default async function ContactSection() {
 
       <div className="flex flex-col md:flex-row gap-8">
         <div className="flex-1 space-y-4">
-          <p className="font-mono text-sm text-black font-medium">
+          <p className="font-heading text-sm text-black font-medium">
             {projectName}
           </p>
           {contacts.map((contact, index: number) => {
@@ -87,7 +87,7 @@ export default async function ContactSection() {
           })}
         </div>
 
-        <address className="flex-1 font-mono text-sm text-black not-italic">
+        <address className="flex-1 font-heading text-sm text-black not-italic">
           <HTMLRenderer content={contactData.address || "Address not available"} />
         </address>
       </div>

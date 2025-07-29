@@ -28,11 +28,11 @@ export default function CollaboratorRowClient(collaborator: Collaborator) {
         className="flex items-center justify-between py-2 @[600px]:grid @[600px]:grid-cols-3 @[600px]:gap-8 cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <span className="text-lg leading-tight text-black opacity-85 font-normal">
+        <span className="text-lg leading-tight text-black opacity-85 font-body">
           {collaborator.name}
         </span>
 
-        <span className="hidden @[600px]:block text-black text-sm font-mono tracking-wide">
+        <span className="hidden @[600px]:block text-black text-sm font-heading tracking-wide">
           {collaborator.role || ""}
         </span>
 
@@ -65,7 +65,7 @@ export default function CollaboratorRowClient(collaborator: Collaborator) {
 
             {collaborator.role && (
               <div className="mb-4 @[600px]:hidden">
-                <span className="text-black text-sm font-mono tracking-wide">
+                <span className="text-black text-sm font-heading tracking-wide">
                   {collaborator.role}
                 </span>
               </div>
@@ -77,7 +77,7 @@ export default function CollaboratorRowClient(collaborator: Collaborator) {
                   <div key={index}>
                     <Link
                       href={`/${project.slug}`}
-                      className="text-black font-mono text-sm leading-tight block hover:opacity-75 transition-opacity duration-200"
+                      className="text-black font-heading text-sm leading-tight block hover:opacity-75 transition-opacity duration-200"
                     >
                       {project.title} <ArrowUpRight className="inline-block" size={16} />
                     </Link>

@@ -29,7 +29,7 @@ export default async function TagsPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">All Tags</h1>
+        <h1 className="text-3xl font-body mb-8">All Tags</h1>
         
         {tags?.edges?.length ? (
           <div className="flex flex-wrap gap-3">
@@ -42,7 +42,7 @@ export default async function TagsPage() {
             ))}
           </div>
         ) : (
-          <p className="text-gray-500">No tags found.</p>
+          <p className="text-gray-500 font-body">No tags found.</p>
         )}
       </div>
     </div>

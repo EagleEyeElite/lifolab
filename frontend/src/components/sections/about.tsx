@@ -23,7 +23,7 @@ export default async function About() {
 
   return (
     <div className="flex justify-center items-center max-w-4xl mx-auto px-8 text-center" id="about">
-      <div className="text-xl md:text-2xl leading-relaxed text-black font-normal tracking-wide">
+      <div className="text-xl md:text-2xl leading-relaxed text-black font-body tracking-wide">
         <HTMLRenderer content={page.content} />
       </div>
     </div>

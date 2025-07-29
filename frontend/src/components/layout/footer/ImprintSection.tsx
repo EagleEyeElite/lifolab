@@ -63,7 +63,7 @@ export default async function ImprintSection() {
           })}
         </div>
 
-        <div className="text-center font-mono text-sm text-black space-y-1">
+        <div className="text-center font-heading text-sm text-black space-y-1">
           <p className="font-medium">Copyright:</p>
           <p>Living the Forest Lab | Reallabor Wald</p>
         </div>
