@@ -5,7 +5,7 @@ import {
   GetPostDetailsQuery,
   GetPostDetailsQueryVariables,
 } from "@/graphql/generatedTypes";
-import HTMLRenderer from "@/components/ui/htmlRenderer";
+import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 
 const GetPostDetails = gql`
     query GetPostDetails($id: ID!) {

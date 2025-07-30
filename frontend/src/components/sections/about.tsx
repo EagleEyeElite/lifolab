@@ -1,6 +1,6 @@
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
-import HTMLRenderer from "@/components/ui/htmlRenderer";
+import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 import { GetAboutPageQuery, GetAboutPageQueryVariables, PageIdType } from "@/graphql/generatedTypes";
 
 const GetAboutPage = gql`

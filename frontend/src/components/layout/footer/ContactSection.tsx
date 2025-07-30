@@ -5,7 +5,7 @@ import SectionHeader from "@/components/ui/sectionHeader";
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import { GetContactContentQuery, GetContactContentQueryVariables } from "@/graphql/generatedTypes";
-import HTMLRenderer from "@/components/ui/htmlRenderer";
+import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 
 const GetContactContent = gql`
     query GetContactContent {

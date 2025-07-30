@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Plus } from "lucide-react";
 import Link from "next/link";
-import HTMLRenderer from "@/components/ui/htmlRenderer";
+import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 import { ArrowUpRight } from "lucide-react"
 
 interface Collaborator {

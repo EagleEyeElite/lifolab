@@ -1,7 +1,7 @@
 import parse, { DOMNode, domToReact, Element } from 'html-react-parser';
 import Image from 'next/image';
 import CustomLink from "@/components/ui/customLink";
-import EmblaCarousel from "@/components/ui/embla-carousel/EmblaCarousel";
+import EmblaCarousel from "@/components/ui/renderHtml/embla-carousel/EmblaCarousel";
 import {EmblaOptionsType} from "embla-carousel";
 
 

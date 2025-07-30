@@ -1,11 +1,11 @@
 import React from "react";
 import SectionHeader from "@/components/ui/sectionHeader";
-import ProjectCard from "@/components/ui/projectCard/projectCard";
+import ProjectCard from "@/components/ui/projectsOverview/projectCard";
 import { Package } from "lucide-react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import { GetPostsQuery, GetPostsQueryVariables } from "@/graphql/generatedTypes";
-import MasonryLayout from "@/components/ui/masonryLayout";
+import MasonryLayout from "@/components/ui/projectsOverview/masonryLayout";
 
 const GetPosts = gql`
     query GetPosts {

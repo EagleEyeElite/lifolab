@@ -1,4 +1,4 @@
-import HTMLRenderer from '@/components/ui/htmlRenderer';
+import HTMLRenderer from '@/components/ui/renderHtml/htmlRenderer';
 
 interface PostHeaderProps {
   title: string | null | undefined;
