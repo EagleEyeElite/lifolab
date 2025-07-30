@@ -66,7 +66,7 @@ export default async function ContactSection() {
 
   return (
     <div className="flex-[2] space-y-4">
-      <SectionHeader icon={Mic}>Contact</SectionHeader>
+      <SectionHeader icon={Mic} size="small">Contact</SectionHeader>
 
       <div className="flex flex-col md:flex-row gap-8">
         <div className="flex-1 space-y-4">

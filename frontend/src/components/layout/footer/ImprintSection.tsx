@@ -34,7 +34,7 @@ export default async function ImprintSection() {
 
   return (
     <div className="flex-1 space-y-4">
-      <SectionHeader icon={FolderClosed}>Imprint</SectionHeader>
+      <SectionHeader icon={FolderClosed} size="small">Imprint</SectionHeader>
 
       <div className="space-y-6">
         <div className="flex items-center justify-center gap-6 flex-wrap">
