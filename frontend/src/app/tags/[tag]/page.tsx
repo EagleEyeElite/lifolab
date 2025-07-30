@@ -1,7 +1,7 @@
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
-import ProjectCard from '@/components/ui/projectCard';
-import TagList from '@/components/ui/TagList';
+import ProjectCard from '@/components/ui/projectCard/projectCard';
+import TagList from '@/components/ui/tags/TagList';
 
 export const revalidate = 10;
 

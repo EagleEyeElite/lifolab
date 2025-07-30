@@ -2,7 +2,7 @@ import React from "react";
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import ProjectCardClient from './ProjectCardClient';
-import TagList from './TagList';
+import TagList from '@/components/ui/tags/TagList';
 import {GetPostCardQuery, GetPostCardQueryVariables} from "@/graphql/generatedTypes";
 
 const GetPostCard = gql`

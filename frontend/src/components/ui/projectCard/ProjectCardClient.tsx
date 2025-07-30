@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import HTMLRenderer from "./htmlRenderer";
+import HTMLRenderer from "@/components/ui/htmlRenderer";
 
 const getImageClassName = (size: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive') => {
   switch (size) {

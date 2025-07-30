@@ -1,6 +1,6 @@
 import React from "react";
 import SectionHeader from "@/components/ui/sectionHeader";
-import ProjectCard from "@/components/ui/projectCard";
+import ProjectCard from "@/components/ui/projectCard/projectCard";
 import { Package } from "lucide-react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";

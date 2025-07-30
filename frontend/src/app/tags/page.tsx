@@ -4,7 +4,7 @@ import {
   GetAllTagsQuery,
   GetAllTagsQueryVariables,
 } from "@/graphql/generatedTypes";
-import TagList from "@/components/ui/TagList";
+import TagList from "@/components/ui/tags/TagList";
 
 export const revalidate = 10;
 

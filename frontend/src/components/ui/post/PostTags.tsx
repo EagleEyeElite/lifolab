@@ -1,4 +1,4 @@
-import TagList from '@/components/ui/TagList';
+import TagList from '@/components/ui/tags/TagList';
 
 interface PostTagsProps {
   tags?: any;
