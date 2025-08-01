@@ -88,6 +88,12 @@ export default function ProjectCardClient({
         isVisible ? 'opacity-100 translate-y-0' : shouldAnimate ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
       }`}
     >
+
+      <Link href={href} className="text-lg font-body font-bold tracking-wide block">
+        {title}
+      </Link>
+
+
       <Link href={href} className="block overflow-hidden rounded-lg hover:shadow-lg transition-shadow duration-300">
         <div className={`relative ${getImageClassName(imageSize)}`}>
           <Image
@@ -101,22 +107,19 @@ export default function ProjectCardClient({
       </Link>
 
       <div className="space-y-2">
-        <div className="flex justify-between items-start">
-          <Link href={href} className="text-sm font-heading tracking-wide flex-1 pr-2">
-            {title}
-          </Link>
+        <div className="flex justify-between items-center">
+          <div>
+            {tagList}
+          </div>
           {whenAndWhere && (
-            <div className="text-xs font-heading text-gray-600 flex-shrink-0">
-              {whenAndWhere}
+            <div>
+              <HTMLRenderer content={whenAndWhere}/>
             </div>
           )}
         </div>
         {excerpt && (
-          <div className="text-sm text-gray-700 leading-relaxed">
-            <HTMLRenderer content={excerpt} />
-          </div>
+          <HTMLRenderer content={excerpt} />
         )}
-        {tagList}
       </div>
     </div>
   );
