@@ -5,7 +5,7 @@
   /* Global */
   --color-primary: theme(colors.amber.100);
   --color-secondary: theme(colors.lime.200);
-  --font-heading: Menlo;
+  --font-heading: 'Menlo', 'Monaco', 'Consolas', monospace;
   --font-body: theme(fontFamily.sans);;
 
   /* Navbar */
