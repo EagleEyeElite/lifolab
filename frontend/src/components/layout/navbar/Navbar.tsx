@@ -1,27 +1,57 @@
 "use client"
 
-import React from "react";
-import Link from "next/link";
+import React, { useState } from "react";
+import {Pencil, Package, Command, FileText, Mic, Newspaper, BookOpen} from "lucide-react";
 import ScrollAnimatedLogo from "@/components/layout/navbar/ScrollAnimatedLogo";
-import NavigationMenu from "@/components/layout/navbar/NavigationMenu";
+import MenuColumn from "@/components/layout/navbar/MenuColumn";
 
 export default function Navbar() {
+  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
+
+  const navigationLinks = [
+    { name: "About", href: "/#about", icon: Pencil },
+    { name: "People", href: "/#people", icon: Command },
+    { name: "Places", href: "/#", icon: FileText },
+    { name: "Contact", href: "#footer", icon: Mic }
+  ];
+
+  const navigationLinks2 = [
+    { name: "Projects", href: "/#projects", icon: Package },
+    { name: "Cyclopedia of ...", href: "/#", icon: BookOpen },
+  ];
+
+  const toggleDropdown = (dropdown: number) => {
+    setOpenDropdown(current => current === dropdown ? null : dropdown);
+  };
+
   return <>
-    <nav className="fixed top-0 h-navbar w-full z-20 pointer-events-none">
-      <div className="grid grid-cols-[1fr_auto_1fr] items-center h-full">
-        <div/>
-        <Link href="/">
-          <h1 className="p-0.5 px-4 border rounded-3xl bg-primary relative z-30 pointer-events-auto">
-            Living the Forest Lab
-          </h1>
-        </Link>
-        <div className="relative z-30 pointer-events-auto">
-          <NavigationMenu/>
-        </div>
+    <nav className="fixed top-0 h-navbar w-full z-30 pointer-events-none">
+      <div className="grid grid-cols-3 h-full">
+        <div />
+        <MenuColumn
+          title="Living the Forest Lab"
+          isOpen={openDropdown === 1}
+          onToggle={() => toggleDropdown(1)}
+          navigationLinks={navigationLinks}
+        />
+        <MenuColumn
+          title="Activities"
+          isOpen={openDropdown === 2}
+          onToggle={() => toggleDropdown(2)}
+          navigationLinks={navigationLinks2}
+        />
       </div>
     </nav>
     <div className="relative z-10">
       <ScrollAnimatedLogo />
     </div>
+    {/* Backdrop overlay when dropdown is open */}
+    {openDropdown && (
+      <button
+        className="fixed inset-0 z-10"
+        onClick={() => setOpenDropdown(null)}
+        aria-label="Close menu"
+      />
+    )}
   </>;
 }
