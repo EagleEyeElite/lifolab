@@ -4,11 +4,11 @@
   "fields": [
     {
       "key": "field_685b105dff534",
-      "label": "Referenced Posts",
-      "name": "referenced_posts",
+      "label": "Referenced Projects",
+      "name": "referenced_projects",
       "aria-label": "",
       "type": "post_object",
-      "instructions": "Select posts this collaborator has worked on or contributed to.",
+      "instructions": "Select projects this collaborator has worked on or contributed to.",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -17,7 +17,7 @@
         "id": ""
       },
       "post_type": [
-        "post"
+        "project"
       ],
       "post_status": "",
       "taxonomy": "",
@@ -31,7 +31,7 @@
       ],
       "show_in_graphql": 1,
       "graphql_description": "",
-      "graphql_field_name": "referencedPosts",
+      "graphql_field_name": "referencedProjects",
       "graphql_connection_type": "one_to_many",
       "ui": 1
     },

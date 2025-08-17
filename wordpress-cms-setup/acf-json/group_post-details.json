@@ -1,6 +1,6 @@
 {
   "key": "group_685b134b408d9",
-  "title": "Post Details",
+  "title": "Project Details",
   "fields": [
     {
       "key": "field_686943fc27c25",
@@ -8,7 +8,7 @@
       "name": "when_and_where",
       "aria-label": "",
       "type": "text",
-      "instructions": "Enter the date and location for this post\/event in the format: 'DD.MM.YYYY | City Name'.",
+      "instructions": "Enter the date and location for this project\/event in the format: 'DD.MM.YYYY | City Name'.",
       "required": 1,
       "conditional_logic": 0,
       "wrapper": {
@@ -33,7 +33,7 @@
       "name": "referenced_collaborators",
       "aria-label": "",
       "type": "post_object",
-      "instructions": "Select collaborators who worked on or contributed to this post\/event.",
+      "instructions": "Select collaborators who worked on or contributed to this project\/event.",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -66,7 +66,7 @@
       {
         "param": "post_type",
         "operator": "==",
-        "value": "post"
+        "value": "project"
       }
     ]
   ],
@@ -80,7 +80,7 @@
   "description": "",
   "show_in_rest": 1,
   "show_in_graphql": 1,
-  "graphql_field_name": "postDetails",
+  "graphql_field_name": "projectDetails",
   "map_graphql_types_from_location_rules": 0,
   "graphql_types": ""
 }

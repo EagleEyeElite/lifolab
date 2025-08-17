@@ -2,14 +2,14 @@ import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import PostImage from './PostImage';
 import {
-  GetPostDetailsQuery,
-  GetPostDetailsQueryVariables,
+  GetProjectDetailsQuery,
+  GetProjectDetailsQueryVariables,
 } from "@/graphql/generatedTypes";
 import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 
-const GetPostDetails = gql`
-    query GetPostDetails($id: ID!) {
-        post(id: $id, idType: SLUG) {
+const GetProjectDetails = gql`
+    query GetProjectDetails($id: ID!) {
+        project(id: $id, idType: SLUG) {
             title
             content
             featuredImage {
@@ -22,26 +22,26 @@ const GetPostDetails = gql`
     }
 `;
 
-interface PostContentProps {
+interface ProjectContentProps {
   slug: string;
 }
 
-export default async function PostContent({ slug }: PostContentProps) {
-  const { post } = await graphqlClient.request<GetPostDetailsQuery, GetPostDetailsQueryVariables>(
-    GetPostDetails,
+export default async function ProjectContent({ slug }: ProjectContentProps) {
+  const { project } = await graphqlClient.request<GetProjectDetailsQuery, GetProjectDetailsQueryVariables>(
+    GetProjectDetails,
     { id: slug }
   );
 
-  if (!post) {
-    throw new Error(`Post with slug "${slug}" not found`);
+  if (!project) {
+    throw new Error(`Project with slug "${slug}" not found`);
   }
 
   return (
     <>
       <div className="pb-8">
-        <PostImage image={post.featuredImage} title={post.title} />
+        <PostImage image={project.featuredImage} title={project.title} />
       </div>
-      <HTMLRenderer  className="prose-lg" content={post.content} />
+      <HTMLRenderer  className="prose-lg" content={project.content} />
     </>
   );
 }

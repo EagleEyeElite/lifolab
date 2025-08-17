@@ -5,9 +5,9 @@ import TagList from '@/components/ui/tags/TagList';
 
 export const revalidate = 10;
 
-const GetPostsByTag = gql`
-    query GetPostsByTag($tag: String!) {
-        posts(where: { tag: $tag }) {
+const GetProjectsByTag = gql`
+    query GetProjectsByTag {
+        allProject {
             edges {
                 node {
                     id
@@ -24,28 +24,28 @@ interface TagPageProps {
   }>;
 }
 
-interface PostNode {
+interface ProjectNode {
   id: string;
   slug: string;
 }
 
-interface GetPostsByTagResponse {
-  posts: {
+interface GetProjectsByTagResponse {
+  allProject: {
     edges: {
-      node: PostNode;
+      node: ProjectNode;
     }[];
   };
 }
 
 export default async function TagPage({ params }: TagPageProps) {
   const { tag } = await params;
-  const { posts } = await graphqlClient.request<GetPostsByTagResponse>(GetPostsByTag, { tag });
+  const { allProject } = await graphqlClient.request<GetProjectsByTagResponse>(GetProjectsByTag);
 
-  const projectCards = posts?.edges?.map(({ node: post }) => {
+  const projectCards = allProject?.edges?.map(({ node: project }) => {
     return (
       <ProjectCard
-        key={post.id}
-        slug={post.slug}
+        key={project.id}
+        slug={project.slug}
         imageSize="medium"
       />
     );
@@ -63,7 +63,7 @@ export default async function TagPage({ params }: TagPageProps) {
         {projectCards.length ? (
           projectCards
         ) : (
-          <p className="text-gray-500 font-body">No posts found with this tag.</p>
+          <p className="text-gray-500 font-body">No projects found. Note: Projects don't support tag filtering yet.</p>
         )}
       </div>
     </div>

@@ -14,10 +14,10 @@ const GetAllCollaborators = gql`
                     collaboratorProfile {
                         coreMember
                         roles
-                        referencedPosts {
+                        referencedProjects {
                             nodes {
                                 __typename
-                                ... on Post {
+                                ... on Project {
                                     title
                                     slug
                                 }
@@ -47,9 +47,9 @@ export default async function CollaboratorRow({ collaboratorSlug }: Collaborator
       href= {`/collaborators/${collaboratorData.slug}`}
       hasLink= {true}
       content= {collaboratorData.content}
-      projects= {collaboratorData.collaboratorProfile?.referencedPosts?.nodes?.map((post: any) => ({
-        title: post.title,
-        slug: post.slug
+      projects= {collaboratorData.collaboratorProfile?.referencedProjects?.nodes?.map((project: any) => ({
+        title: project.title,
+        slug: project.slug
       })) || []}
     />
   );

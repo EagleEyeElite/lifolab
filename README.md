@@ -25,7 +25,7 @@ You can interact with the wordPress instance via wpcli.
 ### Clean up
 Use with caution - reset everything with:
 ```bash
-  docker compose down --volumes --remove-orphans
+  docker compose down --volumes --remove-orphans && docker compose up -d --build && docker compose logs -f wp-setup
 ```
 
 ## Backups

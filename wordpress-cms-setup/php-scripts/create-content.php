@@ -108,8 +108,8 @@ $post1_content = '
 <p>And dont forget about <code>inline code</code> for technical content!</p>
 ';
 
-$post1_id = wp_insert_post(array(
-    'post_type' => 'post',
+$project1_id = wp_insert_post(array(
+    'post_type' => 'project',
     'post_title' => 'Projekt Workshop Alpha',
     'post_content' => $post1_content,
     'post_excerpt' => 'An exploration of WordPress formatting features and typography elements.',
@@ -123,9 +123,9 @@ $post1_id = wp_insert_post(array(
     )
 ));
 
-// Post 2: Projekt Workshop Beta (Conrad only)
-$post2_id = wp_insert_post(array(
-    'post_type' => 'post',
+// Project 2: Projekt Workshop Beta (Conrad only)
+$project2_id = wp_insert_post(array(
+    'post_type' => 'project',
     'post_title' => 'Projekt Workshop Beta',
     'post_content' => '<h2>Workshop Content</h2><p>Text</p>',
     'post_excerpt' => 'A collaborative workshop focused on learning and skill development.',
@@ -139,9 +139,9 @@ $post2_id = wp_insert_post(array(
     )
 ));
 
-// Post 3: Projekt Workshop Gamma (both collaborators)
-$post3_id = wp_insert_post(array(
-    'post_type' => 'post',
+// Project 3: Projekt Workshop Gamma (both collaborators)
+$project3_id = wp_insert_post(array(
+    'post_type' => 'project',
     'post_title' => 'Projekt Workshop Gamma',
     'post_content' => '<h2>Workshop Content</h2><p>Text</p>',
     'post_excerpt' => 'A comprehensive collaborative project combining multiple skills and disciplines.',
@@ -155,9 +155,17 @@ $post3_id = wp_insert_post(array(
     )
 ));
 
-// Set up reverse relationships (collaborators -> posts)
-update_post_meta($max_id, 'referenced_posts', array($post1_id, $post3_id));
-update_post_meta($conrad_id, 'referenced_posts', array($post2_id, $post3_id));
+// Set up reverse relationships (collaborators -> projects)
+update_post_meta($max_id, 'referenced_projects', array($project1_id, $project3_id));
+update_post_meta($conrad_id, 'referenced_projects', array($project2_id, $project3_id));
+
+// Place 1
+$place1_id = wp_insert_post(array(
+    'post_type' => 'place',
+    'post_title' => 'Research Station Alpha',
+    'post_content' => '<p>Text</p>',
+    'post_status' => 'publish',
+));
 
 $about_content = '
 <p>Living the Forest Lab...

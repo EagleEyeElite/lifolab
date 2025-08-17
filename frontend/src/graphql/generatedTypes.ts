@@ -795,15 +795,15 @@ export type CollaboratorProfile = AcfFieldGroup & AcfFieldGroupFields & Collabor
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Select posts this collaborator has worked on or contributed to. */
-  referencedPosts?: Maybe<AcfContentNodeConnection>;
+  /** Select projects this collaborator has worked on or contributed to. */
+  referencedProjects?: Maybe<AcfContentNodeConnection>;
   /** Enter one or more roles this collaborator has in projects. Separated with &#039;|&#039; . */
   roles: Scalars['String']['output'];
 };
 
 
 /** The &quot;CollaboratorProfile&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type CollaboratorProfileReferencedPostsArgs = {
+export type CollaboratorProfileReferencedProjectsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -819,15 +819,15 @@ export type CollaboratorProfile_Fields = {
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Select posts this collaborator has worked on or contributed to. */
-  referencedPosts?: Maybe<AcfContentNodeConnection>;
+  /** Select projects this collaborator has worked on or contributed to. */
+  referencedProjects?: Maybe<AcfContentNodeConnection>;
   /** Enter one or more roles this collaborator has in projects. Separated with &#039;|&#039; . */
   roles: Scalars['String']['output'];
 };
 
 
 /** Interface representing fields of the ACF &quot;CollaboratorProfile&quot; Field Group */
-export type CollaboratorProfile_FieldsReferencedPostsArgs = {
+export type CollaboratorProfile_FieldsReferencedProjectsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1673,7 +1673,11 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Page = 'PAGE',
   /** The Type of Content object */
-  Post = 'POST'
+  Place = 'PLACE',
+  /** The Type of Content object */
+  Post = 'POST',
+  /** The Type of Content object */
+  Project = 'PROJECT'
 }
 
 /** Identifier types for retrieving a specific content type definition. Determines whether to look up content types by ID or name. */
@@ -1977,6 +1981,35 @@ export type CreatePagePayload = {
   page?: Maybe<Page>;
 };
 
+/** Input for the createPlace mutation. */
+export type CreatePlaceInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the createPlace mutation. */
+export type CreatePlacePayload = {
+  __typename?: 'CreatePlacePayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  place?: Maybe<Place>;
+};
+
 /** Input for the createPostFormat mutation. */
 export type CreatePostFormatInput = {
   /** The slug that the post_format will be an alias of */
@@ -2045,6 +2078,37 @@ export type CreatePostPayload = {
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The Post object mutation type. */
   post?: Maybe<Post>;
+};
+
+/** Input for the createProject mutation. */
+export type CreateProjectInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** The excerpt of the object */
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the createProject mutation. */
+export type CreateProjectPayload = {
+  __typename?: 'CreateProjectPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  project?: Maybe<Project>;
 };
 
 /** Input for the createTag mutation. */
@@ -2279,6 +2343,29 @@ export type DeletePagePayload = {
   page?: Maybe<Page>;
 };
 
+/** Input for the deletePlace mutation. */
+export type DeletePlaceInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** Whether the object should be force deleted instead of being moved to the trash */
+  forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The ID of the place to delete */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** The payload for the deletePlace mutation. */
+export type DeletePlacePayload = {
+  __typename?: 'DeletePlacePayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']['output']>;
+  /** The object before it was deleted */
+  place?: Maybe<Place>;
+};
+
 /** Input for the deletePostFormat mutation. */
 export type DeletePostFormatInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
@@ -2319,6 +2406,29 @@ export type DeletePostPayload = {
   deletedId?: Maybe<Scalars['ID']['output']>;
   /** The object before it was deleted */
   post?: Maybe<Post>;
+};
+
+/** Input for the deleteProject mutation. */
+export type DeleteProjectInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** Whether the object should be force deleted instead of being moved to the trash */
+  forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The ID of the project to delete */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** The payload for the deleteProject mutation. */
+export type DeleteProjectPayload = {
+  __typename?: 'DeleteProjectPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']['output']>;
+  /** The object before it was deleted */
+  project?: Maybe<Project>;
 };
 
 /** Input for the deleteTag mutation. */
@@ -3716,7 +3826,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkeable Interface */
-export type MenuItemObjectUnion = Category | Collaborator | Page | Post | PostFormat | Tag;
+export type MenuItemObjectUnion = Category | Collaborator | Page | Place | Post | PostFormat | Project | Tag;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = Edge & MenuConnectionEdge & OneToOneConnection & {
@@ -4624,6 +4734,235 @@ export type PageToRevisionConnectionWhereArgs = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** The place type */
+export type Place = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & {
+  __typename?: 'Place';
+  /**
+   * The ancestors of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  ancestors?: Maybe<PlaceToPlaceConnection>;
+  /** The content of the post. */
+  content?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String']['output'];
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int']['output'];
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']['output']>;
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']['output']>;
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']['output']>;
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the place object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
+  /** The globally unique identifier of the place object. */
+  id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']['output'];
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']['output']>;
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']['output']>;
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /**
+   * The parent of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  parent?: Maybe<PlaceToParentConnectionEdge>;
+  /** The password for the place object. */
+  password?: Maybe<Scalars['String']['output']>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of the databaseId field
+   */
+  placeId: Scalars['Int']['output'];
+  /** Connection between the Place type and the place type */
+  preview?: Maybe<PlaceToPreviewConnectionEdge>;
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']['output']>;
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']['output']>;
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']['output']>;
+  /** The template assigned to the node */
+  template?: Maybe<ContentTemplate>;
+  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+  title?: Maybe<Scalars['String']['output']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The place type */
+export type PlaceAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The place type */
+export type PlaceContentArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The place type */
+export type PlaceEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The place type */
+export type PlaceEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The place type */
+export type PlaceTitleArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+/** A paginated collection of place Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of place Nodes */
+export type PlaceConnection = {
+  /** A list of edges (relational context) between RootQuery and connected place Nodes */
+  edges: Array<PlaceConnectionEdge>;
+  /** A list of connected place Nodes */
+  nodes: Array<Place>;
+  /** Information about pagination in a connection. */
+  pageInfo: PlaceConnectionPageInfo;
+};
+
+/** Represents a connection to a place. Contains both the place Node and metadata about the relationship. */
+export type PlaceConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The connected place Node */
+  node: Place;
+};
+
+/** Pagination metadata specific to &quot;PlaceConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PlaceConnectionEdge&quot; Nodes. */
+export type PlaceConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Identifier types for retrieving a specific Place. Specifies which unique attribute is used to find an exact Place. */
+export enum PlaceIdType {
+  /** Identify a resource by the Database ID. */
+  DatabaseId = 'DATABASE_ID',
+  /** Identify a resource by the (hashed) Global ID. */
+  Id = 'ID',
+  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
+  Slug = 'SLUG',
+  /** Identify a resource by the URI. */
+  Uri = 'URI'
+}
+
+/** Connection between the Place type and the place type */
+export type PlaceToParentConnectionEdge = Edge & OneToOneConnection & PlaceConnectionEdge & {
+  __typename?: 'PlaceToParentConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The node of the connection, without the edges
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  node: Place;
+};
+
+/** Connection between the Place type and the place type */
+export type PlaceToPlaceConnection = Connection & PlaceConnection & {
+  __typename?: 'PlaceToPlaceConnection';
+  /** Edges for the PlaceToPlaceConnection connection */
+  edges: Array<PlaceToPlaceConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Place>;
+  /** Information about pagination in a connection. */
+  pageInfo: PlaceToPlaceConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type PlaceToPlaceConnectionEdge = Edge & PlaceConnectionEdge & {
+  __typename?: 'PlaceToPlaceConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  node: Place;
+};
+
+/** Pagination metadata specific to &quot;PlaceToPlaceConnection&quot; collections. Provides cursors and flags for navigating through sets of PlaceToPlaceConnection Nodes. */
+export type PlaceToPlaceConnectionPageInfo = PageInfo & PlaceConnectionPageInfo & WpPageInfo & {
+  __typename?: 'PlaceToPlaceConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Connection between the Place type and the place type */
+export type PlaceToPreviewConnectionEdge = Edge & OneToOneConnection & PlaceConnectionEdge & {
+  __typename?: 'PlaceToPreviewConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: Place;
+};
+
 /** An plugin object */
 export type Plugin = Node & {
   __typename?: 'Plugin';
@@ -4696,7 +5035,7 @@ export enum PluginStatusEnum {
 }
 
 /** A chronological content entry typically used for blog posts, news articles, or similar date-based content. */
-export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & NodeWithTrackbacks & Previewable & UniformResourceIdentifiable & WithAcfPostDetails & {
+export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & NodeWithTrackbacks & Previewable & UniformResourceIdentifiable & {
   __typename?: 'Post';
   /**
    * The ancestors of the content node.
@@ -4790,8 +5129,6 @@ export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & 
   pingStatus?: Maybe<Scalars['String']['output']>;
   /** URLs that have been pinged. */
   pinged?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Fields of the PostDetails ACF Field Group */
-  postDetails?: Maybe<PostDetails>;
   /** Connection between the Post type and the postFormat type */
   postFormats?: Maybe<PostToPostFormatConnection>;
   /**
@@ -4980,51 +5317,6 @@ export type PostConnectionPageInfo = {
   hasPreviousPage: Scalars['Boolean']['output'];
   /** When paginating backwards, the cursor to continue. */
   startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** The &quot;PostDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type PostDetails = AcfFieldGroup & AcfFieldGroupFields & PostDetails_Fields & {
-  __typename?: 'PostDetails';
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Select collaborators who worked on or contributed to this post/event. */
-  referencedCollaborators?: Maybe<AcfContentNodeConnection>;
-  /** Enter the date and location for this post/event in the format: &#039;DD.MM.YYYY | City Name&#039;. */
-  whenAndWhere: Scalars['String']['output'];
-};
-
-
-/** The &quot;PostDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type PostDetailsReferencedCollaboratorsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Interface representing fields of the ACF &quot;PostDetails&quot; Field Group */
-export type PostDetails_Fields = {
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Select collaborators who worked on or contributed to this post/event. */
-  referencedCollaborators?: Maybe<AcfContentNodeConnection>;
-  /** Enter the date and location for this post/event in the format: &#039;DD.MM.YYYY | City Name&#039;. */
-  whenAndWhere: Scalars['String']['output'];
-};
-
-
-/** Interface representing fields of the ACF &quot;PostDetails&quot; Field Group */
-export type PostDetails_FieldsReferencedCollaboratorsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** A standardized classification system for content presentation styles. These formats can be used to display content differently based on type, such as &quot;standard&quot;, &quot;gallery&quot;, &quot;video&quot;, etc. */
@@ -6103,6 +6395,296 @@ export type Previewable = {
   previewRevisionId?: Maybe<Scalars['ID']['output']>;
 };
 
+/** The project type */
+export type Project = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfProjectDetails & {
+  __typename?: 'Project';
+  /**
+   * The ancestors of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  ancestors?: Maybe<ProjectToProjectConnection>;
+  /** The content of the post. */
+  content?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String']['output'];
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int']['output'];
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']['output']>;
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']['output']>;
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']['output']>;
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+  /** The excerpt of the post. */
+  excerpt?: Maybe<Scalars['String']['output']>;
+  /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+  featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
+  /** The database identifier for the featured image node assigned to the content node */
+  featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Globally unique ID of the featured image assigned to the node */
+  featuredImageId?: Maybe<Scalars['ID']['output']>;
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the project object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
+  /** The globally unique identifier of the project object. */
+  id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']['output'];
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']['output']>;
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']['output']>;
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /**
+   * The parent of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  parent?: Maybe<ProjectToParentConnectionEdge>;
+  /** The password for the project object. */
+  password?: Maybe<Scalars['String']['output']>;
+  /** Connection between the Project type and the project type */
+  preview?: Maybe<ProjectToPreviewConnectionEdge>;
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']['output']>;
+  /** Fields of the ProjectDetails ACF Field Group */
+  projectDetails?: Maybe<ProjectDetails>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of the databaseId field
+   */
+  projectId: Scalars['Int']['output'];
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']['output']>;
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']['output']>;
+  /** The template assigned to the node */
+  template?: Maybe<ContentTemplate>;
+  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+  title?: Maybe<Scalars['String']['output']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The project type */
+export type ProjectAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The project type */
+export type ProjectContentArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The project type */
+export type ProjectEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The project type */
+export type ProjectEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The project type */
+export type ProjectExcerptArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The project type */
+export type ProjectTitleArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+/** A paginated collection of project Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of project Nodes */
+export type ProjectConnection = {
+  /** A list of edges (relational context) between RootQuery and connected project Nodes */
+  edges: Array<ProjectConnectionEdge>;
+  /** A list of connected project Nodes */
+  nodes: Array<Project>;
+  /** Information about pagination in a connection. */
+  pageInfo: ProjectConnectionPageInfo;
+};
+
+/** Represents a connection to a project. Contains both the project Node and metadata about the relationship. */
+export type ProjectConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The connected project Node */
+  node: Project;
+};
+
+/** Pagination metadata specific to &quot;ProjectConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ProjectConnectionEdge&quot; Nodes. */
+export type ProjectConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;ProjectDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type ProjectDetails = AcfFieldGroup & AcfFieldGroupFields & ProjectDetails_Fields & {
+  __typename?: 'ProjectDetails';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Select collaborators who worked on or contributed to this project/event. */
+  referencedCollaborators?: Maybe<AcfContentNodeConnection>;
+  /** Enter the date and location for this project/event in the format: &#039;DD.MM.YYYY | City Name&#039;. */
+  whenAndWhere: Scalars['String']['output'];
+};
+
+
+/** The &quot;ProjectDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type ProjectDetailsReferencedCollaboratorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Interface representing fields of the ACF &quot;ProjectDetails&quot; Field Group */
+export type ProjectDetails_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Select collaborators who worked on or contributed to this project/event. */
+  referencedCollaborators?: Maybe<AcfContentNodeConnection>;
+  /** Enter the date and location for this project/event in the format: &#039;DD.MM.YYYY | City Name&#039;. */
+  whenAndWhere: Scalars['String']['output'];
+};
+
+
+/** Interface representing fields of the ACF &quot;ProjectDetails&quot; Field Group */
+export type ProjectDetails_FieldsReferencedCollaboratorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Identifier types for retrieving a specific Project. Specifies which unique attribute is used to find an exact Project. */
+export enum ProjectIdType {
+  /** Identify a resource by the Database ID. */
+  DatabaseId = 'DATABASE_ID',
+  /** Identify a resource by the (hashed) Global ID. */
+  Id = 'ID',
+  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
+  Slug = 'SLUG',
+  /** Identify a resource by the URI. */
+  Uri = 'URI'
+}
+
+/** Connection between the Project type and the project type */
+export type ProjectToParentConnectionEdge = Edge & OneToOneConnection & ProjectConnectionEdge & {
+  __typename?: 'ProjectToParentConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The node of the connection, without the edges
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  node: Project;
+};
+
+/** Connection between the Project type and the project type */
+export type ProjectToPreviewConnectionEdge = Edge & OneToOneConnection & ProjectConnectionEdge & {
+  __typename?: 'ProjectToPreviewConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: Project;
+};
+
+/** Connection between the Project type and the project type */
+export type ProjectToProjectConnection = Connection & ProjectConnection & {
+  __typename?: 'ProjectToProjectConnection';
+  /** Edges for the ProjectToProjectConnection connection */
+  edges: Array<ProjectToProjectConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Project>;
+  /** Information about pagination in a connection. */
+  pageInfo: ProjectToProjectConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type ProjectToProjectConnectionEdge = Edge & ProjectConnectionEdge & {
+  __typename?: 'ProjectToProjectConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  node: Project;
+};
+
+/** Pagination metadata specific to &quot;ProjectToProjectConnection&quot; collections. Provides cursors and flags for navigating through sets of ProjectToProjectConnection Nodes. */
+export type ProjectToProjectConnectionPageInfo = PageInfo & ProjectConnectionPageInfo & WpPageInfo & {
+  __typename?: 'ProjectToProjectConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
 /** The reading setting type */
 export type ReadingSettings = {
   __typename?: 'ReadingSettings';
@@ -6224,10 +6806,14 @@ export type RootMutation = {
   createMediaItem?: Maybe<CreateMediaItemPayload>;
   /** The createPage mutation */
   createPage?: Maybe<CreatePagePayload>;
+  /** The createPlace mutation */
+  createPlace?: Maybe<CreatePlacePayload>;
   /** The createPost mutation */
   createPost?: Maybe<CreatePostPayload>;
   /** The createPostFormat mutation */
   createPostFormat?: Maybe<CreatePostFormatPayload>;
+  /** The createProject mutation */
+  createProject?: Maybe<CreateProjectPayload>;
   /** The createTag mutation */
   createTag?: Maybe<CreateTagPayload>;
   /** The createUser mutation */
@@ -6242,10 +6828,14 @@ export type RootMutation = {
   deleteMediaItem?: Maybe<DeleteMediaItemPayload>;
   /** The deletePage mutation */
   deletePage?: Maybe<DeletePagePayload>;
+  /** The deletePlace mutation */
+  deletePlace?: Maybe<DeletePlacePayload>;
   /** The deletePost mutation */
   deletePost?: Maybe<DeletePostPayload>;
   /** The deletePostFormat mutation */
   deletePostFormat?: Maybe<DeletePostFormatPayload>;
+  /** The deleteProject mutation */
+  deleteProject?: Maybe<DeleteProjectPayload>;
   /** The deleteTag mutation */
   deleteTag?: Maybe<DeleteTagPayload>;
   /** The deleteUser mutation */
@@ -6270,10 +6860,14 @@ export type RootMutation = {
   updateMediaItem?: Maybe<UpdateMediaItemPayload>;
   /** The updatePage mutation */
   updatePage?: Maybe<UpdatePagePayload>;
+  /** The updatePlace mutation */
+  updatePlace?: Maybe<UpdatePlacePayload>;
   /** The updatePost mutation */
   updatePost?: Maybe<UpdatePostPayload>;
   /** The updatePostFormat mutation */
   updatePostFormat?: Maybe<UpdatePostFormatPayload>;
+  /** The updateProject mutation */
+  updateProject?: Maybe<UpdateProjectPayload>;
   /** The updateSettings mutation */
   updateSettings?: Maybe<UpdateSettingsPayload>;
   /** The updateTag mutation */
@@ -6314,6 +6908,12 @@ export type RootMutationCreatePageArgs = {
 
 
 /** The root mutation */
+export type RootMutationCreatePlaceArgs = {
+  input: CreatePlaceInput;
+};
+
+
+/** The root mutation */
 export type RootMutationCreatePostArgs = {
   input: CreatePostInput;
 };
@@ -6322,6 +6922,12 @@ export type RootMutationCreatePostArgs = {
 /** The root mutation */
 export type RootMutationCreatePostFormatArgs = {
   input: CreatePostFormatInput;
+};
+
+
+/** The root mutation */
+export type RootMutationCreateProjectArgs = {
+  input: CreateProjectInput;
 };
 
 
@@ -6368,6 +6974,12 @@ export type RootMutationDeletePageArgs = {
 
 
 /** The root mutation */
+export type RootMutationDeletePlaceArgs = {
+  input: DeletePlaceInput;
+};
+
+
+/** The root mutation */
 export type RootMutationDeletePostArgs = {
   input: DeletePostInput;
 };
@@ -6376,6 +6988,12 @@ export type RootMutationDeletePostArgs = {
 /** The root mutation */
 export type RootMutationDeletePostFormatArgs = {
   input: DeletePostFormatInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeleteProjectArgs = {
+  input: DeleteProjectInput;
 };
 
 
@@ -6452,6 +7070,12 @@ export type RootMutationUpdatePageArgs = {
 
 
 /** The root mutation */
+export type RootMutationUpdatePlaceArgs = {
+  input: UpdatePlaceInput;
+};
+
+
+/** The root mutation */
 export type RootMutationUpdatePostArgs = {
   input: UpdatePostInput;
 };
@@ -6460,6 +7084,12 @@ export type RootMutationUpdatePostArgs = {
 /** The root mutation */
 export type RootMutationUpdatePostFormatArgs = {
   input: UpdatePostFormatInput;
+};
+
+
+/** The root mutation */
+export type RootMutationUpdateProjectArgs = {
+  input: UpdateProjectInput;
 };
 
 
@@ -6483,6 +7113,8 @@ export type RootMutationUpdateUserArgs = {
 /** The root entry point into the Graph */
 export type RootQuery = WithAcfOptionsPageFrontendContentSettings & {
   __typename?: 'RootQuery';
+  /** Connection between the RootQuery type and the project type */
+  allProject?: Maybe<RootQueryToProjectConnection>;
   /** Entry point to get all settings for the site */
   allSettings?: Maybe<Settings>;
   /** Connection between the RootQuery type and the category type */
@@ -6545,6 +7177,15 @@ export type RootQuery = WithAcfOptionsPageFrontendContentSettings & {
   pageBy?: Maybe<Page>;
   /** Connection between the RootQuery type and the page type */
   pages?: Maybe<RootQueryToPageConnection>;
+  /** An object of the place Type.  */
+  place?: Maybe<Place>;
+  /**
+   * A place object
+   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+   */
+  placeBy?: Maybe<Place>;
+  /** Connection between the RootQuery type and the place type */
+  places?: Maybe<RootQueryToPlaceConnection>;
   /** A WordPress plugin */
   plugin?: Maybe<Plugin>;
   /** Connection between the RootQuery type and the Plugin type */
@@ -6562,6 +7203,13 @@ export type RootQuery = WithAcfOptionsPageFrontendContentSettings & {
   postFormats?: Maybe<RootQueryToPostFormatConnection>;
   /** Connection between the RootQuery type and the post type */
   posts?: Maybe<RootQueryToPostConnection>;
+  /** An object of the project Type.  */
+  project?: Maybe<Project>;
+  /**
+   * A project object
+   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+   */
+  projectBy?: Maybe<Project>;
   /** Fields of the &#039;ReadingSettings&#039; settings group */
   readingSettings?: Maybe<ReadingSettings>;
   /** Connection between the RootQuery type and the EnqueuedScript type */
@@ -6598,6 +7246,16 @@ export type RootQuery = WithAcfOptionsPageFrontendContentSettings & {
   viewer?: Maybe<User>;
   /** Fields of the &#039;WritingSettings&#039; settings group */
   writingSettings?: Maybe<WritingSettings>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryAllProjectArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<RootQueryToProjectConnectionWhereArgs>;
 };
 
 
@@ -6797,6 +7455,33 @@ export type RootQueryPagesArgs = {
 
 
 /** The root entry point into the Graph */
+export type RootQueryPlaceArgs = {
+  asPreview?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['ID']['input'];
+  idType?: InputMaybe<PlaceIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryPlaceByArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  placeId?: InputMaybe<Scalars['Int']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  uri?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryPlacesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<RootQueryToPlaceConnectionWhereArgs>;
+};
+
+
+/** The root entry point into the Graph */
 export type RootQueryPluginArgs = {
   id: Scalars['ID']['input'];
 };
@@ -6853,6 +7538,23 @@ export type RootQueryPostsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<RootQueryToPostConnectionWhereArgs>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryProjectArgs = {
+  asPreview?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['ID']['input'];
+  idType?: InputMaybe<ProjectIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryProjectByArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  projectId?: InputMaybe<Scalars['Int']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  uri?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -7642,6 +8344,77 @@ export type RootQueryToPageConnectionWhereArgs = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** Connection between the RootQuery type and the place type */
+export type RootQueryToPlaceConnection = Connection & PlaceConnection & {
+  __typename?: 'RootQueryToPlaceConnection';
+  /** Edges for the RootQueryToPlaceConnection connection */
+  edges: Array<RootQueryToPlaceConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Place>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToPlaceConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToPlaceConnectionEdge = Edge & PlaceConnectionEdge & {
+  __typename?: 'RootQueryToPlaceConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: Place;
+};
+
+/** Pagination metadata specific to &quot;RootQueryToPlaceConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPlaceConnection Nodes. */
+export type RootQueryToPlaceConnectionPageInfo = PageInfo & PlaceConnectionPageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToPlaceConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the RootQueryToPlaceConnection connection */
+export type RootQueryToPlaceConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** Connection between the RootQuery type and the Plugin type */
 export type RootQueryToPluginConnection = Connection & PluginConnection & {
   __typename?: 'RootQueryToPluginConnection';
@@ -7859,6 +8632,77 @@ export type RootQueryToPostFormatConnectionWhereArgs = {
   termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   /** Whether to prime meta caches for matched terms. Default true. */
   updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Connection between the RootQuery type and the project type */
+export type RootQueryToProjectConnection = Connection & ProjectConnection & {
+  __typename?: 'RootQueryToProjectConnection';
+  /** Edges for the RootQueryToProjectConnection connection */
+  edges: Array<RootQueryToProjectConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Project>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToProjectConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToProjectConnectionEdge = Edge & ProjectConnectionEdge & {
+  __typename?: 'RootQueryToProjectConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: Project;
+};
+
+/** Pagination metadata specific to &quot;RootQueryToProjectConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToProjectConnection Nodes. */
+export type RootQueryToProjectConnectionPageInfo = PageInfo & ProjectConnectionPageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToProjectConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the RootQueryToProjectConnection connection */
+export type RootQueryToProjectConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Connection between the RootQuery type and the ContentNode type */
@@ -9284,6 +10128,39 @@ export type UpdatePagePayload = {
   page?: Maybe<Page>;
 };
 
+/** Input for the updatePlace mutation. */
+export type UpdatePlaceInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the place object */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the updatePlace mutation. */
+export type UpdatePlacePayload = {
+  __typename?: 'UpdatePlacePayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  place?: Maybe<Place>;
+};
+
 /** Input for the updatePostFormat mutation. */
 export type UpdatePostFormatInput = {
   /** The slug that the post_format will be an alias of */
@@ -9358,6 +10235,41 @@ export type UpdatePostPayload = {
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The Post object mutation type. */
   post?: Maybe<Post>;
+};
+
+/** Input for the updateProject mutation. */
+export type UpdateProjectInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** The excerpt of the object */
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the project object */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the updateProject mutation. */
+export type UpdateProjectPayload = {
+  __typename?: 'UpdateProjectPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  project?: Maybe<Project>;
 };
 
 /** Input for the updateSettings mutation. */
@@ -10356,10 +11268,10 @@ export type WithAcfOptionsPageFrontendContentSettings = {
   frontendContentSettings?: Maybe<FrontendContentSettings>;
 };
 
-/** Provides access to fields of the &quot;PostDetails&quot; ACF Field Group via the &quot;postDetails&quot; field */
-export type WithAcfPostDetails = {
-  /** Fields of the PostDetails ACF Field Group */
-  postDetails?: Maybe<PostDetails>;
+/** Provides access to fields of the &quot;ProjectDetails&quot; ACF Field Group via the &quot;projectDetails&quot; field */
+export type WithAcfProjectDetails = {
+  /** Fields of the ProjectDetails ACF Field Group */
+  projectDetails?: Maybe<ProjectDetails>;
 };
 
 /** The writing setting type */
@@ -10373,19 +11285,17 @@ export type WritingSettings = {
   useSmilies?: Maybe<Scalars['Boolean']['output']>;
 };
 
-export type GetPostWhenAndWhereQueryVariables = Exact<{
+export type GetProjectWhenAndWhereQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type GetPostWhenAndWhereQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', postDetails?: { __typename?: 'PostDetails', whenAndWhere: string } | null } | null };
+export type GetProjectWhenAndWhereQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', projectDetails?: { __typename?: 'ProjectDetails', whenAndWhere: string } | null } | null };
 
-export type GetPostsByTagQueryVariables = Exact<{
-  tag: Scalars['String']['input'];
-}>;
+export type GetProjectsByTagQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsByTagQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', node: { __typename?: 'Post', id: string, slug?: string | null } }> } | null };
+export type GetProjectsByTagQuery = { __typename?: 'RootQuery', allProject?: { __typename?: 'RootQueryToProjectConnection', edges: Array<{ __typename?: 'RootQueryToProjectConnectionEdge', node: { __typename?: 'Project', id: string, slug?: string | null } }> } | null };
 
 export type GetAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10412,36 +11322,36 @@ export type GetCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: { __typename?: 'RootQueryToCollaboratorConnection', edges: Array<{ __typename?: 'RootQueryToCollaboratorConnectionEdge', node: { __typename?: 'Collaborator', slug?: string | null, collaboratorProfile?: { __typename?: 'CollaboratorProfile', coreMember?: boolean | null } | null } }> } | null };
 
-export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', node: { __typename?: 'Post', slug?: string | null } }> } | null };
+export type GetProjectsQuery = { __typename?: 'RootQuery', allProject?: { __typename?: 'RootQueryToProjectConnection', edges: Array<{ __typename?: 'RootQueryToProjectConnectionEdge', node: { __typename?: 'Project', slug?: string | null } }> } | null };
 
 export type GetAllCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: { __typename?: 'RootQueryToCollaboratorConnection', edges: Array<{ __typename?: 'RootQueryToCollaboratorConnectionEdge', node: { __typename?: 'Collaborator', id: string, title?: string | null, content?: string | null, slug?: string | null, collaboratorProfile?: { __typename?: 'CollaboratorProfile', coreMember?: boolean | null, roles: string, referencedPosts?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Post', title?: string | null, slug?: string | null }> } | null } | null } }> } | null };
+export type GetAllCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: { __typename?: 'RootQueryToCollaboratorConnection', edges: Array<{ __typename?: 'RootQueryToCollaboratorConnectionEdge', node: { __typename?: 'Collaborator', id: string, title?: string | null, content?: string | null, slug?: string | null, collaboratorProfile?: { __typename?: 'CollaboratorProfile', coreMember?: boolean | null, roles: string, referencedProjects?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project', title?: string | null, slug?: string | null }> } | null } | null } }> } | null };
 
-export type GetPostDetailsQueryVariables = Exact<{
+export type GetProjectDetailsQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type GetPostDetailsQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', title?: string | null, content?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null } | null };
+export type GetProjectDetailsQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', title?: string | null, content?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null } | null };
 
-export type GetPostOverviewQueryVariables = Exact<{
+export type GetProjectOverviewQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type GetPostOverviewQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', title?: string | null, excerpt?: string | null, postDetails?: { __typename?: 'PostDetails', referencedCollaborators?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator', slug?: string | null } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Post' }> } | null } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', name?: string | null, slug?: string | null } }> } | null } | null };
+export type GetProjectOverviewQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', title?: string | null, excerpt?: string | null, projectDetails?: { __typename?: 'ProjectDetails', referencedCollaborators?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator', slug?: string | null } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project' }> } | null } | null } | null };
 
-export type GetPostCardQueryVariables = Exact<{
+export type GetProjectCardQueryVariables = Exact<{
   slug: Scalars['ID']['input'];
 }>;
 
 
-export type GetPostCardQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', id: string, title?: string | null, date?: string | null, slug?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, postDetails?: { __typename?: 'PostDetails', whenAndWhere: string } | null, tags?: { __typename?: 'PostToTagConnection', edges: Array<{ __typename?: 'PostToTagConnectionEdge', node: { __typename?: 'Tag', slug?: string | null } }> } | null } | null };
+export type GetProjectCardQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', id: string, title?: string | null, date?: string | null, slug?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, projectDetails?: { __typename?: 'ProjectDetails', whenAndWhere: string } | null } | null };
 
 export type GetTagsBySlugsQueryVariables = Exact<{
   slugs: Array<Scalars['String']['input']> | Scalars['String']['input'];
@@ -10472,18 +11382,18 @@ export const AuthorDetailsFieldsFragmentDoc = gql`
   }
 }
     `;
-export const GetPostWhenAndWhereDocument = gql`
-    query GetPostWhenAndWhere($id: ID!) {
-  post(id: $id, idType: SLUG) {
-    postDetails {
+export const GetProjectWhenAndWhereDocument = gql`
+    query GetProjectWhenAndWhere($id: ID!) {
+  project(id: $id, idType: SLUG) {
+    projectDetails {
       whenAndWhere
     }
   }
 }
     `;
-export const GetPostsByTagDocument = gql`
-    query GetPostsByTag($tag: String!) {
-  posts(where: {tag: $tag}) {
+export const GetProjectsByTagDocument = gql`
+    query GetProjectsByTag {
+  allProject {
     edges {
       node {
         id
@@ -10559,9 +11469,9 @@ export const GetCollaboratorsDocument = gql`
   }
 }
     `;
-export const GetPostsDocument = gql`
-    query GetPosts {
-  posts(first: 50) {
+export const GetProjectsDocument = gql`
+    query GetProjects {
+  allProject(first: 50) {
     edges {
       node {
         slug
@@ -10582,10 +11492,10 @@ export const GetAllCollaboratorsDocument = gql`
         collaboratorProfile {
           coreMember
           roles
-          referencedPosts {
+          referencedProjects {
             nodes {
               __typename
-              ... on Post {
+              ... on Project {
                 title
                 slug
               }
@@ -10597,9 +11507,9 @@ export const GetAllCollaboratorsDocument = gql`
   }
 }
     `;
-export const GetPostDetailsDocument = gql`
-    query GetPostDetails($id: ID!) {
-  post(id: $id, idType: SLUG) {
+export const GetProjectDetailsDocument = gql`
+    query GetProjectDetails($id: ID!) {
+  project(id: $id, idType: SLUG) {
     title
     content
     featuredImage {
@@ -10611,12 +11521,12 @@ export const GetPostDetailsDocument = gql`
   }
 }
     `;
-export const GetPostOverviewDocument = gql`
-    query GetPostOverview($id: ID!) {
-  post(id: $id, idType: SLUG) {
+export const GetProjectOverviewDocument = gql`
+    query GetProjectOverview($id: ID!) {
+  project(id: $id, idType: SLUG) {
     title
     excerpt
-    postDetails {
+    projectDetails {
       referencedCollaborators {
         nodes {
           __typename
@@ -10626,20 +11536,12 @@ export const GetPostOverviewDocument = gql`
         }
       }
     }
-    tags {
-      edges {
-        node {
-          name
-          slug
-        }
-      }
-    }
   }
 }
     `;
-export const GetPostCardDocument = gql`
-    query GetPostCard($slug: ID!) {
-  post(id: $slug, idType: SLUG) {
+export const GetProjectCardDocument = gql`
+    query GetProjectCard($slug: ID!) {
+  project(id: $slug, idType: SLUG) {
     id
     title
     date
@@ -10651,15 +11553,8 @@ export const GetPostCardDocument = gql`
         altText
       }
     }
-    postDetails {
+    projectDetails {
       whenAndWhere
-    }
-    tags {
-      edges {
-        node {
-          slug
-        }
-      }
     }
   }
 }
@@ -10685,11 +11580,11 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    GetPostWhenAndWhere(variables: GetPostWhenAndWhereQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostWhenAndWhereQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPostWhenAndWhereQuery>({ document: GetPostWhenAndWhereDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostWhenAndWhere', 'query', variables);
+    GetProjectWhenAndWhere(variables: GetProjectWhenAndWhereQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectWhenAndWhereQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProjectWhenAndWhereQuery>({ document: GetProjectWhenAndWhereDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectWhenAndWhere', 'query', variables);
     },
-    GetPostsByTag(variables: GetPostsByTagQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostsByTagQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPostsByTagQuery>({ document: GetPostsByTagDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostsByTag', 'query', variables);
+    GetProjectsByTag(variables?: GetProjectsByTagQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectsByTagQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProjectsByTagQuery>({ document: GetProjectsByTagDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectsByTag', 'query', variables);
     },
     GetAllTags(variables?: GetAllTagsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllTagsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllTagsQuery>({ document: GetAllTagsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllTags', 'query', variables);
@@ -10706,20 +11601,20 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetCollaborators(variables?: GetCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCollaboratorsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetCollaboratorsQuery>({ document: GetCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCollaborators', 'query', variables);
     },
-    GetPosts(variables?: GetPostsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPostsQuery>({ document: GetPostsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPosts', 'query', variables);
+    GetProjects(variables?: GetProjectsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProjectsQuery>({ document: GetProjectsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjects', 'query', variables);
     },
     GetAllCollaborators(variables?: GetAllCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllCollaboratorsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllCollaboratorsQuery>({ document: GetAllCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllCollaborators', 'query', variables);
     },
-    GetPostDetails(variables: GetPostDetailsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostDetailsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPostDetailsQuery>({ document: GetPostDetailsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostDetails', 'query', variables);
+    GetProjectDetails(variables: GetProjectDetailsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectDetailsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProjectDetailsQuery>({ document: GetProjectDetailsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectDetails', 'query', variables);
     },
-    GetPostOverview(variables: GetPostOverviewQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostOverviewQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPostOverviewQuery>({ document: GetPostOverviewDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostOverview', 'query', variables);
+    GetProjectOverview(variables: GetProjectOverviewQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectOverviewQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProjectOverviewQuery>({ document: GetProjectOverviewDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectOverview', 'query', variables);
     },
-    GetPostCard(variables: GetPostCardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPostCardQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPostCardQuery>({ document: GetPostCardDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPostCard', 'query', variables);
+    GetProjectCard(variables: GetProjectCardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectCardQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProjectCardQuery>({ document: GetProjectCardDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectCard', 'query', variables);
     },
     GetTagsBySlugs(variables: GetTagsBySlugsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetTagsBySlugsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetTagsBySlugsQuery>({ document: GetTagsBySlugsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTagsBySlugs', 'query', variables);

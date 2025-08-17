@@ -4,16 +4,16 @@ import PostHeader from './PostHeader';
 import PostTags from './PostTags';
 import CollaboratorSection from '@/components/ui/collaborator/CollaboratorSection';
 import {
-  GetPostOverviewQuery,
-  GetPostOverviewQueryVariables,
+  GetProjectOverviewQuery,
+  GetProjectOverviewQueryVariables,
 } from "@/graphql/generatedTypes";
 
-const GetPostOverview = gql`
-    query GetPostOverview($id: ID!) {
-        post(id: $id, idType: SLUG) {
+const GetProjectOverview = gql`
+    query GetProjectOverview($id: ID!) {
+        project(id: $id, idType: SLUG) {
             title
             excerpt
-            postDetails {
+            projectDetails {
                 referencedCollaborators {
                     nodes {
                         __typename
@@ -23,33 +23,25 @@ const GetPostOverview = gql`
                     }
                 }
             }
-            tags {
-                edges {
-                    node {
-                        name
-                        slug
-                    }
-                }
-            }
         }
     }
 `;
 
-interface PostOverviewProps {
+interface ProjectOverviewProps {
   slug: string;
 }
 
-export default async function PostOverview({ slug }: PostOverviewProps) {
-  const { post } = await graphqlClient.request<GetPostOverviewQuery, GetPostOverviewQueryVariables>(
-    GetPostOverview,
+export default async function ProjectOverview({ slug }: ProjectOverviewProps) {
+  const { project } = await graphqlClient.request<GetProjectOverviewQuery, GetProjectOverviewQueryVariables>(
+    GetProjectOverview,
     { id: slug }
   );
 
-  if (!post) {
-    throw new Error(`Post with slug "${slug}" not found`);
+  if (!project) {
+    throw new Error(`Project with slug "${slug}" not found`);
   }
 
-  const collaboratorSlugs = post.postDetails?.referencedCollaborators?.nodes
+  const collaboratorSlugs = project.projectDetails?.referencedCollaborators?.nodes
     ?.filter((node): node is Extract<typeof node, { __typename: "Collaborator" }> =>
       node.__typename === "Collaborator"
     )
@@ -58,8 +50,8 @@ export default async function PostOverview({ slug }: PostOverviewProps) {
 
   return (
     <>
-      <PostHeader title={post.title} excerpt={post.excerpt} />
-      <PostTags tags={post.tags} />
+      <PostHeader title={project.title} excerpt={project.excerpt} />
+      <PostTags tags={null} />
       <CollaboratorSection
         title="Collaborators"
         collaboratorSlugs={collaboratorSlugs}

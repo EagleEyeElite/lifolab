@@ -3,11 +3,11 @@ import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import ProjectCardClient from './ProjectCardClient';
 import TagList from '@/components/ui/tags/TagList';
-import {GetPostCardQuery, GetPostCardQueryVariables} from "@/graphql/generatedTypes";
+import {GetProjectCardQuery, GetProjectCardQueryVariables} from "@/graphql/generatedTypes";
 
-const GetPostCard = gql`
-    query GetPostCard($slug: ID!) {
-        post(id: $slug, idType: SLUG) {
+const GetProjectCard = gql`
+    query GetProjectCard($slug: ID!) {
+        project(id: $slug, idType: SLUG) {
             id
             title
             date
@@ -19,15 +19,8 @@ const GetPostCard = gql`
                     altText
                 }
             }
-            postDetails {
+            projectDetails {
                 whenAndWhere
-            }
-            tags {
-                edges {
-                    node {
-                        slug
-                    }
-                }
             }
         }
     }
@@ -39,25 +32,23 @@ interface ProjectCardProps {
 }
 
 export default async function ProjectCard({ slug, imageSize }: ProjectCardProps) {
-  const data = await graphqlClient.request<GetPostCardQuery, GetPostCardQueryVariables>(
-    GetPostCard, { slug }
+  const data = await graphqlClient.request<GetProjectCardQuery, GetProjectCardQueryVariables>(
+    GetProjectCard, { slug }
   );
-  const post = data.post;
-  if (!post) {
-    throw new Error(`Post with slug "${slug}" not found`);
+  const project = data.project;
+  if (!project) {
+    throw new Error(`Project with slug "${slug}" not found`);
   }
-
-  const tagSlugs = post.tags?.edges?.map((edge) => edge.node!.slug!) || [];
 
   return (
     <ProjectCardClient
-      title={post.title!}
-      href={`/${post.slug!}`}
-      whenAndWhere={post.postDetails?.whenAndWhere || undefined}
-      excerpt={post.excerpt || undefined}
-      image={post.featuredImage?.node?.sourceUrl || ''}
+      title={project.title!}
+      href={`/${project.slug!}`}
+      whenAndWhere={project.projectDetails?.whenAndWhere || undefined}
+      excerpt={project.excerpt || undefined}
+      image={project.featuredImage?.node?.sourceUrl || ''}
       imageSize={imageSize}
-      tagList={<TagList tagSlugs={tagSlugs} />}
+      tagList={<TagList tagSlugs={[]} />}
     />
   );
 }

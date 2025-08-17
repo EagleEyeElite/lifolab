@@ -4,12 +4,12 @@ import ProjectCard from "@/components/ui/projectsOverview/projectCard";
 import { Package } from "lucide-react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
-import { GetPostsQuery, GetPostsQueryVariables } from "@/graphql/generatedTypes";
+import { GetProjectsQuery, GetProjectsQueryVariables } from "@/graphql/generatedTypes";
 import MasonryLayout from "@/components/ui/projectsOverview/masonryLayout";
 
-const GetPosts = gql`
-    query GetPosts {
-        posts(first: 50) {
+const GetProjects = gql`
+    query GetProjects {
+        allProject(first: 50) {
             edges {
                 node {
                     slug
@@ -20,11 +20,11 @@ const GetPosts = gql`
 `;
 
 export default async function Projects() {
-  const data = await graphqlClient.request<GetPostsQuery, GetPostsQueryVariables>(
-    GetPosts,
+  const data = await graphqlClient.request<GetProjectsQuery, GetProjectsQueryVariables>(
+    GetProjects,
   );
 
-  const posts = data?.posts?.edges?.map(edge => edge.node) || [];
+  const projects = data?.allProject?.edges?.map(edge => edge.node) || [];
 
   // Simplified array with only imageSize
   const imageSizes = [
@@ -32,20 +32,20 @@ export default async function Projects() {
     "large", "medium", "huge", "tiny", "small", "massive"
   ];
 
-  // Generate 13 project cards, cycling through available posts
+  // Generate 13 project cards, cycling through available projects
   const projectCards = imageSizes.map((size, index) => {
-    // Cycle through posts if we have fewer posts than cards needed
-    const postIndex = posts.length > 0 ? index % posts.length : 0;
-    const currentPost = posts[postIndex];
+    // Cycle through projects if we have fewer projects than cards needed
+    const projectIndex = projects.length > 0 ? index % projects.length : 0;
+    const currentProject = projects[projectIndex];
 
-    if (!currentPost || !currentPost.slug) {
-      throw new Error(`Post "${currentPost}" with slug not found`);
+    if (!currentProject || !currentProject.slug) {
+      throw new Error(`Project "${currentProject}" with slug not found`);
     }
 
     return (
       <ProjectCard
         key={index}
-        slug={currentPost.slug}
+        slug={currentProject.slug}
         imageSize={size as 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive'}
       />
     );

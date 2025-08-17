@@ -2,45 +2,45 @@ import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import { notFound } from 'next/navigation';
 import SectionHeader from '@/components/ui/sectionHeader';
-import PostOverview from '@/components/ui/post/PostOverview';
-import PostContent from '@/components/ui/post/PostContent';
+import ProjectOverview from '@/components/ui/post/PostOverview';
+import ProjectContent from '@/components/ui/post/PostContent';
 import {
-  GetPostWhenAndWhereQuery,
-  GetPostWhenAndWhereQueryVariables,
+  GetProjectWhenAndWhereQuery,
+  GetProjectWhenAndWhereQueryVariables,
 } from "@/graphql/generatedTypes";
 
 export const revalidate = 10;
 
-const GetPostWhenAndWhere = gql`
-    query GetPostWhenAndWhere($id: ID!) {
-        post(id: $id, idType: SLUG) {
-            postDetails {
+const GetProjectWhenAndWhere = gql`
+    query GetProjectWhenAndWhere($id: ID!) {
+        project(id: $id, idType: SLUG) {
+            projectDetails {
                 whenAndWhere
             }
         }
     }
 `;
 
-export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Project({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const { post } = await graphqlClient.request<GetPostWhenAndWhereQuery, GetPostWhenAndWhereQueryVariables>(
-    GetPostWhenAndWhere,
+  const { project } = await graphqlClient.request<GetProjectWhenAndWhereQuery, GetProjectWhenAndWhereQueryVariables>(
+    GetProjectWhenAndWhere,
     { id: slug }
   );
 
-  if (!post) {
+  if (!project) {
     notFound();
   }
 
   return (
     <div className="px-6 py-6">
-      <SectionHeader>{post.postDetails?.whenAndWhere || "Project Details"}</SectionHeader>
+      <SectionHeader>{project.projectDetails?.whenAndWhere || "Project Details"}</SectionHeader>
       <div className="pt-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-4">
-          <PostOverview slug={slug} />
+          <ProjectOverview slug={slug} />
         </div>
         <div className="lg:col-span-6 pb-32">
-          <PostContent slug={slug} />
+          <ProjectContent slug={slug} />
         </div>
       </div>
     </div>
