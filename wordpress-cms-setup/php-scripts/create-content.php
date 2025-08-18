@@ -1,7 +1,7 @@
 <?php
 /**
  * Create sample content for WordPress CMS
- * This script creates collaborators and posts with proper relationships
+ * This script creates collaborators, posts, and cyclopedia entries with proper relationships
  */
 
 function get_attachment_id($filename) {
@@ -167,6 +167,36 @@ $place1_id = wp_insert_post(array(
     'post_status' => 'publish',
 ));
 
+// Create Cyclopedia Chapter FIRST (before the entry)
+$chapter1_id = wp_insert_post(array(
+    'post_type' => 'cyclopedia-chapter',
+    'post_title' => 'Cyclopedia Chapter Alpha',
+    'post_status' => 'publish',
+));
+
+// Cyclopedia Entry 1 - now with chapter reference
+$cyclopedia_content_1 = '
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
+aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos.
+Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius.
+Modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minim veniam, quis nostrud.
+Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in.
+Voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt.</p>
+';
+
+$cyclopedia1_id = wp_insert_post(array(
+    'post_type' => 'cyclopedia-entry',
+    'post_title' => 'Cyclopedia Entry Alpha',
+    'post_content' => $cyclopedia_content_1,
+    'post_status' => 'publish',
+    'meta_input' => array(
+        '_thumbnail_id' => $image_1_id,
+        'chapter' => $chapter1_id
+    )
+));
+
 $about_content = '
 <p>Living the Forest Lab...
 Our mission is...
@@ -186,7 +216,6 @@ wp_insert_post(array(
    'post_status' => 'publish',
    'post_author' => $admin_id
 ));
-
 
 // Set default values
 update_field('contact', [

@@ -1,0 +1,59 @@
+{
+  "key": "group_68a347207d146",
+  "title": "Cyclopedia Entry Details",
+  "fields": [
+    {
+      "key": "field_68a34779d75fe",
+      "label": "Chapter",
+      "name": "chapter",
+      "aria-label": "",
+      "type": "post_object",
+      "instructions": "",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "post_type": [
+        "cyclopedia-chapter"
+      ],
+      "post_status": "",
+      "taxonomy": "",
+      "return_format": "object",
+      "multiple": 0,
+      "allow_null": 0,
+      "allow_in_bindings": 0,
+      "bidirectional": 0,
+      "show_in_graphql": 1,
+      "graphql_description": "",
+      "graphql_field_name": "chapter",
+      "graphql_connection_type": "one_to_many",
+      "ui": 1,
+      "bidirectional_target": []
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "cyclopedia-entry"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "side",
+  "style": "seamless",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "show_in_graphql": 1,
+  "graphql_field_name": "cyclopediaentriesdetails",
+  "map_graphql_types_from_location_rules": 0,
+  "graphql_types": ""
+}
