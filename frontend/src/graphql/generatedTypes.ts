@@ -2664,6 +2664,17 @@ export type EnqueuedStylesheetConnectionPageInfo = {
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
+export type FooterSettings = AcfOptionsPage & Node & WithAcfFrontendContent & {
+  __typename?: 'FooterSettings';
+  /** Fields of the FrontendContent ACF Field Group */
+  frontendContent?: Maybe<FrontendContent>;
+  /** The globally unique ID for the object */
+  id: Scalars['ID']['output'];
+  menuTitle?: Maybe<Scalars['String']['output']>;
+  pageTitle?: Maybe<Scalars['String']['output']>;
+  parentId?: Maybe<Scalars['String']['output']>;
+};
+
 /** The &quot;FrontendContent&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type FrontendContent = AcfFieldGroup & AcfFieldGroupFields & FrontendContent_Fields & {
   __typename?: 'FrontendContent';
@@ -2775,17 +2786,6 @@ export type FrontendContentImprint_FieldsImprintImagesArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-export type FrontendContentSettings = AcfOptionsPage & Node & WithAcfFrontendContent & {
-  __typename?: 'FrontendContentSettings';
-  /** Fields of the FrontendContent ACF Field Group */
-  frontendContent?: Maybe<FrontendContent>;
-  /** The globally unique ID for the object */
-  id: Scalars['ID']['output'];
-  menuTitle?: Maybe<Scalars['String']['output']>;
-  pageTitle?: Maybe<Scalars['String']['output']>;
-  parentId?: Maybe<Scalars['String']['output']>;
 };
 
 /** Interface representing fields of the ACF &quot;FrontendContent&quot; Field Group */
@@ -7111,7 +7111,7 @@ export type RootMutationUpdateUserArgs = {
 };
 
 /** The root entry point into the Graph */
-export type RootQuery = WithAcfOptionsPageFrontendContentSettings & {
+export type RootQuery = WithAcfOptionsPageFooterSettings & {
   __typename?: 'RootQuery';
   /** Connection between the RootQuery type and the project type */
   allProject?: Maybe<RootQueryToProjectConnection>;
@@ -7144,7 +7144,7 @@ export type RootQuery = WithAcfOptionsPageFrontendContentSettings & {
   contentTypes?: Maybe<RootQueryToContentTypeConnection>;
   /** Fields of the &#039;DiscussionSettings&#039; settings group */
   discussionSettings?: Maybe<DiscussionSettings>;
-  frontendContentSettings?: Maybe<FrontendContentSettings>;
+  footerSettings?: Maybe<FooterSettings>;
   /** Fields of the &#039;GeneralSettings&#039; settings group */
   generalSettings?: Maybe<GeneralSettings>;
   /** An object of the mediaItem Type.  */
@@ -11263,9 +11263,9 @@ export type WithAcfFrontendContent = {
   frontendContent?: Maybe<FrontendContent>;
 };
 
-/** Access point for the &quot;FrontendContentSettings&quot; ACF Options Page */
-export type WithAcfOptionsPageFrontendContentSettings = {
-  frontendContentSettings?: Maybe<FrontendContentSettings>;
+/** Access point for the &quot;FooterSettings&quot; ACF Options Page */
+export type WithAcfOptionsPageFooterSettings = {
+  footerSettings?: Maybe<FooterSettings>;
 };
 
 /** Provides access to fields of the &quot;ProjectDetails&quot; ACF Field Group via the &quot;projectDetails&quot; field */
@@ -11305,12 +11305,12 @@ export type GetAllTagsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 
 export type GetContactContentQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetContactContentQuery = { __typename?: 'RootQuery', frontendContentSettings?: { __typename?: 'FrontendContentSettings', frontendContent?: { __typename?: 'FrontendContent', contact?: { __typename?: 'FrontendContentContact', info1?: string | null, address?: string | null, infosContactPerson?: Array<{ __typename?: 'FrontendContentContactInfosContactPerson', contactName?: string | null, contactEmail?: string | null } | null> | null } | null } | null } | null };
+export type GetContactContentQuery = { __typename?: 'RootQuery', footerSettings?: { __typename?: 'FooterSettings', frontendContent?: { __typename?: 'FrontendContent', contact?: { __typename?: 'FrontendContentContact', info1?: string | null, address?: string | null, infosContactPerson?: Array<{ __typename?: 'FrontendContentContactInfosContactPerson', contactName?: string | null, contactEmail?: string | null } | null> | null } | null } | null } | null };
 
 export type GetImprintContentQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetImprintContentQuery = { __typename?: 'RootQuery', frontendContentSettings?: { __typename?: 'FrontendContentSettings', frontendContent?: { __typename?: 'FrontendContent', imprint?: { __typename?: 'FrontendContentImprint', imprintImages?: { __typename?: 'AcfMediaItemConnection', nodes: Array<{ __typename?: 'MediaItem', id: string, sourceUrl?: string | null, altText?: string | null }> } | null } | null } | null } | null };
+export type GetImprintContentQuery = { __typename?: 'RootQuery', footerSettings?: { __typename?: 'FooterSettings', frontendContent?: { __typename?: 'FrontendContent', imprint?: { __typename?: 'FrontendContentImprint', imprintImages?: { __typename?: 'AcfMediaItemConnection', nodes: Array<{ __typename?: 'MediaItem', id: string, sourceUrl?: string | null, altText?: string | null }> } | null } | null } | null } | null };
 
 export type GetAboutPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -11426,7 +11426,7 @@ export const GetAllTagsDocument = gql`
     `;
 export const GetContactContentDocument = gql`
     query GetContactContent {
-  frontendContentSettings {
+  footerSettings {
     frontendContent {
       contact {
         info1
@@ -11442,7 +11442,7 @@ export const GetContactContentDocument = gql`
     `;
 export const GetImprintContentDocument = gql`
     query GetImprintContent {
-  frontendContentSettings {
+  footerSettings {
     frontendContent {
       imprint {
         imprintImages {

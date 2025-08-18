@@ -8,7 +8,7 @@ import { GetImprintContentQuery, GetImprintContentQueryVariables } from "@/graph
 
 const GetImprintContent = gql`
     query GetImprintContent {
-        frontendContentSettings {
+        footerSettings {
             frontendContent {
                 imprint {
                     imprintImages {
@@ -25,11 +25,11 @@ const GetImprintContent = gql`
 `;
 
 export default async function ImprintSection() {
-  const { frontendContentSettings } = await graphqlClient.request<GetImprintContentQuery, GetImprintContentQueryVariables>(
+  const { footerSettings } = await graphqlClient.request<GetImprintContentQuery, GetImprintContentQueryVariables>(
     GetImprintContent,
   );
 
-  const imprintImages = frontendContentSettings?.frontendContent?.imprint?.imprintImages?.nodes || [];
+  const imprintImages = footerSettings?.frontendContent?.imprint?.imprintImages?.nodes || [];
 
   return (
     <div className="flex-1 space-y-4">

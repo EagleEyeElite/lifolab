@@ -1,7 +1,6 @@
 import React from 'react';
-import {FolderClosed, Mic} from 'lucide-react';
+import { Mic } from 'lucide-react';
 import Link from "next/link";
-import SectionHeader from "@/components/ui/sectionHeader";
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import { GetContactContentQuery, GetContactContentQueryVariables } from "@/graphql/generatedTypes";
@@ -9,7 +8,7 @@ import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 
 const GetContactContent = gql`
     query GetContactContent {
-        frontendContentSettings {
+        footerSettings {
             frontendContent {
                 contact {
                     info1
@@ -42,11 +41,11 @@ function ContactPerson({ name, email }: {
 }
 
 export default async function ContactSection() {
-  const { frontendContentSettings } = await graphqlClient.request<GetContactContentQuery, GetContactContentQueryVariables>(
+  const { footerSettings } = await graphqlClient.request<GetContactContentQuery, GetContactContentQueryVariables>(
     GetContactContent,
   );
 
-  const contactData = frontendContentSettings?.frontendContent?.contact;
+  const contactData = footerSettings?.frontendContent?.contact;
   
   if (!contactData) {
     throw new Error('Contact data not found');

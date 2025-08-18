@@ -1,6 +1,6 @@
 {
   "key": "group_686ec75173d0f",
-  "title": "Frontend Content",
+  "title": "Footer",
   "fields": [
     {
       "key": "field_686ed7214d74d",
@@ -212,7 +212,7 @@
       {
         "param": "options_page",
         "operator": "==",
-        "value": "frontend-content"
+        "value": "footer"
       }
     ]
   ],
