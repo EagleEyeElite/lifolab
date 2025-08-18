@@ -167,14 +167,16 @@ $place1_id = wp_insert_post(array(
     'post_status' => 'publish',
 ));
 
-// Create Cyclopedia Chapter FIRST (before the entry)
+// Cyclopedia Entries
 $chapter1_id = wp_insert_post(array(
     'post_type' => 'cyclopedia-chapter',
     'post_title' => 'Cyclopedia Chapter Alpha',
     'post_status' => 'publish',
+    'meta_input' => array(
+        'chapter_order' => 1
+    )
 ));
 
-// Cyclopedia Entry 1 - now with chapter reference
 $cyclopedia_content_1 = '
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
 aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -193,7 +195,41 @@ $cyclopedia1_id = wp_insert_post(array(
     'post_status' => 'publish',
     'meta_input' => array(
         '_thumbnail_id' => $image_1_id,
-        'chapter' => $chapter1_id
+        'chapter' => $chapter1_id,
+        'entry_order' => 1
+    )
+));
+
+$cyclopedia2_id = wp_insert_post(array(
+    'post_type' => 'cyclopedia-entry',
+    'post_title' => 'Cyclopedia Entry Beta',
+    'post_content' => $cyclopedia_content_1,
+    'post_status' => 'publish',
+    'meta_input' => array(
+        '_thumbnail_id' => $image_2_id,
+        'chapter' => $chapter1_id,
+        'entry_order' => 2
+    )
+));
+
+$chapter2_id = wp_insert_post(array(
+    'post_type' => 'cyclopedia-chapter',
+    'post_title' => 'Cyclopedia Chapter Beta',
+    'post_status' => 'publish',
+    'meta_input' => array(
+        'chapter_order' => 2
+    )
+));
+
+$cyclopedia3_id = wp_insert_post(array(
+    'post_type' => 'cyclopedia-entry',
+    'post_title' => 'Cyclopedia Entry Gamma',
+    'post_content' => $cyclopedia_content_1,
+    'post_status' => 'publish',
+    'meta_input' => array(
+        '_thumbnail_id' => $image_3_id,
+        'chapter' => $chapter2_id,
+        'entry_order' => 1
     )
 ));
 

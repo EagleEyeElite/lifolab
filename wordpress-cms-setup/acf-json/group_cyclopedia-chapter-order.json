@@ -1,0 +1,55 @@
+{
+  "key": "group_68a36db146fff",
+  "title": "Cyclopedia Chapter Order",
+  "fields": [
+    {
+      "key": "field_68a36db1ddae1",
+      "label": "Chapter Order",
+      "name": "chapter_order",
+      "aria-label": "",
+      "type": "number",
+      "instructions": "Set the display order for this chapter (1, 2, 3, etc.)",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": 1,
+      "min": 1,
+      "max": "",
+      "allow_in_bindings": 0,
+      "placeholder": "",
+      "step": 1,
+      "prepend": "",
+      "append": "",
+      "show_in_graphql": 1,
+      "graphql_description": "The display order for this chapter",
+      "graphql_field_name": "chapterOrder",
+      "graphql_non_null": 1
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "cyclopedia-chapter"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "side",
+  "style": "seamless",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "show_in_graphql": 1,
+  "graphql_field_name": "cyclopediaChapterOrder",
+  "map_graphql_types_from_location_rules": 0,
+  "graphql_types": ""
+}

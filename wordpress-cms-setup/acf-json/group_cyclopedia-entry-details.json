@@ -1,9 +1,9 @@
 {
-  "key": "group_68a347207d146",
+  "key": "group_68a36ecac57c0",
   "title": "Cyclopedia Entry Details",
   "fields": [
     {
-      "key": "field_68a34779d75fe",
+      "key": "field_68a36ecacbb69",
       "label": "Chapter",
       "name": "chapter",
       "aria-label": "",
@@ -32,6 +32,33 @@
       "graphql_connection_type": "one_to_many",
       "ui": 1,
       "bidirectional_target": []
+    },
+    {
+      "key": "field_68a36f3bcbb6a",
+      "label": "Entry Order",
+      "name": "entry_order",
+      "aria-label": "",
+      "type": "number",
+      "instructions": "Set the display order for this entry within its chapter (1, 2, 3, etc.)",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": 1,
+      "min": 1,
+      "max": "",
+      "allow_in_bindings": 0,
+      "placeholder": "",
+      "step": 1,
+      "prepend": "",
+      "append": "",
+      "show_in_graphql": 1,
+      "graphql_description": "",
+      "graphql_field_name": "entryOrder",
+      "graphql_non_null": 1
     }
   ],
   "location": [
@@ -53,7 +80,7 @@
   "description": "",
   "show_in_rest": 0,
   "show_in_graphql": 1,
-  "graphql_field_name": "cyclopediaentriesdetails",
+  "graphql_field_name": "cyclopediaEntryDetails",
   "map_graphql_types_from_location_rules": 0,
   "graphql_types": ""
 }

@@ -8,16 +8,16 @@ import MenuColumn from "@/components/layout/navbar/MenuColumn";
 export default function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
 
-  const navigationLinks = [
+  const navigationLivingTheForestLab = [
     { name: "About", href: "/#about", icon: Pencil },
     { name: "People", href: "/#people", icon: Command },
     { name: "Places", href: "/#places", icon: Globe },
     { name: "Contact", href: "#footer", icon: Mic }
   ];
 
-  const navigationLinks2 = [
+  const navigationActivities = [
     { name: "Projects", href: "/#projects", icon: Package },
-    { name: "Cyclopedia of ...", href: "/#", icon: BookOpen },
+    { name: "Cyclopedia of ...", href: "/cyclopedia", icon: BookOpen },
   ];
 
   const toggleDropdown = (dropdown: number) => {
@@ -32,13 +32,13 @@ export default function Navbar() {
           title="Living the Forest Lab"
           isOpen={openDropdown === 1}
           onToggle={() => toggleDropdown(1)}
-          navigationLinks={navigationLinks}
+          navigationLinks={navigationLivingTheForestLab}
         />
         <MenuColumn
           title="Activities"
           isOpen={openDropdown === 2}
           onToggle={() => toggleDropdown(2)}
-          navigationLinks={navigationLinks2}
+          navigationLinks={navigationActivities}
         />
       </div>
     </nav>
