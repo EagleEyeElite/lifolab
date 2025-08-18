@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react";
-import {Pencil, Package, Command, FileText, Mic, Newspaper, BookOpen} from "lucide-react";
+import {Pencil, Package, Command, Globe, Mic, BookOpen} from "lucide-react";
 import ScrollAnimatedLogo from "@/components/layout/navbar/ScrollAnimatedLogo";
 import MenuColumn from "@/components/layout/navbar/MenuColumn";
 
@@ -11,7 +11,7 @@ export default function Navbar() {
   const navigationLinks = [
     { name: "About", href: "/#about", icon: Pencil },
     { name: "People", href: "/#people", icon: Command },
-    { name: "Places", href: "/#", icon: FileText },
+    { name: "Places", href: "/#places", icon: Globe },
     { name: "Contact", href: "#footer", icon: Mic }
   ];
 

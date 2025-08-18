@@ -11322,6 +11322,11 @@ export type GetCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: { __typename?: 'RootQueryToCollaboratorConnection', edges: Array<{ __typename?: 'RootQueryToCollaboratorConnectionEdge', node: { __typename?: 'Collaborator', slug?: string | null, collaboratorProfile?: { __typename?: 'CollaboratorProfile', coreMember?: boolean | null } | null } }> } | null };
 
+export type GetPlacesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPlacesQuery = { __typename?: 'RootQuery', places?: { __typename?: 'RootQueryToPlaceConnection', edges: Array<{ __typename?: 'RootQueryToPlaceConnectionEdge', node: { __typename?: 'Place', slug?: string | null } }> } | null };
+
 export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -11331,6 +11336,11 @@ export type GetAllCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>
 
 
 export type GetAllCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: { __typename?: 'RootQueryToCollaboratorConnection', edges: Array<{ __typename?: 'RootQueryToCollaboratorConnectionEdge', node: { __typename?: 'Collaborator', id: string, title?: string | null, content?: string | null, slug?: string | null, collaboratorProfile?: { __typename?: 'CollaboratorProfile', coreMember?: boolean | null, roles: string, referencedProjects?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project', title?: string | null, slug?: string | null }> } | null } | null } }> } | null };
+
+export type GetAllPlacesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllPlacesQuery = { __typename?: 'RootQuery', places?: { __typename?: 'RootQueryToPlaceConnection', edges: Array<{ __typename?: 'RootQueryToPlaceConnectionEdge', node: { __typename?: 'Place', id: string, title?: string | null, content?: string | null, slug?: string | null } }> } | null };
 
 export type GetProjectDetailsQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -11469,6 +11479,17 @@ export const GetCollaboratorsDocument = gql`
   }
 }
     `;
+export const GetPlacesDocument = gql`
+    query GetPlaces {
+  places(first: 100) {
+    edges {
+      node {
+        slug
+      }
+    }
+  }
+}
+    `;
 export const GetProjectsDocument = gql`
     query GetProjects {
   allProject(first: 50) {
@@ -11502,6 +11523,20 @@ export const GetAllCollaboratorsDocument = gql`
             }
           }
         }
+      }
+    }
+  }
+}
+    `;
+export const GetAllPlacesDocument = gql`
+    query GetAllPlaces {
+  places(first: 100) {
+    edges {
+      node {
+        id
+        title
+        content
+        slug
       }
     }
   }
@@ -11601,11 +11636,17 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetCollaborators(variables?: GetCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCollaboratorsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetCollaboratorsQuery>({ document: GetCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCollaborators', 'query', variables);
     },
+    GetPlaces(variables?: GetPlacesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPlacesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPlacesQuery>({ document: GetPlacesDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPlaces', 'query', variables);
+    },
     GetProjects(variables?: GetProjectsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectsQuery>({ document: GetProjectsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjects', 'query', variables);
     },
     GetAllCollaborators(variables?: GetAllCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllCollaboratorsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllCollaboratorsQuery>({ document: GetAllCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllCollaborators', 'query', variables);
+    },
+    GetAllPlaces(variables?: GetAllPlacesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllPlacesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAllPlacesQuery>({ document: GetAllPlacesDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllPlaces', 'query', variables);
     },
     GetProjectDetails(variables: GetProjectDetailsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectDetailsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectDetailsQuery>({ document: GetProjectDetailsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectDetails', 'query', variables);
