@@ -9,7 +9,7 @@ export default function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
 
   const navigationLivingTheForestLab = [
-    { name: "About", href: "/#about", icon: Pencil },
+    { name: "About", href: "/about", icon: Pencil },
     { name: "People", href: "/#people", icon: Command },
     { name: "Places", href: "/#places", icon: Globe },
     { name: "Contact", href: "#footer", icon: Mic }

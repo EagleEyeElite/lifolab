@@ -614,29 +614,6 @@ export type CategoryToTaxonomyConnectionEdge = Edge & OneToOneConnection & Taxon
   node: Taxonomy;
 };
 
-/** The &quot;ChapterOrder&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type ChapterOrder = AcfFieldGroup & AcfFieldGroupFields & ChapterOrder_Fields & {
-  __typename?: 'ChapterOrder';
-  /** The display order for this chapter */
-  chapterOrder?: Maybe<Scalars['Float']['output']>;
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-};
-
-/** Interface representing fields of the ACF &quot;ChapterOrder&quot; Field Group */
-export type ChapterOrder_Fields = {
-  /** The display order for this chapter */
-  chapterOrder?: Maybe<Scalars['Float']['output']>;
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-};
-
 /** Team members, contributors, and collaborators involved in projects and events. */
 export type Collaborator = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCollaboratorProfile & {
   __typename?: 'Collaborator';
@@ -2267,15 +2244,13 @@ export type CreateUserPayload = {
 };
 
 /** The cyclopediaChapter type */
-export type CyclopediaChapter = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfChapterOrder & WithAcfCyclopediaChapterOrder & {
+export type CyclopediaChapter = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCyclopediaChapterOrder & {
   __typename?: 'CyclopediaChapter';
   /**
    * The ancestors of the content node.
    * @deprecated This content type is not hierarchical and typically will not have ancestors
    */
   ancestors?: Maybe<CyclopediaChapterToCyclopediaChapterConnection>;
-  /** Fields of the ChapterOrder ACF Field Group */
-  chapterOrder?: Maybe<ChapterOrder>;
   /** Connection between the ContentNode type and the ContentType type */
   contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
   /** The name of the Content Type the node belongs to */
@@ -2515,7 +2490,7 @@ export type CyclopediaChapterToPreviewConnectionEdge = CyclopediaChapterConnecti
 };
 
 /** The cyclopediaEntry type */
-export type CyclopediaEntry = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCyclopediaEntryDetails & WithAcfCyclopediaentriesdetails & {
+export type CyclopediaEntry = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCyclopediaEntryDetails & {
   __typename?: 'CyclopediaEntry';
   /**
    * The ancestors of the content node.
@@ -2535,8 +2510,6 @@ export type CyclopediaEntry = ContentNode & DatabaseIdentifier & MenuItemLinkabl
    * @deprecated Deprecated in favor of the databaseId field
    */
   cyclopediaEntryId: Scalars['Int']['output'];
-  /** Fields of the Cyclopediaentriesdetails ACF Field Group */
-  cyclopediaentriesdetails?: Maybe<Cyclopediaentriesdetails>;
   /** The unique identifier stored in the database */
   databaseId: Scalars['Int']['output'];
   /** Post publishing date. */
@@ -2796,51 +2769,6 @@ export type CyclopediaEntryToPreviewConnectionEdge = CyclopediaEntryConnectionEd
   cursor?: Maybe<Scalars['String']['output']>;
   /** The node of the connection, without the edges */
   node: CyclopediaEntry;
-};
-
-/** The &quot;Cyclopediaentriesdetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type Cyclopediaentriesdetails = AcfFieldGroup & AcfFieldGroupFields & Cyclopediaentriesdetails_Fields & {
-  __typename?: 'Cyclopediaentriesdetails';
-  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;Cyclopediaentriesdetails&quot; Field Group */
-  chapter?: Maybe<AcfContentNodeConnection>;
-  /** The display order for this entry within its chapter */
-  entryOrder?: Maybe<Scalars['Float']['output']>;
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** The &quot;Cyclopediaentriesdetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type CyclopediaentriesdetailsChapterArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Interface representing fields of the ACF &quot;Cyclopediaentriesdetails&quot; Field Group */
-export type Cyclopediaentriesdetails_Fields = {
-  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;Cyclopediaentriesdetails&quot; Field Group */
-  chapter?: Maybe<AcfContentNodeConnection>;
-  /** The display order for this entry within its chapter */
-  entryOrder?: Maybe<Scalars['Float']['output']>;
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** Interface representing fields of the ACF &quot;Cyclopediaentriesdetails&quot; Field Group */
-export type Cyclopediaentriesdetails_FieldsChapterArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** An object that has a unique numeric identifier in the database. Provides consistent access to the database ID across different object types. */
@@ -12283,12 +12211,6 @@ export type WpPageInfo = {
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
-/** Provides access to fields of the &quot;ChapterOrder&quot; ACF Field Group via the &quot;chapterOrder&quot; field */
-export type WithAcfChapterOrder = {
-  /** Fields of the ChapterOrder ACF Field Group */
-  chapterOrder?: Maybe<ChapterOrder>;
-};
-
 /** Provides access to fields of the &quot;CollaboratorProfile&quot; ACF Field Group via the &quot;collaboratorProfile&quot; field */
 export type WithAcfCollaboratorProfile = {
   /** Fields of the CollaboratorProfile ACF Field Group */
@@ -12305,12 +12227,6 @@ export type WithAcfCyclopediaChapterOrder = {
 export type WithAcfCyclopediaEntryDetails = {
   /** Fields of the CyclopediaEntryDetails ACF Field Group */
   cyclopediaEntryDetails?: Maybe<CyclopediaEntryDetails>;
-};
-
-/** Provides access to fields of the &quot;Cyclopediaentriesdetails&quot; ACF Field Group via the &quot;cyclopediaentriesdetails&quot; field */
-export type WithAcfCyclopediaentriesdetails = {
-  /** Fields of the Cyclopediaentriesdetails ACF Field Group */
-  cyclopediaentriesdetails?: Maybe<Cyclopediaentriesdetails>;
 };
 
 /** Provides access to fields of the &quot;FrontendContent&quot; ACF Field Group via the &quot;frontendContent&quot; field */
