@@ -17,6 +17,102 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+/** The &quot;AboutOptions&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type AboutOptions = AboutOptions_Fields & AcfFieldGroup & AcfFieldGroupFields & {
+  __typename?: 'AboutOptions';
+  /** Main content text with links and formatting */
+  aboutContentText?: Maybe<Scalars['String']['output']>;
+  /** Groups of expandable info sections with separators between groups */
+  aboutExpandableInfoGroups?: Maybe<Array<Maybe<AboutOptionsAboutExpandableInfoGroups>>>;
+  /** Main feature image for the about page */
+  aboutFeatureImage?: Maybe<AcfMediaItemConnectionEdge>;
+  /** Main title for the about page */
+  aboutTitle?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;AboutOptionsAboutExpandableInfoGroups&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type AboutOptionsAboutExpandableInfoGroups = AboutOptionsAboutExpandableInfoGroups_Fields & AcfFieldGroup & AcfFieldGroupFields & {
+  __typename?: 'AboutOptionsAboutExpandableInfoGroups';
+  /** Individual expandable info items within this group */
+  expandableInfo?: Maybe<Array<Maybe<AboutOptionsAboutExpandableInfoGroupsExpandableInfo>>>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;AboutOptionsAboutExpandableInfoGroupsExpandableInfo&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type AboutOptionsAboutExpandableInfoGroupsExpandableInfo = AboutOptionsAboutExpandableInfoGroupsExpandableInfo_Fields & AcfFieldGroup & AcfFieldGroupFields & {
+  __typename?: 'AboutOptionsAboutExpandableInfoGroupsExpandableInfo';
+  /** Content that appears when this info is expanded */
+  content?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Title displayed for this expandable info */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;AboutOptionsAboutExpandableInfoGroupsExpandableInfo&quot; Field Group */
+export type AboutOptionsAboutExpandableInfoGroupsExpandableInfo_Fields = {
+  /** Content that appears when this info is expanded */
+  content?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Title displayed for this expandable info */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;AboutOptionsAboutExpandableInfoGroups&quot; Field Group */
+export type AboutOptionsAboutExpandableInfoGroups_Fields = {
+  /** Individual expandable info items within this group */
+  expandableInfo?: Maybe<Array<Maybe<AboutOptionsAboutExpandableInfoGroupsExpandableInfo>>>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;AboutOptions&quot; Field Group */
+export type AboutOptions_Fields = {
+  /** Main content text with links and formatting */
+  aboutContentText?: Maybe<Scalars['String']['output']>;
+  /** Groups of expandable info sections with separators between groups */
+  aboutExpandableInfoGroups?: Maybe<Array<Maybe<AboutOptionsAboutExpandableInfoGroups>>>;
+  /** Main feature image for the about page */
+  aboutFeatureImage?: Maybe<AcfMediaItemConnectionEdge>;
+  /** Main title for the about page */
+  aboutTitle?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutSettings = AcfOptionsPage & Node & WithAcfAboutOptions & {
+  __typename?: 'AboutSettings';
+  /** Fields of the AboutOptions ACF Field Group */
+  aboutOptions?: Maybe<AboutOptions>;
+  /** The globally unique ID for the object */
+  id: Scalars['ID']['output'];
+  menuTitle?: Maybe<Scalars['String']['output']>;
+  pageTitle?: Maybe<Scalars['String']['output']>;
+  parentId?: Maybe<Scalars['String']['output']>;
+};
+
 /** Connection between the CollaboratorProfile_Fields type and the ContentNode type */
 export type AcfContentNodeConnection = Connection & ContentNodeConnection & {
   __typename?: 'AcfContentNodeConnection';
@@ -79,12 +175,12 @@ export type AcfMediaItemConnection = Connection & MediaItemConnection & {
   pageInfo: AcfMediaItemConnectionPageInfo;
 };
 
-/** An edge in a connection */
-export type AcfMediaItemConnectionEdge = Edge & MediaItemConnectionEdge & {
+/** Connection between the AboutOptions_Fields type and the MediaItem type */
+export type AcfMediaItemConnectionEdge = Edge & MediaItemConnectionEdge & OneToOneConnection & {
   __typename?: 'AcfMediaItemConnectionEdge';
-  /** A cursor for use in pagination */
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
   cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
+  /** The node of the connection, without the edges */
   node: MediaItem;
 };
 
@@ -7811,8 +7907,9 @@ export type RootMutationUpdateUserArgs = {
 };
 
 /** The root entry point into the Graph */
-export type RootQuery = WithAcfOptionsPageFooterSettings & {
+export type RootQuery = WithAcfOptionsPageAboutSettings & WithAcfOptionsPageFooterSettings & {
   __typename?: 'RootQuery';
+  aboutSettings?: Maybe<AboutSettings>;
   /** Connection between the RootQuery type and the project type */
   allProject?: Maybe<RootQueryToProjectConnection>;
   /** Entry point to get all settings for the site */
@@ -12229,6 +12326,12 @@ export type WpPageInfo = {
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
+/** Provides access to fields of the &quot;AboutOptions&quot; ACF Field Group via the &quot;aboutOptions&quot; field */
+export type WithAcfAboutOptions = {
+  /** Fields of the AboutOptions ACF Field Group */
+  aboutOptions?: Maybe<AboutOptions>;
+};
+
 /** Provides access to fields of the &quot;CollaboratorProfile&quot; ACF Field Group via the &quot;collaboratorProfile&quot; field */
 export type WithAcfCollaboratorProfile = {
   /** Fields of the CollaboratorProfile ACF Field Group */
@@ -12251,6 +12354,11 @@ export type WithAcfCyclopediaEntryDetails = {
 export type WithAcfFrontendContent = {
   /** Fields of the FrontendContent ACF Field Group */
   frontendContent?: Maybe<FrontendContent>;
+};
+
+/** Access point for the &quot;AboutSettings&quot; ACF Options Page */
+export type WithAcfOptionsPageAboutSettings = {
+  aboutSettings?: Maybe<AboutSettings>;
 };
 
 /** Access point for the &quot;FooterSettings&quot; ACF Options Page */
@@ -12281,6 +12389,11 @@ export type GetProjectWhenAndWhereQueryVariables = Exact<{
 
 
 export type GetProjectWhenAndWhereQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', projectDetails?: { __typename?: 'ProjectDetails', whenAndWhere: string } | null } | null };
+
+export type GetAboutContentQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAboutContentQuery = { __typename?: 'RootQuery', aboutSettings?: { __typename?: 'AboutSettings', aboutOptions?: { __typename?: 'AboutOptions', aboutTitle?: string | null, aboutContentText?: string | null, aboutExpandableInfoGroups?: Array<{ __typename?: 'AboutOptionsAboutExpandableInfoGroups', expandableInfo?: Array<{ __typename?: 'AboutOptionsAboutExpandableInfoGroupsExpandableInfo', title?: string | null, content?: string | null } | null> | null } | null> | null, aboutFeatureImage?: { __typename?: 'AcfMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null } | null } | null };
 
 export type GetCyclopediaChaptersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12406,6 +12519,28 @@ export const GetProjectWhenAndWhereDocument = gql`
   project(id: $id, idType: SLUG) {
     projectDetails {
       whenAndWhere
+    }
+  }
+}
+    `;
+export const GetAboutContentDocument = gql`
+    query GetAboutContent {
+  aboutSettings {
+    aboutOptions {
+      aboutTitle
+      aboutContentText
+      aboutExpandableInfoGroups {
+        expandableInfo {
+          title
+          content
+        }
+      }
+      aboutFeatureImage {
+        node {
+          sourceUrl
+          altText
+        }
+      }
     }
   }
 }
@@ -12674,6 +12809,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     GetProjectWhenAndWhere(variables: GetProjectWhenAndWhereQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectWhenAndWhereQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectWhenAndWhereQuery>({ document: GetProjectWhenAndWhereDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectWhenAndWhere', 'query', variables);
+    },
+    GetAboutContent(variables?: GetAboutContentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAboutContentQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAboutContentQuery>({ document: GetAboutContentDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAboutContent', 'query', variables);
     },
     GetCyclopediaChapters(variables?: GetCyclopediaChaptersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCyclopediaChaptersQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetCyclopediaChaptersQuery>({ document: GetCyclopediaChaptersDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCyclopediaChapters', 'query', variables);

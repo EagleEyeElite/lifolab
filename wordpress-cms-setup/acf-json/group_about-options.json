@@ -1,0 +1,210 @@
+{
+  "key": "group_about_options",
+  "title": "About Options",
+  "fields": [
+    {
+      "key": "field_about_title",
+      "label": "Title",
+      "name": "about_title",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Main title for the about page",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "Living the Forest Lab",
+      "maxlength": "",
+      "allow_in_bindings": 0,
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "show_in_graphql": 1,
+      "graphql_description": "",
+      "graphql_field_name": "aboutTitle",
+      "graphql_non_null": 0
+    },
+    {
+      "key": "field_about_content_text",
+      "label": "Content Text",
+      "name": "about_content_text",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "Main content text with links and formatting",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "allow_in_bindings": 0,
+      "tabs": "all",
+      "toolbar": "full",
+      "media_upload": 1,
+      "delay": 0,
+      "show_in_graphql": 1,
+      "graphql_description": "",
+      "graphql_field_name": "aboutContentText",
+      "graphql_non_null": 0
+    },
+    {
+      "key": "field_about_expandable_info_groups",
+      "label": "Expandable Info Groups",
+      "name": "about_expandable_info_groups",
+      "aria-label": "",
+      "type": "repeater",
+      "instructions": "Groups of expandable info sections with separators between groups",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "collapsed": "",
+      "min": 0,
+      "max": 0,
+      "layout": "block",
+      "button_label": "Add Info Group",
+      "sub_fields": [
+        {
+          "key": "field_about_expandable_info",
+          "label": "Expandable Info",
+          "name": "expandable_info",
+          "aria-label": "",
+          "type": "repeater",
+          "instructions": "Individual expandable info items within this group",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "collapsed": "",
+          "min": 0,
+          "max": 0,
+          "layout": "table",
+          "button_label": "Add Info",
+          "sub_fields": [
+            {
+              "key": "field_about_info_title",
+              "label": "Title",
+              "name": "title",
+              "aria-label": "",
+              "type": "text",
+              "instructions": "Title displayed for this expandable info",
+              "required": 1,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "maxlength": "",
+              "allow_in_bindings": 0,
+              "placeholder": "",
+              "prepend": "",
+              "append": "",
+              "show_in_graphql": 1,
+              "graphql_description": "",
+              "graphql_field_name": "title",
+              "graphql_non_null": 0
+            },
+            {
+              "key": "field_about_info_content",
+              "label": "Content",
+              "name": "content",
+              "aria-label": "",
+              "type": "wysiwyg",
+              "instructions": "Content that appears when this info is expanded",
+              "required": 0,
+              "conditional_logic": 0,
+              "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+              },
+              "default_value": "",
+              "allow_in_bindings": 0,
+              "tabs": "all",
+              "toolbar": "full",
+              "media_upload": 1,
+              "delay": 0,
+              "show_in_graphql": 1,
+              "graphql_description": "",
+              "graphql_field_name": "content",
+              "graphql_non_null": 0
+            }
+          ],
+          "show_in_graphql": 1,
+          "graphql_description": "",
+          "graphql_field_name": "expandableInfo",
+          "allow_in_bindings": 0
+        }
+      ],
+      "show_in_graphql": 1,
+      "graphql_description": "",
+      "graphql_field_name": "aboutExpandableInfoGroups",
+      "allow_in_bindings": 0
+    },
+    {
+      "key": "field_about_feature_image",
+      "label": "Feature Image",
+      "name": "about_feature_image",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "Main feature image for the about page",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "object",
+      "library": "all",
+      "min_width": "",
+      "min_height": "",
+      "min_size": "",
+      "max_width": "",
+      "max_height": "",
+      "max_size": "",
+      "mime_types": "",
+      "allow_in_bindings": 0,
+      "preview_size": "medium",
+      "show_in_graphql": 1,
+      "graphql_description": "",
+      "graphql_field_name": "aboutFeatureImage",
+      "graphql_non_null": 0
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "options_page",
+        "operator": "==",
+        "value": "about"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "seamless",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "show_in_graphql": 1,
+  "graphql_field_name": "aboutOptions",
+  "map_graphql_types_from_location_rules": 0,
+  "graphql_types": ""
+}

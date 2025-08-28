@@ -1,0 +1,27 @@
+{
+  "key": "ui_options_page_about",
+  "title": "About",
+  "active": true,
+  "menu_order": 0,
+  "page_title": "About",
+  "menu_slug": "about",
+  "parent_slug": "none",
+  "advanced_configuration": 1,
+  "icon_url": "",
+  "menu_title": "About",
+  "position": 4,
+  "redirect": 0,
+  "description": "Global about page content and settings.",
+  "menu_icon": {
+    "type": "dashicons",
+    "value": "dashicons-info"
+  },
+  "update_button": "Update",
+  "updated_message": "About content updated",
+  "capability": "edit_posts",
+  "data_storage": "options",
+  "post_id": "",
+  "autoload": 0,
+  "show_in_graphql": 1,
+  "graphql_type_name": "AboutSettings"
+}

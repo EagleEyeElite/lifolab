@@ -246,15 +246,16 @@ Our interdisciplinary approach combines...
 Join us in our mission to protect...</p>
 ';
 
-// Set up page for the about section
-wp_insert_post(array(
+// Create the About page
+$about_page_id = wp_insert_post(array(
    'post_type' => 'page',
-   'post_title' => 'about-section',
-   'post_name' => 'about-section',
+   'post_title' => 'About',
+   'post_name' => 'about',
    'post_content' => $about_content,
    'post_status' => 'publish',
    'post_author' => $admin_id
 ));
+
 
 // Set default values
 update_field('contact', [
@@ -269,5 +270,24 @@ update_field('contact', [
 update_field('imprint', [
     'imprint_images' => [$image_2_id, $image_3_id]
 ], 'option');
+
+// Set up About options page content
+update_field('about_title', 'Living the Forest Lab', 'option');
+
+update_field('about_content_text', $cyclopedia_content_1, 'option');
+
+// Define expandable info
+$group_titles = [
+    ['Alpha', 'Beta'],
+    ['Gamma', 'Delta'],
+    ['Epsilon', 'Zeta']
+];
+$lorem_content = '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>';
+$create_item = fn($title) => ['title' => "Expandable $title", 'content' => $lorem_content];
+$create_group = fn($titles) => ['expandable_info' => array_map($create_item, $titles)];
+$about_expandable_info_groups = array_map($create_group, $group_titles);
+update_field('about_expandable_info_groups', $about_expandable_info_groups, 'option');
+
+update_field('about_feature_image', $image_1_id, 'option');
 
 ?>
