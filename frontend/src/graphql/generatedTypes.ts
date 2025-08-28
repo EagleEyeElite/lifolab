@@ -2244,7 +2244,7 @@ export type CreateUserPayload = {
 };
 
 /** The cyclopediaChapter type */
-export type CyclopediaChapter = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCyclopediaChapterOrder & {
+export type CyclopediaChapter = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCyclopediaChapterDetails & {
   __typename?: 'CyclopediaChapter';
   /**
    * The ancestors of the content node.
@@ -2255,13 +2255,13 @@ export type CyclopediaChapter = ContentNode & DatabaseIdentifier & MenuItemLinka
   contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
   /** The name of the Content Type the node belongs to */
   contentTypeName: Scalars['String']['output'];
+  /** Fields of the CyclopediaChapterDetails ACF Field Group */
+  cyclopediaChapterDetails?: Maybe<CyclopediaChapterDetails>;
   /**
    * The id field matches the WP_Post-&gt;ID field.
    * @deprecated Deprecated in favor of the databaseId field
    */
   cyclopediaChapterId: Scalars['Int']['output'];
-  /** Fields of the CyclopediaChapterOrder ACF Field Group */
-  cyclopediaChapterOrder?: Maybe<CyclopediaChapterOrder>;
   /** The unique identifier stored in the database */
   databaseId: Scalars['Int']['output'];
   /** Post publishing date. */
@@ -2394,6 +2394,51 @@ export type CyclopediaChapterConnectionPageInfo = {
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
+/** The &quot;CyclopediaChapterDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type CyclopediaChapterDetails = AcfFieldGroup & AcfFieldGroupFields & CyclopediaChapterDetails_Fields & {
+  __typename?: 'CyclopediaChapterDetails';
+  /** The display order for this chapter */
+  chapterOrder: Scalars['Float']['output'];
+  /** Select and order cyclopedia entries for this chapter */
+  entries?: Maybe<AcfContentNodeConnection>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The &quot;CyclopediaChapterDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type CyclopediaChapterDetailsEntriesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Interface representing fields of the ACF &quot;CyclopediaChapterDetails&quot; Field Group */
+export type CyclopediaChapterDetails_Fields = {
+  /** The display order for this chapter */
+  chapterOrder: Scalars['Float']['output'];
+  /** Select and order cyclopedia entries for this chapter */
+  entries?: Maybe<AcfContentNodeConnection>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Interface representing fields of the ACF &quot;CyclopediaChapterDetails&quot; Field Group */
+export type CyclopediaChapterDetails_FieldsEntriesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
 /** Identifier types for retrieving a specific CyclopediaChapter. Specifies which unique attribute is used to find an exact CyclopediaChapter. */
 export enum CyclopediaChapterIdType {
   /** Identify a resource by the Database ID. */
@@ -2405,29 +2450,6 @@ export enum CyclopediaChapterIdType {
   /** Identify a resource by the URI. */
   Uri = 'URI'
 }
-
-/** The &quot;CyclopediaChapterOrder&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type CyclopediaChapterOrder = AcfFieldGroup & AcfFieldGroupFields & CyclopediaChapterOrder_Fields & {
-  __typename?: 'CyclopediaChapterOrder';
-  /** The display order for this chapter */
-  chapterOrder: Scalars['Float']['output'];
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-};
-
-/** Interface representing fields of the ACF &quot;CyclopediaChapterOrder&quot; Field Group */
-export type CyclopediaChapterOrder_Fields = {
-  /** The display order for this chapter */
-  chapterOrder: Scalars['Float']['output'];
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-};
 
 /** Connection between the CyclopediaChapter type and the cyclopediaChapter type */
 export type CyclopediaChapterToCyclopediaChapterConnection = Connection & CyclopediaChapterConnection & {
@@ -2657,10 +2679,8 @@ export type CyclopediaEntryConnectionPageInfo = {
 /** The &quot;CyclopediaEntryDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type CyclopediaEntryDetails = AcfFieldGroup & AcfFieldGroupFields & CyclopediaEntryDetails_Fields & {
   __typename?: 'CyclopediaEntryDetails';
-  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;CyclopediaEntryDetails&quot; Field Group */
-  chapter?: Maybe<AcfContentNodeConnection>;
-  /** Set the display order for this entry within its chapter (1, 2, 3, etc.) */
-  entryOrder: Scalars['Float']['output'];
+  /** Select which chapters this entry appears in */
+  chapters?: Maybe<AcfContentNodeConnection>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -2670,7 +2690,7 @@ export type CyclopediaEntryDetails = AcfFieldGroup & AcfFieldGroupFields & Cyclo
 
 
 /** The &quot;CyclopediaEntryDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type CyclopediaEntryDetailsChapterArgs = {
+export type CyclopediaEntryDetailsChaptersArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2679,10 +2699,8 @@ export type CyclopediaEntryDetailsChapterArgs = {
 
 /** Interface representing fields of the ACF &quot;CyclopediaEntryDetails&quot; Field Group */
 export type CyclopediaEntryDetails_Fields = {
-  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;CyclopediaEntryDetails&quot; Field Group */
-  chapter?: Maybe<AcfContentNodeConnection>;
-  /** Set the display order for this entry within its chapter (1, 2, 3, etc.) */
-  entryOrder: Scalars['Float']['output'];
+  /** Select which chapters this entry appears in */
+  chapters?: Maybe<AcfContentNodeConnection>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -2692,7 +2710,7 @@ export type CyclopediaEntryDetails_Fields = {
 
 
 /** Interface representing fields of the ACF &quot;CyclopediaEntryDetails&quot; Field Group */
-export type CyclopediaEntryDetails_FieldsChapterArgs = {
+export type CyclopediaEntryDetails_FieldsChaptersArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -12217,10 +12235,10 @@ export type WithAcfCollaboratorProfile = {
   collaboratorProfile?: Maybe<CollaboratorProfile>;
 };
 
-/** Provides access to fields of the &quot;CyclopediaChapterOrder&quot; ACF Field Group via the &quot;cyclopediaChapterOrder&quot; field */
-export type WithAcfCyclopediaChapterOrder = {
-  /** Fields of the CyclopediaChapterOrder ACF Field Group */
-  cyclopediaChapterOrder?: Maybe<CyclopediaChapterOrder>;
+/** Provides access to fields of the &quot;CyclopediaChapterDetails&quot; ACF Field Group via the &quot;cyclopediaChapterDetails&quot; field */
+export type WithAcfCyclopediaChapterDetails = {
+  /** Fields of the CyclopediaChapterDetails ACF Field Group */
+  cyclopediaChapterDetails?: Maybe<CyclopediaChapterDetails>;
 };
 
 /** Provides access to fields of the &quot;CyclopediaEntryDetails&quot; ACF Field Group via the &quot;cyclopediaEntryDetails&quot; field */
@@ -12264,10 +12282,10 @@ export type GetProjectWhenAndWhereQueryVariables = Exact<{
 
 export type GetProjectWhenAndWhereQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', projectDetails?: { __typename?: 'ProjectDetails', whenAndWhere: string } | null } | null };
 
-export type GetCyclopediaEntriesWithChaptersQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetCyclopediaChaptersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCyclopediaEntriesWithChaptersQuery = { __typename?: 'RootQuery', cyclopediaEntries?: { __typename?: 'RootQueryToCyclopediaEntryConnection', edges: Array<{ __typename?: 'RootQueryToCyclopediaEntryConnectionEdge', node: { __typename?: 'CyclopediaEntry', id: string, title?: string | null, content?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, cyclopediaEntryDetails?: { __typename?: 'CyclopediaEntryDetails', entryOrder: number, chapter?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename?: 'Collaborator' } | { __typename?: 'CyclopediaChapter', id: string, title?: string | null, cyclopediaChapterOrder?: { __typename?: 'CyclopediaChapterOrder', chapterOrder: number } | null } | { __typename?: 'CyclopediaEntry' } | { __typename?: 'MediaItem' } | { __typename?: 'Page' } | { __typename?: 'Place' } | { __typename?: 'Post' } | { __typename?: 'Project' }> } | null } | null } }> } | null };
+export type GetCyclopediaChaptersQuery = { __typename?: 'RootQuery', cyclopediaChapters?: { __typename?: 'RootQueryToCyclopediaChapterConnection', edges: Array<{ __typename?: 'RootQueryToCyclopediaChapterConnectionEdge', node: { __typename?: 'CyclopediaChapter', id: string, cyclopediaChapterDetails?: { __typename?: 'CyclopediaChapterDetails', chapterOrder: number } | null } }> } | null };
 
 export type GetProjectsByTagQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12313,6 +12331,20 @@ export type GetAllCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>
 
 
 export type GetAllCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: { __typename?: 'RootQueryToCollaboratorConnection', edges: Array<{ __typename?: 'RootQueryToCollaboratorConnectionEdge', node: { __typename?: 'Collaborator', id: string, title?: string | null, content?: string | null, slug?: string | null, collaboratorProfile?: { __typename?: 'CollaboratorProfile', coreMember?: boolean | null, roles: string, referencedProjects?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator' } | { __typename: 'CyclopediaChapter' } | { __typename: 'CyclopediaEntry' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project', title?: string | null, slug?: string | null }> } | null } | null } }> } | null };
+
+export type GetChapterWithEntryIdsQueryVariables = Exact<{
+  chapterId: Scalars['ID']['input'];
+}>;
+
+
+export type GetChapterWithEntryIdsQuery = { __typename?: 'RootQuery', cyclopediaChapter?: { __typename?: 'CyclopediaChapter', id: string, title?: string | null, cyclopediaChapterDetails?: { __typename?: 'CyclopediaChapterDetails', entries?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename?: 'Collaborator' } | { __typename?: 'CyclopediaChapter' } | { __typename: 'CyclopediaEntry', id: string } | { __typename?: 'MediaItem' } | { __typename?: 'Page' } | { __typename?: 'Place' } | { __typename?: 'Post' } | { __typename?: 'Project' }> } | null } | null } | null };
+
+export type GetCyclopediaEntryQueryVariables = Exact<{
+  entryId: Scalars['ID']['input'];
+}>;
+
+
+export type GetCyclopediaEntryQuery = { __typename?: 'RootQuery', cyclopediaEntry?: { __typename?: 'CyclopediaEntry', id: string, title?: string | null, content?: string | null, slug?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null } | null };
 
 export type GetAllPlacesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12378,33 +12410,14 @@ export const GetProjectWhenAndWhereDocument = gql`
   }
 }
     `;
-export const GetCyclopediaEntriesWithChaptersDocument = gql`
-    query GetCyclopediaEntriesWithChapters {
-  cyclopediaEntries(first: 50) {
+export const GetCyclopediaChaptersDocument = gql`
+    query GetCyclopediaChapters {
+  cyclopediaChapters(first: 50) {
     edges {
       node {
         id
-        title
-        content
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-        cyclopediaEntryDetails {
-          chapter {
-            nodes {
-              ... on CyclopediaChapter {
-                id
-                title
-                cyclopediaChapterOrder {
-                  chapterOrder
-                }
-              }
-            }
-          }
-          entryOrder
+        cyclopediaChapterDetails {
+          chapterOrder
         }
       }
     }
@@ -12538,6 +12551,40 @@ export const GetAllCollaboratorsDocument = gql`
   }
 }
     `;
+export const GetChapterWithEntryIdsDocument = gql`
+    query GetChapterWithEntryIds($chapterId: ID!) {
+  cyclopediaChapter(id: $chapterId) {
+    id
+    title
+    cyclopediaChapterDetails {
+      entries {
+        nodes {
+          ... on CyclopediaEntry {
+            __typename
+            id
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const GetCyclopediaEntryDocument = gql`
+    query GetCyclopediaEntry($entryId: ID!) {
+  cyclopediaEntry(id: $entryId) {
+    id
+    title
+    content
+    slug
+    featuredImage {
+      node {
+        sourceUrl
+        altText
+      }
+    }
+  }
+}
+    `;
 export const GetAllPlacesDocument = gql`
     query GetAllPlaces {
   places(first: 100) {
@@ -12628,8 +12675,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetProjectWhenAndWhere(variables: GetProjectWhenAndWhereQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectWhenAndWhereQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectWhenAndWhereQuery>({ document: GetProjectWhenAndWhereDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectWhenAndWhere', 'query', variables);
     },
-    GetCyclopediaEntriesWithChapters(variables?: GetCyclopediaEntriesWithChaptersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCyclopediaEntriesWithChaptersQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetCyclopediaEntriesWithChaptersQuery>({ document: GetCyclopediaEntriesWithChaptersDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCyclopediaEntriesWithChapters', 'query', variables);
+    GetCyclopediaChapters(variables?: GetCyclopediaChaptersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCyclopediaChaptersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetCyclopediaChaptersQuery>({ document: GetCyclopediaChaptersDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCyclopediaChapters', 'query', variables);
     },
     GetProjectsByTag(variables?: GetProjectsByTagQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectsByTagQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectsByTagQuery>({ document: GetProjectsByTagDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectsByTag', 'query', variables);
@@ -12657,6 +12704,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetAllCollaborators(variables?: GetAllCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllCollaboratorsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllCollaboratorsQuery>({ document: GetAllCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllCollaborators', 'query', variables);
+    },
+    GetChapterWithEntryIds(variables: GetChapterWithEntryIdsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetChapterWithEntryIdsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetChapterWithEntryIdsQuery>({ document: GetChapterWithEntryIdsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetChapterWithEntryIds', 'query', variables);
+    },
+    GetCyclopediaEntry(variables: GetCyclopediaEntryQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCyclopediaEntryQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetCyclopediaEntryQuery>({ document: GetCyclopediaEntryDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCyclopediaEntry', 'query', variables);
     },
     GetAllPlaces(variables?: GetAllPlacesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllPlacesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllPlacesQuery>({ document: GetAllPlacesDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllPlaces', 'query', variables);

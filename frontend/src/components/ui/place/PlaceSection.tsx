@@ -2,6 +2,7 @@ import React from "react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import ExpandableRows, { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
+import { GetAllPlacesQuery, GetAllPlacesQueryVariables } from "@/graphql/generatedTypes";
 
 const GetAllPlaces = gql`
     query GetAllPlaces {
@@ -23,7 +24,7 @@ interface PlaceSectionProps {
 }
 
 export default async function PlaceSection({ placeSlugs }: PlaceSectionProps) {
-  const data: any = await graphqlClient.request(GetAllPlaces);
+  const data = await graphqlClient.request<GetAllPlacesQuery, GetAllPlacesQueryVariables>(GetAllPlaces);
 
   const items: ExpandableRowItem[] = placeSlugs
     .flatMap(slug => {
@@ -32,8 +33,10 @@ export default async function PlaceSection({ placeSlugs }: PlaceSectionProps) {
       )?.node;
       if (!placeData) return [];
       return [{
-        name: placeData.title,
-        content: placeData.content
+        name: placeData.title || '',
+        role: '',
+        content: placeData.content || '',
+        referencedLinks: []
       }];
     });
 

@@ -2,6 +2,7 @@ import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import ProjectCard from '@/components/ui/projectsOverview/projectCard';
 import TagList from '@/components/ui/tags/TagList';
+import { GetProjectsByTagQuery, GetProjectsByTagQueryVariables } from '@/graphql/generatedTypes';
 
 export const revalidate = 10;
 
@@ -24,28 +25,16 @@ interface TagPageProps {
   }>;
 }
 
-interface ProjectNode {
-  id: string;
-  slug: string;
-}
-
-interface GetProjectsByTagResponse {
-  allProject: {
-    edges: {
-      node: ProjectNode;
-    }[];
-  };
-}
 
 export default async function TagPage({ params }: TagPageProps) {
   const { tag } = await params;
-  const { allProject } = await graphqlClient.request<GetProjectsByTagResponse>(GetProjectsByTag);
+  const { allProject } = await graphqlClient.request<GetProjectsByTagQuery, GetProjectsByTagQueryVariables>(GetProjectsByTag);
 
   const projectCards = allProject?.edges?.map(({ node: project }) => {
     return (
       <ProjectCard
         key={project.id}
-        slug={project.slug}
+        slug={project.slug!}
         imageSize="medium"
       />
     );

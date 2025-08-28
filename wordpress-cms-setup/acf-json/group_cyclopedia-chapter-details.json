@@ -1,9 +1,9 @@
 {
-  "key": "group_68a36db146fff",
-  "title": "Cyclopedia Chapter Order",
+  "key": "group_68b01f960c586",
+  "title": "Cyclopedia Chapter Details",
   "fields": [
     {
-      "key": "field_68a36db1ddae1",
+      "key": "field_68b0240b39415",
       "label": "Chapter Order",
       "name": "chapter_order",
       "aria-label": "",
@@ -28,6 +28,41 @@
       "graphql_description": "The display order for this chapter",
       "graphql_field_name": "chapterOrder",
       "graphql_non_null": 1
+    },
+    {
+      "key": "field_68b01f9610521",
+      "label": "Entries",
+      "name": "entries",
+      "aria-label": "",
+      "type": "relationship",
+      "instructions": "Select and order cyclopedia entries for this chapter",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "post_type": [
+        "cyclopedia-entry"
+      ],
+      "post_status": "",
+      "taxonomy": "",
+      "filters": [
+        "search"
+      ],
+      "return_format": "object",
+      "min": "",
+      "max": "",
+      "allow_in_bindings": 0,
+      "bidirectional": 1,
+      "bidirectional_target": [
+        "field_68a36ecacbb69"
+      ],
+      "show_in_graphql": 1,
+      "graphql_description": "",
+      "graphql_field_name": "entries",
+      "graphql_connection_type": "one_to_many"
     }
   ],
   "location": [
@@ -40,7 +75,7 @@
     ]
   ],
   "menu_order": 0,
-  "position": "side",
+  "position": "normal",
   "style": "seamless",
   "label_placement": "top",
   "instruction_placement": "label",
@@ -49,7 +84,7 @@
   "description": "",
   "show_in_rest": 0,
   "show_in_graphql": 1,
-  "graphql_field_name": "cyclopediaChapterOrder",
+  "graphql_field_name": "cyclopediaChapterDetails",
   "map_graphql_types_from_location_rules": 0,
   "graphql_types": ""
 }

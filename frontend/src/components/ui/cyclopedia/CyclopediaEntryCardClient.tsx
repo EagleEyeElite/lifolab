@@ -3,12 +3,19 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
-import { GetCyclopediaEntriesQuery } from "@/graphql/generatedTypes";
 
-type CyclopediaEntryNode = NonNullable<NonNullable<GetCyclopediaEntriesQuery['cyclopediaEntries']>['edges'][number]['node']>;
 
 interface CyclopediaEntryCardProps {
-  entry: CyclopediaEntryNode;
+  id: string;
+  title?: string | null;
+  content?: string | null;
+  slug?: string | null;
+  featuredImage?: {
+    node: {
+      sourceUrl?: string | null;
+      altText?: string | null;
+    };
+  } | null;
 }
 
 // Helper function to truncate HTML content to a specific word count and add inline show more button
@@ -66,9 +73,18 @@ function truncateHtmlToWords(html: string, wordLimit: number): { truncated: stri
   return { truncated: result, isTruncated: true };
 }
 
-export default function CyclopediaEntryCard({ entry }: CyclopediaEntryCardProps) {
+export default function CyclopediaEntryCardClient({ id, title, content, slug, featuredImage }: CyclopediaEntryCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const contentRef = React.useRef<HTMLDivElement>(null);
+  
+  // Use the props directly as entry data
+  const entry = {
+    id,
+    title,
+    content,
+    slug,
+    featuredImage
+  };
   
   const { truncated, isTruncated } = entry.content 
     ? truncateHtmlToWords(entry.content, 50)

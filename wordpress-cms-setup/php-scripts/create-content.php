@@ -194,9 +194,7 @@ $cyclopedia1_id = wp_insert_post(array(
     'post_content' => $cyclopedia_content_1,
     'post_status' => 'publish',
     'meta_input' => array(
-        '_thumbnail_id' => $image_1_id,
-        'chapter' => $chapter1_id,
-        'entry_order' => 1
+        '_thumbnail_id' => $image_1_id
     )
 ));
 
@@ -206,9 +204,7 @@ $cyclopedia2_id = wp_insert_post(array(
     'post_content' => $cyclopedia_content_1,
     'post_status' => 'publish',
     'meta_input' => array(
-        '_thumbnail_id' => $image_2_id,
-        'chapter' => $chapter1_id,
-        'entry_order' => 2
+        '_thumbnail_id' => $image_2_id
     )
 ));
 
@@ -227,11 +223,18 @@ $cyclopedia3_id = wp_insert_post(array(
     'post_content' => $cyclopedia_content_1,
     'post_status' => 'publish',
     'meta_input' => array(
-        '_thumbnail_id' => $image_3_id,
-        'chapter' => $chapter2_id,
-        'entry_order' => 1
+        '_thumbnail_id' => $image_3_id
     )
 ));
+
+// Set up many-to-many relationships
+// Chapter Alpha: Alpha, Beta, Gamma entries
+update_field('entries', array($cyclopedia1_id, $cyclopedia2_id, $cyclopedia3_id), $chapter1_id);
+
+// Chapter Beta: Beta entry only
+update_field('entries', array($cyclopedia2_id), $chapter2_id);
+
+// The bidirectional sync will automatically set the chapters field on each entry
 
 $about_content = '
 <p>Living the Forest Lab...

@@ -1,6 +1,7 @@
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import Link from 'next/link';
+import { GetTagsBySlugsQuery, GetTagsBySlugsQueryVariables } from '@/graphql/generatedTypes';
 
 const GetTagsBySlugs = gql`
   query GetTagsBySlugs($slugs: [String!]!) {
@@ -19,7 +20,7 @@ const GetTagsBySlugs = gql`
 export default async function TagList({ tagSlugs }: {
   tagSlugs: string[];
 }) {
-  const { tags } = await graphqlClient.request<any>(GetTagsBySlugs, { slugs: tagSlugs });
+  const { tags } = await graphqlClient.request<GetTagsBySlugsQuery, GetTagsBySlugsQueryVariables>(GetTagsBySlugs, { slugs: tagSlugs });
 
   if (!tags?.edges?.length) {
     throw new Error(`Error fetching tags for tags ${tagSlugs}`);

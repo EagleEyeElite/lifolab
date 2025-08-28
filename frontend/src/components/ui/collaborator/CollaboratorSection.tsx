@@ -2,6 +2,7 @@ import React from "react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import ExpandableRows, { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
+import { GetAllCollaboratorsQuery, GetAllCollaboratorsQueryVariables } from "@/graphql/generatedTypes";
 
 const GetAllCollaborators = gql`
     query GetAllCollaborators {
@@ -37,7 +38,7 @@ interface CollaboratorSectionProps {
 }
 
 export default async function CollaboratorSection({ title, collaboratorSlugs }: CollaboratorSectionProps) {
-  const data: any = await graphqlClient.request(GetAllCollaborators);
+  const data = await graphqlClient.request<GetAllCollaboratorsQuery, GetAllCollaboratorsQueryVariables>(GetAllCollaborators);
 
   const items: ExpandableRowItem[] = collaboratorSlugs
     .flatMap(slug => {
@@ -48,9 +49,9 @@ export default async function CollaboratorSection({ title, collaboratorSlugs }: 
       if (!collaboratorData) return [];
 
       return [{
-        name: collaboratorData.title,
-        role: collaboratorData.collaboratorProfile?.roles,
-        content: collaboratorData.content,
+        name: collaboratorData.title || '',
+        role: collaboratorData.collaboratorProfile?.roles || '',
+        content: collaboratorData.content || '',
         referencedLinks: collaboratorData.collaboratorProfile?.referencedProjects?.nodes?.map((project: any) => ({
           title: project.title,
           slug: project.slug
