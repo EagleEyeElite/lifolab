@@ -1,0 +1,27 @@
+{
+  "key": "ui_options_page_site_content",
+  "title": "Site Content",
+  "active": true,
+  "menu_order": 0,
+  "page_title": "Site Content",
+  "menu_slug": "site-content",
+  "parent_slug": "none",
+  "advanced_configuration": 1,
+  "icon_url": "",
+  "menu_title": "Site Content",
+  "position": 3,
+  "redirect": 1,
+  "description": "Manage site-wide content including footer and description sections.",
+  "menu_icon": {
+    "type": "dashicons",
+    "value": "dashicons-admin-page"
+  },
+  "update_button": "Update",
+  "updated_message": "Content updated",
+  "capability": "edit_posts",
+  "data_storage": "options",
+  "post_id": "",
+  "autoload": 0,
+  "show_in_graphql": 0,
+  "graphql_type_name": ""
+}

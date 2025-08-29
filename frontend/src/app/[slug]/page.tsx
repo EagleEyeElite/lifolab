@@ -14,6 +14,7 @@ export const revalidate = 10;
 const GetProjectWhenAndWhere = gql`
     query GetProjectWhenAndWhere($id: ID!) {
         project(id: $id, idType: SLUG) {
+            id
             projectDetails {
                 whenAndWhere
             }
@@ -37,7 +38,7 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
       <SectionHeader>{project.projectDetails?.whenAndWhere || "Project Details"}</SectionHeader>
       <div className="pt-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-4">
-          <ProjectOverview slug={slug} />
+          <ProjectOverview id={project.id} />
         </div>
         <div className="lg:col-span-6 pb-32">
           <ProjectContent slug={slug} />

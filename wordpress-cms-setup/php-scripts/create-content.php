@@ -236,25 +236,6 @@ update_field('entries', array($cyclopedia2_id), $chapter2_id);
 
 // The bidirectional sync will automatically set the chapters field on each entry
 
-$about_content = '
-<p>Living the Forest Lab...
-Our mission is...
-We work closely with...
-The project focuses on...
-Through collaborative efforts...
-Our interdisciplinary approach combines...
-Join us in our mission to protect...</p>
-';
-
-// Create the About page
-$about_page_id = wp_insert_post(array(
-   'post_type' => 'page',
-   'post_title' => 'About',
-   'post_name' => 'about',
-   'post_content' => $about_content,
-   'post_status' => 'publish',
-   'post_author' => $admin_id
-));
 
 
 // Set default values
@@ -270,6 +251,17 @@ update_field('contact', [
 update_field('imprint', [
     'imprint_images' => [$image_2_id, $image_3_id]
 ], 'option');
+
+// Set up Description options page content
+$description_content = '<p>Living the Forest Lab...
+Our mission is...
+We work closely with...
+The project focuses on...
+Through collaborative efforts...
+Our interdisciplinary approach combines...
+Join us in our mission to protect...</p>';
+
+update_field('description_content', $description_content, 'option');
 
 // Set up About options page content
 update_field('about_title', 'Living the Forest Lab', 'option');

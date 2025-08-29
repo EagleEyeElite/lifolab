@@ -6,8 +6,8 @@ import TagList from '@/components/ui/tags/TagList';
 import {GetProjectCardQuery, GetProjectCardQueryVariables} from "@/graphql/generatedTypes";
 
 const GetProjectCard = gql`
-    query GetProjectCard($slug: ID!) {
-        project(id: $slug, idType: SLUG) {
+    query GetProjectCard($id: ID!) {
+        project(id: $id) {
             id
             title
             date
@@ -19,6 +19,15 @@ const GetProjectCard = gql`
                     altText
                 }
             }
+            tags {
+                edges {
+                    node {
+                        id
+                        name
+                        slug
+                    }
+                }
+            }
             projectDetails {
                 whenAndWhere
             }
@@ -27,18 +36,21 @@ const GetProjectCard = gql`
 `;
 
 interface ProjectCardProps {
-  slug: string;
+  id: string;
   imageSize: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive';
 }
 
-export default async function ProjectCard({ slug, imageSize }: ProjectCardProps) {
+export default async function ProjectCard({ id, imageSize }: ProjectCardProps) {
   const data = await graphqlClient.request<GetProjectCardQuery, GetProjectCardQueryVariables>(
-    GetProjectCard, { slug }
+    GetProjectCard, { id }
   );
   const project = data.project;
   if (!project) {
-    throw new Error(`Project with slug "${slug}" not found`);
+    throw new Error(`Project with id "${id}" not found`);
   }
+
+  // Extract tag IDs from the project
+  const tagIds = project.tags?.edges?.map(({ node }) => node.id) || [];
 
   return (
     <ProjectCardClient
@@ -48,7 +60,7 @@ export default async function ProjectCard({ slug, imageSize }: ProjectCardProps)
       excerpt={project.excerpt || undefined}
       image={project.featuredImage?.node?.sourceUrl || ''}
       imageSize={imageSize}
-      tagList={<TagList tagSlugs={[]} />}
+      tagList={<TagList tagIds={tagIds} />}
     />
   );
 }

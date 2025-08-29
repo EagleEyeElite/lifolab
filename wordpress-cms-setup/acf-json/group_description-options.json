@@ -1,0 +1,53 @@
+{
+  "key": "group_description_options",
+  "title": "Description Options",
+  "fields": [
+    {
+      "key": "field_description_content",
+      "label": "Description Content",
+      "name": "description_content",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "Content displayed in the description section on the homepage",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "allow_in_bindings": 0,
+      "tabs": "all",
+      "toolbar": "full",
+      "media_upload": 1,
+      "delay": 0,
+      "show_in_graphql": 1,
+      "graphql_description": "",
+      "graphql_field_name": "descriptionContent",
+      "graphql_non_null": 0
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "options_page",
+        "operator": "==",
+        "value": "description"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "seamless",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "show_in_graphql": 1,
+  "graphql_field_name": "descriptionOptions",
+  "map_graphql_types_from_location_rules": 0,
+  "graphql_types": ""
+}

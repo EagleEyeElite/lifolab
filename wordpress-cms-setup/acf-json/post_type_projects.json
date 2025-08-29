@@ -1,7 +1,7 @@
 {
   "key": "post_type_68a2c22fe1631",
   "title": "Projects",
-  "menu_order": 0,
+  "menu_order": 3,
   "active": true,
   "post_type": "project",
   "advanced_configuration": true,
@@ -10,18 +10,18 @@
   "labels": {
     "name": "Projects",
     "singular_name": "Project",
-    "menu_name": "Project",
-    "all_items": "All Project",
+    "menu_name": "Projects",
+    "all_items": "All Projects",
     "edit_item": "Edit Project",
     "view_item": "View Project",
-    "view_items": "View Project",
+    "view_items": "View Projects",
     "add_new_item": "Add Project",
     "add_new": "Add Project",
     "new_item": "New Project",
     "parent_item_colon": "Parent Project:",
-    "search_items": "Search Project",
-    "not_found": "No project found",
-    "not_found_in_trash": "No project found in Trash",
+    "search_items": "Search Projects",
+    "not_found": "No projects found",
+    "not_found_in_trash": "No projects found in Trash",
     "archives": "Project Archives",
     "attributes": "Project Attributes",
     "featured_image": "",
@@ -30,10 +30,10 @@
     "use_featured_image": "",
     "insert_into_item": "Insert into project",
     "uploaded_to_this_item": "Uploaded to this project",
-    "filter_items_list": "Filter project list",
-    "filter_by_date": "Filter project by date",
-    "items_list_navigation": "Project list navigation",
-    "items_list": "Project list",
+    "filter_items_list": "Filter projects list",
+    "filter_by_date": "Filter projects by date",
+    "items_list_navigation": "Projects list navigation",
+    "items_list": "Projects list",
     "item_published": "Project published.",
     "item_published_privately": "Project published privately.",
     "item_reverted_to_draft": "Project reverted to draft.",
@@ -71,7 +71,7 @@
     "thumbnail",
     "custom-fields"
   ],
-  "taxonomies": "",
+  "taxonomies": ["post_tag"],
   "has_archive": false,
   "has_archive_slug": "",
   "rewrite": {
@@ -88,6 +88,6 @@
   "enter_title_here": "",
   "show_in_graphql": 1,
   "graphql_single_name": "project",
-  "graphql_plural_name": "project"
+  "graphql_plural_name": "projects"
 }
 

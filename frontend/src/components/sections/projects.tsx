@@ -9,10 +9,10 @@ import MasonryLayout from "@/components/ui/projectsOverview/masonryLayout";
 
 const GetProjects = gql`
     query GetProjects {
-        allProject(first: 50) {
+        projects(first: 50) {
             edges {
                 node {
-                    slug
+                    id
                 }
             }
         }
@@ -24,7 +24,7 @@ export default async function Projects() {
     GetProjects,
   );
 
-  const projects = data?.allProject?.edges?.map(edge => edge.node) || [];
+  const projects = data?.projects?.edges?.map(edge => edge.node) || [];
 
   // Simplified array with only imageSize
   const imageSizes = [
@@ -38,14 +38,14 @@ export default async function Projects() {
     const projectIndex = projects.length > 0 ? index % projects.length : 0;
     const currentProject = projects[projectIndex];
 
-    if (!currentProject || !currentProject.slug) {
+    if (!currentProject || !currentProject.id) {
       throw new Error(`Project "${currentProject}" with slug not found`);
     }
 
     return (
       <ProjectCard
         key={index}
-        slug={currentProject.slug}
+        id={currentProject.id}
         imageSize={size as 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive'}
       />
     );

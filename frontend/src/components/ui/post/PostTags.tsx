@@ -1,19 +1,17 @@
 import TagList from '@/components/ui/tags/TagList';
 
 interface PostTagsProps {
-  tags?: any;
+  tags: string[];
 }
 
 export default function PostTags({ tags }: PostTagsProps) {
-  const tagSlugs = tags?.edges?.map((tagEdge: any) => tagEdge.node.slug!) || [];
-  
-  if (!tagSlugs.length) {
+  if (!tags.length) {
     return null;
   }
 
   return (
     <div className="mb-8">
-      <TagList tagSlugs={tagSlugs} />
+      <TagList tagIds={tags} />
     </div>
   );
 }

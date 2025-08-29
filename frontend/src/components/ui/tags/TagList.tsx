@@ -1,29 +1,29 @@
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import Link from 'next/link';
-import { GetTagsBySlugsQuery, GetTagsBySlugsQueryVariables } from '@/graphql/generatedTypes';
+import { GetTagsByIdsQuery, GetTagsByIdsQueryVariables } from '@/graphql/generatedTypes';
 
-const GetTagsBySlugs = gql`
-  query GetTagsBySlugs($slugs: [String!]!) {
-    tags(where: { slug: $slugs }) {
-      edges {
-        node {
-          id
-          name
-          slug
+const GetTagsByIds = gql`
+    query GetTagsByIds($ids: [ID!]!) {
+        tags(where: { include: $ids }) {
+            edges {
+                node {
+                    id
+                    name
+                    slug
+                }
+            }
         }
-      }
     }
-  }
 `;
 
-export default async function TagList({ tagSlugs }: {
-  tagSlugs: string[];
+export default async function TagList({ tagIds }: {
+  tagIds: string[];
 }) {
-  const { tags } = await graphqlClient.request<GetTagsBySlugsQuery, GetTagsBySlugsQueryVariables>(GetTagsBySlugs, { slugs: tagSlugs });
+  const { tags } = await graphqlClient.request<GetTagsByIdsQuery, GetTagsByIdsQueryVariables>(GetTagsByIds, { ids: tagIds });
 
   if (!tags?.edges?.length) {
-    throw new Error(`Error fetching tags for tags ${tagSlugs}`);
+    throw new Error(`Error fetching tags for tags ${tagIds}`);
   }
 
   return (

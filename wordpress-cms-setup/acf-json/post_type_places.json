@@ -1,7 +1,7 @@
 {
   "key": "post_type_68a2bff595ab1",
   "title": "Places",
-  "menu_order": 0,
+  "menu_order": 5,
   "active": true,
   "post_type": "place",
   "advanced_configuration": true,

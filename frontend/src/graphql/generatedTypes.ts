@@ -1909,7 +1909,9 @@ export enum ContentTypesOfPostFormatEnum {
 /** Allowed Content Types of the Tag taxonomy. */
 export enum ContentTypesOfTagEnum {
   /** The Type of Content object */
-  Post = 'POST'
+  Post = 'POST',
+  /** The Type of Content object */
+  Project = 'PROJECT'
 }
 
 /** Input for the createCategory mutation. */
@@ -2254,6 +2256,8 @@ export type CreateProjectInput = {
   slug?: InputMaybe<Scalars['String']['input']>;
   /** The status of the object */
   status?: InputMaybe<PostStatusEnum>;
+  /** Set connections between the project and tags */
+  tags?: InputMaybe<ProjectTagsInput>;
   /** The title of the object */
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -3217,6 +3221,40 @@ export type DeleteUserPayload = {
   deletedId?: Maybe<Scalars['ID']['output']>;
   /** The deleted user object */
   user?: Maybe<User>;
+};
+
+/** The &quot;DescriptionOptions&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type DescriptionOptions = AcfFieldGroup & AcfFieldGroupFields & DescriptionOptions_Fields & {
+  __typename?: 'DescriptionOptions';
+  /** Content displayed in the description section on the homepage */
+  descriptionContent?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;DescriptionOptions&quot; Field Group */
+export type DescriptionOptions_Fields = {
+  /** Content displayed in the description section on the homepage */
+  descriptionContent?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+export type DescriptionSettings = AcfOptionsPage & Node & WithAcfDescriptionOptions & {
+  __typename?: 'DescriptionSettings';
+  /** Fields of the DescriptionOptions ACF Field Group */
+  descriptionOptions?: Maybe<DescriptionOptions>;
+  /** The globally unique ID for the object */
+  id: Scalars['ID']['output'];
+  menuTitle?: Maybe<Scalars['String']['output']>;
+  pageTitle?: Maybe<Scalars['String']['output']>;
+  parentId?: Maybe<Scalars['String']['output']>;
 };
 
 /** The discussion setting type */
@@ -7233,8 +7271,12 @@ export type Project = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node
   slug?: Maybe<Scalars['String']['output']>;
   /** The current status of the object */
   status?: Maybe<Scalars['String']['output']>;
+  /** Connection between the Project type and the tag type */
+  tags?: Maybe<ProjectToTagConnection>;
   /** The template assigned to the node */
   template?: Maybe<ContentTemplate>;
+  /** Connection between the Project type and the TermNode type */
+  terms?: Maybe<ProjectToTermNodeConnection>;
   /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
   title?: Maybe<Scalars['String']['output']>;
   /** The unique resource identifier path */
@@ -7278,6 +7320,26 @@ export type ProjectEnqueuedStylesheetsArgs = {
 /** The project type */
 export type ProjectExcerptArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The project type */
+export type ProjectTagsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ProjectToTagConnectionWhereArgs>;
+};
+
+
+/** The project type */
+export type ProjectTermsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ProjectToTermNodeConnectionWhereArgs>;
 };
 
 
@@ -7373,6 +7435,26 @@ export enum ProjectIdType {
   Uri = 'URI'
 }
 
+/** Set relationships between the project to tags */
+export type ProjectTagsInput = {
+  /** If true, this will append the tag to existing related tags. If false, this will replace existing relationships. Default true. */
+  append?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The input list of items to set. */
+  nodes?: InputMaybe<Array<InputMaybe<ProjectTagsNodeInput>>>;
+};
+
+/** List of tags to connect the project to. If an ID is set, it will be used to create the connection. If not, it will look for a slug. If neither are valid existing terms, and the site is configured to allow terms to be created during post mutations, a term will be created using the Name if it exists in the input, then fallback to the slug if it exists. */
+export type ProjectTagsNodeInput = {
+  /** The description of the tag. This field is used to set a description of the tag if a new one is created during the mutation. */
+  description?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the tag. If present, this will be used to connect to the project. If no existing tag exists with this ID, no connection will be made. */
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** The name of the tag. This field is used to create a new term, if term creation is enabled in nested mutations, and if one does not already exist with the provided slug or ID or if a slug or ID is not provided. If no name is included and a term is created, the creation will fallback to the slug field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the tag. If no ID is present, this field will be used to make a connection. If no existing term exists with this slug, this field will be used as a fallback to the Name field when creating a new term to connect to, if term creation is enabled as a nested mutation. */
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** Connection between the Project type and the project type */
 export type ProjectToParentConnectionEdge = Edge & OneToOneConnection & ProjectConnectionEdge & {
   __typename?: 'ProjectToParentConnectionEdge';
@@ -7431,6 +7513,162 @@ export type ProjectToProjectConnectionPageInfo = PageInfo & ProjectConnectionPag
   hasPreviousPage: Scalars['Boolean']['output'];
   /** When paginating backwards, the cursor to continue. */
   startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Connection between the Project type and the tag type */
+export type ProjectToTagConnection = Connection & TagConnection & {
+  __typename?: 'ProjectToTagConnection';
+  /** Edges for the ProjectToTagConnection connection */
+  edges: Array<ProjectToTagConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Tag>;
+  /** Information about pagination in a connection. */
+  pageInfo: ProjectToTagConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type ProjectToTagConnectionEdge = Edge & TagConnectionEdge & {
+  __typename?: 'ProjectToTagConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: Tag;
+};
+
+/** Pagination metadata specific to &quot;ProjectToTagConnection&quot; collections. Provides cursors and flags for navigating through sets of ProjectToTagConnection Nodes. */
+export type ProjectToTagConnectionPageInfo = PageInfo & TagConnectionPageInfo & WpPageInfo & {
+  __typename?: 'ProjectToTagConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the ProjectToTagConnection connection */
+export type ProjectToTagConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']['input']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']['input']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']['input']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Connection between the Project type and the TermNode type */
+export type ProjectToTermNodeConnection = Connection & TermNodeConnection & {
+  __typename?: 'ProjectToTermNodeConnection';
+  /** Edges for the ProjectToTermNodeConnection connection */
+  edges: Array<ProjectToTermNodeConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<TermNode>;
+  /** Information about pagination in a connection. */
+  pageInfo: ProjectToTermNodeConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type ProjectToTermNodeConnectionEdge = Edge & TermNodeConnectionEdge & {
+  __typename?: 'ProjectToTermNodeConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: TermNode;
+};
+
+/** Pagination metadata specific to &quot;ProjectToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of ProjectToTermNodeConnection Nodes. */
+export type ProjectToTermNodeConnectionPageInfo = PageInfo & TermNodeConnectionPageInfo & WpPageInfo & {
+  __typename?: 'ProjectToTermNodeConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the ProjectToTermNodeConnection connection */
+export type ProjectToTermNodeConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']['input']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']['input']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']['input']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** The Taxonomy to filter terms by */
+  taxonomies?: InputMaybe<Array<InputMaybe<TaxonomyEnum>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** The reading setting type */
@@ -7907,11 +8145,9 @@ export type RootMutationUpdateUserArgs = {
 };
 
 /** The root entry point into the Graph */
-export type RootQuery = WithAcfOptionsPageAboutSettings & WithAcfOptionsPageFooterSettings & {
+export type RootQuery = WithAcfOptionsPageAboutSettings & WithAcfOptionsPageDescriptionSettings & WithAcfOptionsPageFooterSettings & {
   __typename?: 'RootQuery';
   aboutSettings?: Maybe<AboutSettings>;
-  /** Connection between the RootQuery type and the project type */
-  allProject?: Maybe<RootQueryToProjectConnection>;
   /** Entry point to get all settings for the site */
   allSettings?: Maybe<Settings>;
   /** Connection between the RootQuery type and the category type */
@@ -7957,6 +8193,7 @@ export type RootQuery = WithAcfOptionsPageAboutSettings & WithAcfOptionsPageFoot
    * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
    */
   cyclopediaEntryBy?: Maybe<CyclopediaEntry>;
+  descriptionSettings?: Maybe<DescriptionSettings>;
   /** Fields of the &#039;DiscussionSettings&#039; settings group */
   discussionSettings?: Maybe<DiscussionSettings>;
   footerSettings?: Maybe<FooterSettings>;
@@ -8025,6 +8262,8 @@ export type RootQuery = WithAcfOptionsPageAboutSettings & WithAcfOptionsPageFoot
    * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
    */
   projectBy?: Maybe<Project>;
+  /** Connection between the RootQuery type and the project type */
+  projects?: Maybe<RootQueryToProjectConnection>;
   /** Fields of the &#039;ReadingSettings&#039; settings group */
   readingSettings?: Maybe<ReadingSettings>;
   /** Connection between the RootQuery type and the EnqueuedScript type */
@@ -8061,16 +8300,6 @@ export type RootQuery = WithAcfOptionsPageAboutSettings & WithAcfOptionsPageFoot
   viewer?: Maybe<User>;
   /** Fields of the &#039;WritingSettings&#039; settings group */
   writingSettings?: Maybe<WritingSettings>;
-};
-
-
-/** The root entry point into the Graph */
-export type RootQueryAllProjectArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<RootQueryToProjectConnectionWhereArgs>;
 };
 
 
@@ -8424,6 +8653,16 @@ export type RootQueryProjectByArgs = {
   projectId?: InputMaybe<Scalars['Int']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   uri?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryProjectsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<RootQueryToProjectConnectionWhereArgs>;
 };
 
 
@@ -9712,6 +9951,18 @@ export type RootQueryToProjectConnectionWhereArgs = {
   stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
   /** Show posts with a specific status. */
   status?: InputMaybe<PostStatusEnum>;
+  /** Tag Slug */
+  tag?: InputMaybe<Scalars['String']['input']>;
+  /** Use Tag ID */
+  tagId?: InputMaybe<Scalars['String']['input']>;
+  /** Array of tag IDs, used to display objects from one tag OR another */
+  tagIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of tag IDs, used to display objects from one tag OR another */
+  tagNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of tag slugs, used to display objects from one tag AND another */
+  tagSlugAnd?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Array of tag slugs, used to include objects in ANY specified tags */
+  tagSlugIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Title of the object */
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -10225,6 +10476,8 @@ export type Tag = DatabaseIdentifier & MenuItemLinkable & Node & TermNode & Unif
   name?: Maybe<Scalars['String']['output']>;
   /** Connection between the Tag type and the post type */
   posts?: Maybe<TagToPostConnection>;
+  /** Connection between the Tag type and the project type */
+  projects?: Maybe<TagToProjectConnection>;
   /** An alphanumeric identifier for the object unique to its type. */
   slug?: Maybe<Scalars['String']['output']>;
   /**
@@ -10280,6 +10533,16 @@ export type TagPostsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<TagToPostConnectionWhereArgs>;
+};
+
+
+/** A taxonomy term used to organize and classify content. Tags do not have a hierarchy and are generally used for more specific classifications. */
+export type TagProjectsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TagToProjectConnectionWhereArgs>;
 };
 
 /** A paginated collection of tag Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of tag Nodes */
@@ -10450,6 +10713,89 @@ export type TagToPostConnectionWhereArgs = {
   categoryName?: InputMaybe<Scalars['String']['input']>;
   /** Array of category IDs, used to display objects from one category OR another */
   categoryNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Tag Slug */
+  tag?: InputMaybe<Scalars['String']['input']>;
+  /** Use Tag ID */
+  tagId?: InputMaybe<Scalars['String']['input']>;
+  /** Array of tag IDs, used to display objects from one tag OR another */
+  tagIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of tag IDs, used to display objects from one tag OR another */
+  tagNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of tag slugs, used to display objects from one tag AND another */
+  tagSlugAnd?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Array of tag slugs, used to include objects in ANY specified tags */
+  tagSlugIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Connection between the Tag type and the project type */
+export type TagToProjectConnection = Connection & ProjectConnection & {
+  __typename?: 'TagToProjectConnection';
+  /** Edges for the TagToProjectConnection connection */
+  edges: Array<TagToProjectConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Project>;
+  /** Information about pagination in a connection. */
+  pageInfo: TagToProjectConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type TagToProjectConnectionEdge = Edge & ProjectConnectionEdge & {
+  __typename?: 'TagToProjectConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: Project;
+};
+
+/** Pagination metadata specific to &quot;TagToProjectConnection&quot; collections. Provides cursors and flags for navigating through sets of TagToProjectConnection Nodes. */
+export type TagToProjectConnectionPageInfo = PageInfo & ProjectConnectionPageInfo & WpPageInfo & {
+  __typename?: 'TagToProjectConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the TagToProjectConnection connection */
+export type TagToProjectConnectionWhereArgs = {
   /** Filter the connection based on dates */
   dateQuery?: InputMaybe<DateQueryInput>;
   /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
@@ -11334,6 +11680,8 @@ export type UpdateProjectInput = {
   slug?: InputMaybe<Scalars['String']['input']>;
   /** The status of the object */
   status?: InputMaybe<PostStatusEnum>;
+  /** Set connections between the project and tags */
+  tags?: InputMaybe<ProjectTagsInput>;
   /** The title of the object */
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -12350,6 +12698,12 @@ export type WithAcfCyclopediaEntryDetails = {
   cyclopediaEntryDetails?: Maybe<CyclopediaEntryDetails>;
 };
 
+/** Provides access to fields of the &quot;DescriptionOptions&quot; ACF Field Group via the &quot;descriptionOptions&quot; field */
+export type WithAcfDescriptionOptions = {
+  /** Fields of the DescriptionOptions ACF Field Group */
+  descriptionOptions?: Maybe<DescriptionOptions>;
+};
+
 /** Provides access to fields of the &quot;FrontendContent&quot; ACF Field Group via the &quot;frontendContent&quot; field */
 export type WithAcfFrontendContent = {
   /** Fields of the FrontendContent ACF Field Group */
@@ -12359,6 +12713,11 @@ export type WithAcfFrontendContent = {
 /** Access point for the &quot;AboutSettings&quot; ACF Options Page */
 export type WithAcfOptionsPageAboutSettings = {
   aboutSettings?: Maybe<AboutSettings>;
+};
+
+/** Access point for the &quot;DescriptionSettings&quot; ACF Options Page */
+export type WithAcfOptionsPageDescriptionSettings = {
+  descriptionSettings?: Maybe<DescriptionSettings>;
 };
 
 /** Access point for the &quot;FooterSettings&quot; ACF Options Page */
@@ -12388,7 +12747,7 @@ export type GetProjectWhenAndWhereQueryVariables = Exact<{
 }>;
 
 
-export type GetProjectWhenAndWhereQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', projectDetails?: { __typename?: 'ProjectDetails', whenAndWhere: string } | null } | null };
+export type GetProjectWhenAndWhereQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', id: string, projectDetails?: { __typename?: 'ProjectDetails', whenAndWhere: string } | null } | null };
 
 export type GetAboutContentQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12400,15 +12759,17 @@ export type GetCyclopediaChaptersQueryVariables = Exact<{ [key: string]: never; 
 
 export type GetCyclopediaChaptersQuery = { __typename?: 'RootQuery', cyclopediaChapters?: { __typename?: 'RootQueryToCyclopediaChapterConnection', edges: Array<{ __typename?: 'RootQueryToCyclopediaChapterConnectionEdge', node: { __typename?: 'CyclopediaChapter', id: string, cyclopediaChapterDetails?: { __typename?: 'CyclopediaChapterDetails', chapterOrder: number } | null } }> } | null };
 
-export type GetProjectsByTagQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetTagWithProjectsQueryVariables = Exact<{
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+}>;
 
 
-export type GetProjectsByTagQuery = { __typename?: 'RootQuery', allProject?: { __typename?: 'RootQueryToProjectConnection', edges: Array<{ __typename?: 'RootQueryToProjectConnectionEdge', node: { __typename?: 'Project', id: string, slug?: string | null } }> } | null };
+export type GetTagWithProjectsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null, projects?: { __typename?: 'RootQueryToProjectConnection', edges: Array<{ __typename?: 'RootQueryToProjectConnectionEdge', node: { __typename?: 'Project', id: string, slug?: string | null } }> } | null };
 
 export type GetAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllTagsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', slug?: string | null } }> } | null };
+export type GetAllTagsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string } }> } | null };
 
 export type GetContactContentQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12420,10 +12781,10 @@ export type GetImprintContentQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetImprintContentQuery = { __typename?: 'RootQuery', footerSettings?: { __typename?: 'FooterSettings', frontendContent?: { __typename?: 'FrontendContent', imprint?: { __typename?: 'FrontendContentImprint', imprintImages?: { __typename?: 'AcfMediaItemConnection', nodes: Array<{ __typename?: 'MediaItem', id: string, sourceUrl?: string | null, altText?: string | null }> } | null } | null } | null } | null };
 
-export type GetAboutPageQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetDescriptionContentQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAboutPageQuery = { __typename?: 'RootQuery', page?: { __typename?: 'Page', title?: string | null, content?: string | null } | null };
+export type GetDescriptionContentQuery = { __typename?: 'RootQuery', descriptionSettings?: { __typename?: 'DescriptionSettings', descriptionOptions?: { __typename?: 'DescriptionOptions', descriptionContent?: string | null } | null } | null };
 
 export type GetCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12438,7 +12799,7 @@ export type GetPlacesQuery = { __typename?: 'RootQuery', places?: { __typename?:
 export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProjectsQuery = { __typename?: 'RootQuery', allProject?: { __typename?: 'RootQueryToProjectConnection', edges: Array<{ __typename?: 'RootQueryToProjectConnectionEdge', node: { __typename?: 'Project', slug?: string | null } }> } | null };
+export type GetProjectsQuery = { __typename?: 'RootQuery', projects?: { __typename?: 'RootQueryToProjectConnection', edges: Array<{ __typename?: 'RootQueryToProjectConnectionEdge', node: { __typename?: 'Project', id: string } }> } | null };
 
 export type GetAllCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12476,21 +12837,21 @@ export type GetProjectOverviewQueryVariables = Exact<{
 }>;
 
 
-export type GetProjectOverviewQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', title?: string | null, excerpt?: string | null, projectDetails?: { __typename?: 'ProjectDetails', referencedCollaborators?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator', slug?: string | null } | { __typename: 'CyclopediaChapter' } | { __typename: 'CyclopediaEntry' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project' }> } | null } | null } | null };
+export type GetProjectOverviewQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', title?: string | null, excerpt?: string | null, tags?: { __typename?: 'ProjectToTagConnection', edges: Array<{ __typename?: 'ProjectToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null, projectDetails?: { __typename?: 'ProjectDetails', referencedCollaborators?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator', slug?: string | null } | { __typename: 'CyclopediaChapter' } | { __typename: 'CyclopediaEntry' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project' }> } | null } | null } | null };
 
 export type GetProjectCardQueryVariables = Exact<{
-  slug: Scalars['ID']['input'];
+  id: Scalars['ID']['input'];
 }>;
 
 
-export type GetProjectCardQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', id: string, title?: string | null, date?: string | null, slug?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, projectDetails?: { __typename?: 'ProjectDetails', whenAndWhere: string } | null } | null };
+export type GetProjectCardQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', id: string, title?: string | null, date?: string | null, slug?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, tags?: { __typename?: 'ProjectToTagConnection', edges: Array<{ __typename?: 'ProjectToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null, projectDetails?: { __typename?: 'ProjectDetails', whenAndWhere: string } | null } | null };
 
-export type GetTagsBySlugsQueryVariables = Exact<{
-  slugs: Array<Scalars['String']['input']> | Scalars['String']['input'];
+export type GetTagsByIdsQueryVariables = Exact<{
+  ids: Array<Scalars['ID']['input']> | Scalars['ID']['input'];
 }>;
 
 
-export type GetTagsBySlugsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null };
+export type GetTagsByIdsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null };
 
 type AuthorDetailsFields_MediaItem_Fragment = { __typename?: 'MediaItem', author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } } | null };
 
@@ -12517,6 +12878,7 @@ export const AuthorDetailsFieldsFragmentDoc = gql`
 export const GetProjectWhenAndWhereDocument = gql`
     query GetProjectWhenAndWhere($id: ID!) {
   project(id: $id, idType: SLUG) {
+    id
     projectDetails {
       whenAndWhere
     }
@@ -12559,9 +12921,18 @@ export const GetCyclopediaChaptersDocument = gql`
   }
 }
     `;
-export const GetProjectsByTagDocument = gql`
-    query GetProjectsByTag {
-  allProject {
+export const GetTagWithProjectsDocument = gql`
+    query GetTagWithProjects($slug: [String]) {
+  tags(where: {slug: $slug}) {
+    edges {
+      node {
+        id
+        name
+        slug
+      }
+    }
+  }
+  projects(where: {tagSlugIn: $slug}) {
     edges {
       node {
         id
@@ -12576,7 +12947,7 @@ export const GetAllTagsDocument = gql`
   tags {
     edges {
       node {
-        slug
+        id
       }
     }
   }
@@ -12615,11 +12986,12 @@ export const GetImprintContentDocument = gql`
   }
 }
     `;
-export const GetAboutPageDocument = gql`
-    query GetAboutPage {
-  page(id: "about-section", idType: URI) {
-    title
-    content
+export const GetDescriptionContentDocument = gql`
+    query GetDescriptionContent {
+  descriptionSettings {
+    descriptionOptions {
+      descriptionContent
+    }
   }
 }
     `;
@@ -12650,10 +13022,10 @@ export const GetPlacesDocument = gql`
     `;
 export const GetProjectsDocument = gql`
     query GetProjects {
-  allProject(first: 50) {
+  projects(first: 50) {
     edges {
       node {
-        slug
+        id
       }
     }
   }
@@ -12750,9 +13122,18 @@ export const GetProjectDetailsDocument = gql`
     `;
 export const GetProjectOverviewDocument = gql`
     query GetProjectOverview($id: ID!) {
-  project(id: $id, idType: SLUG) {
+  project(id: $id) {
     title
     excerpt
+    tags {
+      edges {
+        node {
+          id
+          name
+          slug
+        }
+      }
+    }
     projectDetails {
       referencedCollaborators {
         nodes {
@@ -12767,8 +13148,8 @@ export const GetProjectOverviewDocument = gql`
 }
     `;
 export const GetProjectCardDocument = gql`
-    query GetProjectCard($slug: ID!) {
-  project(id: $slug, idType: SLUG) {
+    query GetProjectCard($id: ID!) {
+  project(id: $id) {
     id
     title
     date
@@ -12780,15 +13161,24 @@ export const GetProjectCardDocument = gql`
         altText
       }
     }
+    tags {
+      edges {
+        node {
+          id
+          name
+          slug
+        }
+      }
+    }
     projectDetails {
       whenAndWhere
     }
   }
 }
     `;
-export const GetTagsBySlugsDocument = gql`
-    query GetTagsBySlugs($slugs: [String!]!) {
-  tags(where: {slug: $slugs}) {
+export const GetTagsByIdsDocument = gql`
+    query GetTagsByIds($ids: [ID!]!) {
+  tags(where: {include: $ids}) {
     edges {
       node {
         id
@@ -12816,8 +13206,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetCyclopediaChapters(variables?: GetCyclopediaChaptersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCyclopediaChaptersQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetCyclopediaChaptersQuery>({ document: GetCyclopediaChaptersDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCyclopediaChapters', 'query', variables);
     },
-    GetProjectsByTag(variables?: GetProjectsByTagQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectsByTagQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProjectsByTagQuery>({ document: GetProjectsByTagDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectsByTag', 'query', variables);
+    GetTagWithProjects(variables?: GetTagWithProjectsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetTagWithProjectsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetTagWithProjectsQuery>({ document: GetTagWithProjectsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTagWithProjects', 'query', variables);
     },
     GetAllTags(variables?: GetAllTagsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllTagsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllTagsQuery>({ document: GetAllTagsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllTags', 'query', variables);
@@ -12828,8 +13218,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetImprintContent(variables?: GetImprintContentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetImprintContentQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetImprintContentQuery>({ document: GetImprintContentDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetImprintContent', 'query', variables);
     },
-    GetAboutPage(variables?: GetAboutPageQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAboutPageQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAboutPageQuery>({ document: GetAboutPageDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAboutPage', 'query', variables);
+    GetDescriptionContent(variables?: GetDescriptionContentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetDescriptionContentQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetDescriptionContentQuery>({ document: GetDescriptionContentDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetDescriptionContent', 'query', variables);
     },
     GetCollaborators(variables?: GetCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCollaboratorsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetCollaboratorsQuery>({ document: GetCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCollaborators', 'query', variables);
@@ -12861,8 +13251,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetProjectCard(variables: GetProjectCardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectCardQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectCardQuery>({ document: GetProjectCardDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectCard', 'query', variables);
     },
-    GetTagsBySlugs(variables: GetTagsBySlugsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetTagsBySlugsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetTagsBySlugsQuery>({ document: GetTagsBySlugsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTagsBySlugs', 'query', variables);
+    GetTagsByIds(variables: GetTagsByIdsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetTagsByIdsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetTagsByIdsQuery>({ document: GetTagsByIdsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTagsByIds', 'query', variables);
     }
   };
 }

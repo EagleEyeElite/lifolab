@@ -10,9 +10,18 @@ import {
 
 const GetProjectOverview = gql`
     query GetProjectOverview($id: ID!) {
-        project(id: $id, idType: SLUG) {
+        project(id: $id) {
             title
             excerpt
+            tags {
+                edges {
+                    node {
+                        id
+                        name
+                        slug
+                    }
+                }
+            }
             projectDetails {
                 referencedCollaborators {
                     nodes {
@@ -28,17 +37,17 @@ const GetProjectOverview = gql`
 `;
 
 interface ProjectOverviewProps {
-  slug: string;
+  id: string;
 }
 
-export default async function ProjectOverview({ slug }: ProjectOverviewProps) {
+export default async function ProjectOverview({ id }: ProjectOverviewProps) {
   const { project } = await graphqlClient.request<GetProjectOverviewQuery, GetProjectOverviewQueryVariables>(
     GetProjectOverview,
-    { id: slug }
+    { id }
   );
 
   if (!project) {
-    throw new Error(`Project with slug "${slug}" not found`);
+    throw new Error(`Project with id "${id}" not found`);
   }
 
   const collaboratorSlugs = project.projectDetails?.referencedCollaborators?.nodes
@@ -48,10 +57,13 @@ export default async function ProjectOverview({ slug }: ProjectOverviewProps) {
     .map(node => node.slug)
     .filter((slug): slug is string => slug !== undefined) || [];
 
+  // Extract tag IDs from the project tags
+  const tagIds = project.tags?.edges?.map(({ node }) => node.id) || [];
+  
   return (
     <>
       <PostHeader title={project.title} excerpt={project.excerpt} />
-      <PostTags tags={null} />
+      <PostTags tags={tagIds} />
       <CollaboratorSection
         title="Collaborators"
         collaboratorSlugs={collaboratorSlugs}
