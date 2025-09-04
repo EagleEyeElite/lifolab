@@ -84,7 +84,7 @@ export default function ProjectCardClient({
   return <>
     <div
       ref={cardRef}
-      className={`group hover:bg-gray-100 rounded-lg hover:-m-2 hover:p-2 ${shouldAnimate ? 'duration-300 ease-out' : ''} ${
+      className={`group hover:bg-gray-100 rounded-lg p-2 hover:p-2 ${shouldAnimate ? 'duration-300 ease-out' : ''} ${
         isVisible ? 'opacity-100 translate-y-0' : shouldAnimate ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
       }`}
     >

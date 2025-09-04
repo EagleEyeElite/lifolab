@@ -39,6 +39,17 @@ export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps)
   });
 
   useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      requestAnimationFrame(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView();
+        }
+      });
+      return;
+    }
+
     switch (animate) {
       case AnimationMode.StartBig:
         window.scrollTo({top: 0});
@@ -73,7 +84,9 @@ export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps)
         throw new Error(`Invalid CSS variable`);
       }
 
-      const logoHeight = Math.min(vw / aspectRatio, vh); // Scale logo to full size, respecting width or height constraints (whichever comes first)
+      // Scale logo to full size, respecting width or height constraints (whichever comes first)
+      // subtracts navbar height twice for centering
+      const logoHeight = Math.min(vw / aspectRatio, vh - (navbarHeight * 2));
       const logoWidth = logoHeight * aspectRatio;
       const finalHeight = navbarHeight - (spacing2 * 2);
       const finalWidth = finalHeight * aspectRatio;
@@ -95,9 +108,14 @@ export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps)
   const { scrollYProgress } = useScroll({target: containerRef, offset: ["start start", "end start"]});
   const shouldAnimate = animate === AnimationMode.StartBig || animate === AnimationMode.StartSmall;
   const animationProgress = useMotionValue(shouldAnimate ? scrollYProgress.get() : 1);
-  useMotionValueEvent(scrollYProgress, "change", (value) => {
+  const handleScrollChange = (value: number) => {
     animationProgress.set(shouldAnimate ? value : 1);
-  });
+  };
+  useMotionValueEvent(scrollYProgress, "change", handleScrollChange);
+  useEffect(() => {
+    // force match resize, on animate change
+    handleScrollChange(scrollYProgress.get());
+  }, [animate]);
   const scrollYSpring = useSpring(animationProgress, { stiffness: 1500, damping: 100, mass: 1 });
   const [width, height, x, y] = [
     useTransform(scrollYSpring, [0, 1], logoPositions.logoWidthRange, { ease: easeOut }),

@@ -51,7 +51,7 @@ export default async function CyclopediaChapter({ chapterId }: CyclopediaChapter
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-body font-bold pb-4">
+      <h1 className="text-xl font-body font-bold pt-10">
         {chapter.title}
       </h1>
       <MasonryLayout>

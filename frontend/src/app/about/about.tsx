@@ -4,6 +4,7 @@ import SectionHeader from "@/components/ui/sectionHeader";
 import ExpandableRows, { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
 import {graphqlClient} from "@/graphql/client";
 import {gql} from "graphql-request";
+import {GetAboutContentQuery} from "@/graphql/generatedTypes";
 
 const GetAboutContent = gql`
   query GetAboutContent {
@@ -28,29 +29,9 @@ const GetAboutContent = gql`
   }
 `;
 
-interface AboutContentQuery {
-  aboutSettings?: {
-    aboutOptions?: {
-      aboutTitle?: string;
-      aboutContentText?: string;
-      aboutExpandableInfoGroups?: Array<{
-        expandableInfo?: Array<{
-          title?: string;
-          content?: string;
-        }> | null;
-      }> | null;
-      aboutFeatureImage?: {
-        node?: {
-          sourceUrl?: string;
-          altText?: string;
-        } | null;
-      } | null;
-    } | null;
-  } | null;
-}
 
 export default async function About() {
-  const data = await graphqlClient.request<AboutContentQuery>(GetAboutContent);
+  const data = await graphqlClient.request<GetAboutContentQuery>(GetAboutContent);
   const aboutData = data?.aboutSettings?.aboutOptions;
 
   return (
@@ -62,21 +43,21 @@ export default async function About() {
             <SectionHeader icon={Pencil}>About</SectionHeader>
           </div>
 
-          {/* Main content flex container */}
-          <div className="flex flex-col lg:flex-row gap-4">
-            {/* Main content */}
-            <div className="flex-1">
-              <h1 className="text-5xl font-normal leading-none text-black/85 tracking-normal mb-8 inline-block">
+          {/* Main content grid container - responsive layout: 1 col mobile, 2 col tablet, 3 col desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Main content - Text */}
+            <div className="order-1">
+              <h1 className="text-5xl font-normal leading-none text-black tracking-normal mb-8 inline-block">
                 {aboutData?.aboutTitle || "Living the Forest Lab"}
               </h1>
 
-              <div className="text-lg leading-tight text-black opacity-85 font-normal text-justify">
+              <div className="text-lg leading-tight text-black font-normal text-justify">
                 <div dangerouslySetInnerHTML={{ __html: aboutData?.aboutContentText || "" }} />
               </div>
             </div>
 
-            {/* Expandable Info - Grouped */}
-            <div className="flex-1 lg:w-80">
+            {/* Expandable Info - Links */}
+            <div className="order-2">
               {aboutData?.aboutExpandableInfoGroups?.map((group, groupIndex) => {
                 // Transform expandable info to ExpandableRowItem format
                 const groupItems: ExpandableRowItem[] = group?.expandableInfo?.map(info => ({
@@ -93,14 +74,17 @@ export default async function About() {
             </div>
 
             {/* Image */}
-            {aboutData?.aboutFeatureImage?.node?.sourceUrl && (
-              <Image
-                src={aboutData.aboutFeatureImage.node.sourceUrl}
-                alt={aboutData.aboutFeatureImage.node.altText || "About image"}
-                width={500}
-                height={500}
-              />
-            )}
+            <div className="order-3">
+              {aboutData?.aboutFeatureImage?.node?.sourceUrl && (
+                <Image
+                  src={aboutData.aboutFeatureImage.node.sourceUrl}
+                  alt={aboutData.aboutFeatureImage.node.altText || "About image"}
+                  width={500}
+                  height={500}
+                  className="w-full h-auto object-cover rounded-lg"
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
