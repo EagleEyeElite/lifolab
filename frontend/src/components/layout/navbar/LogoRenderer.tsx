@@ -141,23 +141,59 @@ export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps)
               setAspectRatio(img.naturalWidth / img.naturalHeight);
             }}
             onClick={() => {
-              if (animationProgress.get() >= 1) {
-                onNavigate();
-              } else {
-                const currentScrollY = window.scrollY;
-                const screenHeight = window.innerHeight;
-                const scrollAmount = screenHeight * 0.7;
-                window.scrollTo({
-                  top: currentScrollY + scrollAmount,
-                  behavior: 'smooth'
-                });
+              // Simplified 2-State Logo State Machine
+              const containerHeight = containerRef.current?.offsetHeight || 0;
+              const currentScrollY = window.scrollY;
+
+              enum LogoState {
+                GO_HOME = "go_home",           // Click takes you to home position
+                HOME_STATE = "home_state"      // At home position, click makes logo big
+              }
+
+              // Determine current state
+              const getCurrentState = (): LogoState => {
+                // If not on root route, always go home
+                if (animate === AnimationMode.DontAnimate) {
+                  return LogoState.GO_HOME;
+                }
+                
+                // Check if we're at the home position (logo small, description visible)
+                const isAtHomePosition = Math.abs(currentScrollY - containerHeight) < 10;
+                
+                return isAtHomePosition ? LogoState.HOME_STATE : LogoState.GO_HOME;
+              };
+
+              const currentState = getCurrentState();
+
+              // State machine transitions
+              switch (currentState) {
+                case LogoState.GO_HOME:
+                  // Take user to home position or navigate to root route
+                  if (animate === AnimationMode.DontAnimate) {
+                    onNavigate(); // Navigate to root route
+                  } else {
+                    // Scroll to home position (logo small, description visible)
+                    window.scrollTo({
+                      top: containerHeight,
+                      behavior: 'smooth'
+                    });
+                  }
+                  break;
+
+                case LogoState.HOME_STATE:
+                  // User is at home, scroll up to make logo big (enter scroll-dependent state)
+                  window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                  });
+                  break;
               }
             }}
           />
         </motion.div>
       )}
       <div
-        className={animate === AnimationMode.DontAnimate ? 'hidden' : 'h-lvh'}
+        className={animate === AnimationMode.DontAnimate ? 'hidden' : 'h-[calc(100lvh-var(--spacing-navbar)-var(--spacing-match-logo-scroll-offset))]'}
         ref={containerRef}
       />
     </>

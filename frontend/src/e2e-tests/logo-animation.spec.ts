@@ -38,10 +38,6 @@ async function scrollMinimal(page: Page): Promise<void> {
   await page.evaluate(() => window.scrollBy(0, 1));
 }
 
-async function scrollFullScreen(page: Page): Promise<void> {
-  await page.evaluate(() => window.scrollBy(0, window.innerHeight));
-}
-
 async function scrollToTop(page: Page): Promise<void> {
   await page.evaluate(() => window.scrollTo(0, 0));
   await waitForPageLoad(page);
@@ -87,8 +83,14 @@ test.describe('logo animation mode tests', () => {
     await navigateToTestPage(page, AnimationMode.StartSmall);
 
     await expectFooterNotVisible(page);
-    const screenHeight = await page.evaluate(() => window.innerHeight);
-    await expectScrollPosition(page, screenHeight);
+    // Calculate expected scroll position based on new container height: 100vh - navbar - spacing-match-logo-scroll-offset
+    const expectedScrollY = await page.evaluate(() => {
+      const vh = window.innerHeight;
+      const navbarHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--spacing-navbar')) * 16; // 5rem * 16px
+      const spacingAB = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--spacing-match-logo-scroll-offset')) * 16; // 10rem * 16px
+      return vh - navbarHeight - spacingAB;
+    });
+    await expectScrollPosition(page, expectedScrollY);
     const logo = await getLogo(page);
     await expect(logo).toBeVisible();
 
@@ -96,7 +98,7 @@ test.describe('logo animation mode tests', () => {
     await expectFooterVisible(page);
   });
 
-  test('startBig mode - logo centered at start, footer appears after full screen scroll', async ({ page }) => {
+  test('startBig mode - logo centered at start, footer appears after reduced scroll', async ({ page }) => {
     await navigateToTestPage(page, AnimationMode.StartBig);
     await scrollToTop(page);
 
@@ -108,37 +110,47 @@ test.describe('logo animation mode tests', () => {
 
     await scrollMinimal(page);
     await expectFooterNotVisible(page);
-    await scrollFullScreen(page);
+    
+    // Scroll by the reduced container height (100vh - navbar - spacing-match-logo-scroll-offset)
+    await page.evaluate(() => {
+      const vh = window.innerHeight;
+      const navbarHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--spacing-navbar')) * 16;
+      const spacingAB = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--spacing-match-logo-scroll-offset')) * 16;
+      const scrollDistance = vh - navbarHeight - spacingAB;
+      window.scrollBy(0, scrollDistance);
+    });
+    await waitForPageLoad(page);
     await expectFooterVisible(page);
   });
 
-  test('logo animation from top-left to center-big and back', async ({ page }) => {
-    // Get initial position
-    await page.goto('/test/blank');
+  test('logo doesnt get big during client navigation, but after click/scroll', async ({ page }) => {
+    // Start in dontAnimate mode to get stable initial state
+    await navigateToTestPage(page, AnimationMode.DontAnimate);
     const logo = await getLogo(page);
     await expect(logo).toBeVisible();
     const initialBox = await logo.boundingBox();
     expect(initialBox).not.toBeNull();
 
-    // Navigate to startBig mode
+    // Navigate to startSmall mode
     await page.evaluate(() => {
-      (window as any).next.router.push('/test/blank?animationMode=startBig');
+      (window as any).next.router.push('/test/blank?animationMode=startSmall');
     });
     await waitForPageLoad(page);
 
     // Verify centered and larger
     const centerBox = await logo.boundingBox();
-    expect(centerBox).not.toBeNull();
-    expect(centerBox!.width).toBeGreaterThan(initialBox!.width);
-    expect(centerBox!.height).toBeGreaterThan(initialBox!.height);
-    await expectLogoCentered(page);
+    expect(centerBox).toEqual(initialBox);
 
-    // Scroll and verify return to original position
-    await scrollFullScreen(page);
+    // Scroll to the top to make the logo big
+    await scrollToTop(page);
+    await waitForPageLoad(page);
     await waitForPageLoad(page);
 
     const finalBox = await logo.boundingBox();
-    expect(finalBox).toEqual(initialBox);
+    expect(finalBox).not.toBeNull();
+    expect(finalBox!.width).toBeGreaterThan(initialBox!.width);
+    expect(finalBox!.height).toBeGreaterThan(initialBox!.height);
+    await expectLogoCentered(page);
   });
 
   test('logo stays stable when mobile address bar hides/shows', async ({ browser }) => {
@@ -172,5 +184,57 @@ test.describe('logo animation mode tests', () => {
     await page.waitForTimeout(500);
     const finalDimensions = await getLogoDimensions(page);
     expect(finalDimensions).toEqual(initialDimensions);
+  });
+
+  test('logo navigation from non-root routes', async ({ page }) => {
+    // Start on a non-root route (uses DontAnimate mode)
+    await page.goto('/people');
+    await waitForPageLoad(page);
+
+    const logo = await getLogo(page);
+    await expect(logo).toBeVisible();
+
+    // Click logo to navigate back to root
+    await logo.click();
+    await waitForPageLoad(page);
+
+    // Verify we're on the root route
+    expect(page.url()).toMatch(/\/$|\/$/);
+  });
+
+  test('logo three-step click behavior on root page', async ({ page }) => {
+    await page.goto('/');
+    await waitForPageLoad(page);
+
+    const logo = await getLogo(page);
+    await expect(logo).toBeVisible();
+
+    // Step 1: Start with big logo, scroll down to make it small
+    const containerHeight = await page.evaluate(() => {
+      const vh = window.innerHeight;
+      const navbarHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--spacing-navbar')) * 16;
+      const spacingAB = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--spacing-match-logo-scroll-offset')) * 16;
+      return vh - navbarHeight - spacingAB;
+    });
+    
+    // Scroll past the description (beyond containerHeight)
+    await page.evaluate((height) => {
+      window.scrollTo({ top: height + 100 });
+    }, containerHeight);
+    await waitForPageLoad(page);
+
+    // Step 2: Click logo - should scroll to edge (show description, logo still small)
+    await logo.click();
+    await waitForPageLoad(page);
+    
+    let scrollY = await page.evaluate(() => window.scrollY);
+    expect(Math.abs(scrollY - containerHeight)).toBeLessThan(10);
+
+    // Step 3: Click logo again - should scroll to top (logo becomes big)
+    await logo.click();
+    await waitForPageLoad(page);
+    
+    scrollY = await page.evaluate(() => window.scrollY);
+    expect(scrollY).toBe(0);
   });
 });
