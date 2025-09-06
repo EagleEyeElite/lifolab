@@ -22,10 +22,12 @@ export default async function RootLayout({children}: {
     <div className="relative z-10">
       <Navbar/>
     </div>
-    <main className="min-h-screen pt-navbar relative z-0">
-      {children}
-    </main>
-    <Footer />
+    <div className="relative z-0 px-6">
+      <main className="min-h-screen pt-navbar ">
+        {children}
+      </main>
+      <Footer />
+    </div>
     </body>
     </html>
   );

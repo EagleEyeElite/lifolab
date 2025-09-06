@@ -1,11 +1,11 @@
 import React from "react";
-import SectionHeader from "@/components/ui/sectionHeader";
 import ProjectCard from "@/components/ui/projectsOverview/projectCard";
 import { Package } from "lucide-react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import { GetProjectsQuery, GetProjectsQueryVariables } from "@/graphql/generatedTypes";
 import MasonryLayout from "@/components/ui/projectsOverview/masonryLayout";
+import Section from "@/components/ui/Section";
 
 const GetProjects = gql`
     query GetProjects {
@@ -52,17 +52,14 @@ export default async function Projects() {
   }).filter(Boolean);
 
   return (
-    <div className="flex justify-start w-full" id="projects">
-      <div className="w-full">
-        <div className="px-6 py-6 space-y-6">
-          <SectionHeader icon={Package}>
-            Projects
-          </SectionHeader>
+    <Section title="Projects" icon={Package} id="projects">
+      <div className="flex justify-start w-full">
+        <div className="w-full">
           <MasonryLayout>
             {projectCards}
           </MasonryLayout>
         </div>
       </div>
-    </div>
+    </Section>
   );
 }

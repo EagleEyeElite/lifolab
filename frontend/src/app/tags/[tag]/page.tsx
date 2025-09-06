@@ -6,6 +6,9 @@ import {
   GetTagWithProjectsQuery,
   GetTagWithProjectsQueryVariables
 } from '@/graphql/generatedTypes';
+import Section from '@/components/ui/Section';
+import { Tag } from 'lucide-react';
+import React from "react";
 
 export const revalidate = 10;
 
@@ -48,12 +51,11 @@ export default async function TagPage({ params }: TagPageProps) {
 
   if (!tags?.edges?.length) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <Section title="Tag not found" icon={Tag}>
         <div className="max-w-sm mx-auto space-y-6">
-          <h1 className="text-3xl font-body">Tag not found</h1>
           <p className="text-gray-500 font-body">The requested tag does not exist.</p>
         </div>
-      </div>
+      </Section>
     );
   }
 
@@ -68,20 +70,24 @@ export default async function TagPage({ params }: TagPageProps) {
   )) || [];
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-sm mx-auto space-y-6">
-        <div className="flex items-center">
-          <h1 className="text-3xl font-body">Category:</h1>
-          <div className="pl-2 items-center">
+    <Section title="Category" icon={Tag}>
+      <div className="flex justify-center">
+        <div className="max-w-sm">
+          <div className="flex items-center pt-6 pb-10">
+            <h1 className="text-xl font-body font-bold pr-2">
+              Category:
+            </h1>
             <TagList tagIds={tagIds} />
           </div>
+          <div className="flex flex-col gap-4">
+            {projectCards.length ? (
+              projectCards
+            ) : (
+              <p className="text-gray-500 font-body">No projects found for this tag.</p>
+            )}
+          </div>
         </div>
-        {projectCards.length ? (
-          projectCards
-        ) : (
-          <p className="text-gray-500 font-body">No projects found for this tag.</p>
-        )}
       </div>
-    </div>
+    </Section>
   );
 }

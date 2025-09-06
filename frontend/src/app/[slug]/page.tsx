@@ -1,13 +1,13 @@
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import { notFound } from 'next/navigation';
-import SectionHeader from '@/components/ui/sectionHeader';
 import ProjectOverview from '@/components/ui/post/PostOverview';
 import ProjectContent from '@/components/ui/post/PostContent';
 import {
   GetProjectWhenAndWhereQuery,
   GetProjectWhenAndWhereQueryVariables,
 } from "@/graphql/generatedTypes";
+import Section from '@/components/ui/Section';
 
 export const revalidate = 10;
 
@@ -34,9 +34,8 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
   }
 
   return (
-    <div className="px-6 py-6">
-      <SectionHeader>{project.projectDetails?.whenAndWhere || "Project Details"}</SectionHeader>
-      <div className="pt-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <Section title={project.projectDetails?.whenAndWhere || "Project Details"}>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-4">
           <ProjectOverview id={project.id} />
         </div>
@@ -44,6 +43,6 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
           <ProjectContent slug={slug} />
         </div>
       </div>
-    </div>
+    </Section>
   );
 }

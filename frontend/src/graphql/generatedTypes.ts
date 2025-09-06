@@ -12752,7 +12752,7 @@ export type GetProjectWhenAndWhereQuery = { __typename?: 'RootQuery', project?: 
 export type GetAboutContentQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAboutContentQuery = { __typename?: 'RootQuery', aboutSettings?: { __typename?: 'AboutSettings', aboutOptions?: { __typename?: 'AboutOptions', aboutTitle?: string | null, aboutContentText?: string | null, aboutExpandableInfoGroups?: Array<{ __typename?: 'AboutOptionsAboutExpandableInfoGroups', expandableInfo?: Array<{ __typename?: 'AboutOptionsAboutExpandableInfoGroupsExpandableInfo', title?: string | null, content?: string | null } | null> | null } | null> | null, aboutFeatureImage?: { __typename?: 'AcfMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null } | null } | null };
+export type GetAboutContentQuery = { __typename?: 'RootQuery', aboutSettings?: { __typename?: 'AboutSettings', aboutOptions?: { __typename?: 'AboutOptions', aboutTitle?: string | null, aboutContentText?: string | null, aboutExpandableInfoGroups?: Array<{ __typename?: 'AboutOptionsAboutExpandableInfoGroups', expandableInfo?: Array<{ __typename?: 'AboutOptionsAboutExpandableInfoGroupsExpandableInfo', title?: string | null, content?: string | null } | null> | null } | null> | null, aboutFeatureImage?: { __typename?: 'AcfMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null, mediaDetails?: { __typename?: 'MediaDetails', width?: number | null, height?: number | null } | null } } | null } | null } | null };
 
 export type GetCyclopediaChaptersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12791,10 +12791,10 @@ export type GetCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: { __typename?: 'RootQueryToCollaboratorConnection', edges: Array<{ __typename?: 'RootQueryToCollaboratorConnectionEdge', node: { __typename?: 'Collaborator', slug?: string | null, collaboratorProfile?: { __typename?: 'CollaboratorProfile', coreMember?: boolean | null } | null } }> } | null };
 
-export type GetPlacesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetAllPlacesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPlacesQuery = { __typename?: 'RootQuery', places?: { __typename?: 'RootQueryToPlaceConnection', edges: Array<{ __typename?: 'RootQueryToPlaceConnectionEdge', node: { __typename?: 'Place', slug?: string | null } }> } | null };
+export type GetAllPlacesQuery = { __typename?: 'RootQuery', places?: { __typename?: 'RootQueryToPlaceConnection', edges: Array<{ __typename?: 'RootQueryToPlaceConnectionEdge', node: { __typename?: 'Place', id: string, title?: string | null, content?: string | null, slug?: string | null } }> } | null };
 
 export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12819,11 +12819,6 @@ export type GetCyclopediaEntryQueryVariables = Exact<{
 
 
 export type GetCyclopediaEntryQuery = { __typename?: 'RootQuery', cyclopediaEntry?: { __typename?: 'CyclopediaEntry', id: string, title?: string | null, content?: string | null, slug?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null } | null };
-
-export type GetAllPlacesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetAllPlacesQuery = { __typename?: 'RootQuery', places?: { __typename?: 'RootQueryToPlaceConnection', edges: Array<{ __typename?: 'RootQueryToPlaceConnectionEdge', node: { __typename?: 'Place', id: string, title?: string | null, content?: string | null, slug?: string | null } }> } | null };
 
 export type GetProjectDetailsQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -12901,6 +12896,10 @@ export const GetAboutContentDocument = gql`
         node {
           sourceUrl
           altText
+          mediaDetails {
+            width
+            height
+          }
         }
       }
     }
@@ -13009,11 +13008,14 @@ export const GetCollaboratorsDocument = gql`
   }
 }
     `;
-export const GetPlacesDocument = gql`
-    query GetPlaces {
+export const GetAllPlacesDocument = gql`
+    query GetAllPlaces {
   places(first: 100) {
     edges {
       node {
+        id
+        title
+        content
         slug
       }
     }
@@ -13087,20 +13089,6 @@ export const GetCyclopediaEntryDocument = gql`
       node {
         sourceUrl
         altText
-      }
-    }
-  }
-}
-    `;
-export const GetAllPlacesDocument = gql`
-    query GetAllPlaces {
-  places(first: 100) {
-    edges {
-      node {
-        id
-        title
-        content
-        slug
       }
     }
   }
@@ -13224,8 +13212,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetCollaborators(variables?: GetCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCollaboratorsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetCollaboratorsQuery>({ document: GetCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCollaborators', 'query', variables);
     },
-    GetPlaces(variables?: GetPlacesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPlacesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPlacesQuery>({ document: GetPlacesDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPlaces', 'query', variables);
+    GetAllPlaces(variables?: GetAllPlacesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllPlacesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAllPlacesQuery>({ document: GetAllPlacesDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllPlaces', 'query', variables);
     },
     GetProjects(variables?: GetProjectsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectsQuery>({ document: GetProjectsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjects', 'query', variables);
@@ -13238,9 +13226,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetCyclopediaEntry(variables: GetCyclopediaEntryQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCyclopediaEntryQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetCyclopediaEntryQuery>({ document: GetCyclopediaEntryDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCyclopediaEntry', 'query', variables);
-    },
-    GetAllPlaces(variables?: GetAllPlacesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllPlacesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAllPlacesQuery>({ document: GetAllPlacesDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllPlaces', 'query', variables);
     },
     GetProjectDetails(variables: GetProjectDetailsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectDetailsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectDetailsQuery>({ document: GetProjectDetailsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectDetails', 'query', variables);

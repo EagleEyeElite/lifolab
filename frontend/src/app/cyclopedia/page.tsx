@@ -1,10 +1,10 @@
 import React from "react";
-import SectionHeader from "@/components/ui/sectionHeader";
 import { BookOpen } from "lucide-react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import CyclopediaChapter from "@/components/ui/cyclopedia/CyclopediaChapter";
 import { GetCyclopediaChaptersQuery, GetCyclopediaChaptersQueryVariables } from "@/graphql/generatedTypes";
+import Section from "@/components/ui/Section";
 
 
 const GetCyclopediaChapters = gql`
@@ -43,12 +43,9 @@ export default async function Cyclopedia() {
     .filter(Boolean);
 
   return (
-    <div className="flex justify-start w-full" id="cyclopedia">
-      <div className="w-full">
-        <div className="px-6 py-6 space-y-6">
-          <SectionHeader icon={BookOpen}>
-            Cyclopedia
-          </SectionHeader>
+    <Section title="Cyclopedia" icon={BookOpen}>
+      <div className="flex justify-start w-full">
+        <div className="w-full">
           <div className="space-y-8">
             {sortedChapterIds.map((chapterId: string) => (
               <CyclopediaChapter
@@ -59,6 +56,6 @@ export default async function Cyclopedia() {
           </div>
         </div>
       </div>
-    </div>
+    </Section>
   );
 }

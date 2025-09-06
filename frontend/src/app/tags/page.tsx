@@ -5,6 +5,9 @@ import {
   GetAllTagsQueryVariables,
 } from "@/graphql/generatedTypes";
 import TagList from "@/components/ui/tags/TagList";
+import Section from '@/components/ui/Section';
+import { Tag } from 'lucide-react';
+import React from "react";
 
 export const revalidate = 10;
 
@@ -27,11 +30,13 @@ export default async function TagsPage() {
   )) || []
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-body mb-8">All Tags</h1>
+    <Section title="All Categories" icon={Tag}>
+      <div className="flex items-center pt-6 pb-10">
+        <h1 className="text-xl font-body font-bold pr-2">
+          All Categories:
+        </h1>
         <TagList tagIds={ids} />
       </div>
-    </div>
+    </Section>
   );
 }

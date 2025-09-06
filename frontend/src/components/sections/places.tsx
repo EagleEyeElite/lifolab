@@ -1,38 +1,47 @@
 import React from "react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
-import PlaceSection from "@/components/ui/place/PlaceSection";
-import SectionHeader from "@/components/ui/sectionHeader";
+import ExpandableRows, { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
 import { Globe } from "lucide-react";
-import {GetPlacesQuery, GetPlacesQueryVariables} from "@/graphql/generatedTypes";
+import { GetAllPlacesQuery, GetAllPlacesQueryVariables } from "@/graphql/generatedTypes";
+import Section from "@/components/ui/Section";
 
-const GetPlaces = gql`
-  query GetPlaces {
-    places(first: 100) {
-      edges {
-        node {
-          slug
+const GetAllPlaces = gql`
+    query GetAllPlaces {
+        places(first: 100) {
+            edges {
+                node {
+                    id
+                    title
+                    content
+                    slug
+                }
+            }
         }
-      }
     }
-  }
 `;
 
 export default async function Places() {
-  const data = await graphqlClient.request<GetPlacesQuery, GetPlacesQueryVariables>(GetPlaces);
+  const data = await graphqlClient.request<GetAllPlacesQuery, GetAllPlacesQueryVariables>(GetAllPlaces);
 
-  const placeSlugs: string[] = data?.places?.edges?.flatMap(
-    (edge) => edge.node.slug || []
-  ) || []
+  const items: ExpandableRowItem[] = data?.places?.edges?.flatMap(
+    (edge) => {
+      const placeData = edge.node;
+      if (!placeData.slug || !placeData.title) return [];
+      return [{
+        name: placeData.title,
+        role: '',
+        content: placeData.content || '',
+        referencedLinks: []
+      }];
+    }
+  ) || [];
 
   return (
-    <div className="p-6" id="places">
+    <Section title="Places" icon={Globe} id="places">
       <div className="pb-8">
-        <SectionHeader icon={Globe}>Places</SectionHeader>
+        <ExpandableRows items={items} />
       </div>
-      <div className="pb-8">
-        <PlaceSection placeSlugs={placeSlugs} />
-      </div>
-    </div>
+    </Section>
   );
 }
