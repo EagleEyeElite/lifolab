@@ -43,7 +43,7 @@ export default async function Cyclopedia() {
     .filter(Boolean);
 
   return (
-    <Section title="Cyclopedia" icon={BookOpen}>
+    <Section title="Enzyklopädie" icon={BookOpen}>
       <div className="flex justify-start w-full">
         <div className="w-full">
           <div className="space-y-8">

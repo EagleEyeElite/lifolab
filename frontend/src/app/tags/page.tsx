@@ -31,10 +31,10 @@ export default async function TagsPage() {
   )) || []
 
   return (
-    <Section title="All Categories" icon={Tag}>
+    <Section title="Alle Kategorien" icon={Tag}>
       <div className="flex items-center pt-6 pb-10">
         <div className="pr-2">
-          <SubHeading>All Categories:</SubHeading>
+          <SubHeading>Alle Kategorien:</SubHeading>
         </div>
         <TagList tagIds={ids} />
       </div>

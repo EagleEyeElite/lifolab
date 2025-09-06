@@ -46,7 +46,7 @@ export default async function People() {
   });
 
   return (
-    <Section title="People" icon={Command} id="people">
+    <Section title="Personen" icon={Command} id="people">
       <div className="pb-8">
         <CollaboratorSection
           title="Living the Forest Lab Team"
@@ -55,7 +55,7 @@ export default async function People() {
       </div>
       <div className="pb-8">
         <CollaboratorSection
-          title="Collaborations"
+          title="Kollaborationen"
           collaboratorSlugs={collaboratorSlugs}
         />
       </div>

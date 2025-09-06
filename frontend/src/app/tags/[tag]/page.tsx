@@ -52,9 +52,9 @@ export default async function TagPage({ params }: TagPageProps) {
 
   if (!tags?.edges?.length) {
     return (
-      <Section title="Tag not found" icon={Tag}>
+      <Section title="Kategorie nicht gefunden" icon={Tag}>
         <div className="max-w-sm mx-auto space-y-6">
-          <p className="text-gray-500 font-body">The requested tag does not exist.</p>
+          <p className="text-gray-500 font-body">Die angeforderte Kategorie existiert nicht.</p>
         </div>
       </Section>
     );
@@ -65,7 +65,7 @@ export default async function TagPage({ params }: TagPageProps) {
   const Heading = <>
     <div className="flex items-center">
       <div className="pr-2">
-        <SubHeading>Category:</SubHeading>
+        <SubHeading>Kategorie:</SubHeading>
       </div>
       <TagList tagIds={tagIds} />
     </div>
@@ -84,13 +84,13 @@ export default async function TagPage({ params }: TagPageProps) {
       {projectCards.length ? (
         projectCards
       ) : (
-        <p className="text-gray-500 font-body">No projects found for this tag.</p>
+        <p className="text-gray-500 font-body">Keine Projekte für diese Kategorie gefunden.</p>
       )}
     </div>
   </>
 
   return (
-    <Section title="Category" icon={Tag}>
+    <Section title="Kategorie" icon={Tag}>
       <div className="flex flex-col items-center pt-6">
         <div className="max-w-xl w-full pb-10">
           {Heading}

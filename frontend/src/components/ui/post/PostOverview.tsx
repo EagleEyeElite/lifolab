@@ -65,7 +65,7 @@ export default async function ProjectOverview({ id }: ProjectOverviewProps) {
       <PostHeader title={project.title} excerpt={project.excerpt} />
       <PostTags tags={tagIds} />
       <CollaboratorSection
-        title="Collaborators"
+        title="Kollaborateure"
         collaboratorSlugs={collaboratorSlugs}
       />
     </>

@@ -34,7 +34,7 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
   }
 
   return (
-    <Section title={project.projectDetails?.whenAndWhere || "Project Details"}>
+    <Section title={project.projectDetails?.whenAndWhere || "Projekt Details"}>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-4">
           <ProjectOverview id={project.id} />

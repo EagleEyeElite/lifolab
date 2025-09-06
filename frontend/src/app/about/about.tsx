@@ -40,11 +40,11 @@ export default async function About() {
 
   // Throw error if no image is found
   if (!aboutData?.aboutFeatureImage?.node?.sourceUrl) {
-    throw new Error("About feature image is required but not found in the data");
+    throw new Error("Über uns Bild ist erforderlich, aber nicht in den Daten gefunden");
   }
 
   return (
-    <Section title="About" icon={Pencil}>
+    <Section title="Über uns" icon={Pencil}>
       {/* Main content grid container - responsive layout: 1 col mobile, 2 col tablet, 3 col desktop */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Main content - Text */}
@@ -76,7 +76,7 @@ export default async function About() {
         <div className="order-3">
           <Image
             src={aboutData.aboutFeatureImage.node.sourceUrl}
-            alt={aboutData.aboutFeatureImage.node.altText || "About image"}
+            alt={aboutData.aboutFeatureImage.node.altText || "Über uns Bild"}
             width={aboutData.aboutFeatureImage.node.mediaDetails!.width!}
             height={aboutData.aboutFeatureImage.node.mediaDetails!.height!}
             className="w-full h-auto object-cover rounded-lg"

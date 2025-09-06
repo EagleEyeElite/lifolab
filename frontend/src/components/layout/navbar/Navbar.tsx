@@ -9,15 +9,15 @@ export default function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
 
   const navigationLivingTheForestLab = [
-    { name: "About", href: "/about", icon: Pencil },
-    { name: "People", href: "/#people", icon: Command },
-    { name: "Places", href: "/#places", icon: Globe },
-    { name: "Contact", href: "#footer", icon: Mic }
+    { name: "Über uns", href: "/about", icon: Pencil },
+    { name: "Personen", href: "/#people", icon: Command },
+    { name: "Orte", href: "/#places", icon: Globe },
+    { name: "Kontakt", href: "#footer", icon: Mic }
   ];
 
   const navigationActivities = [
-    { name: "Projects", href: "/#projects", icon: Package },
-    { name: "Cyclopedia of ...", href: "/cyclopedia", icon: BookOpen },
+    { name: "Projekte", href: "/#projects", icon: Package },
+    { name: "Enzyklopädie von ...", href: "/cyclopedia", icon: BookOpen },
   ];
 
   const toggleDropdown = (dropdown: number) => {
@@ -35,7 +35,7 @@ export default function Navbar() {
           navigationLinks={navigationLivingTheForestLab}
         />
         <MenuColumn
-          title="Activities"
+          title="Aktivitäten"
           isOpen={openDropdown === 2}
           onToggle={() => toggleDropdown(2)}
           navigationLinks={navigationActivities}

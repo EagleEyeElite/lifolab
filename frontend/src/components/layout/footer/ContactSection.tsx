@@ -91,7 +91,7 @@ export default async function ContactSection() {
         </div>
 
         <address className="flex-1 font-heading text-sm not-italic">
-          <HTMLRenderer content={contactData.address || "Address not available"} className="text-black text-sm"/>
+          <HTMLRenderer content={contactData.address || "Adresse nicht verfügbar"} className="text-black text-sm"/>
         </address>
       </div>
     </div>

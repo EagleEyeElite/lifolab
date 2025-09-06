@@ -52,7 +52,7 @@ export default async function Projects() {
   }).filter(Boolean);
 
   return (
-    <Section title="Projects" icon={Package} id="projects">
+    <Section title="Projekte" icon={Package} id="projects">
       <div className="pt-2">
         <MasonryLayout>
           {projectCards}

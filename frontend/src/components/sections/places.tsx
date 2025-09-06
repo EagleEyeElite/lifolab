@@ -38,7 +38,7 @@ export default async function Places() {
   ) || [];
 
   return (
-    <Section title="Places" icon={Globe} id="places">
+    <Section title="Orte" icon={Globe} id="places">
       <div className="pb-8">
         <ExpandableRows items={items} />
       </div>

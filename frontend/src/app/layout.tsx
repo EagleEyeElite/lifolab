@@ -6,10 +6,10 @@ import Footer from "@/components/layout/footer/footer";
 
 export const metadata: Metadata = {
   title: "Living the Forest Lab",
-  description: `Living the Forest Lab, a research initiative by TU Berlin's Faculty of Electrical Engineering and Computer Science, 
-   promotes transdisciplinary forest protection through experimental projects that bridge open-source communities 
-   with students and experts to develop prototype solutions for climate change 
-   and biodiversity preservation.`,
+  description: `Living the Forest Lab ist eine Forschungsinitiative der Fakultät für Elektrotechnik und Informatik der TU Berlin, 
+   die transdisziplinären Waldschutz durch experimentelle Projekte fördert, die Open-Source-Communities 
+   mit Studierenden und Experten verbinden, um Prototyplösungen für den Klimawandel 
+   und den Erhalt der Artenvielfalt zu entwickeln.`,
 };
 
 export default async function RootLayout({children}: {
