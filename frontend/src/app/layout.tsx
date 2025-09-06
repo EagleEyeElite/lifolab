@@ -22,8 +22,8 @@ export default async function RootLayout({children}: {
     <div className="relative z-10">
       <Navbar/>
     </div>
-    <div className="relative z-0 px-6">
-      <main className="min-h-screen pt-navbar pb-32">
+    <div className="relative z-0 px-container">
+      <main className="min-h-screen pt-navbar mb-responsive-lg">
         {children}
       </main>
       <Footer />

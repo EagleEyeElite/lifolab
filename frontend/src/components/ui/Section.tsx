@@ -10,9 +10,9 @@ interface SectionProps {
 
 export default function Section({ children, title, icon: Icon, id }: SectionProps) {
   return (
-    <div className="py-6" id={id}>
+    <div className="py-section" id={id}>
       {/* Section Header */}
-      <div className="pb-6">
+      <div className="pb-responsive-md">
         <div className="border-y-2 border-black py-3">
           <h2 className="text-lg pl-3 font-heading font-bold tracking-wide flex items-center gap-2">
             {title} {Icon && <Icon size={16} strokeWidth={2.5} />}
@@ -21,7 +21,7 @@ export default function Section({ children, title, icon: Icon, id }: SectionProp
       </div>
       
       {/* Section Content */}
-      <div className="px-3">
+      <div className="px-section">
         {children}
       </div>
     </div>

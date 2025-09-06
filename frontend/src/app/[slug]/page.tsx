@@ -39,7 +39,7 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
         <div className="lg:col-span-4">
           <ProjectOverview id={project.id} />
         </div>
-        <div className="lg:col-span-6 pb-32">
+        <div className="lg:col-span-6 mb-responsive-lg">
           <ProjectContent slug={slug} />
         </div>
       </div>
