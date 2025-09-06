@@ -28,11 +28,11 @@ function ContactPerson({ name, email }: {
   email: string;
 }) {
   return (
-    <div className="space-y-2">
-      <p className="font-heading text-sm">{name}</p>
+    <div className="space-y-responsive-sm">
+      <p className="font-heading text-responsive-xs">{name}</p>
       <Link
         href={`mailto:${email}`}
-        className="inline-block px-4 py-2 rounded-full border border-black font-heading text-sm"
+        className="inline-block px-responsive py-responsive rounded-full border border-black font-heading text-responsive-xs"
       >
         {email}
       </Link>
@@ -64,16 +64,16 @@ export default async function ContactSection() {
     })).filter(contact => contact.email);
 
   return (
-    <div className="flex-2 space-y-4">
-      <div className={`border-y border-black py-3`}>
-        <h2 className={`text-sm pl-3 font-heading tracking-wide flex items-center gap-2`}>
+    <div className="flex-2 space-y-responsive">
+      <div className={`border-y border-black py-responsive-sm`}>
+        <h2 className={`text-responsive-xs pl-responsive font-heading tracking-wide flex items-center gap-2`}>
           Contact <Mic size={16} />
         </h2>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="flex-1 space-y-4">
-          <p className="font-heading text-sm font-medium">
+      <div className="flex flex-col sm:flex-row gap-responsive">
+        <div className="flex-1 space-y-responsive">
+          <p className="font-heading text-responsive-xs font-medium">
             {projectName}
           </p>
           {contacts.map((contact, index: number) => {
@@ -90,8 +90,8 @@ export default async function ContactSection() {
           })}
         </div>
 
-        <address className="flex-1 font-heading text-sm not-italic">
-          <HTMLRenderer content={contactData.address || "Adresse nicht verfügbar"} className="text-black text-sm"/>
+        <address className="flex-1 font-heading text-responsive-xs not-italic">
+          <HTMLRenderer content={contactData.address || "Adresse nicht verfügbar"} className="text-black text-responsive-xs"/>
         </address>
       </div>
     </div>

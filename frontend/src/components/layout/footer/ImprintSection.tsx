@@ -32,15 +32,15 @@ export default async function ImprintSection() {
   const imprintImages = footerSettings?.frontendContent?.imprint?.imprintImages?.nodes || [];
 
   return (
-    <div className="flex-1 space-y-4">
-      <div className={`border-y border-black py-3`}>
-        <h2 className={`text-sm pl-3 font-heading tracking-wide flex items-center gap-2`}>
+    <div className="flex-1 space-y-responsive">
+      <div className={`border-y border-black py-responsive-sm`}>
+        <h2 className={`text-responsive-xs pl-responsive font-heading tracking-wide flex items-center gap-2`}>
           Imprint <FolderClosed size={16} />
         </h2>
       </div>
 
-      <div className="space-y-6">
-        <div className="flex items-center gap-6 flex-wrap">
+      <div className="space-y-responsive">
+        <div className="flex items-center gap-responsive-xs flex-wrap">
           {imprintImages.map(({ id, sourceUrl, altText }) => {
             if (!sourceUrl) {
               throw new Error(`Invalid sourceUrl for imprint image with id: ${id}`);
@@ -57,16 +57,16 @@ export default async function ImprintSection() {
                 <Image
                   src={sourceUrl}
                   alt={altText || 'Imprint Image'}
-                  width={120}
-                  height={48}
-                  className="object-contain"
+                  width={100}
+                  height={40}
+                  className="object-contain sm:w-[120px] sm:h-[48px]"
                 />
               </Link>
             );
           })}
         </div>
 
-        <p className="font-heading text-sm">
+        <p className="font-heading text-responsive-xs">
          Copyright: Living the Forest Lab | Reallabor Wald
         </p>
       </div>

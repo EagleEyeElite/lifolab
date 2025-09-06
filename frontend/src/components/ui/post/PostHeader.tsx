@@ -8,7 +8,7 @@ interface PostHeaderProps {
 export default function PostHeader({ title, excerpt }: PostHeaderProps) {
   return (
     <>
-      <h1 className="text-4xl font-body leading-none mb-8">
+      <h1 className="text-responsive-lg font-body leading-none mb-responsive">
         {title}
       </h1>
       {excerpt && (

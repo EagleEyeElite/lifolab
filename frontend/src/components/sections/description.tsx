@@ -24,7 +24,7 @@ export default async function Description() {
 
   return (
     <div className="flex justify-center py-[var(--spacing-match-logo-scroll-offset)]">
-      <HTMLRenderer content={content} className="font-heading text-2xl tracking-tight text-center text-gray-700" />
+      <HTMLRenderer content={content} className="font-heading text-xl sm:text-2xl tracking-tight text-center text-gray-700" />
     </div>
   );
 }

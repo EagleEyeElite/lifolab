@@ -45,10 +45,10 @@ function ContentMeta({ item }: { item: ExpandableRowItem }) {
   if (!hasContent) return null;
 
   return <>
-    <div className="pt-8 pb-2">
+    <div className="pt-6 sm:pt-8 pb-2">
       <div className="h-px bg-gray-400" />
     </div>
-    <div className="pb-3 @[600px]:hidden">
+    <div className="pb-responsive sm:hidden">
       <Role role={item.role} />
     </div>
     <ReferencedLinks links={item.referencedLinks} />
@@ -58,8 +58,8 @@ function ContentMeta({ item }: { item: ExpandableRowItem }) {
 export default function ExpandableContent({ item, isExpanded }: ExpandableContentProps) {
   return (
     <Expandable isExpanded={isExpanded}>
-      <div className="@container pt-2 pb-3">
-        <div className={`p-4 rounded-sm text-sm leading-relaxed bg-primary transition-all duration-300 ease-out ${
+      <div className="pt-responsive pb-responsive">
+        <div className={`p-responsive rounded-sm text-responsive-content leading-relaxed bg-primary transition-all duration-300 ease-out ${
           isExpanded ? 'translate-y-0' : '-translate-y-2'
         }`}>
           <HTMLRenderer content={item.content} className="text-black"/>

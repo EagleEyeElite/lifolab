@@ -6,7 +6,7 @@ interface SubHeadingProps {
 
 export default function SubHeading({ children}: SubHeadingProps) {
   return (
-    <h2 className={`text-xl font-body font-bold`}>
+    <h2 className={`text-responsive-md font-body font-bold`}>
       {children}
     </h2>
   );
