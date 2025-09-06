@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
+import SubHeading from "@/components/ui/SubHeading";
 
 const getImageClassName = (size: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive') => {
   switch (size) {
@@ -105,7 +106,9 @@ export default function ProjectCardClient({
           </div>
         </div>
       </div>
-      <h1 className="text-xl font-body font-bold pt-2">{title}</h1>
+      <div className="pt-2">
+        <SubHeading>{title}</SubHeading>
+      </div>
       <div className="pt-1">
         <HTMLRenderer content={excerpt}/>
       </div>

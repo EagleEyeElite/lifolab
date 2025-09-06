@@ -3,6 +3,7 @@ import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import ExpandableRows, { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
 import { GetAllCollaboratorsQuery, GetAllCollaboratorsQueryVariables } from "@/graphql/generatedTypes";
+import SubHeading from "@/components/ui/SubHeading";
 
 const GetAllCollaborators = gql`
     query GetAllCollaborators {
@@ -60,7 +61,9 @@ export default async function CollaboratorSection({ title, collaboratorSlugs }: 
     });
 
   return <>
-    <h1 className="text-xl font-body font-bold pb-4">{title}</h1>
+    <div className="pb-4">
+      <SubHeading>{title}</SubHeading>
+    </div>
     <ExpandableRows items={items} />
   </>
 }

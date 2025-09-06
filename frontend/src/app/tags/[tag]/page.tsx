@@ -9,6 +9,7 @@ import {
 import Section from '@/components/ui/Section';
 import { Tag } from 'lucide-react';
 import React from "react";
+import SubHeading from '@/components/ui/SubHeading';
 
 export const revalidate = 10;
 
@@ -61,6 +62,15 @@ export default async function TagPage({ params }: TagPageProps) {
 
   const tagIds = tags.edges.map(({ node }) => node.id);
 
+  const Heading = <>
+    <div className="flex items-center">
+      <div className="pr-2">
+        <SubHeading>Category:</SubHeading>
+      </div>
+      <TagList tagIds={tagIds} />
+    </div>
+  </>
+
   const projectCards = projects?.edges?.map(({ node: project }) => (
     <ProjectCard
       key={project.id}
@@ -69,23 +79,24 @@ export default async function TagPage({ params }: TagPageProps) {
     />
   )) || [];
 
+  const Projects = <>
+    <div className="flex flex-col gap-14">
+      {projectCards.length ? (
+        projectCards
+      ) : (
+        <p className="text-gray-500 font-body">No projects found for this tag.</p>
+      )}
+    </div>
+  </>
+
   return (
     <Section title="Category" icon={Tag}>
-      <div className="flex justify-center">
-        <div className="max-w-sm">
-          <div className="flex items-center pt-6 pb-10">
-            <h1 className="text-xl font-body font-bold pr-2">
-              Category:
-            </h1>
-            <TagList tagIds={tagIds} />
-          </div>
-          <div className="flex flex-col gap-4">
-            {projectCards.length ? (
-              projectCards
-            ) : (
-              <p className="text-gray-500 font-body">No projects found for this tag.</p>
-            )}
-          </div>
+      <div className="flex flex-col items-center pt-6">
+        <div className="max-w-xl w-full pb-10">
+          {Heading}
+        </div>
+        <div className="max-w-lg">
+          {Projects}
         </div>
       </div>
     </Section>

@@ -8,6 +8,7 @@ import TagList from "@/components/ui/tags/TagList";
 import Section from '@/components/ui/Section';
 import { Tag } from 'lucide-react';
 import React from "react";
+import SubHeading from '@/components/ui/SubHeading';
 
 export const revalidate = 10;
 
@@ -32,9 +33,9 @@ export default async function TagsPage() {
   return (
     <Section title="All Categories" icon={Tag}>
       <div className="flex items-center pt-6 pb-10">
-        <h1 className="text-xl font-body font-bold pr-2">
-          All Categories:
-        </h1>
+        <div className="pr-2">
+          <SubHeading>All Categories:</SubHeading>
+        </div>
         <TagList tagIds={ids} />
       </div>
     </Section>
