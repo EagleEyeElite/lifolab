@@ -21,7 +21,9 @@ export default function Section({ children, title, icon: Icon, id }: SectionProp
       </div>
       
       {/* Section Content */}
-      {children}
+      <div className="px-3">
+        {children}
+      </div>
     </div>
   );
 }

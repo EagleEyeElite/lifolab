@@ -9,7 +9,7 @@ import Section from "@/components/ui/Section";
 
 const GetProjects = gql`
     query GetProjects {
-        projects(first: 50) {
+        projects(first: 100) {
             edges {
                 node {
                     id
@@ -53,12 +53,10 @@ export default async function Projects() {
 
   return (
     <Section title="Projects" icon={Package} id="projects">
-      <div className="flex justify-start w-full">
-        <div className="w-full">
-          <MasonryLayout>
-            {projectCards}
-          </MasonryLayout>
-        </div>
+      <div className="pt-2">
+        <MasonryLayout>
+          {projectCards}
+        </MasonryLayout>
       </div>
     </Section>
   );

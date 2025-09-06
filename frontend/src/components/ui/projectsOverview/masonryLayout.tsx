@@ -8,7 +8,7 @@ interface MasonryLayoutProps {
 }
 
 export default function MasonryLayout({ children }: MasonryLayoutProps) {
-  const [isMounted, setIsMounted] = useState(false);
+  const [gapSize, setGapSize] = useState<number | null>(null);
 
   // Responsive breakpoints
   const breakpoints = {
@@ -18,14 +18,27 @@ export default function MasonryLayout({ children }: MasonryLayoutProps) {
   };
 
   useEffect(() => {
-    setIsMounted(true);
+    // Calculate spacing from CSS custom properties
+    const styles = getComputedStyle(document.documentElement);
+    const fontSize = parseFloat(styles.fontSize);
+    const spacing12 = parseFloat(styles.getPropertyValue('--spacing')) * 12 * fontSize;
+
+    setGapSize(spacing12);
   }, []);
+
+  const cards = React.Children.map(children, (child, index) => (
+      <div className="pb-5">
+        {child}
+      </div>
+    ))
+
+  const isMounted = gapSize != null;
 
   // Render fallback during server-side rendering and initial client render
   if (!isMounted) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {children}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        {cards}
       </div>
     );
   }
@@ -39,14 +52,14 @@ export default function MasonryLayout({ children }: MasonryLayoutProps) {
         desktop: 3
       }}
       gap={{
-        mobile: 35,
-        tablet: 35,
-        desktop: 35
+        mobile: gapSize,
+        tablet: gapSize,
+        desktop: gapSize
       }}
       autoArrange={true}
       key={`masonry-${isMounted}`}
     >
-      {children}
+      {cards}
     </Masonry>
   );
 }

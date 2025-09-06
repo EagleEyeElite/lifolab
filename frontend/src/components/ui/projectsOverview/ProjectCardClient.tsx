@@ -84,11 +84,13 @@ export default function ProjectCardClient({
   return <>
     <div
       ref={cardRef}
-      className={`group hover:bg-gray-100 rounded-lg p-2 hover:p-2 ${shouldAnimate ? 'duration-300 ease-out' : ''} ${
+      className={`group relative ${shouldAnimate ? 'duration-300 ease-out' : ''} ${
         isVisible ? 'opacity-100 translate-y-0' : shouldAnimate ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
       }`}
     >
-    <Link href={href}>
+      {/* Hover background that expands outward */}
+      <div className="absolute -inset-2 bg-gray-100 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    <Link href={href} className="relative z-10">
       <div className={`relative overflow-hidden rounded-lg group-hover:shadow-lg duration-300 ${getImageClassName(imageSize)}`}>
         <Image
           src={image}
@@ -108,10 +110,9 @@ export default function ProjectCardClient({
         <HTMLRenderer content={excerpt}/>
       </div>
     </Link>
-    <div className="font-heading pt-3">
+    <div className="font-heading pt-3 relative z-10">
       {tagList}
     </div>
     </div>
-    <div className="pt-4" />
   </>
 }

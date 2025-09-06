@@ -13024,7 +13024,7 @@ export const GetAllPlacesDocument = gql`
     `;
 export const GetProjectsDocument = gql`
     query GetProjects {
-  projects(first: 50) {
+  projects(first: 100) {
     edges {
       node {
         id
