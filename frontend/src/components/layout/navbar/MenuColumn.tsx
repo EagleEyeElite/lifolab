@@ -8,6 +8,7 @@ interface MenuColumnProps {
   title: string;
   isOpen: boolean;
   onToggle: () => void;
+  onClose?: () => void;
   navigationLinks: Array<{
     name: string;
     href: string;
@@ -15,25 +16,38 @@ interface MenuColumnProps {
   }>;
 }
 
-export default function MenuColumn({ title, isOpen, onToggle, navigationLinks }: MenuColumnProps) {
-  return (
-    <div className={`relative z-30 pointer-events-auto transition-all duration-300 ${
-      isOpen 
-        ? 'bg-primary border-l border-r' 
-        : 'bg-primary border-l border-b border-r rounded-bl-3xl rounded-br-3xl'
-    }`}>
-      <button
-        onClick={onToggle}
-        className="flex items-center justify-between h-full w-full px-4"
-        aria-label={`Toggle ${title} menu`}
-      >
-        <span>{title}</span>
-        <Plus
-          size={20}
-          className={`transition-transform duration-300 ${isOpen ? 'rotate-45' : 'rotate-0'}`}
-        />
-      </button>
-      <DropdownMenu isOpen={isOpen} navigationLinks={navigationLinks} />
+export default function MenuColumn({ title, isOpen, onToggle, onClose, navigationLinks }: MenuColumnProps) {
+  return <>
+    <div className="relative flex flex-col transition-all duration-300">
+      {/* LAYER 1: Button background (bottom layer) */}
+      <div className="absolute top-4 left-0 right-0 h-10 bg-primary/90 backdrop-blur-sm rounded-lg" />
+
+      {/* LAYER 2: Dropdown background (middle layer) */}
+      <div
+        className="absolute inset-0 bg-primary rounded-b-3xl border-x border-b border-black/20 transition-all duration-300 ease-out origin-top shadow-lg scale-y-0 opacity-0 data-[open=true]:scale-y-100 data-[open=true]:opacity-100"
+        data-open={isOpen}
+      />
+
+      {/* LAYER 3: Dropdown menu (now 3rd) */}
+      <div className="relative order-2">
+        <DropdownMenu isOpen={isOpen} navigationLinks={navigationLinks} onClose={onClose} />
+      </div>
+
+      {/* LAYER 4: Interactive content (now 4th) */}
+      <div className="relative order-1">
+        <button
+          onClick={onToggle}
+          className="flex items-center justify-center gap-2 px-4 py-2 transition-all duration-300 mt-4 hover:opacity-70 w-full"
+          aria-label={`Toggle ${title} menu`}
+        >
+          <span className="data-[open=false]:underline" data-open={isOpen}>{title}</span>
+          <Plus
+            size={16}
+            className="transition-transform duration-300 data-[open=true]:rotate-45"
+            data-open={isOpen}
+          />
+        </button>
+      </div>
     </div>
-  );
+  </>;
 }

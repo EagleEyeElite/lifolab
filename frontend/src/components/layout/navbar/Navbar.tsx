@@ -1,18 +1,17 @@
 "use client"
 
-import React, { useState } from "react";
+import React from "react";
 import {Pencil, Package, Command, Globe, Mic, BookOpen} from "lucide-react";
 import ScrollAnimatedLogo from "@/components/layout/navbar/ScrollAnimatedLogo";
-import MenuColumn from "@/components/layout/navbar/MenuColumn";
+import DesktopNavigation from "@/components/layout/navbar/DesktopNavigation";
+import MobileNavigation from "@/components/layout/navbar/MobileNavigation";
 
 export default function Navbar() {
-  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
-
   const navigationLivingTheForestLab = [
     { name: "Über uns", href: "/about", icon: Pencil },
     { name: "Personen", href: "/#people", icon: Command },
     { name: "Orte", href: "/#places", icon: Globe },
-    { name: "Kontakt", href: "#footer", icon: Mic }
+    { name: "Kontakt", href: "/#footer", icon: Mic }
   ];
 
   const navigationActivities = [
@@ -20,38 +19,30 @@ export default function Navbar() {
     { name: "Enzyklopädie von ...", href: "/cyclopedia", icon: BookOpen },
   ];
 
-  const toggleDropdown = (dropdown: number) => {
-    setOpenDropdown(current => current === dropdown ? null : dropdown);
-  };
-
   return <>
-    <nav className="fixed top-0 h-navbar w-full z-30 pointer-events-none">
-      <div className="grid grid-cols-3 h-full">
-        <div />
-        <MenuColumn
-          title="Living the Forest Lab"
-          isOpen={openDropdown === 1}
-          onToggle={() => toggleDropdown(1)}
-          navigationLinks={navigationLivingTheForestLab}
+    {/* Layer 1: Blur backdrop (lowest) */}
+    <div
+      className="fixed top-0 w-full backdrop-blur-md bg-white/10 [mask-image:linear-gradient(to_bottom,black_0%,black_70%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_70%,transparent_100%)]"
+      style={{ height: 'calc(var(--spacing-navbar) + 2rem)' }}
+    />
+    
+    {/* Layer 2: Logo (middle) */}
+    <ScrollAnimatedLogo />
+
+    {/* Layer 3: Links with backgrounds (highest) */}
+    <nav className="fixed top-0 h-navbar w-full">
+      <div className="hidden sm:block">
+        <DesktopNavigation
+          navigationLivingTheForestLab={navigationLivingTheForestLab}
+          navigationActivities={navigationActivities}
         />
-        <MenuColumn
-          title="Aktivitäten"
-          isOpen={openDropdown === 2}
-          onToggle={() => toggleDropdown(2)}
-          navigationLinks={navigationActivities}
+      </div>
+      <div className="sm:hidden">
+        <MobileNavigation
+          navigationLivingTheForestLab={navigationLivingTheForestLab}
+          navigationActivities={navigationActivities}
         />
       </div>
     </nav>
-    <div className="relative z-10">
-      <ScrollAnimatedLogo />
-    </div>
-    {/* Backdrop overlay when dropdown is open */}
-    {openDropdown && (
-      <button
-        className="fixed inset-0 z-10"
-        onClick={() => setOpenDropdown(null)}
-        aria-label="Close menu"
-      />
-    )}
   </>;
 }

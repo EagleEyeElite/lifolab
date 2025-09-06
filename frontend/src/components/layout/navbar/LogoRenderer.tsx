@@ -128,7 +128,7 @@ export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps)
     <>
       {logoPositions.isReady && (
         <motion.div
-          className="fixed -translate-x-1/2 -translate-y-1/2 cursor-pointer z-[25]"
+          className="fixed -translate-x-1/2 -translate-y-1/2 cursor-pointer"
           style={{ width, height, x, y }}
         >
           <Image
