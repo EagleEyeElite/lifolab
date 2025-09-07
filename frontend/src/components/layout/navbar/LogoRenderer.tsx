@@ -7,6 +7,7 @@ import {easeIn, easeOut} from "motion";
 import React, {useEffect, useState, useRef} from 'react';
 import {useScroll} from "motion/react"
 import Match from '@public/match.svg'
+import ScrollHint from "@/components/ui/ScrollHint";
 
 interface LogoPositions {
   isReady: boolean;
@@ -30,6 +31,7 @@ interface LogoRendererProps {
 export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [aspectRatio, setAspectRatio] = useState(0);
+  const [showScrollHint, setShowScrollHint] = useState(false);
   const [logoPositions, setLogoPositions] = useState<LogoPositions>({
     isReady: false,
     logoWidthRange: [0, 0],
@@ -110,6 +112,13 @@ export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps)
   const animationProgress = useMotionValue(shouldAnimate ? scrollYProgress.get() : 1);
   const handleScrollChange = (value: number) => {
     animationProgress.set(shouldAnimate ? value : 1);
+    
+    // Calculate scroll hint visibility
+    if (animate === AnimationMode.DontAnimate) {
+      setShowScrollHint(false);
+    } else {
+      setShowScrollHint(value === 0);
+    }
   };
   useMotionValueEvent(scrollYProgress, "change", handleScrollChange);
   useEffect(() => {
@@ -192,6 +201,7 @@ export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps)
           />
         </motion.div>
       )}
+      <ScrollHint shouldShow={showScrollHint} />
       <div
         className={animate === AnimationMode.DontAnimate ? 'hidden' : 'h-[calc(100lvh-var(--spacing-navbar)-var(--spacing-match-logo-scroll-offset))]'}
         ref={containerRef}
