@@ -31,13 +31,16 @@ export default function DesktopNavigation({
     <>
       <div className="grid grid-cols-3 relative gap-8 px-8">
         <div />
-        <MenuColumn
-          title="Living the Forest Lab"
-          isOpen={openDropdown === 1}
-          onToggle={() => toggleDropdown(1)}
-          onClose={closeDropdown}
-          navigationLinks={navigationLivingTheForestLab}
-        />
+        <div className="pointer-events-auto">
+          <MenuColumn
+            title="Living the Forest Lab"
+            isOpen={openDropdown === 1}
+            onToggle={() => toggleDropdown(1)}
+            onClose={closeDropdown}
+            navigationLinks={navigationLivingTheForestLab}
+          />
+        </div>
+        <div className="pointer-events-auto">
         <MenuColumn
           title="Aktivitäten"
           isOpen={openDropdown === 2}
@@ -45,12 +48,13 @@ export default function DesktopNavigation({
           onClose={closeDropdown}
           navigationLinks={navigationActivities}
         />
+        </div>
       </div>
       
       {/* Desktop backdrop overlay when dropdown is open */}
       {openDropdown && (
         <button
-          className="fixed inset-0"
+          className="fixed inset-0 pointer-events-auto"
           onClick={closeDropdown}
           aria-label="Close menu"
         />

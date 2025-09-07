@@ -30,7 +30,7 @@ export default function Navbar() {
     <ScrollAnimatedLogo />
 
     {/* Layer 3: Links with backgrounds (highest) */}
-    <nav className="fixed top-0 h-navbar w-full">
+    <nav className="fixed top-0 h-navbar w-full pointer-events-none">
       <div className="hidden sm:block">
         <DesktopNavigation
           navigationLivingTheForestLab={navigationLivingTheForestLab}
