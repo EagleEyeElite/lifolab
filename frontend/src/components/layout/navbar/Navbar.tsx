@@ -31,13 +31,13 @@ export default function Navbar() {
 
     {/* Layer 3: Links with backgrounds (highest) */}
     <nav className="fixed top-0 h-navbar w-full pointer-events-none">
-      <div className="hidden sm:block">
+      <div className="hidden md:block">
         <DesktopNavigation
           navigationLivingTheForestLab={navigationLivingTheForestLab}
           navigationActivities={navigationActivities}
         />
       </div>
-      <div className="sm:hidden">
+      <div className="md:hidden">
         <MobileNavigation
           navigationLivingTheForestLab={navigationLivingTheForestLab}
           navigationActivities={navigationActivities}

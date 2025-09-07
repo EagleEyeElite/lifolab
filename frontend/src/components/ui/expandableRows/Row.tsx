@@ -11,19 +11,19 @@ interface ExpandableButtonProps {
 
 export default function Row({ item, isExpanded, onToggle }: ExpandableButtonProps) {
   return (
-    <button className="cursor-pointer w-full py-responsive" onClick={onToggle}>
-      <div className="text-left items-center flex justify-between gap-responsive-sm sm:grid sm:gap-8 sm:grid-cols-3">
-        <span className="text-responsive-sm font-body pl-responsive">
+    <button className="@container cursor-pointer w-full py-2" onClick={onToggle}>
+      <div className="text-left items-center grid gap-8 grid-cols-2 @[600px]:grid-cols-3">
+        <span className="text-lg font-body pl-2">
           {item.name}
         </span>
 
-        <div className="hidden sm:block">
+        <div className="hidden @[600px]:block">
           <Role role={item.role} />
         </div>
 
-        <div className="pr-responsive sm:justify-self-auto">
+        <div className="justify-self-end @[600px]:justify-self-auto pr-2 @[600px]:pr-0">
           <Plus
-            size={16}
+            size={20}
             className={`duration-300 ${isExpanded ? 'rotate-45' : 'rotate-0'}`}
           />
         </div>

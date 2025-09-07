@@ -24,7 +24,7 @@ export default function DropdownMenu({ isOpen, navigationLinks, onClose }: Dropd
           {navigationLinks.map((link) => {
             const IconComponent = link.icon;
             return (
-              <li key={link.href} className="py-4 pl-2">
+              <li key={link.href} className="py-3 pl-2">
                 <Link
                   href={link.href}
                   className="flex gap-2 text-sm hover:opacity-70 transition-opacity"
