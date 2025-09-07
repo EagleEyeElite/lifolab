@@ -22,7 +22,7 @@ export default function Navbar() {
   return <>
     {/* Layer 1: Blur backdrop (lowest) */}
     <div
-      className="fixed top-0 w-full backdrop-blur-md bg-white/10 [mask-image:linear-gradient(to_bottom,black_0%,black_70%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_70%,transparent_100%)]"
+      className="fixed top-0 w-full backdrop-blur-sm bg-gradient-to-b from-white/80 via-white/20 to-transparent [mask-image:linear-gradient(to_bottom,black_0%,black_60%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_60%,transparent_100%)]"
       style={{ height: 'calc(var(--spacing-navbar) + 2rem)' }}
     />
     

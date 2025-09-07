@@ -21,7 +21,14 @@ export default function DesktopNavigation({
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
 
   const toggleDropdown = (dropdown: number) => {
-    setOpenDropdown(current => current === dropdown ? null : dropdown);
+    setOpenDropdown(current => {
+      // If clicking the same dropdown that's already open, close it
+      if (current === dropdown) {
+        return null;
+      }
+      // If clicking a different dropdown (or no dropdown is open), open the new one
+      return dropdown;
+    });
   };
 
   const closeDropdown = () => {
@@ -29,7 +36,7 @@ export default function DesktopNavigation({
   };
   return (
     <>
-      <div className="grid grid-cols-3 relative gap-8 px-8">
+      <div className="grid grid-cols-3 relative gap-8 px-8 z-20">
         <div />
         <div className="pointer-events-auto">
           <MenuColumn
@@ -54,7 +61,7 @@ export default function DesktopNavigation({
       {/* Desktop backdrop overlay when dropdown is open */}
       {openDropdown && (
         <button
-          className="fixed inset-0 pointer-events-auto"
+          className="fixed inset-0 pointer-events-auto z-10"
           onClick={closeDropdown}
           aria-label="Close menu"
         />

@@ -10,7 +10,7 @@
 
     /* Navbar */
     --spacing-navbar: 5rem;
-    --spacing-match-logo-scroll-offset: 14rem;
+    --spacing-match-logo-scroll-offset: 8rem;
 }
 
 @layer base {
