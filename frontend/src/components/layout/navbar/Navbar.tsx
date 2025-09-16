@@ -1,23 +1,14 @@
 "use client"
 
 import React from "react";
-import {Pencil, Package, Command, Globe, Mic, BookOpen} from "lucide-react";
 import ScrollAnimatedLogo from "@/components/layout/navbar/ScrollAnimatedLogo";
 import DesktopNavigation from "@/components/layout/navbar/DesktopNavigation";
 import MobileNavigation from "@/components/layout/navbar/MobileNavigation";
 
-export default function Navbar() {
-  const navigationLivingTheForestLab = [
-    { name: "About", href: "/about", icon: Pencil },
-    { name: "Personen", href: "/#people", icon: Command },
-    { name: "Orte", href: "/#places", icon: Globe },
-    { name: "Kontakt", href: "/#footer", icon: Mic }
-  ];
+import { navbar } from "@/config/siteConfig";
 
-  const navigationActivities = [
-    { name: "Projekte", href: "/#projects", icon: Package },
-    { name: "Enzyklopädie von ...", href: "/cyclopedia", icon: BookOpen },
-  ];
+export default function Navbar() {
+  const { livingTheForestLab: navigationLivingTheForestLab, activities: navigationActivities } = navbar;
 
   return <>
     {/* Layer 1: Blur backdrop (lowest) */}

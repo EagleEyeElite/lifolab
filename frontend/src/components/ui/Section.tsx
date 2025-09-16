@@ -1,5 +1,6 @@
 import React from 'react';
 import { LucideIcon } from "lucide-react";
+import SubHeading from "@/components/ui/SubHeading";
 
 interface SectionProps {
   children: React.ReactNode;
@@ -13,10 +14,9 @@ export default function Section({ children, title, icon: Icon, id }: SectionProp
     <div className="py-section" id={id}>
       {/* Section Header */}
       <div className="pb-responsive-md">
-        <div className="border-y-2 border-black py-3">
-          <h2 className="text-lg pl-3 font-heading font-bold tracking-wide flex items-center gap-2">
-            {title} {Icon && <Icon size={16} strokeWidth={2.5} />}
-          </h2>
+        <div className="border-y-2 border-black p-3 flex items-center gap-2">
+          {Icon && <Icon size={18} strokeWidth={3} />}
+          <SubHeading>{title}</SubHeading>
         </div>
       </div>
       

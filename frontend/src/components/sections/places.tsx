@@ -2,9 +2,9 @@ import React from "react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import ExpandableRows, { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
-import { Globe } from "lucide-react";
 import { GetAllPlacesQuery, GetAllPlacesQueryVariables } from "@/graphql/generatedTypes";
 import Section from "@/components/ui/Section";
+import { sections } from "@/config/siteConfig";
 
 const GetAllPlaces = gql`
     query GetAllPlaces {
@@ -38,7 +38,7 @@ export default async function Places() {
   ) || [];
 
   return (
-    <Section title="Orte" icon={Globe} id="places">
+    <Section title={sections.places.name} icon={sections.places.icon} id={sections.places.id}>
       <div className="pb-8">
         <ExpandableRows items={items} />
       </div>

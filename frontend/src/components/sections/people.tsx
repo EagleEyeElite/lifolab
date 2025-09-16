@@ -2,12 +2,12 @@ import React from "react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import CollaboratorSection from "@/components/ui/collaborator/CollaboratorSection";
-import { Command } from "lucide-react";
 import {
   GetCollaboratorsQuery,
   GetCollaboratorsQueryVariables,
 } from "@/graphql/generatedTypes";
 import Section from "@/components/ui/Section";
+import { sections, strings } from "@/config/siteConfig";
 
 const GetCollaborators = gql`
   query GetCollaborators {
@@ -46,16 +46,16 @@ export default async function People() {
   });
 
   return (
-    <Section title="Personen" icon={Command} id="people">
+    <Section title={sections.people.name} icon={sections.people.icon} id={sections.people.id}>
       <div className="pb-8">
         <CollaboratorSection
-          title="Living the Forest Lab Team"
+          title={strings.people.teamTitle}
           collaboratorSlugs={teamMemberSlugs}
         />
       </div>
       <div className="pb-8">
         <CollaboratorSection
-          title="Kollaborationen"
+          title={strings.people.collaborationsTitle}
           collaboratorSlugs={collaboratorSlugs}
         />
       </div>

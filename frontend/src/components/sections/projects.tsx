@@ -1,11 +1,11 @@
 import React from "react";
 import ProjectCard from "@/components/ui/projectsOverview/projectCard";
-import { Package } from "lucide-react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import { GetProjectsQuery, GetProjectsQueryVariables } from "@/graphql/generatedTypes";
 import MasonryLayout from "@/components/ui/projectsOverview/masonryLayout";
 import Section from "@/components/ui/Section";
+import { sections, strings } from "@/config/siteConfig";
 
 const GetProjects = gql`
     query GetProjects {
@@ -52,7 +52,7 @@ export default async function Projects() {
   }).filter(Boolean);
 
   return (
-    <Section title="Projekte" icon={Package} id="projects">
+    <Section title={sections.projects.name} icon={sections.projects.icon} id={sections.projects.id}>
       <div className="pt-2">
         <MasonryLayout>
           {projectCards}

@@ -1,10 +1,10 @@
 import React from "react";
-import { BookOpen } from "lucide-react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import CyclopediaChapter from "@/components/ui/cyclopedia/CyclopediaChapter";
 import { GetCyclopediaChaptersQuery, GetCyclopediaChaptersQueryVariables } from "@/graphql/generatedTypes";
 import Section from "@/components/ui/Section";
+import { sections } from "@/config/siteConfig";
 
 
 const GetCyclopediaChapters = gql`
@@ -43,7 +43,7 @@ export default async function Cyclopedia() {
     .filter(Boolean);
 
   return (
-    <Section title="Enzyklopädie" icon={BookOpen}>
+    <Section title={sections.cyclopedia.name} icon={sections.cyclopedia.icon}>
       <div className="flex justify-start w-full">
         <div className="w-full">
           <div className="space-y-8">

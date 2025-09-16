@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { Pencil } from "lucide-react";
 import ExpandableRows, { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
 import {graphqlClient} from "@/graphql/client";
 import {gql} from "graphql-request";
 import {GetAboutContentQuery} from "@/graphql/generatedTypes";
 import Section from "@/components/ui/Section";
 import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
+import { sections, strings } from "@/config/siteConfig";
 
 const GetAboutContent = gql`
     query GetAboutContent {
@@ -40,11 +40,11 @@ export default async function About() {
 
   // Throw error if no image is found
   if (!aboutData?.aboutFeatureImage?.node?.sourceUrl) {
-    throw new Error("Über uns Bild ist erforderlich, aber nicht in den Daten gefunden");
+    throw new Error("About Us image is required but not found in the data");
   }
 
   return (
-    <Section title="Über uns" icon={Pencil}>
+    <Section title={sections.about.name} icon={sections.about.icon}>
       {/* Main content grid container - responsive layout: 1 col mobile, 2 col tablet, 3 col desktop */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Main content - Text */}
@@ -76,7 +76,7 @@ export default async function About() {
         <div className="order-3">
           <Image
             src={aboutData.aboutFeatureImage.node.sourceUrl}
-            alt={aboutData.aboutFeatureImage.node.altText || "Über uns Bild"}
+            alt={aboutData.aboutFeatureImage.node.altText || ""}
             width={aboutData.aboutFeatureImage.node.mediaDetails!.width!}
             height={aboutData.aboutFeatureImage.node.mediaDetails!.height!}
             className="w-full h-auto object-cover rounded-primary"

@@ -49,7 +49,7 @@ export default function DesktopNavigation({
         </div>
         <div className="pointer-events-auto">
         <MenuColumn
-          title="Aktivitäten"
+          title="Activities"
           isOpen={openDropdown === 2}
           onToggle={() => toggleDropdown(2)}
           onClose={closeDropdown}
