@@ -37,7 +37,17 @@ export default async function People() {
         teamMemberSlugs.push(slug);
         teamMemberSlugs.push(slug);
         teamMemberSlugs.push(slug);
+        teamMemberSlugs.push(slug);
+        teamMemberSlugs.push(slug);
+        teamMemberSlugs.push(slug);
       } else {
+        collaboratorSlugs.push(slug);
+        collaboratorSlugs.push(slug);
+        collaboratorSlugs.push(slug);
+        collaboratorSlugs.push(slug);
+        collaboratorSlugs.push(slug);
+        collaboratorSlugs.push(slug);
+        collaboratorSlugs.push(slug);
         collaboratorSlugs.push(slug);
         collaboratorSlugs.push(slug);
         collaboratorSlugs.push(slug);
@@ -51,12 +61,14 @@ export default async function People() {
         <CollaboratorSection
           title={strings.people.teamTitle}
           collaboratorSlugs={teamMemberSlugs}
+          columns={3}
         />
       </div>
       <div className="pb-8">
         <CollaboratorSection
           title={strings.people.collaborationsTitle}
           collaboratorSlugs={collaboratorSlugs}
+          columns={3}
         />
       </div>
     </Section>

@@ -7,7 +7,7 @@ import { ExpandableRowItem } from "./ExpandableRows";
 export default function ExpandableRow(item: ExpandableRowItem) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  return <>
+  return <div>
       <Row
         item={item}
         isExpanded={isExpanded}
@@ -17,5 +17,5 @@ export default function ExpandableRow(item: ExpandableRowItem) {
         item={item}
         isExpanded={isExpanded}
       />
-  </>
+  </div>
 }

@@ -1,7 +1,8 @@
 import React from "react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
-import ExpandableRows, { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
+import ThreeColumnExpandableRows from "@/components/ui/expandableRows/ThreeColumnExpandableRows";
+import { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
 import { GetAllCollaboratorsQuery, GetAllCollaboratorsQueryVariables } from "@/graphql/generatedTypes";
 import SubHeading from "@/components/ui/SubHeading";
 
@@ -36,9 +37,10 @@ const GetAllCollaborators = gql`
 interface CollaboratorSectionProps {
   title: string;
   collaboratorSlugs: string[];
+  columns?: number;
 }
 
-export default async function CollaboratorSection({ title, collaboratorSlugs }: CollaboratorSectionProps) {
+export default async function CollaboratorSection({ title, collaboratorSlugs, columns = 1 }: CollaboratorSectionProps) {
   const data = await graphqlClient.request<GetAllCollaboratorsQuery, GetAllCollaboratorsQueryVariables>(GetAllCollaborators);
 
   const items: ExpandableRowItem[] = collaboratorSlugs
@@ -64,6 +66,6 @@ export default async function CollaboratorSection({ title, collaboratorSlugs }: 
     <div className="pb-4">
       <SubHeading>{title}</SubHeading>
     </div>
-    <ExpandableRows items={items} />
+    <ThreeColumnExpandableRows items={items} columns={columns} />
   </>
 }
