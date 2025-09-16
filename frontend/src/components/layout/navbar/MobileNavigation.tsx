@@ -36,13 +36,13 @@ export default function MobileNavigation({
       <div className="flex justify-end pr-8">
         <button
           onClick={toggle}
-          className="flex items-center gap-2 px-4 py-2 mt-4 bg-primary rounded-lg hover:opacity-70 transition-opacity pointer-events-auto"
+          className="flex items-center gap-2 px-4 py-2 mt-4 bg-primary rounded-primary hover:opacity-70 transition-opacity pointer-events-auto"
         >
           <span className={isOpen ? '' : 'underline'}>Menu</span>
           <Plus size={16} className={`transition-transform ${isOpen ? 'rotate-45' : ''}`} />
         </button>
       </div>
-      <div className={`absolute top-full right-8 w-80 mt-2 bg-primary border border-black/20 rounded-lg shadow-lg pointer-events-auto transition-all duration-300 transform-gpu ${
+      <div className={`absolute top-full right-8 w-80 mt-2 bg-primary border border-black/20 rounded-primary shadow-lg pointer-events-auto transition-all duration-300 transform-gpu ${
         isOpen 
           ? 'opacity-100 scale-100 translate-y-0' 
           : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'

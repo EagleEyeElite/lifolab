@@ -79,7 +79,7 @@ export default async function About() {
             alt={aboutData.aboutFeatureImage.node.altText || "Über uns Bild"}
             width={aboutData.aboutFeatureImage.node.mediaDetails!.width!}
             height={aboutData.aboutFeatureImage.node.mediaDetails!.height!}
-            className="w-full h-auto object-cover rounded-lg"
+            className="w-full h-auto object-cover rounded-primary"
           />
         </div>
       </div>

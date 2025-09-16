@@ -55,7 +55,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 key={index}
                 style={{ flexBasis: `${slideWidth}rem` }}
               >
-                <div className="shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] rounded-[1.8rem] overflow-hidden h-[19rem] select-none">
+                <div className="shadow-[inset_0_0_0_0.2rem_rgb(234,234,234)] rounded-primary overflow-hidden h-[19rem] select-none">
                   <Image
                     src={image.src}
                     alt={image.alt}

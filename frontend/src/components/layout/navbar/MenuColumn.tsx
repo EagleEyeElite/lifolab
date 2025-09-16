@@ -20,11 +20,11 @@ export default function MenuColumn({ title, isOpen, onToggle, onClose, navigatio
   return <>
     <div className="relative flex flex-col transition-all duration-300">
       {/* LAYER 1: Button background (bottom layer) */}
-      <div className="absolute top-4 left-0 right-0 h-10 bg-primary/90 backdrop-blur-sm rounded-lg" />
+      <div className="absolute top-4 left-0 right-0 h-10 bg-primary/90 backdrop-blur-sm rounded-primary" />
 
       {/* LAYER 2: Dropdown background (middle layer) */}
       <div
-        className="absolute inset-0 bg-primary rounded-b-3xl border-x border-b border-black/20 transition-all duration-300 ease-out origin-top shadow-lg scale-y-0 opacity-0 data-[open=true]:scale-y-100 data-[open=true]:opacity-100"
+        className="absolute inset-0 bg-primary rounded-b-primary border-x border-b border-black/20 transition-all duration-300 ease-out origin-top shadow-lg scale-y-0 opacity-0 data-[open=true]:scale-y-100 data-[open=true]:opacity-100"
         data-open={isOpen}
       />
 

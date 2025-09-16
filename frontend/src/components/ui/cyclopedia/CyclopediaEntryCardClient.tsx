@@ -105,7 +105,7 @@ export default function CyclopediaEntryCardClient({ id, title, content, slug, fe
   }, [isExpanded, isTruncated]);
 
   return (
-    <div className="bg-white border border-black rounded-none overflow-hidden">
+    <div className="bg-white border border-black rounded-primary overflow-hidden">
       {entry.featuredImage?.node?.sourceUrl && (
         <div className="relative w-full h-48">
           <Image

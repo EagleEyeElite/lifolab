@@ -140,7 +140,7 @@ export default function HTMLRenderer({ content, className, style }: HTMLRenderer
           if (classes.includes('wp-block-image')) {
             const children = domToReact(domNode.children as DOMNode[]);
             return (
-              <div className="overflow-hidden rounded-lg">
+              <div className="overflow-hidden rounded-primary">
                 {children}
               </div>
             );

@@ -90,9 +90,9 @@ export default function ProjectCardClient({
       }`}
     >
       {/* Hover background that expands outward */}
-      <div className="absolute -inset-2 bg-gray-100 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="absolute -inset-2 bg-gray-100 rounded-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
     <Link href={href} className="relative z-10">
-      <div className={`relative overflow-hidden rounded-lg group-hover:shadow-lg duration-300 ${getImageClassName(imageSize)}`}>
+      <div className={`relative overflow-hidden rounded-primary group-hover:shadow-lg duration-300 ${getImageClassName(imageSize)}`}>
         <Image
           src={image}
           alt={title}
@@ -101,7 +101,7 @@ export default function ProjectCardClient({
           sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"
         />
         <div className="absolute bottom-0 right-0">
-          <div className="bg-black/30 backdrop-blur-sm px-2 py-1 rounded-tl-lg shadow-sm">
+          <div className="bg-black/30 backdrop-blur-sm px-2 py-1 rounded-tl-primary shadow-sm">
             <HTMLRenderer content={whenAndWhere} className="text-xs text-gray-300" />
           </div>
         </div>
