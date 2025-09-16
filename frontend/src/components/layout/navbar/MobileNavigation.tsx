@@ -42,7 +42,7 @@ export default function MobileNavigation({
           <Plus size={16} className={`transition-transform ${isOpen ? 'rotate-45' : ''}`} />
         </button>
       </div>
-      <div className={`absolute top-full right-8 w-80 mt-2 bg-primary border border-black/20 rounded-primary shadow-lg pointer-events-auto transition-all duration-300 transform-gpu ${
+      <div className={`absolute top-full right-8 w-80 mt-2 bg-primary rounded-primary backdrop-blur-sm pointer-events-auto transition-all duration-300 transform-gpu ${
         isOpen 
           ? 'opacity-100 scale-100 translate-y-0' 
           : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'

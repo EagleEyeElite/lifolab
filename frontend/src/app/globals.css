@@ -12,6 +12,9 @@
     /* Navbar */
     --spacing-navbar: theme(spacing.20);
     --spacing-match-logo-scroll-offset: theme(spacing.32);
+    
+    /* Layout */
+    --spacing-three-column-gap: theme(spacing.12);
 }
 
 @layer base {

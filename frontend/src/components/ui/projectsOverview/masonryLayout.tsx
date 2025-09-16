@@ -18,12 +18,12 @@ export default function MasonryLayout({ children }: MasonryLayoutProps) {
   };
 
   useEffect(() => {
-    // Calculate spacing from CSS custom properties
+    // Get the three-column gap from CSS custom properties
     const styles = getComputedStyle(document.documentElement);
     const fontSize = parseFloat(styles.fontSize);
-    const spacing12 = parseFloat(styles.getPropertyValue('--spacing')) * 12 * fontSize;
+    const threeColumnGap = parseFloat(styles.getPropertyValue('--spacing-three-column-gap')) * fontSize;
 
-    setGapSize(spacing12);
+    setGapSize(threeColumnGap);
   }, []);
 
   const cards = React.Children.map(children, (child, index) => (

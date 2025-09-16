@@ -8,7 +8,7 @@ import MobileNavigation from "@/components/layout/navbar/MobileNavigation";
 
 export default function Navbar() {
   const navigationLivingTheForestLab = [
-    { name: "Über uns", href: "/about", icon: Pencil },
+    { name: "About", href: "/about", icon: Pencil },
     { name: "Personen", href: "/#people", icon: Command },
     { name: "Orte", href: "/#places", icon: Globe },
     { name: "Kontakt", href: "/#footer", icon: Mic }

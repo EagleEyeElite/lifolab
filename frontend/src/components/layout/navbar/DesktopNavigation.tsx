@@ -35,8 +35,8 @@ export default function DesktopNavigation({
     setOpenDropdown(null);
   };
   return (
-    <>
-      <div className="grid grid-cols-3 relative gap-8 px-8 z-20">
+    <div className="relative z-20 px-container">
+      <div className="grid grid-cols-3 px-section gap-three-column-gap">
         <div />
         <div className="pointer-events-auto">
           <MenuColumn
@@ -66,6 +66,6 @@ export default function DesktopNavigation({
           aria-label="Close menu"
         />
       )}
-    </>
+    </div>
   );
 }

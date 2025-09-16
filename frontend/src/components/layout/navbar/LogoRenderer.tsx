@@ -82,7 +82,8 @@ export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps)
       const fontSize = parseFloat(styles.fontSize);
       const navbarHeight = parseFloat(styles.getPropertyValue('--spacing-navbar')) * fontSize;
       const spacing2 = parseFloat(styles.getPropertyValue('--spacing')) * 2 * fontSize;
-      if (isNaN(fontSize) || isNaN(navbarHeight) || isNaN(spacing2)) {
+      const spacing6 = parseFloat(styles.getPropertyValue('--spacing')) * 6 * fontSize;
+      if (isNaN(fontSize) || isNaN(navbarHeight) || isNaN(spacing2) || isNaN(spacing6)) {
         throw new Error(`Invalid CSS variable`);
       }
 
@@ -97,7 +98,7 @@ export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps)
         isReady: true,
         logoWidthRange: [logoWidth, finalWidth],
         logoHeightRange: [logoHeight, finalHeight],
-        logoXRange: [vw * 0.5, (finalWidth * 0.5) + spacing2],
+        logoXRange: [vw * 0.5, (finalWidth * 0.5) + spacing6],
         logoYRange: [vh * 0.5, navbarHeight * 0.5]
       });
     };
