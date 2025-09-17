@@ -1,4 +1,4 @@
-import TagList from '@/components/ui/tags/TagList';
+import CategoryList from '@/components/ui/categories/CategoryList';
 
 interface PostTagsProps {
   tags: string[];
@@ -11,7 +11,7 @@ export default function PostTags({ tags }: PostTagsProps) {
 
   return (
     <div className="pb-responsive">
-      <TagList tagIds={tags} />
+      <CategoryList tagIds={tags} />
     </div>
   );
 }

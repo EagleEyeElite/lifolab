@@ -1,7 +1,7 @@
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import ProjectCard from '@/components/ui/projectsOverview/projectCard';
-import TagList from '@/components/ui/tags/TagList';
+import CategoryList from '@/components/ui/categories/CategoryList';
 import {
   GetTagWithProjectsAndAllTagsQuery,
   GetTagWithProjectsAndAllTagsQueryVariables
@@ -71,7 +71,7 @@ export default async function TagPage({ params }: TagPageProps) {
       <div className="pr-2">
         <SubHeading>{strings.tags.categories}:</SubHeading>
       </div>
-      <TagList tagIds={allTagIds} selectedTagSlug={tag} />
+      <CategoryList tagIds={allTagIds} selectedTagSlug={tag} />
     </div>
   </>
 

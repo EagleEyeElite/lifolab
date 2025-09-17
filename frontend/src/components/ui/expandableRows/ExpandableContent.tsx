@@ -30,7 +30,7 @@ function ReferencedLinks({ links }: { links?: Array<{ slug: string; title: strin
         <li key={index}>
           <Link
             href={`/${link.slug}`}
-            className="font-heading text-xs text-gray-500"
+            className="font-heading text-xs text-black underline"
           >
             {link.title} <ArrowUpRight className="inline-block" size={16} />
           </Link>
@@ -40,30 +40,28 @@ function ReferencedLinks({ links }: { links?: Array<{ slug: string; title: strin
   );
 }
 
-function ContentMeta({ item }: { item: ExpandableRowItem }) {
-  const hasContent = item.role || (item.referencedLinks && item.referencedLinks.length > 0);
-  if (!hasContent) return null;
-
-  return <>
-    <div className="pt-8 pb-2">
-      <div className="h-px bg-gray-400" />
-    </div>
-    <div className="pb-3 @[600px]:hidden">
-      <Role role={item.role} />
-    </div>
-    <ReferencedLinks links={item.referencedLinks} />
-  </>
-}
 
 export default function ExpandableContent({ item, isExpanded }: ExpandableContentProps) {
   return (
     <Expandable isExpanded={isExpanded}>
       <div className="@container pt-2 pb-3">
-        <div className={`p-4 rounded-primary text-sm leading-relaxed bg-primary transition-all duration-300 ease-out ${
+        <div className={`p-4 rounded-primary text-sm leading-relaxed transition-all duration-300 ease-out bg-secondary ${
           isExpanded ? 'translate-y-0' : '-translate-y-2'
         }`}>
+          {/* 1. Role first */}
+          <div className="pb-3 @[600px]:hidden">
+            <Role role={item.role} />
+          </div>
+
+          {/* 2. Info text second */}
           <HTMLRenderer content={item.content} className="text-black"/>
-          <ContentMeta item={item} />
+
+          {/* 3. Links last */}
+          {item.referencedLinks && item.referencedLinks.length > 0 && (
+            <div className="pt-3">
+              <ReferencedLinks links={item.referencedLinks} />
+            </div>
+          )}
         </div>
       </div>
     </Expandable>

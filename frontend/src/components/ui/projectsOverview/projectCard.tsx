@@ -2,7 +2,7 @@ import React from "react";
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import ProjectCardClient from './ProjectCardClient';
-import TagList from '@/components/ui/tags/TagList';
+import CategoryList from '@/components/ui/categories/CategoryList';
 import {GetProjectCardQuery, GetProjectCardQueryVariables} from "@/graphql/generatedTypes";
 
 const GetProjectCard = gql`
@@ -60,7 +60,7 @@ export default async function ProjectCard({ id, imageSize }: ProjectCardProps) {
       excerpt={project.excerpt || undefined}
       image={project.featuredImage?.node?.sourceUrl || ''}
       imageSize={imageSize}
-      tagList={<TagList tagIds={tagIds} />}
+      tagList={<CategoryList tagIds={tagIds} />}
     />
   );
 }

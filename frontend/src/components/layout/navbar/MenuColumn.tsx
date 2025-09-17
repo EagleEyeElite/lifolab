@@ -21,7 +21,7 @@ export default function MenuColumn({ title, isOpen, onToggle, onClose, navigatio
     <div className="relative w-full  flex flex-col transition-all duration-300">
       {/* LAYER 1: Dropdown background (middle layer) */}
       <div
-        className="absolute inset-0 bg-primary rounded-b-primary transition-all duration-300 ease-out origin-top backdrop-blur-sm scale-y-0 opacity-0 data-[open=true]:scale-y-100 data-[open=true]:opacity-100"
+        className="absolute inset-0 bg-secondary rounded-b-primary transition-all duration-300 ease-out origin-top backdrop-blur-sm scale-y-0 opacity-0 data-[open=true]:scale-y-100 data-[open=true]:opacity-100"
         data-open={isOpen}
       />
 

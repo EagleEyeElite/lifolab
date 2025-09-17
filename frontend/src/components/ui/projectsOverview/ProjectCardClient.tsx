@@ -85,35 +85,25 @@ export default function ProjectCardClient({
   return <>
     <div
       ref={cardRef}
-      className={`group relative ${shouldAnimate ? 'duration-300 ease-out' : ''} ${
+      className={`group relative ${shouldAnimate ? 'duration-200 ease-out' : ''} ${
         isVisible ? 'opacity-100 translate-y-0' : shouldAnimate ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
       }`}
     >
-      {/* Hover background that expands outward */}
-      <div className="absolute -inset-2 bg-gray-100 rounded-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
     <Link href={href} className="relative z-10">
-      <div className={`relative overflow-hidden rounded-primary group-hover:shadow-lg duration-300 ${getImageClassName(imageSize)}`}>
+      <div className={`relative duration-200 ${getImageClassName(imageSize)}`}>
         <Image
           src={image}
           alt={title}
           fill
-          className="object-cover group-hover:scale-105 duration-300"
+          className="object-cover rounded-primary group-hover:blur-xs duration-200"
           sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"
         />
-        <div className="absolute bottom-0 right-0">
-          <div className="bg-black/30 backdrop-blur-sm px-2 py-1 rounded-tl-primary shadow-sm">
-            <HTMLRenderer content={whenAndWhere} className="text-xs text-gray-300" />
-          </div>
-        </div>
       </div>
-      <div className="pt-2">
+      <div className="pt-2 group-hover:text-secondary">
         <SubHeading>{title}</SubHeading>
       </div>
-      <div className="pt-1">
-        <HTMLRenderer content={excerpt}/>
-      </div>
     </Link>
-    <div className="font-heading pt-3 relative z-10">
+    <div className="font-heading pt-3 relative z-10 group-hover:blur-xs duration-200">
       {tagList}
     </div>
     </div>

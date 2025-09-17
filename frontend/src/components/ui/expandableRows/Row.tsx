@@ -13,7 +13,7 @@ export default function Row({ item, isExpanded, onToggle }: ExpandableButtonProp
   return (
     <button className="@container cursor-pointer w-full py-2" onClick={onToggle}>
       <div className="flex items-center gap-4 text-left @[600px]:grid @[600px]:grid-cols-3 @[600px]:gap-8">
-        <span className="text-lg font-body pl-2 flex-1 @[600px]:flex-none">
+        <span className="text-lg font-body pl-2 flex-1 @[600px]:flex-none text-black">
           {item.name}
         </span>
 

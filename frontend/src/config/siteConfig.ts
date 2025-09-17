@@ -6,6 +6,7 @@ import {
   Mail,
   FolderOpen,
   BookOpen,
+  Tag,
 } from "lucide-react";
 
 export interface NavigationItem {
@@ -24,7 +25,7 @@ interface PageConfig {
 // Single source of truth for all page/section configurations
 const pageConfigs: Record<string, PageConfig> = {
   about: {
-    name: "About Us",
+    name: "About",
     icon: Info,
     href: "/about"
   },
@@ -55,6 +56,11 @@ const pageConfigs: Record<string, PageConfig> = {
     name: "Contact",
     icon: Mail,
     href: "/#footer"
+  },
+  tags: {
+    name: "Categories",
+    icon: Tag,
+    href: "/categories"
   }
 } as const;
 
@@ -69,6 +75,7 @@ export const siteConfig = {
 
     activities: [
       pageConfigs.projects,
+      pageConfigs.tags,
       { name: "Encyclopedia of ...", href: pageConfigs.cyclopedia.href, icon: pageConfigs.cyclopedia.icon }
     ] as NavigationItem[]
   },

@@ -1,6 +1,5 @@
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
-import PostHeader from './PostHeader';
 import PostTags from './PostTags';
 import PeopleSection from '@/components/ui/people/PeopleSection';
 import {
@@ -8,6 +7,7 @@ import {
   GetProjectOverviewQueryVariables,
 } from "@/graphql/generatedTypes";
 import {siteConfig} from "@/config/siteConfig";
+import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 
 const GetProjectOverview = gql`
     query GetProjectOverview($id: ID!) {
@@ -39,9 +39,10 @@ const GetProjectOverview = gql`
 
 interface ProjectOverviewProps {
   id: string;
+  whenAndWhere?: string | null;
 }
 
-export default async function ProjectOverview({ id }: ProjectOverviewProps) {
+export default async function ProjectOverview({ id, whenAndWhere }: ProjectOverviewProps) {
   const { project } = await graphqlClient.request<GetProjectOverviewQuery, GetProjectOverviewQueryVariables>(
     GetProjectOverview,
     { id }
@@ -63,7 +64,16 @@ export default async function ProjectOverview({ id }: ProjectOverviewProps) {
   
   return (
     <>
-      <PostHeader title={project.title} excerpt={project.excerpt} />
+      {whenAndWhere && (
+        <div className="font-heading text-sm pb-4 text-black">
+          {whenAndWhere}
+        </div>
+      )}
+      {project.excerpt && (
+        <div className="pb-8">
+            <HTMLRenderer className={"text-black"} content={project.excerpt} />
+        </div>
+      )}
       <PostTags tags={tagIds} />
       <PeopleSection
         title={siteConfig.strings.postOverView.collaborators}

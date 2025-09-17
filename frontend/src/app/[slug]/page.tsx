@@ -15,6 +15,7 @@ const GetProjectWhenAndWhere = gql`
     query GetProjectWhenAndWhere($id: ID!) {
         project(id: $id, idType: SLUG) {
             id
+            title
             projectDetails {
                 whenAndWhere
             }
@@ -34,10 +35,10 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
   }
 
   return (
-    <Section title={project.projectDetails?.whenAndWhere || "Projekt Details"}>
+    <Section title={project.title || ""}>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-4">
-          <ProjectOverview id={project.id} />
+          <ProjectOverview id={project.id} whenAndWhere={project.projectDetails?.whenAndWhere} />
         </div>
         <div className="lg:col-span-6 pb-responsive-lg">
           <ProjectContent slug={slug} />

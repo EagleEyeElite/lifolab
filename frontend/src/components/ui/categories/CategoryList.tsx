@@ -17,7 +17,7 @@ const GetTagsByIds = gql`
     }
 `;
 
-export default async function TagList({ tagIds, selectedTagSlug }: {
+export default async function CategoryList({ tagIds, selectedTagSlug }: {
   tagIds: string[];
   selectedTagSlug?: string;
 }) {
@@ -34,12 +34,13 @@ export default async function TagList({ tagIds, selectedTagSlug }: {
         return (
           <Link
             key={tag.id}
-            href={`/tags/${tag.slug}`}
-            className={`inline-flex items-center px-2 py-1 text-xs font-heading border border-gray-500 rounded-full ${
+            href={`/categories/${tag.slug}`}
+            className={`inline-flex items-center px-2 py-1 text-xs font-heading rounded-full ${
               isSelected
-                ? 'bg-green-500 text-white'
-                : 'bg-secondary text-gray-500'
+                ? 'text-black'
+                : 'text-black'
             }`}
+            style={{ backgroundColor: '#d3ff17' }}
           >
             {tag.name}
           </Link>

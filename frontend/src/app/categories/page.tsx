@@ -4,7 +4,7 @@ import {
   GetAllTagsQuery,
   GetAllTagsQueryVariables,
 } from "@/graphql/generatedTypes";
-import TagList from "@/components/ui/tags/TagList";
+import CategoryList from "@/components/ui/categories/CategoryList";
 import Section from '@/components/ui/Section';
 import { Tag } from 'lucide-react';
 import React from "react";
@@ -39,7 +39,7 @@ export default async function TagsPage() {
             <div className="pr-2">
               <SubHeading>{strings.tags.categories}:</SubHeading>
             </div>
-            <TagList tagIds={ids} />
+            <CategoryList tagIds={ids} />
           </div>
         </div>
       </div>

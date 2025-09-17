@@ -5,7 +5,7 @@ export default function Role({ role }: {
 }) {
   if (!role) return null;
   return (
-    <span className={`text-sm text-gray-500 font-heading`}>
+    <span className={`text-sm text-black font-heading`}>
       {role}
     </span>
   );

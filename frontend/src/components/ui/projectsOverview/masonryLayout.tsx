@@ -27,7 +27,7 @@ export default function MasonryLayout({ children }: MasonryLayoutProps) {
   }, []);
 
   const cards = React.Children.map(children, (child, index) => (
-      <div className="pb-5">
+      <div className="pb-3">
         {child}
       </div>
     ))
@@ -37,7 +37,7 @@ export default function MasonryLayout({ children }: MasonryLayoutProps) {
   // Render fallback during server-side rendering and initial client render
   if (!isMounted) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {cards}
       </div>
     );

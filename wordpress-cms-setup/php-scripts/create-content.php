@@ -20,8 +20,8 @@ $image_1_id = get_attachment_id('exampleUpload1.jpeg');
 $image_2_id = get_attachment_id('exampleUpload2.jpeg');
 $image_3_id = get_attachment_id('exampleUpload3.jpeg');
 
-// Create tags
-echo "Setting up tags...\n";
+// Create categories
+echo "Setting up categories...\n";
 wp_insert_term('Project', 'post_tag');
 wp_insert_term('Workshop', 'post_tag');
 

@@ -12747,17 +12747,12 @@ export type GetProjectWhenAndWhereQueryVariables = Exact<{
 }>;
 
 
-export type GetProjectWhenAndWhereQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', id: string, projectDetails?: { __typename?: 'ProjectDetails', whenAndWhere: string } | null } | null };
+export type GetProjectWhenAndWhereQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', id: string, title?: string | null, projectDetails?: { __typename?: 'ProjectDetails', whenAndWhere: string } | null } | null };
 
 export type GetAboutContentQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetAboutContentQuery = { __typename?: 'RootQuery', aboutSettings?: { __typename?: 'AboutSettings', aboutOptions?: { __typename?: 'AboutOptions', aboutTitle?: string | null, aboutContentText?: string | null, aboutExpandableInfoGroups?: Array<{ __typename?: 'AboutOptionsAboutExpandableInfoGroups', expandableInfo?: Array<{ __typename?: 'AboutOptionsAboutExpandableInfoGroupsExpandableInfo', title?: string | null, content?: string | null } | null> | null } | null> | null, aboutFeatureImage?: { __typename?: 'AcfMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null, mediaDetails?: { __typename?: 'MediaDetails', width?: number | null, height?: number | null } | null } } | null } | null } | null };
-
-export type GetCyclopediaChaptersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetCyclopediaChaptersQuery = { __typename?: 'RootQuery', cyclopediaChapters?: { __typename?: 'RootQueryToCyclopediaChapterConnection', edges: Array<{ __typename?: 'RootQueryToCyclopediaChapterConnectionEdge', node: { __typename?: 'CyclopediaChapter', id: string, cyclopediaChapterDetails?: { __typename?: 'CyclopediaChapterDetails', chapterOrder: number } | null } }> } | null };
 
 export type GetTagWithProjectsAndAllTagsQueryVariables = Exact<{
   slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
@@ -12770,6 +12765,11 @@ export type GetAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetAllTagsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string } }> } | null };
+
+export type GetCyclopediaChaptersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCyclopediaChaptersQuery = { __typename?: 'RootQuery', cyclopediaChapters?: { __typename?: 'RootQueryToCyclopediaChapterConnection', edges: Array<{ __typename?: 'RootQueryToCyclopediaChapterConnectionEdge', node: { __typename?: 'CyclopediaChapter', id: string, cyclopediaChapterDetails?: { __typename?: 'CyclopediaChapterDetails', chapterOrder: number } | null } }> } | null };
 
 export type GetContactContentQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12800,6 +12800,25 @@ export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetProjectsQuery = { __typename?: 'RootQuery', projects?: { __typename?: 'RootQueryToProjectConnection', edges: Array<{ __typename?: 'RootQueryToProjectConnectionEdge', node: { __typename?: 'Project', id: string } }> } | null };
+
+export type GetAllTagsWithDetailsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllTagsWithDetailsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null };
+
+export type GetProjectsByTagQueryVariables = Exact<{
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+}>;
+
+
+export type GetProjectsByTagQuery = { __typename?: 'RootQuery', projects?: { __typename?: 'RootQueryToProjectConnection', edges: Array<{ __typename?: 'RootQueryToProjectConnectionEdge', node: { __typename?: 'Project', id: string, slug?: string | null } }> } | null };
+
+export type GetTagsByIdsQueryVariables = Exact<{
+  ids: Array<Scalars['ID']['input']> | Scalars['ID']['input'];
+}>;
+
+
+export type GetTagsByIdsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null };
 
 export type GetChapterWithEntryIdsQueryVariables = Exact<{
   chapterId: Scalars['ID']['input'];
@@ -12841,25 +12860,6 @@ export type GetProjectCardQueryVariables = Exact<{
 
 export type GetProjectCardQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', id: string, title?: string | null, date?: string | null, slug?: string | null, excerpt?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null, tags?: { __typename?: 'ProjectToTagConnection', edges: Array<{ __typename?: 'ProjectToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null, projectDetails?: { __typename?: 'ProjectDetails', whenAndWhere: string } | null } | null };
 
-export type GetTagsByIdsQueryVariables = Exact<{
-  ids: Array<Scalars['ID']['input']> | Scalars['ID']['input'];
-}>;
-
-
-export type GetTagsByIdsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null };
-
-export type GetAllTagsWithDetailsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetAllTagsWithDetailsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null };
-
-export type GetProjectsByTagQueryVariables = Exact<{
-  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
-}>;
-
-
-export type GetProjectsByTagQuery = { __typename?: 'RootQuery', projects?: { __typename?: 'RootQueryToProjectConnection', edges: Array<{ __typename?: 'RootQueryToProjectConnectionEdge', node: { __typename?: 'Project', id: string, slug?: string | null } }> } | null };
-
 type AuthorDetailsFields_MediaItem_Fragment = { __typename?: 'MediaItem', author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } } | null };
 
 type AuthorDetailsFields_Page_Fragment = { __typename?: 'Page', author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } } | null };
@@ -12886,6 +12886,7 @@ export const GetProjectWhenAndWhereDocument = gql`
     query GetProjectWhenAndWhere($id: ID!) {
   project(id: $id, idType: SLUG) {
     id
+    title
     projectDetails {
       whenAndWhere
     }
@@ -12912,20 +12913,6 @@ export const GetAboutContentDocument = gql`
             width
             height
           }
-        }
-      }
-    }
-  }
-}
-    `;
-export const GetCyclopediaChaptersDocument = gql`
-    query GetCyclopediaChapters {
-  cyclopediaChapters(first: 50) {
-    edges {
-      node {
-        id
-        cyclopediaChapterDetails {
-          chapterOrder
         }
       }
     }
@@ -12966,6 +12953,20 @@ export const GetAllTagsDocument = gql`
     edges {
       node {
         id
+      }
+    }
+  }
+}
+    `;
+export const GetCyclopediaChaptersDocument = gql`
+    query GetCyclopediaChapters {
+  cyclopediaChapters(first: 50) {
+    edges {
+      node {
+        id
+        cyclopediaChapterDetails {
+          chapterOrder
+        }
       }
     }
   }
@@ -13047,6 +13048,44 @@ export const GetProjectsDocument = gql`
     edges {
       node {
         id
+      }
+    }
+  }
+}
+    `;
+export const GetAllTagsWithDetailsDocument = gql`
+    query GetAllTagsWithDetails {
+  tags {
+    edges {
+      node {
+        id
+        name
+        slug
+      }
+    }
+  }
+}
+    `;
+export const GetProjectsByTagDocument = gql`
+    query GetProjectsByTag($slug: [String]) {
+  projects(where: {tagSlugIn: $slug}) {
+    edges {
+      node {
+        id
+        slug
+      }
+    }
+  }
+}
+    `;
+export const GetTagsByIdsDocument = gql`
+    query GetTagsByIds($ids: [ID!]!) {
+  tags(where: {include: $ids}) {
+    edges {
+      node {
+        id
+        name
+        slug
       }
     }
   }
@@ -13183,44 +13222,6 @@ export const GetProjectCardDocument = gql`
   }
 }
     `;
-export const GetTagsByIdsDocument = gql`
-    query GetTagsByIds($ids: [ID!]!) {
-  tags(where: {include: $ids}) {
-    edges {
-      node {
-        id
-        name
-        slug
-      }
-    }
-  }
-}
-    `;
-export const GetAllTagsWithDetailsDocument = gql`
-    query GetAllTagsWithDetails {
-  tags {
-    edges {
-      node {
-        id
-        name
-        slug
-      }
-    }
-  }
-}
-    `;
-export const GetProjectsByTagDocument = gql`
-    query GetProjectsByTag($slug: [String]) {
-  projects(where: {tagSlugIn: $slug}) {
-    edges {
-      node {
-        id
-        slug
-      }
-    }
-  }
-}
-    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -13235,14 +13236,14 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetAboutContent(variables?: GetAboutContentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAboutContentQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAboutContentQuery>({ document: GetAboutContentDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAboutContent', 'query', variables);
     },
-    GetCyclopediaChapters(variables?: GetCyclopediaChaptersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCyclopediaChaptersQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetCyclopediaChaptersQuery>({ document: GetCyclopediaChaptersDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCyclopediaChapters', 'query', variables);
-    },
     GetTagWithProjectsAndAllTags(variables?: GetTagWithProjectsAndAllTagsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetTagWithProjectsAndAllTagsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetTagWithProjectsAndAllTagsQuery>({ document: GetTagWithProjectsAndAllTagsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTagWithProjectsAndAllTags', 'query', variables);
     },
     GetAllTags(variables?: GetAllTagsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllTagsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllTagsQuery>({ document: GetAllTagsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllTags', 'query', variables);
+    },
+    GetCyclopediaChapters(variables?: GetCyclopediaChaptersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCyclopediaChaptersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetCyclopediaChaptersQuery>({ document: GetCyclopediaChaptersDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCyclopediaChapters', 'query', variables);
     },
     GetContactContent(variables?: GetContactContentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetContactContentQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetContactContentQuery>({ document: GetContactContentDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetContactContent', 'query', variables);
@@ -13262,6 +13263,15 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetProjects(variables?: GetProjectsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectsQuery>({ document: GetProjectsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjects', 'query', variables);
     },
+    GetAllTagsWithDetails(variables?: GetAllTagsWithDetailsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllTagsWithDetailsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAllTagsWithDetailsQuery>({ document: GetAllTagsWithDetailsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllTagsWithDetails', 'query', variables);
+    },
+    GetProjectsByTag(variables?: GetProjectsByTagQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectsByTagQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProjectsByTagQuery>({ document: GetProjectsByTagDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectsByTag', 'query', variables);
+    },
+    GetTagsByIds(variables: GetTagsByIdsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetTagsByIdsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetTagsByIdsQuery>({ document: GetTagsByIdsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTagsByIds', 'query', variables);
+    },
     GetChapterWithEntryIds(variables: GetChapterWithEntryIdsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetChapterWithEntryIdsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetChapterWithEntryIdsQuery>({ document: GetChapterWithEntryIdsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetChapterWithEntryIds', 'query', variables);
     },
@@ -13279,15 +13289,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetProjectCard(variables: GetProjectCardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectCardQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectCardQuery>({ document: GetProjectCardDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectCard', 'query', variables);
-    },
-    GetTagsByIds(variables: GetTagsByIdsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetTagsByIdsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetTagsByIdsQuery>({ document: GetTagsByIdsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTagsByIds', 'query', variables);
-    },
-    GetAllTagsWithDetails(variables?: GetAllTagsWithDetailsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllTagsWithDetailsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAllTagsWithDetailsQuery>({ document: GetAllTagsWithDetailsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllTagsWithDetails', 'query', variables);
-    },
-    GetProjectsByTag(variables?: GetProjectsByTagQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectsByTagQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProjectsByTagQuery>({ document: GetProjectsByTagDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectsByTag', 'query', variables);
     }
   };
 }

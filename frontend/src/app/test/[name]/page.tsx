@@ -32,5 +32,5 @@ export default async function TestPage({params, searchParams}: {
   if (name === 'id3') {
     return <Link href={`/test/id1?animationMode=${AnimationMode.StartBig}`}>Go to /test/id1</Link>;
   }
-  return <div className="w-full h-10 bg-red-600"/>;
+  return <div className="w-full h-10 bg-secondary"/>;
 }

@@ -3,8 +3,8 @@
 
 @theme {
     /* Global */
-    --color-primary: theme(colors.amber.100);
-    --color-secondary: theme(colors.lime.100);
+    --color-primary: #d2ff17;
+    --color-secondary: #cc3636;
     --font-heading: 'Menlo', 'Monaco', 'Consolas', monospace;
     --font-body: theme(fontFamily.sans);
     --radius-primary: theme(borderRadius.xl);
@@ -14,7 +14,7 @@
     --spacing-match-logo-scroll-offset: theme(spacing.32);
     
     /* Layout */
-    --spacing-three-column-gap: theme(spacing.8);
+    --spacing-three-column-gap: theme(spacing.6);
 }
 
 @layer base {
