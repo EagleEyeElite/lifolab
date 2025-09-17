@@ -44,8 +44,8 @@
     .pr-responsive { @apply pr-1 sm:pr-0; }
 
     /* Responsive Margins */
-    .mb-responsive { @apply mb-6 sm:mb-8; }
-    .mb-responsive-lg { @apply mb-16 sm:mb-32; }
+    .pb-responsive { @apply mb-6 sm:mb-8; }
+    .pb-responsive-lg { @apply mb-16 sm:mb-32; }
 
     /* Responsive Spacing */
     .space-y-responsive { @apply space-y-3 sm:space-y-4; }

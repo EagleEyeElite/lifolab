@@ -9,6 +9,7 @@ import Section from '@/components/ui/Section';
 import { Tag } from 'lucide-react';
 import React from "react";
 import SubHeading from '@/components/ui/SubHeading';
+import { strings } from '@/config/siteConfig';
 
 export const revalidate = 10;
 
@@ -31,12 +32,16 @@ export default async function TagsPage() {
   )) || []
 
   return (
-    <Section title="Alle Kategorien" icon={Tag}>
-      <div className="flex items-center pt-6 pb-10">
-        <div className="pr-2">
-          <SubHeading>Alle Kategorien:</SubHeading>
+    <Section title={strings.tags.categories} icon={Tag}>
+      <div className="flex flex-col items-center pt-6">
+        <div className="max-w-xl w-full pb-10">
+          <div className="flex items-center">
+            <div className="pr-2">
+              <SubHeading>{strings.tags.categories}:</SubHeading>
+            </div>
+            <TagList tagIds={ids} />
+          </div>
         </div>
-        <TagList tagIds={ids} />
       </div>
     </Section>
   );

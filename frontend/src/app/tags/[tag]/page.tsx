@@ -3,24 +3,33 @@ import { gql } from 'graphql-request';
 import ProjectCard from '@/components/ui/projectsOverview/projectCard';
 import TagList from '@/components/ui/tags/TagList';
 import {
-  GetTagWithProjectsQuery,
-  GetTagWithProjectsQueryVariables
+  GetTagWithProjectsAndAllTagsQuery,
+  GetTagWithProjectsAndAllTagsQueryVariables
 } from '@/graphql/generatedTypes';
 import Section from '@/components/ui/Section';
 import { Tag } from 'lucide-react';
 import React from "react";
 import SubHeading from '@/components/ui/SubHeading';
+import { strings } from '@/config/siteConfig';
+import { notFound } from 'next/navigation';
 
 export const revalidate = 10;
 
-const GetTagWithProjects = gql`
-    query GetTagWithProjects($slug: [String]) {
+const GetTagWithProjectsAndAllTags = gql`
+    query GetTagWithProjectsAndAllTags($slug: [String]) {
         tags(where: { slug: $slug }) {
             edges {
                 node {
                     id
                     name
                     slug
+                }
+            }
+        }
+        allTags: tags {
+            edges {
+                node {
+                    id
                 }
             }
         }
@@ -45,29 +54,24 @@ export default async function TagPage({ params }: TagPageProps) {
   const { tag } = await params;
 
   // Get both tag information and projects in a single query
-  const { tags, projects } = await graphqlClient.request<GetTagWithProjectsQuery, GetTagWithProjectsQueryVariables>(
-    GetTagWithProjects,
+  const { tags, allTags, projects } = await graphqlClient.request<GetTagWithProjectsAndAllTagsQuery, GetTagWithProjectsAndAllTagsQueryVariables>(
+    GetTagWithProjectsAndAllTags,
     { slug: [tag] }
   );
 
   if (!tags?.edges?.length) {
-    return (
-      <Section title="Kategorie nicht gefunden" icon={Tag}>
-        <div className="max-w-sm mx-auto space-y-6">
-          <p className="text-gray-500 font-body">Die angeforderte Kategorie existiert nicht.</p>
-        </div>
-      </Section>
-    );
+    notFound();
   }
 
-  const tagIds = tags.edges.map(({ node }) => node.id);
+  const tagIds = tags.edges.map(({ node }: { node: { id: string; name?: string | null; slug?: string | null } }) => node.id);
+  const allTagIds = allTags?.edges?.map(({ node }: { node: { id: string } }) => node.id) || [];
 
-  const Heading = <>
-    <div className="flex items-center">
+  const AllTagsHeading = <>
+    <div className="flex items-center pb-10">
       <div className="pr-2">
-        <SubHeading>Kategorie:</SubHeading>
+        <SubHeading>{strings.tags.categories}:</SubHeading>
       </div>
-      <TagList tagIds={tagIds} />
+      <TagList tagIds={allTagIds} selectedTagSlug={tag} />
     </div>
   </>
 
@@ -84,16 +88,16 @@ export default async function TagPage({ params }: TagPageProps) {
       {projectCards.length ? (
         projectCards
       ) : (
-        <p className="text-gray-500 font-body">Keine Projekte für diese Kategorie gefunden.</p>
+        <p className="text-gray-500 font-body">{strings.tags.noProjectsFound}</p>
       )}
     </div>
   </>
 
   return (
-    <Section title="Kategorie" icon={Tag}>
+    <Section title={strings.tags.categories} icon={Tag}>
       <div className="flex flex-col items-center pt-6">
-        <div className="max-w-xl w-full pb-10">
-          {Heading}
+        <div className="max-w-xl w-full">
+          {AllTagsHeading}
         </div>
         <div className="max-w-lg">
           {Projects}

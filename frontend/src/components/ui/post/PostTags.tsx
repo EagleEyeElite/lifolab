@@ -10,7 +10,7 @@ export default function PostTags({ tags }: PostTagsProps) {
   }
 
   return (
-    <div className="mb-responsive">
+    <div className="pb-responsive">
       <TagList tagIds={tags} />
     </div>
   );

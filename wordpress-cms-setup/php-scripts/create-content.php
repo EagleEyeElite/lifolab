@@ -22,7 +22,7 @@ $image_3_id = get_attachment_id('exampleUpload3.jpeg');
 
 // Create tags
 echo "Setting up tags...\n";
-wp_insert_term('Projekt', 'post_tag');
+wp_insert_term('Project', 'post_tag');
 wp_insert_term('Workshop', 'post_tag');
 
 // Max Mustermann - not core member, role: musterrolle
@@ -110,12 +110,12 @@ $post1_content = '
 
 $project1_id = wp_insert_post(array(
     'post_type' => 'project',
-    'post_title' => 'Projekt Workshop Alpha',
+    'post_title' => 'Project Workshop Alpha',
     'post_content' => $post1_content,
     'post_excerpt' => 'An exploration of WordPress formatting features and typography elements.',
     'post_status' => 'publish',
     'post_author' => $admin_id,
-    'tags_input' => array('Projekt'),
+    'tags_input' => array('Project'),
     'meta_input' => array(
         'when_and_where' => 'Musterdatum | Musterstadt',
         '_thumbnail_id' => $image_1_id,
@@ -123,10 +123,10 @@ $project1_id = wp_insert_post(array(
     )
 ));
 
-// Project 2: Projekt Workshop Beta (Conrad only)
+// Project 2: Project Workshop Beta (Conrad only)
 $project2_id = wp_insert_post(array(
     'post_type' => 'project',
-    'post_title' => 'Projekt Workshop Beta',
+    'post_title' => 'Project Workshop Beta',
     'post_content' => '<h2>Workshop Content</h2><p>Text</p>',
     'post_excerpt' => 'A collaborative workshop focused on learning and skill development.',
     'post_status' => 'publish',
@@ -139,15 +139,15 @@ $project2_id = wp_insert_post(array(
     )
 ));
 
-// Project 3: Projekt Workshop Gamma (both collaborators)
+// Project 3: Project Workshop Gamma (both collaborators)
 $project3_id = wp_insert_post(array(
     'post_type' => 'project',
-    'post_title' => 'Projekt Workshop Gamma',
+    'post_title' => 'Project Workshop Gamma',
     'post_content' => '<h2>Workshop Content</h2><p>Text</p>',
     'post_excerpt' => 'A comprehensive collaborative project combining multiple skills and disciplines.',
     'post_status' => 'publish',
     'post_author' => $admin_id,
-    'tags_input' => array('Projekt', 'Workshop'),
+    'tags_input' => array('Project', 'Workshop'),
     'meta_input' => array(
         'when_and_where' => 'Musterdatum | Musterstadt',
         '_thumbnail_id' => $image_3_id,

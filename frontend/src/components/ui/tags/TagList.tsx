@@ -17,8 +17,9 @@ const GetTagsByIds = gql`
     }
 `;
 
-export default async function TagList({ tagIds }: {
+export default async function TagList({ tagIds, selectedTagSlug }: {
   tagIds: string[];
+  selectedTagSlug?: string;
 }) {
   const { tags } = await graphqlClient.request<GetTagsByIdsQuery, GetTagsByIdsQueryVariables>(GetTagsByIds, { ids: tagIds });
 
@@ -28,15 +29,22 @@ export default async function TagList({ tagIds }: {
 
   return (
     <div className="flex flex-wrap gap-1">
-      {tags.edges.map(({ node: tag }: any) => (
-        <Link
-          key={tag.id}
-          href={`/tags/${tag.slug}`}
-          className="inline-flex items-center px-2 py-1 text-xs font-heading bg-secondary border border-gray-500 text-gray-500 rounded-full"
-        >
-          {tag.name}
-        </Link>
-      ))}
+      {tags.edges.map(({ node: tag }: any) => {
+        const isSelected = selectedTagSlug === tag.slug;
+        return (
+          <Link
+            key={tag.id}
+            href={`/tags/${tag.slug}`}
+            className={`inline-flex items-center px-2 py-1 text-xs font-heading border border-gray-500 rounded-full ${
+              isSelected
+                ? 'bg-green-500 text-white'
+                : 'bg-secondary text-gray-500'
+            }`}
+          >
+            {tag.name}
+          </Link>
+        );
+      })}
     </div>
   );
 }

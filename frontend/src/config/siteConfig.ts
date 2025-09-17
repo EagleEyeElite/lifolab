@@ -81,6 +81,17 @@ export const siteConfig = {
       teamTitle: "Living the Forest Lab Team",
       collaborationsTitle: "Collaborations"
     },
+    tags: {
+      categories: "Categories",
+      category: "Category",
+      noProjectsFound: "No projects found for this category.",
+      categoryNotFound: "Category not found",
+      categoryNotFoundMessage: "The requested category does not exist.",
+    },
+    notFound: {
+      title: "Page Not Found",
+      backToHome: "Back to Home",
+    },
   }
 } as const;
 
