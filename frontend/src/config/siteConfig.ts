@@ -92,6 +92,9 @@ export const siteConfig = {
       title: "Page Not Found",
       backToHome: "Back to Home",
     },
+    postOverView: {
+      collaborators: "Collaborators",
+    }
   }
 } as const;
 

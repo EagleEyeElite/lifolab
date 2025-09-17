@@ -59,7 +59,7 @@
   "menu_position": "",
   "menu_icon": {
     "type": "dashicons",
-    "value": "dashicons-grid-view"
+    "value": "dashicons-portfolio"
   },
   "rename_capabilities": false,
   "singular_capability_name": "post",

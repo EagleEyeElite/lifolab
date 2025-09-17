@@ -113,7 +113,7 @@ export type AboutSettings = AcfOptionsPage & Node & WithAcfAboutOptions & {
   parentId?: Maybe<Scalars['String']['output']>;
 };
 
-/** Connection between the CollaboratorProfile_Fields type and the ContentNode type */
+/** Connection between the CyclopediaChapterDetails_Fields type and the ContentNode type */
 export type AcfContentNodeConnection = Connection & ContentNodeConnection & {
   __typename?: 'AcfContentNodeConnection';
   /** Edges for the AcfContentNodeConnection connection */
@@ -708,286 +708,6 @@ export type CategoryToTaxonomyConnectionEdge = Edge & OneToOneConnection & Taxon
   cursor?: Maybe<Scalars['String']['output']>;
   /** The node of the connection, without the edges */
   node: Taxonomy;
-};
-
-/** Team members, contributors, and collaborators involved in projects and events. */
-export type Collaborator = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCollaboratorProfile & {
-  __typename?: 'Collaborator';
-  /**
-   * The ancestors of the content node.
-   * @deprecated This content type is not hierarchical and typically will not have ancestors
-   */
-  ancestors?: Maybe<CollaboratorToCollaboratorConnection>;
-  /**
-   * The id field matches the WP_Post-&gt;ID field.
-   * @deprecated Deprecated in favor of the databaseId field
-   */
-  collaboratorId: Scalars['Int']['output'];
-  /** Fields of the CollaboratorProfile ACF Field Group */
-  collaboratorProfile?: Maybe<CollaboratorProfile>;
-  /** The content of the post. */
-  content?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the ContentType type */
-  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
-  /** The name of the Content Type the node belongs to */
-  contentTypeName: Scalars['String']['output'];
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** Post publishing date. */
-  date?: Maybe<Scalars['String']['output']>;
-  /** The publishing date set in GMT. */
-  dateGmt?: Maybe<Scalars['String']['output']>;
-  /** The desired slug of the post */
-  desiredSlug?: Maybe<Scalars['String']['output']>;
-  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
-  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
-  /** The RSS enclosure for the object */
-  enclosure?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
-  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
-  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
-  guid?: Maybe<Scalars['String']['output']>;
-  /** Whether the collaborator object is password protected. */
-  hasPassword?: Maybe<Scalars['Boolean']['output']>;
-  /** The globally unique identifier of the collaborator object. */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Comment */
-  isComment: Scalars['Boolean']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether the node represents the front page. */
-  isFrontPage: Scalars['Boolean']['output'];
-  /** Whether  the node represents the blog page. */
-  isPostsPage: Scalars['Boolean']['output'];
-  /** Whether the object is a node in the preview state */
-  isPreview?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** The user that most recently edited the node */
-  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
-  /** The permalink of the post */
-  link?: Maybe<Scalars['String']['output']>;
-  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
-  modified?: Maybe<Scalars['String']['output']>;
-  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
-  modifiedGmt?: Maybe<Scalars['String']['output']>;
-  /**
-   * The parent of the content node.
-   * @deprecated This content type is not hierarchical and typically will not have a parent
-   */
-  parent?: Maybe<CollaboratorToParentConnectionEdge>;
-  /** The password for the collaborator object. */
-  password?: Maybe<Scalars['String']['output']>;
-  /** Connection between the Collaborator type and the collaborator type */
-  preview?: Maybe<CollaboratorToPreviewConnectionEdge>;
-  /** The database id of the preview node */
-  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** Whether the object is a node in the preview state */
-  previewRevisionId?: Maybe<Scalars['ID']['output']>;
-  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
-  slug?: Maybe<Scalars['String']['output']>;
-  /** The current status of the object */
-  status?: Maybe<Scalars['String']['output']>;
-  /** The template assigned to the node */
-  template?: Maybe<ContentTemplate>;
-  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
-  title?: Maybe<Scalars['String']['output']>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** Team members, contributors, and collaborators involved in projects and events. */
-export type CollaboratorAncestorsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-/** Team members, contributors, and collaborators involved in projects and events. */
-export type CollaboratorContentArgs = {
-  format?: InputMaybe<PostObjectFieldFormatEnum>;
-};
-
-
-/** Team members, contributors, and collaborators involved in projects and events. */
-export type CollaboratorEnqueuedScriptsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-/** Team members, contributors, and collaborators involved in projects and events. */
-export type CollaboratorEnqueuedStylesheetsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-/** Team members, contributors, and collaborators involved in projects and events. */
-export type CollaboratorTitleArgs = {
-  format?: InputMaybe<PostObjectFieldFormatEnum>;
-};
-
-/** A paginated collection of collaborator Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of collaborator Nodes */
-export type CollaboratorConnection = {
-  /** A list of edges (relational context) between RootQuery and connected collaborator Nodes */
-  edges: Array<CollaboratorConnectionEdge>;
-  /** A list of connected collaborator Nodes */
-  nodes: Array<Collaborator>;
-  /** Information about pagination in a connection. */
-  pageInfo: CollaboratorConnectionPageInfo;
-};
-
-/** Represents a connection to a collaborator. Contains both the collaborator Node and metadata about the relationship. */
-export type CollaboratorConnectionEdge = {
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The connected collaborator Node */
-  node: Collaborator;
-};
-
-/** Pagination metadata specific to &quot;CollaboratorConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CollaboratorConnectionEdge&quot; Nodes. */
-export type CollaboratorConnectionPageInfo = {
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Identifier types for retrieving a specific Collaborator. Specifies which unique attribute is used to find an exact Collaborator. */
-export enum CollaboratorIdType {
-  /** Identify a resource by the Database ID. */
-  DatabaseId = 'DATABASE_ID',
-  /** Identify a resource by the (hashed) Global ID. */
-  Id = 'ID',
-  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
-  Slug = 'SLUG',
-  /** Identify a resource by the URI. */
-  Uri = 'URI'
-}
-
-/** The &quot;CollaboratorProfile&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type CollaboratorProfile = AcfFieldGroup & AcfFieldGroupFields & CollaboratorProfile_Fields & {
-  __typename?: 'CollaboratorProfile';
-  /** Check to display separately from general collaborators. */
-  coreMember?: Maybe<Scalars['Boolean']['output']>;
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Select projects this collaborator has worked on or contributed to. */
-  referencedProjects?: Maybe<AcfContentNodeConnection>;
-  /** Enter one or more roles this collaborator has in projects. Separated with &#039;|&#039; . */
-  roles: Scalars['String']['output'];
-};
-
-
-/** The &quot;CollaboratorProfile&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type CollaboratorProfileReferencedProjectsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Interface representing fields of the ACF &quot;CollaboratorProfile&quot; Field Group */
-export type CollaboratorProfile_Fields = {
-  /** Check to display separately from general collaborators. */
-  coreMember?: Maybe<Scalars['Boolean']['output']>;
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Select projects this collaborator has worked on or contributed to. */
-  referencedProjects?: Maybe<AcfContentNodeConnection>;
-  /** Enter one or more roles this collaborator has in projects. Separated with &#039;|&#039; . */
-  roles: Scalars['String']['output'];
-};
-
-
-/** Interface representing fields of the ACF &quot;CollaboratorProfile&quot; Field Group */
-export type CollaboratorProfile_FieldsReferencedProjectsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Connection between the Collaborator type and the collaborator type */
-export type CollaboratorToCollaboratorConnection = CollaboratorConnection & Connection & {
-  __typename?: 'CollaboratorToCollaboratorConnection';
-  /** Edges for the CollaboratorToCollaboratorConnection connection */
-  edges: Array<CollaboratorToCollaboratorConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Collaborator>;
-  /** Information about pagination in a connection. */
-  pageInfo: CollaboratorToCollaboratorConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type CollaboratorToCollaboratorConnectionEdge = CollaboratorConnectionEdge & Edge & {
-  __typename?: 'CollaboratorToCollaboratorConnectionEdge';
-  /**
-   * A cursor for use in pagination
-   * @deprecated This content type is not hierarchical and typically will not have ancestors
-   */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /**
-   * The item at the end of the edge
-   * @deprecated This content type is not hierarchical and typically will not have ancestors
-   */
-  node: Collaborator;
-};
-
-/** Pagination metadata specific to &quot;CollaboratorToCollaboratorConnection&quot; collections. Provides cursors and flags for navigating through sets of CollaboratorToCollaboratorConnection Nodes. */
-export type CollaboratorToCollaboratorConnectionPageInfo = CollaboratorConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'CollaboratorToCollaboratorConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Connection between the Collaborator type and the collaborator type */
-export type CollaboratorToParentConnectionEdge = CollaboratorConnectionEdge & Edge & OneToOneConnection & {
-  __typename?: 'CollaboratorToParentConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /**
-   * The node of the connection, without the edges
-   * @deprecated This content type is not hierarchical and typically will not have a parent
-   */
-  node: Collaborator;
-};
-
-/** Connection between the Collaborator type and the collaborator type */
-export type CollaboratorToPreviewConnectionEdge = CollaboratorConnectionEdge & Edge & OneToOneConnection & {
-  __typename?: 'CollaboratorToPreviewConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: Collaborator;
 };
 
 /** A response or reaction to content submitted by users. Comments are typically associated with a specific content entry. */
@@ -1765,13 +1485,13 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Attachment = 'ATTACHMENT',
   /** The Type of Content object */
-  Collaborator = 'COLLABORATOR',
-  /** The Type of Content object */
   CyclopediaChapter = 'CYCLOPEDIA_CHAPTER',
   /** The Type of Content object */
   CyclopediaEntry = 'CYCLOPEDIA_ENTRY',
   /** The Type of Content object */
   Page = 'PAGE',
+  /** The Type of Content object */
+  People = 'PEOPLE',
   /** The Type of Content object */
   Place = 'PLACE',
   /** The Type of Content object */
@@ -1941,35 +1661,6 @@ export type CreateCategoryPayload = {
   clientMutationId?: Maybe<Scalars['String']['output']>;
 };
 
-/** Input for the createCollaborator mutation. */
-export type CreateCollaboratorInput = {
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The content of the object */
-  content?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
-  date?: InputMaybe<Scalars['String']['input']>;
-  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
-  menuOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** The password used to protect the content of the object */
-  password?: InputMaybe<Scalars['String']['input']>;
-  /** The slug of the object */
-  slug?: InputMaybe<Scalars['String']['input']>;
-  /** The status of the object */
-  status?: InputMaybe<PostStatusEnum>;
-  /** The title of the object */
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** The payload for the createCollaborator mutation. */
-export type CreateCollaboratorPayload = {
-  __typename?: 'CreateCollaboratorPayload';
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** The Post object mutation type. */
-  collaborator?: Maybe<Collaborator>;
-};
-
 /** Input for the createComment mutation. */
 export type CreateCommentInput = {
   /** The name of the comment's author. */
@@ -2137,6 +1828,35 @@ export type CreatePagePayload = {
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The Post object mutation type. */
   page?: Maybe<Page>;
+};
+
+/** Input for the createPerson mutation. */
+export type CreatePersonInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the createPerson mutation. */
+export type CreatePersonPayload = {
+  __typename?: 'CreatePersonPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  person?: Maybe<Person>;
 };
 
 /** Input for the createPlace mutation. */
@@ -2961,29 +2681,6 @@ export type DeleteCategoryPayload = {
   deletedId?: Maybe<Scalars['ID']['output']>;
 };
 
-/** Input for the deleteCollaborator mutation. */
-export type DeleteCollaboratorInput = {
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** Whether the object should be force deleted instead of being moved to the trash */
-  forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The ID of the collaborator to delete */
-  id: Scalars['ID']['input'];
-  /** Override the edit lock when another user is editing the post */
-  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** The payload for the deleteCollaborator mutation. */
-export type DeleteCollaboratorPayload = {
-  __typename?: 'DeleteCollaboratorPayload';
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** The object before it was deleted */
-  collaborator?: Maybe<Collaborator>;
-  /** The ID of the deleted object */
-  deletedId?: Maybe<Scalars['ID']['output']>;
-};
-
 /** Input for the deleteComment mutation. */
 export type DeleteCommentInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
@@ -3093,6 +2790,29 @@ export type DeletePagePayload = {
   deletedId?: Maybe<Scalars['ID']['output']>;
   /** The object before it was deleted */
   page?: Maybe<Page>;
+};
+
+/** Input for the deletePerson mutation. */
+export type DeletePersonInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** Whether the object should be force deleted instead of being moved to the trash */
+  forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The ID of the person to delete */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** The payload for the deletePerson mutation. */
+export type DeletePersonPayload = {
+  __typename?: 'DeletePersonPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']['output']>;
+  /** The object before it was deleted */
+  person?: Maybe<Person>;
 };
 
 /** Input for the deletePlace mutation. */
@@ -4612,7 +4332,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkeable Interface */
-export type MenuItemObjectUnion = Category | Collaborator | CyclopediaChapter | CyclopediaEntry | Page | Place | Post | PostFormat | Project | Tag;
+export type MenuItemObjectUnion = Category | CyclopediaChapter | CyclopediaEntry | Page | Person | Place | Post | PostFormat | Project | Tag;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = Edge & MenuConnectionEdge & OneToOneConnection & {
@@ -5518,6 +5238,286 @@ export type PageToRevisionConnectionWhereArgs = {
   status?: InputMaybe<PostStatusEnum>;
   /** Title of the object */
   title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Team members, contributors, and people involved in projects and events. */
+export type Person = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfPersonProfile & {
+  __typename?: 'Person';
+  /**
+   * The ancestors of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  ancestors?: Maybe<PersonToPersonConnection>;
+  /** The content of the post. */
+  content?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String']['output'];
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int']['output'];
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']['output']>;
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']['output']>;
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']['output']>;
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the people object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
+  /** The globally unique identifier of the people object. */
+  id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']['output'];
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']['output']>;
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']['output']>;
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /**
+   * The parent of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  parent?: Maybe<PersonToParentConnectionEdge>;
+  /** The password for the people object. */
+  password?: Maybe<Scalars['String']['output']>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of the databaseId field
+   */
+  personId: Scalars['Int']['output'];
+  /** Fields of the PersonProfile ACF Field Group */
+  personProfile?: Maybe<PersonProfile>;
+  /** Connection between the Person type and the person type */
+  preview?: Maybe<PersonToPreviewConnectionEdge>;
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']['output']>;
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']['output']>;
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']['output']>;
+  /** The template assigned to the node */
+  template?: Maybe<ContentTemplate>;
+  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+  title?: Maybe<Scalars['String']['output']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Team members, contributors, and people involved in projects and events. */
+export type PersonAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** Team members, contributors, and people involved in projects and events. */
+export type PersonContentArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** Team members, contributors, and people involved in projects and events. */
+export type PersonEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** Team members, contributors, and people involved in projects and events. */
+export type PersonEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** Team members, contributors, and people involved in projects and events. */
+export type PersonTitleArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+/** A paginated collection of person Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of person Nodes */
+export type PersonConnection = {
+  /** A list of edges (relational context) between RootQuery and connected person Nodes */
+  edges: Array<PersonConnectionEdge>;
+  /** A list of connected person Nodes */
+  nodes: Array<Person>;
+  /** Information about pagination in a connection. */
+  pageInfo: PersonConnectionPageInfo;
+};
+
+/** Represents a connection to a person. Contains both the person Node and metadata about the relationship. */
+export type PersonConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The connected person Node */
+  node: Person;
+};
+
+/** Pagination metadata specific to &quot;PersonConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PersonConnectionEdge&quot; Nodes. */
+export type PersonConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Identifier types for retrieving a specific Person. Specifies which unique attribute is used to find an exact Person. */
+export enum PersonIdType {
+  /** Identify a resource by the Database ID. */
+  DatabaseId = 'DATABASE_ID',
+  /** Identify a resource by the (hashed) Global ID. */
+  Id = 'ID',
+  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
+  Slug = 'SLUG',
+  /** Identify a resource by the URI. */
+  Uri = 'URI'
+}
+
+/** The &quot;PersonProfile&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PersonProfile = AcfFieldGroup & AcfFieldGroupFields & PersonProfile_Fields & {
+  __typename?: 'PersonProfile';
+  /** Check to display separately from general collaborators. */
+  coreMember?: Maybe<Scalars['Boolean']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Select projects this person has worked on or contributed to. */
+  referencedProjects?: Maybe<AcfContentNodeConnection>;
+  /** Enter one or more roles this person has in projects. Separated with &#039;|&#039; . */
+  roles: Scalars['String']['output'];
+};
+
+
+/** The &quot;PersonProfile&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PersonProfileReferencedProjectsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Interface representing fields of the ACF &quot;PersonProfile&quot; Field Group */
+export type PersonProfile_Fields = {
+  /** Check to display separately from general collaborators. */
+  coreMember?: Maybe<Scalars['Boolean']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Select projects this person has worked on or contributed to. */
+  referencedProjects?: Maybe<AcfContentNodeConnection>;
+  /** Enter one or more roles this person has in projects. Separated with &#039;|&#039; . */
+  roles: Scalars['String']['output'];
+};
+
+
+/** Interface representing fields of the ACF &quot;PersonProfile&quot; Field Group */
+export type PersonProfile_FieldsReferencedProjectsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Connection between the Person type and the person type */
+export type PersonToParentConnectionEdge = Edge & OneToOneConnection & PersonConnectionEdge & {
+  __typename?: 'PersonToParentConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The node of the connection, without the edges
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  node: Person;
+};
+
+/** Connection between the Person type and the person type */
+export type PersonToPersonConnection = Connection & PersonConnection & {
+  __typename?: 'PersonToPersonConnection';
+  /** Edges for the PersonToPersonConnection connection */
+  edges: Array<PersonToPersonConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Person>;
+  /** Information about pagination in a connection. */
+  pageInfo: PersonToPersonConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type PersonToPersonConnectionEdge = Edge & PersonConnectionEdge & {
+  __typename?: 'PersonToPersonConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  node: Person;
+};
+
+/** Pagination metadata specific to &quot;PersonToPersonConnection&quot; collections. Provides cursors and flags for navigating through sets of PersonToPersonConnection Nodes. */
+export type PersonToPersonConnectionPageInfo = PageInfo & PersonConnectionPageInfo & WpPageInfo & {
+  __typename?: 'PersonToPersonConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Connection between the Person type and the person type */
+export type PersonToPreviewConnectionEdge = Edge & OneToOneConnection & PersonConnectionEdge & {
+  __typename?: 'PersonToPreviewConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: Person;
 };
 
 /** The place type */
@@ -7386,15 +7386,15 @@ export type ProjectDetails = AcfFieldGroup & AcfFieldGroupFields & ProjectDetail
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Select collaborators who worked on or contributed to this project/event. */
-  referencedCollaborators?: Maybe<AcfContentNodeConnection>;
+  /** Select people who worked on or contributed to this project/event. */
+  referencedPeople?: Maybe<AcfContentNodeConnection>;
   /** Enter the date and location for this project/event in the format: &#039;DD.MM.YYYY | City Name&#039;. */
   whenAndWhere: Scalars['String']['output'];
 };
 
 
 /** The &quot;ProjectDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type ProjectDetailsReferencedCollaboratorsArgs = {
+export type ProjectDetailsReferencedPeopleArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -7408,15 +7408,15 @@ export type ProjectDetails_Fields = {
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Select collaborators who worked on or contributed to this project/event. */
-  referencedCollaborators?: Maybe<AcfContentNodeConnection>;
+  /** Select people who worked on or contributed to this project/event. */
+  referencedPeople?: Maybe<AcfContentNodeConnection>;
   /** Enter the date and location for this project/event in the format: &#039;DD.MM.YYYY | City Name&#039;. */
   whenAndWhere: Scalars['String']['output'];
 };
 
 
 /** Interface representing fields of the ACF &quot;ProjectDetails&quot; Field Group */
-export type ProjectDetails_FieldsReferencedCollaboratorsArgs = {
+export type ProjectDetails_FieldsReferencedPeopleArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -7784,8 +7784,6 @@ export type RootMutation = {
   __typename?: 'RootMutation';
   /** The createCategory mutation */
   createCategory?: Maybe<CreateCategoryPayload>;
-  /** The createCollaborator mutation */
-  createCollaborator?: Maybe<CreateCollaboratorPayload>;
   /** The createComment mutation */
   createComment?: Maybe<CreateCommentPayload>;
   /** The createCyclopediaChapter mutation */
@@ -7796,6 +7794,8 @@ export type RootMutation = {
   createMediaItem?: Maybe<CreateMediaItemPayload>;
   /** The createPage mutation */
   createPage?: Maybe<CreatePagePayload>;
+  /** The createPerson mutation */
+  createPerson?: Maybe<CreatePersonPayload>;
   /** The createPlace mutation */
   createPlace?: Maybe<CreatePlacePayload>;
   /** The createPost mutation */
@@ -7810,8 +7810,6 @@ export type RootMutation = {
   createUser?: Maybe<CreateUserPayload>;
   /** The deleteCategory mutation */
   deleteCategory?: Maybe<DeleteCategoryPayload>;
-  /** The deleteCollaborator mutation */
-  deleteCollaborator?: Maybe<DeleteCollaboratorPayload>;
   /** The deleteComment mutation */
   deleteComment?: Maybe<DeleteCommentPayload>;
   /** The deleteCyclopediaChapter mutation */
@@ -7822,6 +7820,8 @@ export type RootMutation = {
   deleteMediaItem?: Maybe<DeleteMediaItemPayload>;
   /** The deletePage mutation */
   deletePage?: Maybe<DeletePagePayload>;
+  /** The deletePerson mutation */
+  deletePerson?: Maybe<DeletePersonPayload>;
   /** The deletePlace mutation */
   deletePlace?: Maybe<DeletePlacePayload>;
   /** The deletePost mutation */
@@ -7846,8 +7846,6 @@ export type RootMutation = {
   sendPasswordResetEmail?: Maybe<SendPasswordResetEmailPayload>;
   /** The updateCategory mutation */
   updateCategory?: Maybe<UpdateCategoryPayload>;
-  /** The updateCollaborator mutation */
-  updateCollaborator?: Maybe<UpdateCollaboratorPayload>;
   /** The updateComment mutation */
   updateComment?: Maybe<UpdateCommentPayload>;
   /** The updateCyclopediaChapter mutation */
@@ -7858,6 +7856,8 @@ export type RootMutation = {
   updateMediaItem?: Maybe<UpdateMediaItemPayload>;
   /** The updatePage mutation */
   updatePage?: Maybe<UpdatePagePayload>;
+  /** The updatePerson mutation */
+  updatePerson?: Maybe<UpdatePersonPayload>;
   /** The updatePlace mutation */
   updatePlace?: Maybe<UpdatePlacePayload>;
   /** The updatePost mutation */
@@ -7878,12 +7878,6 @@ export type RootMutation = {
 /** The root mutation */
 export type RootMutationCreateCategoryArgs = {
   input: CreateCategoryInput;
-};
-
-
-/** The root mutation */
-export type RootMutationCreateCollaboratorArgs = {
-  input: CreateCollaboratorInput;
 };
 
 
@@ -7914,6 +7908,12 @@ export type RootMutationCreateMediaItemArgs = {
 /** The root mutation */
 export type RootMutationCreatePageArgs = {
   input: CreatePageInput;
+};
+
+
+/** The root mutation */
+export type RootMutationCreatePersonArgs = {
+  input: CreatePersonInput;
 };
 
 
@@ -7960,12 +7960,6 @@ export type RootMutationDeleteCategoryArgs = {
 
 
 /** The root mutation */
-export type RootMutationDeleteCollaboratorArgs = {
-  input: DeleteCollaboratorInput;
-};
-
-
-/** The root mutation */
 export type RootMutationDeleteCommentArgs = {
   input: DeleteCommentInput;
 };
@@ -7992,6 +7986,12 @@ export type RootMutationDeleteMediaItemArgs = {
 /** The root mutation */
 export type RootMutationDeletePageArgs = {
   input: DeletePageInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeletePersonArgs = {
+  input: DeletePersonInput;
 };
 
 
@@ -8068,12 +8068,6 @@ export type RootMutationUpdateCategoryArgs = {
 
 
 /** The root mutation */
-export type RootMutationUpdateCollaboratorArgs = {
-  input: UpdateCollaboratorInput;
-};
-
-
-/** The root mutation */
 export type RootMutationUpdateCommentArgs = {
   input: UpdateCommentInput;
 };
@@ -8100,6 +8094,12 @@ export type RootMutationUpdateMediaItemArgs = {
 /** The root mutation */
 export type RootMutationUpdatePageArgs = {
   input: UpdatePageInput;
+};
+
+
+/** The root mutation */
+export type RootMutationUpdatePersonArgs = {
+  input: UpdatePersonInput;
 };
 
 
@@ -8154,15 +8154,6 @@ export type RootQuery = WithAcfOptionsPageAboutSettings & WithAcfOptionsPageDesc
   categories?: Maybe<RootQueryToCategoryConnection>;
   /** A 0bject */
   category?: Maybe<Category>;
-  /** An object of the collaborator Type. Team members, contributors, and collaborators involved in projects and events. */
-  collaborator?: Maybe<Collaborator>;
-  /**
-   * A collaborator object
-   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
-   */
-  collaboratorBy?: Maybe<Collaborator>;
-  /** Connection between the RootQuery type and the collaborator type */
-  collaborators?: Maybe<RootQueryToCollaboratorConnection>;
   /** Returns a Comment */
   comment?: Maybe<Comment>;
   /** Connection between the RootQuery type and the Comment type */
@@ -8229,6 +8220,15 @@ export type RootQuery = WithAcfOptionsPageAboutSettings & WithAcfOptionsPageDesc
   pageBy?: Maybe<Page>;
   /** Connection between the RootQuery type and the page type */
   pages?: Maybe<RootQueryToPageConnection>;
+  /** Connection between the RootQuery type and the person type */
+  people?: Maybe<RootQueryToPersonConnection>;
+  /** An object of the person Type. Team members, contributors, and people involved in projects and events. */
+  person?: Maybe<Person>;
+  /**
+   * A person object
+   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+   */
+  personBy?: Maybe<Person>;
   /** An object of the place Type.  */
   place?: Maybe<Place>;
   /**
@@ -8317,33 +8317,6 @@ export type RootQueryCategoriesArgs = {
 export type RootQueryCategoryArgs = {
   id: Scalars['ID']['input'];
   idType?: InputMaybe<CategoryIdType>;
-};
-
-
-/** The root entry point into the Graph */
-export type RootQueryCollaboratorArgs = {
-  asPreview?: InputMaybe<Scalars['Boolean']['input']>;
-  id: Scalars['ID']['input'];
-  idType?: InputMaybe<CollaboratorIdType>;
-};
-
-
-/** The root entry point into the Graph */
-export type RootQueryCollaboratorByArgs = {
-  collaboratorId?: InputMaybe<Scalars['Int']['input']>;
-  id?: InputMaybe<Scalars['ID']['input']>;
-  slug?: InputMaybe<Scalars['String']['input']>;
-  uri?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** The root entry point into the Graph */
-export type RootQueryCollaboratorsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<RootQueryToCollaboratorConnectionWhereArgs>;
 };
 
 
@@ -8549,6 +8522,33 @@ export type RootQueryPagesArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<RootQueryToPageConnectionWhereArgs>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryPeopleArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<RootQueryToPersonConnectionWhereArgs>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryPersonArgs = {
+  asPreview?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['ID']['input'];
+  idType?: InputMaybe<PersonIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryPersonByArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  personId?: InputMaybe<Scalars['Int']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  uri?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -8866,77 +8866,6 @@ export type RootQueryToCategoryConnectionWhereArgs = {
   termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   /** Whether to prime meta caches for matched terms. Default true. */
   updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** Connection between the RootQuery type and the collaborator type */
-export type RootQueryToCollaboratorConnection = CollaboratorConnection & Connection & {
-  __typename?: 'RootQueryToCollaboratorConnection';
-  /** Edges for the RootQueryToCollaboratorConnection connection */
-  edges: Array<RootQueryToCollaboratorConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Collaborator>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToCollaboratorConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type RootQueryToCollaboratorConnectionEdge = CollaboratorConnectionEdge & Edge & {
-  __typename?: 'RootQueryToCollaboratorConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Collaborator;
-};
-
-/** Pagination metadata specific to &quot;RootQueryToCollaboratorConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCollaboratorConnection Nodes. */
-export type RootQueryToCollaboratorConnectionPageInfo = CollaboratorConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToCollaboratorConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Arguments for filtering the RootQueryToCollaboratorConnection connection */
-export type RootQueryToCollaboratorConnectionWhereArgs = {
-  /** Filter the connection based on dates */
-  dateQuery?: InputMaybe<DateQueryInput>;
-  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
-  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Specific database ID of the object */
-  id?: InputMaybe<Scalars['Int']['input']>;
-  /** Array of IDs for the objects to retrieve */
-  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Get objects with a specific mimeType property */
-  mimeType?: InputMaybe<MimeTypeEnum>;
-  /** Slug / post_name of the object */
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** Specify objects to retrieve. Use slugs */
-  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What parameter to use to order the objects by. */
-  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
-  /** Use ID to return only children. Use 0 to return only top-level items */
-  parent?: InputMaybe<Scalars['ID']['input']>;
-  /** Specify objects whose parent is in an array */
-  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Specify posts whose parent is not in an array */
-  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Show posts with a specific password. */
-  password?: InputMaybe<Scalars['String']['input']>;
-  /** Show Posts based on a keyword search */
-  search?: InputMaybe<Scalars['String']['input']>;
-  /** Retrieve posts where post status is in an array. */
-  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
-  /** Show posts with a specific status. */
-  status?: InputMaybe<PostStatusEnum>;
-  /** Title of the object */
-  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Connection between the RootQuery type and the Comment type */
@@ -9558,6 +9487,77 @@ export type RootQueryToPageConnectionWhereArgs = {
   authorName?: InputMaybe<Scalars['String']['input']>;
   /** Find objects NOT connected to author(s) in the array of author's userIds */
   authorNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Connection between the RootQuery type and the person type */
+export type RootQueryToPersonConnection = Connection & PersonConnection & {
+  __typename?: 'RootQueryToPersonConnection';
+  /** Edges for the RootQueryToPersonConnection connection */
+  edges: Array<RootQueryToPersonConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Person>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToPersonConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToPersonConnectionEdge = Edge & PersonConnectionEdge & {
+  __typename?: 'RootQueryToPersonConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: Person;
+};
+
+/** Pagination metadata specific to &quot;RootQueryToPersonConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPersonConnection Nodes. */
+export type RootQueryToPersonConnectionPageInfo = PageInfo & PersonConnectionPageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToPersonConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the RootQueryToPersonConnection connection */
+export type RootQueryToPersonConnectionWhereArgs = {
   /** Filter the connection based on dates */
   dateQuery?: InputMaybe<DateQueryInput>;
   /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
@@ -11331,39 +11331,6 @@ export type UpdateCategoryPayload = {
   clientMutationId?: Maybe<Scalars['String']['output']>;
 };
 
-/** Input for the updateCollaborator mutation. */
-export type UpdateCollaboratorInput = {
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The content of the object */
-  content?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
-  date?: InputMaybe<Scalars['String']['input']>;
-  /** The ID of the collaborator object */
-  id: Scalars['ID']['input'];
-  /** Override the edit lock when another user is editing the post */
-  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
-  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
-  menuOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** The password used to protect the content of the object */
-  password?: InputMaybe<Scalars['String']['input']>;
-  /** The slug of the object */
-  slug?: InputMaybe<Scalars['String']['input']>;
-  /** The status of the object */
-  status?: InputMaybe<PostStatusEnum>;
-  /** The title of the object */
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** The payload for the updateCollaborator mutation. */
-export type UpdateCollaboratorPayload = {
-  __typename?: 'UpdateCollaboratorPayload';
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** The Post object mutation type. */
-  collaborator?: Maybe<Collaborator>;
-};
-
 /** Input for the updateComment mutation. */
 export type UpdateCommentInput = {
   /** The name of the comment's author. */
@@ -11547,6 +11514,39 @@ export type UpdatePagePayload = {
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The Post object mutation type. */
   page?: Maybe<Page>;
+};
+
+/** Input for the updatePerson mutation. */
+export type UpdatePersonInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the person object */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the updatePerson mutation. */
+export type UpdatePersonPayload = {
+  __typename?: 'UpdatePersonPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  person?: Maybe<Person>;
 };
 
 /** Input for the updatePlace mutation. */
@@ -12680,12 +12680,6 @@ export type WithAcfAboutOptions = {
   aboutOptions?: Maybe<AboutOptions>;
 };
 
-/** Provides access to fields of the &quot;CollaboratorProfile&quot; ACF Field Group via the &quot;collaboratorProfile&quot; field */
-export type WithAcfCollaboratorProfile = {
-  /** Fields of the CollaboratorProfile ACF Field Group */
-  collaboratorProfile?: Maybe<CollaboratorProfile>;
-};
-
 /** Provides access to fields of the &quot;CyclopediaChapterDetails&quot; ACF Field Group via the &quot;cyclopediaChapterDetails&quot; field */
 export type WithAcfCyclopediaChapterDetails = {
   /** Fields of the CyclopediaChapterDetails ACF Field Group */
@@ -12723,6 +12717,12 @@ export type WithAcfOptionsPageDescriptionSettings = {
 /** Access point for the &quot;FooterSettings&quot; ACF Options Page */
 export type WithAcfOptionsPageFooterSettings = {
   footerSettings?: Maybe<FooterSettings>;
+};
+
+/** Provides access to fields of the &quot;PersonProfile&quot; ACF Field Group via the &quot;personProfile&quot; field */
+export type WithAcfPersonProfile = {
+  /** Fields of the PersonProfile ACF Field Group */
+  personProfile?: Maybe<PersonProfile>;
 };
 
 /** Provides access to fields of the &quot;ProjectDetails&quot; ACF Field Group via the &quot;projectDetails&quot; field */
@@ -12786,10 +12786,10 @@ export type GetDescriptionContentQueryVariables = Exact<{ [key: string]: never; 
 
 export type GetDescriptionContentQuery = { __typename?: 'RootQuery', descriptionSettings?: { __typename?: 'DescriptionSettings', descriptionOptions?: { __typename?: 'DescriptionOptions', descriptionContent?: string | null } | null } | null };
 
-export type GetCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetPeopleQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: { __typename?: 'RootQueryToCollaboratorConnection', edges: Array<{ __typename?: 'RootQueryToCollaboratorConnectionEdge', node: { __typename?: 'Collaborator', slug?: string | null, collaboratorProfile?: { __typename?: 'CollaboratorProfile', coreMember?: boolean | null } | null } }> } | null };
+export type GetPeopleQuery = { __typename?: 'RootQuery', people?: { __typename?: 'RootQueryToPersonConnection', edges: Array<{ __typename?: 'RootQueryToPersonConnectionEdge', node: { __typename?: 'Person', slug?: string | null, personProfile?: { __typename?: 'PersonProfile', coreMember?: boolean | null } | null } }> } | null };
 
 export type GetAllPlacesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12801,17 +12801,12 @@ export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetProjectsQuery = { __typename?: 'RootQuery', projects?: { __typename?: 'RootQueryToProjectConnection', edges: Array<{ __typename?: 'RootQueryToProjectConnectionEdge', node: { __typename?: 'Project', id: string } }> } | null };
 
-export type GetAllCollaboratorsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetAllCollaboratorsQuery = { __typename?: 'RootQuery', collaborators?: { __typename?: 'RootQueryToCollaboratorConnection', edges: Array<{ __typename?: 'RootQueryToCollaboratorConnectionEdge', node: { __typename?: 'Collaborator', id: string, title?: string | null, content?: string | null, slug?: string | null, collaboratorProfile?: { __typename?: 'CollaboratorProfile', coreMember?: boolean | null, roles: string, referencedProjects?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator' } | { __typename: 'CyclopediaChapter' } | { __typename: 'CyclopediaEntry' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project', title?: string | null, slug?: string | null }> } | null } | null } }> } | null };
-
 export type GetChapterWithEntryIdsQueryVariables = Exact<{
   chapterId: Scalars['ID']['input'];
 }>;
 
 
-export type GetChapterWithEntryIdsQuery = { __typename?: 'RootQuery', cyclopediaChapter?: { __typename?: 'CyclopediaChapter', id: string, title?: string | null, cyclopediaChapterDetails?: { __typename?: 'CyclopediaChapterDetails', entries?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename?: 'Collaborator' } | { __typename?: 'CyclopediaChapter' } | { __typename: 'CyclopediaEntry', id: string } | { __typename?: 'MediaItem' } | { __typename?: 'Page' } | { __typename?: 'Place' } | { __typename?: 'Post' } | { __typename?: 'Project' }> } | null } | null } | null };
+export type GetChapterWithEntryIdsQuery = { __typename?: 'RootQuery', cyclopediaChapter?: { __typename?: 'CyclopediaChapter', id: string, title?: string | null, cyclopediaChapterDetails?: { __typename?: 'CyclopediaChapterDetails', entries?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename?: 'CyclopediaChapter' } | { __typename: 'CyclopediaEntry', id: string } | { __typename?: 'MediaItem' } | { __typename?: 'Page' } | { __typename?: 'Person' } | { __typename?: 'Place' } | { __typename?: 'Post' } | { __typename?: 'Project' }> } | null } | null } | null };
 
 export type GetCyclopediaEntryQueryVariables = Exact<{
   entryId: Scalars['ID']['input'];
@@ -12819,6 +12814,11 @@ export type GetCyclopediaEntryQueryVariables = Exact<{
 
 
 export type GetCyclopediaEntryQuery = { __typename?: 'RootQuery', cyclopediaEntry?: { __typename?: 'CyclopediaEntry', id: string, title?: string | null, content?: string | null, slug?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null } | null };
+
+export type GetAllPeopleQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllPeopleQuery = { __typename?: 'RootQuery', people?: { __typename?: 'RootQueryToPersonConnection', edges: Array<{ __typename?: 'RootQueryToPersonConnectionEdge', node: { __typename?: 'Person', id: string, title?: string | null, content?: string | null, slug?: string | null, personProfile?: { __typename?: 'PersonProfile', coreMember?: boolean | null, roles: string, referencedProjects?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'CyclopediaChapter' } | { __typename: 'CyclopediaEntry' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Person' } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project', title?: string | null, slug?: string | null }> } | null } | null } }> } | null };
 
 export type GetProjectDetailsQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -12832,7 +12832,7 @@ export type GetProjectOverviewQueryVariables = Exact<{
 }>;
 
 
-export type GetProjectOverviewQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', title?: string | null, excerpt?: string | null, tags?: { __typename?: 'ProjectToTagConnection', edges: Array<{ __typename?: 'ProjectToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null, projectDetails?: { __typename?: 'ProjectDetails', referencedCollaborators?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'Collaborator', slug?: string | null } | { __typename: 'CyclopediaChapter' } | { __typename: 'CyclopediaEntry' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project' }> } | null } | null } | null };
+export type GetProjectOverviewQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', title?: string | null, excerpt?: string | null, tags?: { __typename?: 'ProjectToTagConnection', edges: Array<{ __typename?: 'ProjectToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null, projectDetails?: { __typename?: 'ProjectDetails', referencedPeople?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'CyclopediaChapter' } | { __typename: 'CyclopediaEntry' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Person', slug?: string | null } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project' }> } | null } | null } | null };
 
 export type GetProjectCardQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -13013,13 +13013,13 @@ export const GetDescriptionContentDocument = gql`
   }
 }
     `;
-export const GetCollaboratorsDocument = gql`
-    query GetCollaborators {
-  collaborators(first: 100) {
+export const GetPeopleDocument = gql`
+    query GetPeople {
+  people(first: 100) {
     edges {
       node {
         slug
-        collaboratorProfile {
+        personProfile {
           coreMember
         }
       }
@@ -13047,33 +13047,6 @@ export const GetProjectsDocument = gql`
     edges {
       node {
         id
-      }
-    }
-  }
-}
-    `;
-export const GetAllCollaboratorsDocument = gql`
-    query GetAllCollaborators {
-  collaborators(first: 100) {
-    edges {
-      node {
-        id
-        title
-        content
-        slug
-        collaboratorProfile {
-          coreMember
-          roles
-          referencedProjects {
-            nodes {
-              __typename
-              ... on Project {
-                title
-                slug
-              }
-            }
-          }
-        }
       }
     }
   }
@@ -13113,6 +13086,33 @@ export const GetCyclopediaEntryDocument = gql`
   }
 }
     `;
+export const GetAllPeopleDocument = gql`
+    query GetAllPeople {
+  people(first: 100) {
+    edges {
+      node {
+        id
+        title
+        content
+        slug
+        personProfile {
+          coreMember
+          roles
+          referencedProjects {
+            nodes {
+              __typename
+              ... on Project {
+                title
+                slug
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const GetProjectDetailsDocument = gql`
     query GetProjectDetails($id: ID!) {
   project(id: $id, idType: SLUG) {
@@ -13142,10 +13142,10 @@ export const GetProjectOverviewDocument = gql`
       }
     }
     projectDetails {
-      referencedCollaborators {
+      referencedPeople {
         nodes {
           __typename
-          ... on Collaborator {
+          ... on Person {
             slug
           }
         }
@@ -13253,8 +13253,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetDescriptionContent(variables?: GetDescriptionContentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetDescriptionContentQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetDescriptionContentQuery>({ document: GetDescriptionContentDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetDescriptionContent', 'query', variables);
     },
-    GetCollaborators(variables?: GetCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCollaboratorsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetCollaboratorsQuery>({ document: GetCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCollaborators', 'query', variables);
+    GetPeople(variables?: GetPeopleQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetPeopleQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPeopleQuery>({ document: GetPeopleDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPeople', 'query', variables);
     },
     GetAllPlaces(variables?: GetAllPlacesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllPlacesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllPlacesQuery>({ document: GetAllPlacesDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllPlaces', 'query', variables);
@@ -13262,14 +13262,14 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetProjects(variables?: GetProjectsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectsQuery>({ document: GetProjectsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjects', 'query', variables);
     },
-    GetAllCollaborators(variables?: GetAllCollaboratorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllCollaboratorsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAllCollaboratorsQuery>({ document: GetAllCollaboratorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllCollaborators', 'query', variables);
-    },
     GetChapterWithEntryIds(variables: GetChapterWithEntryIdsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetChapterWithEntryIdsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetChapterWithEntryIdsQuery>({ document: GetChapterWithEntryIdsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetChapterWithEntryIds', 'query', variables);
     },
     GetCyclopediaEntry(variables: GetCyclopediaEntryQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCyclopediaEntryQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetCyclopediaEntryQuery>({ document: GetCyclopediaEntryDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCyclopediaEntry', 'query', variables);
+    },
+    GetAllPeople(variables?: GetAllPeopleQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllPeopleQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAllPeopleQuery>({ document: GetAllPeopleDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllPeople', 'query', variables);
     },
     GetProjectDetails(variables: GetProjectDetailsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectDetailsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectDetailsQuery>({ document: GetProjectDetailsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectDetails', 'query', variables);

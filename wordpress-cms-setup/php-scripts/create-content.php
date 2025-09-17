@@ -1,7 +1,7 @@
 <?php
 /**
  * Create sample content for WordPress CMS
- * This script creates collaborators, posts, and cyclopedia entries with proper relationships
+ * This script creates people, posts, and cyclopedia entries with proper relationships
  */
 
 function get_attachment_id($filename) {
@@ -27,7 +27,7 @@ wp_insert_term('Workshop', 'post_tag');
 
 // Max Mustermann - not core member, role: musterrolle
 $max_id = wp_insert_post(array(
-    'post_type' => 'collaborator',
+    'post_type' => 'people',
     'post_title' => 'Max Mustermann',
     'post_content' => '<p>info text</p>',
     'post_status' => 'publish',
@@ -39,7 +39,7 @@ $max_id = wp_insert_post(array(
 
 // Conrad Klaus - core member, roles: developer | designer
 $conrad_id = wp_insert_post(array(
-    'post_type' => 'collaborator',
+    'post_type' => 'people',
     'post_title' => 'Conrad Klaus',
     'post_content' => '<p>info text</p>',
     'post_status' => 'publish',
@@ -119,7 +119,7 @@ $project1_id = wp_insert_post(array(
     'meta_input' => array(
         'when_and_where' => 'Musterdatum | Musterstadt',
         '_thumbnail_id' => $image_1_id,
-        'referenced_collaborators' => $max_id
+        'referenced_people' =>$max_id
     )
 ));
 
@@ -135,11 +135,11 @@ $project2_id = wp_insert_post(array(
     'meta_input' => array(
         'when_and_where' => 'Musterdatum | Musterstadt',
         '_thumbnail_id' => $image_2_id,
-        'referenced_collaborators' => $conrad_id
+        'referenced_people' =>$conrad_id
     )
 ));
 
-// Project 3: Project Workshop Gamma (both collaborators)
+// Project 3: Project Workshop Gamma (both people)
 $project3_id = wp_insert_post(array(
     'post_type' => 'project',
     'post_title' => 'Project Workshop Gamma',
@@ -151,13 +151,13 @@ $project3_id = wp_insert_post(array(
     'meta_input' => array(
         'when_and_where' => 'Musterdatum | Musterstadt',
         '_thumbnail_id' => $image_3_id,
-        'referenced_collaborators' => array($max_id, $conrad_id)
+        'referenced_people' => array($max_id, $conrad_id)
     )
 ));
 
-// Set up reverse relationships (collaborators -> projects)
-update_post_meta($max_id, 'referenced_projects', array($project1_id, $project3_id));
-update_post_meta($conrad_id, 'referenced_projects', array($project2_id, $project3_id));
+// Set up reverse relationships (people -> projects)
+update_field('referenced_projects', array($project1_id, $project3_id), $max_id);
+update_field('referenced_projects', array($project2_id, $project3_id), $conrad_id);
 
 // Place 1
 $place1_id = wp_insert_post(array(

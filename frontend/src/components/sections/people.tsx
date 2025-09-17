@@ -1,21 +1,21 @@
 import React from "react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
-import CollaboratorSection from "@/components/ui/collaborator/CollaboratorSection";
+import PeopleSection from "@/components/ui/people/PeopleSection";
 import {
-  GetCollaboratorsQuery,
-  GetCollaboratorsQueryVariables,
+  GetPeopleQuery,
+  GetPeopleQueryVariables,
 } from "@/graphql/generatedTypes";
 import Section from "@/components/ui/Section";
 import { sections, strings } from "@/config/siteConfig";
 
-const GetCollaborators = gql`
-  query GetCollaborators {
-    collaborators(first: 100) {
+const GetPeople = gql`
+  query GetPeople {
+    people(first: 100) {
       edges {
         node {
           slug
-          collaboratorProfile {
+          personProfile {
             coreMember
           }
         }
@@ -25,15 +25,15 @@ const GetCollaborators = gql`
 `;
 
 export default async function People() {
-  const data = await graphqlClient.request<GetCollaboratorsQuery, GetCollaboratorsQueryVariables>(GetCollaborators);
+  const data = await graphqlClient.request<GetPeopleQuery, GetPeopleQueryVariables>(GetPeople);
   
   const teamMemberSlugs: string[] = [];
-  const collaboratorSlugs: string[] = [];
-  
-  data?.collaborators?.edges?.forEach((edge) => {
+  const collaborationSlugs: string[] = [];
+
+  data?.people?.edges?.forEach((edge) => {
     const slug = edge.node.slug;
     if (slug) {
-      if (edge.node.collaboratorProfile?.coreMember === true) {
+      if (edge.node.personProfile?.coreMember === true) {
         teamMemberSlugs.push(slug);
         teamMemberSlugs.push(slug);
         teamMemberSlugs.push(slug);
@@ -41,16 +41,16 @@ export default async function People() {
         teamMemberSlugs.push(slug);
         teamMemberSlugs.push(slug);
       } else {
-        collaboratorSlugs.push(slug);
-        collaboratorSlugs.push(slug);
-        collaboratorSlugs.push(slug);
-        collaboratorSlugs.push(slug);
-        collaboratorSlugs.push(slug);
-        collaboratorSlugs.push(slug);
-        collaboratorSlugs.push(slug);
-        collaboratorSlugs.push(slug);
-        collaboratorSlugs.push(slug);
-        collaboratorSlugs.push(slug);
+        collaborationSlugs.push(slug);
+        collaborationSlugs.push(slug);
+        collaborationSlugs.push(slug);
+        collaborationSlugs.push(slug);
+        collaborationSlugs.push(slug);
+        collaborationSlugs.push(slug);
+        collaborationSlugs.push(slug);
+        collaborationSlugs.push(slug);
+        collaborationSlugs.push(slug);
+        collaborationSlugs.push(slug);
       }
     }
   });
@@ -58,16 +58,16 @@ export default async function People() {
   return (
     <Section title={sections.people.name} icon={sections.people.icon} id={sections.people.id}>
       <div className="pb-8">
-        <CollaboratorSection
+        <PeopleSection
           title={strings.people.teamTitle}
-          collaboratorSlugs={teamMemberSlugs}
+          personSlugs={teamMemberSlugs}
           columns={3}
         />
       </div>
       <div className="pb-8">
-        <CollaboratorSection
+        <PeopleSection
           title={strings.people.collaborationsTitle}
-          collaboratorSlugs={collaboratorSlugs}
+          personSlugs={collaborationSlugs}
           columns={3}
         />
       </div>

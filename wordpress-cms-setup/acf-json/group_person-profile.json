@@ -1,6 +1,6 @@
 {
   "key": "group_685b0f415a7ea",
-  "title": "Collaborator Profile",
+  "title": "Person Profile",
   "fields": [
     {
       "key": "field_685b105dff534",
@@ -8,7 +8,7 @@
       "name": "referenced_projects",
       "aria-label": "",
       "type": "post_object",
-      "instructions": "Select projects this collaborator has worked on or contributed to.",
+      "instructions": "Select projects this person has worked on or contributed to.",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -41,7 +41,7 @@
       "name": "roles",
       "aria-label": "",
       "type": "text",
-      "instructions": "Enter one or more roles this collaborator has in projects. Separated with '|' .",
+      "instructions": "Enter one or more roles this person has in projects. Separated with '|' .",
       "required": 1,
       "conditional_logic": 0,
       "wrapper": {
@@ -91,7 +91,7 @@
       {
         "param": "post_type",
         "operator": "==",
-        "value": "collaborator"
+        "value": "people"
       }
     ]
   ],
@@ -105,7 +105,7 @@
   "description": "",
   "show_in_rest": 1,
   "show_in_graphql": 1,
-  "graphql_field_name": "collaboratorProfile",
+  "graphql_field_name": "personProfile",
   "map_graphql_types_from_location_rules": 0,
   "graphql_types": ""
 }

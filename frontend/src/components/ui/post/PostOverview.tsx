@@ -2,11 +2,12 @@ import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import PostHeader from './PostHeader';
 import PostTags from './PostTags';
-import CollaboratorSection from '@/components/ui/collaborator/CollaboratorSection';
+import PeopleSection from '@/components/ui/people/PeopleSection';
 import {
   GetProjectOverviewQuery,
   GetProjectOverviewQueryVariables,
 } from "@/graphql/generatedTypes";
+import {siteConfig} from "@/config/siteConfig";
 
 const GetProjectOverview = gql`
     query GetProjectOverview($id: ID!) {
@@ -23,10 +24,10 @@ const GetProjectOverview = gql`
                 }
             }
             projectDetails {
-                referencedCollaborators {
+                referencedPeople {
                     nodes {
                         __typename
-                        ... on Collaborator {
+                        ... on Person {
                             slug
                         }
                     }
@@ -50,9 +51,9 @@ export default async function ProjectOverview({ id }: ProjectOverviewProps) {
     throw new Error(`Project with id "${id}" not found`);
   }
 
-  const collaboratorSlugs = project.projectDetails?.referencedCollaborators?.nodes
-    ?.filter((node): node is Extract<typeof node, { __typename: "Collaborator" }> =>
-      node.__typename === "Collaborator"
+  const personSlugs = project.projectDetails?.referencedPeople?.nodes
+    ?.filter((node): node is Extract<typeof node, { __typename: "Person" }> =>
+      node.__typename === "Person"
     )
     .map(node => node.slug)
     .filter((slug): slug is string => slug !== undefined) || [];
@@ -64,9 +65,9 @@ export default async function ProjectOverview({ id }: ProjectOverviewProps) {
     <>
       <PostHeader title={project.title} excerpt={project.excerpt} />
       <PostTags tags={tagIds} />
-      <CollaboratorSection
-        title="Kollaborateure"
-        collaboratorSlugs={collaboratorSlugs}
+      <PeopleSection
+        title={siteConfig.strings.postOverView.collaborators}
+        personSlugs={personSlugs}
       />
     </>
   );

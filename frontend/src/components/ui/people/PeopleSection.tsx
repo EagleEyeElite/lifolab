@@ -3,19 +3,19 @@ import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import ThreeColumnExpandableRows from "@/components/ui/expandableRows/ThreeColumnExpandableRows";
 import { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
-import { GetAllCollaboratorsQuery, GetAllCollaboratorsQueryVariables } from "@/graphql/generatedTypes";
+import { GetAllPeopleQuery, GetAllPeopleQueryVariables } from "@/graphql/generatedTypes";
 import SubHeading from "@/components/ui/SubHeading";
 
-const GetAllCollaborators = gql`
-    query GetAllCollaborators {
-        collaborators(first: 100) {
+const GetAllPeople = gql`
+    query GetAllPeople {
+        people(first: 100) {
             edges {
                 node {
                     id
                     title
                     content
                     slug
-                    collaboratorProfile {
+                    personProfile {
                         coreMember
                         roles
                         referencedProjects {
@@ -34,28 +34,28 @@ const GetAllCollaborators = gql`
     }
 `;
 
-interface CollaboratorSectionProps {
+interface PersonSectionProps {
   title: string;
-  collaboratorSlugs: string[];
+  personSlugs: string[];
   columns?: number;
 }
 
-export default async function CollaboratorSection({ title, collaboratorSlugs, columns = 1 }: CollaboratorSectionProps) {
-  const data = await graphqlClient.request<GetAllCollaboratorsQuery, GetAllCollaboratorsQueryVariables>(GetAllCollaborators);
+export default async function PeopleSection({ title, personSlugs, columns = 1 }: PersonSectionProps) {
+  const data = await graphqlClient.request<GetAllPeopleQuery, GetAllPeopleQueryVariables>(GetAllPeople);
 
-  const items: ExpandableRowItem[] = collaboratorSlugs
+  const items: ExpandableRowItem[] = personSlugs
     .flatMap(slug => {
-      const collaboratorData = data.collaborators?.edges?.find((edge: any) =>
+      const personData = data.people?.edges?.find((edge: any) =>
         edge.node.slug === slug
       )?.node;
 
-      if (!collaboratorData) return [];
+      if (!personData) return [];
 
       return [{
-        name: collaboratorData.title || '',
-        role: collaboratorData.collaboratorProfile?.roles || '',
-        content: collaboratorData.content || '',
-        referencedLinks: collaboratorData.collaboratorProfile?.referencedProjects?.nodes?.map((project: any) => ({
+        name: personData.title || '',
+        role: personData.personProfile?.roles || '',
+        content: personData.content || '',
+        referencedLinks: personData.personProfile?.referencedProjects?.nodes?.map((project: any) => ({
           title: project.title,
           slug: project.slug
         })) || []

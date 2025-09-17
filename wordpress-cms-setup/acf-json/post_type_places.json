@@ -59,7 +59,7 @@
   "menu_position": "",
   "menu_icon": {
     "type": "dashicons",
-    "value": "dashicons-admin-site-alt3"
+    "value": "dashicons-location"
   },
   "rename_capabilities": false,
   "singular_capability_name": "post",
