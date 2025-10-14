@@ -1,7 +1,8 @@
 import React from "react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
-import ExpandableRows, { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
+import ThreeColumnExpandableRows from "@/components/ui/expandableRows/ThreeColumnExpandableRows";
+import { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
 import { GetAllPlacesQuery, GetAllPlacesQueryVariables } from "@/graphql/generatedTypes";
 import Section from "@/components/ui/Section";
 import { sections } from "@/config/siteConfig";
@@ -40,7 +41,7 @@ export default async function Places() {
   return (
     <Section title={sections.places.name} icon={sections.places.icon} id={sections.places.id}>
       <div className="pb-8">
-        <ExpandableRows items={items} />
+        <ThreeColumnExpandableRows items={items} />
       </div>
     </Section>
   );

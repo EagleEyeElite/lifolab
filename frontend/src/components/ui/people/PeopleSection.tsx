@@ -2,7 +2,7 @@ import React from "react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
 import ThreeColumnExpandableRows from "@/components/ui/expandableRows/ThreeColumnExpandableRows";
-import { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
+import ExpandableRows, { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
 import { GetAllPeopleQuery, GetAllPeopleQueryVariables } from "@/graphql/generatedTypes";
 import SubHeading from "@/components/ui/SubHeading";
 
@@ -66,6 +66,10 @@ export default async function PeopleSection({ title, personSlugs, columns = 1 }:
     <div className="pb-4">
       <SubHeading>{title}</SubHeading>
     </div>
-    <ThreeColumnExpandableRows items={items} columns={columns} />
+    {columns === 1 ? (
+      <ExpandableRows items={items} />
+    ) : (
+      <ThreeColumnExpandableRows items={items} />
+    )}
   </>
 }
