@@ -12,6 +12,7 @@ import React from "react";
 import SubHeading from '@/components/ui/SubHeading';
 import { strings } from '@/config/siteConfig';
 import { notFound } from 'next/navigation';
+import MasonryLayout from '@/components/ui/projectsOverview/masonryLayout';
 
 export const revalidate = 10;
 
@@ -67,41 +68,48 @@ export default async function TagPage({ params }: TagPageProps) {
   const allTagIds = allTags?.edges?.map(({ node }: { node: { id: string } }) => node.id) || [];
 
   const AllTagsHeading = <>
-    <div className="flex items-center pb-10">
-      <div className="pr-2">
-        <SubHeading>{strings.tags.categories}:</SubHeading>
-      </div>
-      <CategoryList tagIds={allTagIds} selectedTagSlug={tag} />
+    <div className="pb-6">
+      <CategoryList
+        tagIds={allTagIds}
+        selectedTagSlug={tag}
+        selectable={true}
+      />
     </div>
   </>
 
-  const projectCards = projects?.edges?.map(({ node: project }) => (
-    <ProjectCard
-      key={project.id}
-      id={project.id!}
-      imageSize="medium"
-    />
-  )) || [];
+  const imageSizes = [
+    "massive", "tiny", "tiny", "tiny", "tiny", "tiny", "tiny",
+    "large", "medium", "huge", "tiny", "small", "massive"
+  ];
+
+  const projectCards = projects?.edges?.map(({ node: project }, index) => {
+    const size = imageSizes[index % imageSizes.length];
+    return (
+      <ProjectCard
+        key={project.id}
+        id={project.id!}
+        imageSize={size as 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive'}
+      />
+    );
+  }) || [];
 
   const Projects = <>
-    <div className="flex flex-col gap-14">
-      {projectCards.length ? (
-        projectCards
-      ) : (
-        <p className="text-gray-500 font-body">{strings.tags.noProjectsFound}</p>
-      )}
-    </div>
+    {projectCards.length ? (
+      <MasonryLayout>
+        {projectCards}
+      </MasonryLayout>
+    ) : (
+      <p className="text-gray-500 font-body">{strings.tags.noProjectsFound}</p>
+    )}
   </>
 
   return (
     <Section title={strings.tags.categories} icon={Tag}>
-      <div className="flex flex-col items-center pt-6">
-        <div className="max-w-xl w-full">
-          {AllTagsHeading}
-        </div>
-        <div className="max-w-lg">
-          {Projects}
-        </div>
+      <div className="pb-8">
+        {AllTagsHeading}
+      </div>
+      <div className="pt-2">
+        {Projects}
       </div>
     </Section>
   );

@@ -33,15 +33,8 @@ export default async function TagsPage() {
 
   return (
     <Section title={strings.tags.categories} icon={Tag}>
-      <div className="flex flex-col items-center pt-6">
-        <div className="max-w-xl w-full pb-10">
-          <div className="flex items-center">
-            <div className="pr-2">
-              <SubHeading>{strings.tags.categories}:</SubHeading>
-            </div>
-            <CategoryList tagIds={ids} />
-          </div>
-        </div>
+      <div className="pb-8">
+        <CategoryList tagIds={ids} selectable={true} />
       </div>
     </Section>
   );
