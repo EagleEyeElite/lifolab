@@ -15,6 +15,7 @@ const GetCyclopediaChapters = gql`
           id
           cyclopediaChapterDetails {
             chapterOrder
+            backgroundColor
           }
         }
       }
@@ -32,25 +33,29 @@ export default async function Cyclopedia() {
   
   const chapters = cyclopediaChapters?.edges?.map((edge: any) => edge.node).filter(Boolean) || [];
   
-  // Sort chapters by chapter_order and extract just IDs
-  const sortedChapterIds = chapters
+  // Sort chapters by chapter_order and extract IDs with colors
+  const sortedChaptersData = chapters
     .sort((a: any, b: any) => {
       const orderA = a?.cyclopediaChapterDetails?.chapterOrder || 999;
       const orderB = b?.cyclopediaChapterDetails?.chapterOrder || 999;
       return orderA - orderB;
     })
-    .map((chapter: any) => chapter?.id)
-    .filter(Boolean);
+    .map((chapter: any) => ({
+      id: chapter?.id,
+      backgroundColor: chapter?.cyclopediaChapterDetails?.backgroundColor
+    }))
+    .filter((chapter: any) => chapter.id);
 
   return (
     <Section title={sections.cyclopedia.name} icon={sections.cyclopedia.icon}>
       <div className="flex justify-start w-full">
         <div className="w-full">
           <div className="space-y-8">
-            {sortedChapterIds.map((chapterId: string) => (
+            {sortedChaptersData.map((chapterData: any) => (
               <CyclopediaChapter
-                key={chapterId}
-                chapterId={chapterId}
+                key={chapterData.id}
+                chapterId={chapterData.id}
+                backgroundColor={chapterData.backgroundColor}
               />
             ))}
           </div>

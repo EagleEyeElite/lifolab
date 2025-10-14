@@ -26,9 +26,10 @@ const GetChapterWithEntryIds = gql`
 
 interface CyclopediaChapterProps {
   chapterId: string;
+  backgroundColor: string;
 }
 
-export default async function CyclopediaChapter({ chapterId }: CyclopediaChapterProps) {
+export default async function CyclopediaChapter({ chapterId, backgroundColor }: CyclopediaChapterProps) {
   const { cyclopediaChapter } = await graphqlClient.request<GetChapterWithEntryIdsQuery, GetChapterWithEntryIdsQueryVariables>(GetChapterWithEntryIds, {
     chapterId: chapterId
   });
@@ -56,7 +57,7 @@ export default async function CyclopediaChapter({ chapterId }: CyclopediaChapter
       </h1>
       <MasonryLayout>
         {entries.map((entry) => (
-          <CyclopediaEntryCard key={entry.id} entryId={entry.id} />
+          <CyclopediaEntryCard key={entry.id} entryId={entry.id} backgroundColor={backgroundColor} />
         ))}
       </MasonryLayout>
     </div>

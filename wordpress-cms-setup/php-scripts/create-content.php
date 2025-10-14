@@ -173,7 +173,8 @@ $chapter1_id = wp_insert_post(array(
     'post_title' => 'Cyclopedia Chapter Alpha',
     'post_status' => 'publish',
     'meta_input' => array(
-        'chapter_order' => 1
+        'chapter_order' => 1,
+        'background_color' => '#FED7AA'
     )
 ));
 
@@ -213,7 +214,8 @@ $chapter2_id = wp_insert_post(array(
     'post_title' => 'Cyclopedia Chapter Beta',
     'post_status' => 'publish',
     'meta_input' => array(
-        'chapter_order' => 2
+        'chapter_order' => 2,
+        'background_color' => '#E9D5FF'
     )
 ));
 

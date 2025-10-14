@@ -48,7 +48,7 @@ const pageConfigs: Record<string, PageConfig> = {
     id: "projects"
   },
   cyclopedia: {
-    name: "Encyclopedia",
+    name: "LiFo-Cyclopedia",
     icon: BookOpen,
     href: "/cyclopedia"
   },
@@ -76,7 +76,7 @@ export const siteConfig = {
     activities: [
       pageConfigs.projects,
       pageConfigs.tags,
-      { name: "Encyclopedia of ...", href: pageConfigs.cyclopedia.href, icon: pageConfigs.cyclopedia.icon }
+      { name: "LiFo-Cyclopedia", href: pageConfigs.cyclopedia.href, icon: pageConfigs.cyclopedia.icon }
     ] as NavigationItem[]
   },
 

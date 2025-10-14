@@ -30,6 +30,29 @@
       "graphql_non_null": 1
     },
     {
+      "key": "field_68eeb57dc24e3",
+      "label": "Background Color",
+      "name": "background_color",
+      "aria-label": "",
+      "type": "color_picker",
+      "instructions": "Select a background color for this chapter's entries.",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "#FED7AA",
+      "enable_opacity": 0,
+      "return_format": "string",
+      "allow_in_bindings": 0,
+      "show_in_graphql": 1,
+      "graphql_description": "The background color for this chapter's entries",
+      "graphql_field_name": "backgroundColor",
+      "graphql_non_null": 1
+    },
+    {
       "key": "field_68b01f9610521",
       "label": "Entries",
       "name": "entries",
@@ -62,7 +85,8 @@
       "show_in_graphql": 1,
       "graphql_description": "",
       "graphql_field_name": "entries",
-      "graphql_connection_type": "one_to_many"
+      "graphql_connection_type": "one_to_many",
+      "elements": []
     }
   ],
   "location": [

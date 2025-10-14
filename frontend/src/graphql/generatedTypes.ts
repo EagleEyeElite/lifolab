@@ -2133,7 +2133,7 @@ export type CyclopediaChapter = ContentNode & DatabaseIdentifier & MenuItemLinka
   parent?: Maybe<CyclopediaChapterToParentConnectionEdge>;
   /** The password for the cyclopedia-chapter object. */
   password?: Maybe<Scalars['String']['output']>;
-  /** Connection between the CyclopediaChapter type and the cyclopediaChapter type */
+  /** Connection between the cyclopediaChapter type and the cyclopediaChapter type */
   preview?: Maybe<CyclopediaChapterToPreviewConnectionEdge>;
   /** The database id of the preview node */
   previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
@@ -2217,6 +2217,8 @@ export type CyclopediaChapterConnectionPageInfo = {
 /** The &quot;CyclopediaChapterDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type CyclopediaChapterDetails = AcfFieldGroup & AcfFieldGroupFields & CyclopediaChapterDetails_Fields & {
   __typename?: 'CyclopediaChapterDetails';
+  /** The background color for this chapter&#039;s entries */
+  backgroundColor: Scalars['String']['output'];
   /** The display order for this chapter */
   chapterOrder: Scalars['Float']['output'];
   /** Select and order cyclopedia entries for this chapter */
@@ -2239,6 +2241,8 @@ export type CyclopediaChapterDetailsEntriesArgs = {
 
 /** Interface representing fields of the ACF &quot;CyclopediaChapterDetails&quot; Field Group */
 export type CyclopediaChapterDetails_Fields = {
+  /** The background color for this chapter&#039;s entries */
+  backgroundColor: Scalars['String']['output'];
   /** The display order for this chapter */
   chapterOrder: Scalars['Float']['output'];
   /** Select and order cyclopedia entries for this chapter */
@@ -2271,7 +2275,7 @@ export enum CyclopediaChapterIdType {
   Uri = 'URI'
 }
 
-/** Connection between the CyclopediaChapter type and the cyclopediaChapter type */
+/** Connection between the cyclopediaChapter type and the cyclopediaChapter type */
 export type CyclopediaChapterToCyclopediaChapterConnection = Connection & CyclopediaChapterConnection & {
   __typename?: 'CyclopediaChapterToCyclopediaChapterConnection';
   /** Edges for the CyclopediaChapterToCyclopediaChapterConnection connection */
@@ -2310,7 +2314,7 @@ export type CyclopediaChapterToCyclopediaChapterConnectionPageInfo = CyclopediaC
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
-/** Connection between the CyclopediaChapter type and the cyclopediaChapter type */
+/** Connection between the cyclopediaChapter type and the cyclopediaChapter type */
 export type CyclopediaChapterToParentConnectionEdge = CyclopediaChapterConnectionEdge & Edge & OneToOneConnection & {
   __typename?: 'CyclopediaChapterToParentConnectionEdge';
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -2322,7 +2326,7 @@ export type CyclopediaChapterToParentConnectionEdge = CyclopediaChapterConnectio
   node: CyclopediaChapter;
 };
 
-/** Connection between the CyclopediaChapter type and the cyclopediaChapter type */
+/** Connection between the cyclopediaChapter type and the cyclopediaChapter type */
 export type CyclopediaChapterToPreviewConnectionEdge = CyclopediaChapterConnectionEdge & Edge & OneToOneConnection & {
   __typename?: 'CyclopediaChapterToPreviewConnectionEdge';
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -2409,7 +2413,7 @@ export type CyclopediaEntry = ContentNode & DatabaseIdentifier & MenuItemLinkabl
   parent?: Maybe<CyclopediaEntryToParentConnectionEdge>;
   /** The password for the cyclopedia-entry object. */
   password?: Maybe<Scalars['String']['output']>;
-  /** Connection between the CyclopediaEntry type and the cyclopediaEntry type */
+  /** Connection between the cyclopediaEntry type and the cyclopediaEntry type */
   preview?: Maybe<CyclopediaEntryToPreviewConnectionEdge>;
   /** The database id of the preview node */
   previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
@@ -2549,7 +2553,7 @@ export enum CyclopediaEntryIdType {
   Uri = 'URI'
 }
 
-/** Connection between the CyclopediaEntry type and the cyclopediaEntry type */
+/** Connection between the cyclopediaEntry type and the cyclopediaEntry type */
 export type CyclopediaEntryToCyclopediaEntryConnection = Connection & CyclopediaEntryConnection & {
   __typename?: 'CyclopediaEntryToCyclopediaEntryConnection';
   /** Edges for the CyclopediaEntryToCyclopediaEntryConnection connection */
@@ -2588,7 +2592,7 @@ export type CyclopediaEntryToCyclopediaEntryConnectionPageInfo = CyclopediaEntry
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
-/** Connection between the CyclopediaEntry type and the cyclopediaEntry type */
+/** Connection between the cyclopediaEntry type and the cyclopediaEntry type */
 export type CyclopediaEntryToParentConnectionEdge = CyclopediaEntryConnectionEdge & Edge & OneToOneConnection & {
   __typename?: 'CyclopediaEntryToParentConnectionEdge';
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -2600,7 +2604,7 @@ export type CyclopediaEntryToParentConnectionEdge = CyclopediaEntryConnectionEdg
   node: CyclopediaEntry;
 };
 
-/** Connection between the CyclopediaEntry type and the cyclopediaEntry type */
+/** Connection between the cyclopediaEntry type and the cyclopediaEntry type */
 export type CyclopediaEntryToPreviewConnectionEdge = CyclopediaEntryConnectionEdge & Edge & OneToOneConnection & {
   __typename?: 'CyclopediaEntryToPreviewConnectionEdge';
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -4331,7 +4335,7 @@ export enum MenuItemNodeIdTypeEnum {
   Id = 'ID'
 }
 
-/** Deprecated in favor of MenuItemLinkeable Interface */
+/** Deprecated in favor of MenuItemLinkable Interface */
 export type MenuItemObjectUnion = Category | CyclopediaChapter | CyclopediaEntry | Page | Person | Place | Post | PostFormat | Project | Tag;
 
 /** Connection between the MenuItem type and the Menu type */
@@ -4913,7 +4917,7 @@ export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & 
   parentId?: Maybe<Scalars['ID']['output']>;
   /** The password for the page object. */
   password?: Maybe<Scalars['String']['output']>;
-  /** Connection between the Page type and the page type */
+  /** Connection between the page type and the page type */
   preview?: Maybe<PageToPreviewConnectionEdge>;
   /** The database id of the preview node */
   previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
@@ -5152,7 +5156,7 @@ export type PageToCommentConnectionWhereArgs = {
   userId?: InputMaybe<Scalars['ID']['input']>;
 };
 
-/** Connection between the Page type and the page type */
+/** Connection between the page type and the page type */
 export type PageToPreviewConnectionEdge = Edge & OneToOneConnection & PageConnectionEdge & {
   __typename?: 'PageToPreviewConnectionEdge';
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -5312,7 +5316,7 @@ export type Person = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
   personId: Scalars['Int']['output'];
   /** Fields of the PersonProfile ACF Field Group */
   personProfile?: Maybe<PersonProfile>;
-  /** Connection between the Person type and the person type */
+  /** Connection between the person type and the person type */
   preview?: Maybe<PersonToPreviewConnectionEdge>;
   /** The database id of the preview node */
   previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
@@ -5460,7 +5464,7 @@ export type PersonProfile_FieldsReferencedProjectsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-/** Connection between the Person type and the person type */
+/** Connection between the person type and the person type */
 export type PersonToParentConnectionEdge = Edge & OneToOneConnection & PersonConnectionEdge & {
   __typename?: 'PersonToParentConnectionEdge';
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -5472,7 +5476,7 @@ export type PersonToParentConnectionEdge = Edge & OneToOneConnection & PersonCon
   node: Person;
 };
 
-/** Connection between the Person type and the person type */
+/** Connection between the person type and the person type */
 export type PersonToPersonConnection = Connection & PersonConnection & {
   __typename?: 'PersonToPersonConnection';
   /** Edges for the PersonToPersonConnection connection */
@@ -5511,7 +5515,7 @@ export type PersonToPersonConnectionPageInfo = PageInfo & PersonConnectionPageIn
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
-/** Connection between the Person type and the person type */
+/** Connection between the person type and the person type */
 export type PersonToPreviewConnectionEdge = Edge & OneToOneConnection & PersonConnectionEdge & {
   __typename?: 'PersonToPreviewConnectionEdge';
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -5590,7 +5594,7 @@ export type Place = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node &
    * @deprecated Deprecated in favor of the databaseId field
    */
   placeId: Scalars['Int']['output'];
-  /** Connection between the Place type and the place type */
+  /** Connection between the place type and the place type */
   preview?: Maybe<PlaceToPreviewConnectionEdge>;
   /** The database id of the preview node */
   previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
@@ -5689,7 +5693,7 @@ export enum PlaceIdType {
   Uri = 'URI'
 }
 
-/** Connection between the Place type and the place type */
+/** Connection between the place type and the place type */
 export type PlaceToParentConnectionEdge = Edge & OneToOneConnection & PlaceConnectionEdge & {
   __typename?: 'PlaceToParentConnectionEdge';
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -5701,7 +5705,7 @@ export type PlaceToParentConnectionEdge = Edge & OneToOneConnection & PlaceConne
   node: Place;
 };
 
-/** Connection between the Place type and the place type */
+/** Connection between the place type and the place type */
 export type PlaceToPlaceConnection = Connection & PlaceConnection & {
   __typename?: 'PlaceToPlaceConnection';
   /** Edges for the PlaceToPlaceConnection connection */
@@ -5740,7 +5744,7 @@ export type PlaceToPlaceConnectionPageInfo = PageInfo & PlaceConnectionPageInfo 
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
-/** Connection between the Place type and the place type */
+/** Connection between the place type and the place type */
 export type PlaceToPreviewConnectionEdge = Edge & OneToOneConnection & PlaceConnectionEdge & {
   __typename?: 'PlaceToPreviewConnectionEdge';
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -5922,7 +5926,7 @@ export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & 
    * @deprecated Deprecated in favor of the databaseId field
    */
   postId: Scalars['Int']['output'];
-  /** Connection between the Post type and the post type */
+  /** Connection between the post type and the post type */
   preview?: Maybe<PostToPreviewConnectionEdge>;
   /** The database id of the preview node */
   previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
@@ -6724,7 +6728,7 @@ export type PostToCommentConnectionWhereArgs = {
   userId?: InputMaybe<Scalars['ID']['input']>;
 };
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export type PostToParentConnectionEdge = Edge & OneToOneConnection & PostConnectionEdge & {
   __typename?: 'PostToParentConnectionEdge';
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -6736,7 +6740,7 @@ export type PostToParentConnectionEdge = Edge & OneToOneConnection & PostConnect
   node: Post;
 };
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export type PostToPostConnection = Connection & PostConnection & {
   __typename?: 'PostToPostConnection';
   /** Edges for the PostToPostConnection connection */
@@ -6852,7 +6856,7 @@ export type PostToPostFormatConnectionWhereArgs = {
   updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export type PostToPreviewConnectionEdge = Edge & OneToOneConnection & PostConnectionEdge & {
   __typename?: 'PostToPreviewConnectionEdge';
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -7254,7 +7258,7 @@ export type Project = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node
   parent?: Maybe<ProjectToParentConnectionEdge>;
   /** The password for the project object. */
   password?: Maybe<Scalars['String']['output']>;
-  /** Connection between the Project type and the project type */
+  /** Connection between the project type and the project type */
   preview?: Maybe<ProjectToPreviewConnectionEdge>;
   /** The database id of the preview node */
   previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
@@ -7455,7 +7459,7 @@ export type ProjectTagsNodeInput = {
   slug?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** Connection between the Project type and the project type */
+/** Connection between the project type and the project type */
 export type ProjectToParentConnectionEdge = Edge & OneToOneConnection & ProjectConnectionEdge & {
   __typename?: 'ProjectToParentConnectionEdge';
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -7467,7 +7471,7 @@ export type ProjectToParentConnectionEdge = Edge & OneToOneConnection & ProjectC
   node: Project;
 };
 
-/** Connection between the Project type and the project type */
+/** Connection between the project type and the project type */
 export type ProjectToPreviewConnectionEdge = Edge & OneToOneConnection & ProjectConnectionEdge & {
   __typename?: 'ProjectToPreviewConnectionEdge';
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -7476,7 +7480,7 @@ export type ProjectToPreviewConnectionEdge = Edge & OneToOneConnection & Project
   node: Project;
 };
 
-/** Connection between the Project type and the project type */
+/** Connection between the project type and the project type */
 export type ProjectToProjectConnection = Connection & ProjectConnection & {
   __typename?: 'ProjectToProjectConnection';
   /** Edges for the ProjectToProjectConnection connection */
@@ -12769,7 +12773,7 @@ export type GetAllTagsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 
 export type GetCyclopediaChaptersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCyclopediaChaptersQuery = { __typename?: 'RootQuery', cyclopediaChapters?: { __typename?: 'RootQueryToCyclopediaChapterConnection', edges: Array<{ __typename?: 'RootQueryToCyclopediaChapterConnectionEdge', node: { __typename?: 'CyclopediaChapter', id: string, cyclopediaChapterDetails?: { __typename?: 'CyclopediaChapterDetails', chapterOrder: number } | null } }> } | null };
+export type GetCyclopediaChaptersQuery = { __typename?: 'RootQuery', cyclopediaChapters?: { __typename?: 'RootQueryToCyclopediaChapterConnection', edges: Array<{ __typename?: 'RootQueryToCyclopediaChapterConnectionEdge', node: { __typename?: 'CyclopediaChapter', id: string, cyclopediaChapterDetails?: { __typename?: 'CyclopediaChapterDetails', chapterOrder: number, backgroundColor: string } | null } }> } | null };
 
 export type GetContactContentQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12966,6 +12970,7 @@ export const GetCyclopediaChaptersDocument = gql`
         id
         cyclopediaChapterDetails {
           chapterOrder
+          backgroundColor
         }
       }
     }

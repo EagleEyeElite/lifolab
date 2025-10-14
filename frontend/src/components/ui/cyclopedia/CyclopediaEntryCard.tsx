@@ -24,9 +24,10 @@ const GetCyclopediaEntry = gql`
 
 interface CyclopediaEntryProps {
   entryId: string;
+  backgroundColor: string;
 }
 
-export default async function CyclopediaEntryCard({ entryId }: CyclopediaEntryProps) {
+export default async function CyclopediaEntryCard({ entryId, backgroundColor }: CyclopediaEntryProps) {
   const { cyclopediaEntry } = await graphqlClient.request<GetCyclopediaEntryQuery, GetCyclopediaEntryQueryVariables>(GetCyclopediaEntry, {
     entryId: entryId
   });
@@ -43,6 +44,7 @@ export default async function CyclopediaEntryCard({ entryId }: CyclopediaEntryPr
       content={cyclopediaEntry.content}
       slug={cyclopediaEntry.slug}
       featuredImage={cyclopediaEntry.featuredImage}
+      backgroundColor={backgroundColor}
     />
   );
 }

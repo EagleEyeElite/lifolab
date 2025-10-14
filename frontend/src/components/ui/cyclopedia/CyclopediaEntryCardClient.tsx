@@ -16,6 +16,7 @@ interface CyclopediaEntryCardProps {
       altText?: string | null;
     };
   } | null;
+  backgroundColor: string;
 }
 
 // Helper function to truncate HTML content to a specific word count and add inline show more button
@@ -73,7 +74,7 @@ function truncateHtmlToWords(html: string, wordLimit: number): { truncated: stri
   return { truncated: result, isTruncated: true };
 }
 
-export default function CyclopediaEntryCardClient({ id, title, content, slug, featuredImage }: CyclopediaEntryCardProps) {
+export default function CyclopediaEntryCardClient({ id, title, content, slug, featuredImage, backgroundColor }: CyclopediaEntryCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const contentRef = React.useRef<HTMLDivElement>(null);
   
@@ -105,14 +106,14 @@ export default function CyclopediaEntryCardClient({ id, title, content, slug, fe
   }, [isExpanded, isTruncated]);
 
   return (
-    <div className="bg-white border border-black rounded-primary overflow-hidden">
+    <div className="rounded-primary overflow-hidden" style={{ backgroundColor }}>
       {entry.featuredImage?.node?.sourceUrl && (
         <div className="relative w-full h-48">
           <Image
             src={entry.featuredImage.node.sourceUrl}
             alt={entry.featuredImage.node.altText || entry.title || 'Cyclopedia entry'}
             fill
-            className="object-cover"
+            className="object-contain"
           />
         </div>
       )}
