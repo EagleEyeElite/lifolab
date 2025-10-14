@@ -20,7 +20,7 @@ configure:
 	@echo "🔎 Disabling search engine indexing..."
 	@wp option update blog_public 0
 	@echo "💬 Disabling comments..."
-	@wp plugin install disable-comments --version=2.5.2 --activate
+	@wp plugin install disable-comments --version=2.5.3 --activate
 	@wp option update disable_comments_options '{"remove_everywhere":true,"disabled_post_types":[],"db_version":6}' --format=json
 	@echo "🗑️ Removing default WordPress plugins..."
 	@wp plugin delete hello akismet
@@ -28,9 +28,9 @@ configure:
 	@mkdir -p ./wp-content/themes/$$(wp theme list --status=active --field=name)/acf-json
 	@cp /acf-json/*.json ./wp-content/themes/$$(wp theme list --status=active --field=name)/acf-json/
 	@echo "🔌 Installing plugins."
-	@wp plugin install updraftplus --version=1.25.7 --activate
+	@wp plugin install updraftplus --version=1.25.8 --activate
 	@wp plugin install secure-custom-fields --version=6.5.7 --activate
-	@wp plugin install wp-graphql --version=2.3.3 --activate
+	@wp plugin install wp-graphql --version=2.3.8 --activate
 	@wp plugin install wpgraphql-acf --version=2.4.1 --activate
 	@wp eval-file /php-scripts/sync-acf-json.php
 	@echo "🔒Create application password for Frontend NextJS"

@@ -13,7 +13,7 @@ services:
 
   # WordPress cms
   wordpress:
-    image: wordpress:6.8.2-php8.2-apache
+    image: wordpress:6.8.3-php8.2-apache
     environment:
       - WORDPRESS_DB_NAME=wp_db
       - WORDPRESS_TABLE_PREFIX=wp_
