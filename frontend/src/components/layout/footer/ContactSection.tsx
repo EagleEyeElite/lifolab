@@ -32,7 +32,7 @@ function ContactPerson({ name, email }: {
       <p className="font-heading text-responsive-xs">{name}</p>
       <Link
         href={`mailto:${email}`}
-        className="inline-block px-responsive py-responsive rounded-primary border border-black font-heading text-responsive-xs"
+        className="inline-block px-responsive py-responsive rounded-primary border border-black font-heading text-responsive-xs break-all overflow-wrap-anywhere"
       >
         {email}
       </Link>

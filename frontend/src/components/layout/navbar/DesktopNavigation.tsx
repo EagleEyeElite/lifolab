@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react";
+import React from "react";
 import MenuColumn from "./MenuColumn";
 
 interface NavigationLink {
@@ -18,54 +18,23 @@ export default function DesktopNavigation({
   navigationLivingTheForestLab,
   navigationActivities,
 }: DesktopNavigationProps) {
-  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
-
-  const toggleDropdown = (dropdown: number) => {
-    setOpenDropdown(current => {
-      // If clicking the same dropdown that's already open, close it
-      if (current === dropdown) {
-        return null;
-      }
-      // If clicking a different dropdown (or no dropdown is open), open the new one
-      return dropdown;
-    });
-  };
-
-  const closeDropdown = () => {
-    setOpenDropdown(null);
-  };
   return (
-    <div className="relative z-20 px-container">
-      <div className="grid grid-cols-3 px-section gap-three-column-gap">
-        <div />
-        <div className="pointer-events-auto relative z-30">
+    <div className="relative z-20 px-container h-full flex items-center">
+      <div className="w-full flex flex-col items-center gap-0 md:grid md:grid-cols-3 px-section md:gap-three-column-gap">
+        <div className="hidden md:block" />
+        <div className="pointer-events-auto relative z-30 h-navbar w-full">
           <MenuColumn
             title="Living the Forest Lab"
-            isOpen={openDropdown === 1}
-            onToggle={() => toggleDropdown(1)}
-            onClose={closeDropdown}
             navigationLinks={navigationLivingTheForestLab}
           />
         </div>
-        <div className="pointer-events-auto relative z-30">
+        <div className="pointer-events-auto relative z-30 h-navbar w-full">
         <MenuColumn
           title="Activities"
-          isOpen={openDropdown === 2}
-          onToggle={() => toggleDropdown(2)}
-          onClose={closeDropdown}
           navigationLinks={navigationActivities}
         />
         </div>
       </div>
-      
-      {/* Desktop backdrop overlay when dropdown is open */}
-      {openDropdown && (
-        <button
-          className="fixed inset-0 pointer-events-auto z-5"
-          onClick={closeDropdown}
-          aria-label="Close menu"
-        />
-      )}
     </div>
   );
 }
