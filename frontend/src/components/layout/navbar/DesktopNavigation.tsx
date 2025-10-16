@@ -12,11 +12,13 @@ interface NavigationLink {
 interface DesktopNavigationProps {
   navigationLivingTheForestLab: NavigationLink[];
   navigationActivities: NavigationLink[];
+  showButtonBackground: boolean;
 }
 
 export default function DesktopNavigation({
   navigationLivingTheForestLab,
   navigationActivities,
+  showButtonBackground,
 }: DesktopNavigationProps) {
   return (
     <div className="relative z-20 px-container h-full flex items-center">
@@ -26,12 +28,14 @@ export default function DesktopNavigation({
           <MenuColumn
             title="Living the Forest Lab"
             navigationLinks={navigationLivingTheForestLab}
+            showButtonBackground={showButtonBackground}
           />
         </div>
         <div className="pointer-events-auto relative z-30 h-navbar w-full">
         <MenuColumn
           title="Activities"
           navigationLinks={navigationActivities}
+          showButtonBackground={showButtonBackground}
         />
         </div>
       </div>

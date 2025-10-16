@@ -4,7 +4,12 @@ import React, {useState, useEffect, useRef} from 'react';
 import {usePathname, useSearchParams, useRouter} from "next/navigation";
 import LogoRenderer, {AnimationMode} from '@/components/layout/navbar/LogoRenderer';
 
-export default function ScrollAnimatedLogo() {
+interface ScrollAnimatedLogoProps {
+  onScrollProgressChange: (progress: number) => void;
+  logoClickTriggerRef?: React.RefObject<(() => void) | null>;
+}
+
+export default function ScrollAnimatedLogo({ onScrollProgressChange, logoClickTriggerRef }: ScrollAnimatedLogoProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [hasNavigatedInternally, setHasNavigatedInternally] = useState(false);
@@ -52,6 +57,8 @@ export default function ScrollAnimatedLogo() {
         }
         router.push('/');
       }}
+      onScrollProgressChange={onScrollProgressChange}
+      logoClickTriggerRef={logoClickTriggerRef}
     />
   );
 }

@@ -101,6 +101,9 @@ export const siteConfig = {
     },
     postOverView: {
       collaborators: "Collaborators",
+    },
+    navigation: {
+      scrollToExplore: "Scroll to explore"
     }
   }
 } as const;
