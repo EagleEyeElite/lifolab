@@ -1,8 +1,8 @@
 import {
   LucideIcon,
-  Info,
+  Pencil,
   Users,
-  MapPin,
+  Globe,
   Mail,
   FolderOpen,
   BookOpen,
@@ -26,7 +26,7 @@ interface PageConfig {
 const pageConfigs: Record<string, PageConfig> = {
   about: {
     name: "About",
-    icon: Info,
+    icon: Pencil,
     href: "/about"
   },
   people: {
@@ -37,8 +37,8 @@ const pageConfigs: Record<string, PageConfig> = {
   },
   places: {
     name: "Places",
-    icon: MapPin,
-    href: "/#places", 
+    icon: Globe,
+    href: "/#places",
     id: "places"
   },
   projects: {
