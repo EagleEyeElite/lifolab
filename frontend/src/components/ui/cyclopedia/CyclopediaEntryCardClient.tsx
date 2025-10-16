@@ -108,13 +108,15 @@ export default function CyclopediaEntryCardClient({ id, title, content, slug, fe
   return (
     <div className="rounded-primary overflow-hidden" style={{ backgroundColor }}>
       {entry.featuredImage?.node?.sourceUrl && (
-        <div className="relative w-full h-48">
-          <Image
-            src={entry.featuredImage.node.sourceUrl}
-            alt={entry.featuredImage.node.altText || entry.title || 'Cyclopedia entry'}
-            fill
-            className="object-contain"
-          />
+        <div className="pt-3">
+          <div className="relative w-full h-48">
+            <Image
+              src={entry.featuredImage.node.sourceUrl}
+              alt={entry.featuredImage.node.altText || entry.title || 'Cyclopedia entry'}
+              fill
+              className="object-contain"
+            />
+          </div>
         </div>
       )}
       <div className="p-4 space-y-3">
