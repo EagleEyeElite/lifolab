@@ -26,9 +26,11 @@ export enum AnimationMode {
 interface LogoRendererProps {
   animate: AnimationMode;
   onNavigate: () => void;
+  onScrollProgressChange: (progress: number) => void;
+  logoClickTriggerRef?: React.RefObject<(() => void) | null>;
 }
 
-export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps) {
+export default function LogoRenderer({ animate, onNavigate, onScrollProgressChange, logoClickTriggerRef }: LogoRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [aspectRatio, setAspectRatio] = useState(0);
   const [showScrollHint, setShowScrollHint] = useState(false);
@@ -112,8 +114,10 @@ export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps)
   const shouldAnimate = animate === AnimationMode.StartBig || animate === AnimationMode.StartSmall;
   const animationProgress = useMotionValue(shouldAnimate ? scrollYProgress.get() : 1);
   const handleScrollChange = (value: number) => {
-    animationProgress.set(shouldAnimate ? value : 1);
-    
+    const progress = shouldAnimate ? value : 1;
+    animationProgress.set(progress);
+    onScrollProgressChange(progress);
+
     // Calculate scroll hint visibility
     if (animate === AnimationMode.DontAnimate) {
       setShowScrollHint(false);
@@ -134,6 +138,64 @@ export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps)
     useTransform(scrollYSpring, [0, 1], logoPositions.logoYRange, { ease: easeOut })
   ];
 
+  // Logo click handler
+  const handleLogoClick = () => {
+    // Simplified 2-State Logo State Machine
+    const containerHeight = containerRef.current?.offsetHeight || 0;
+    const currentScrollY = window.scrollY;
+
+    enum LogoState {
+      GO_HOME = "go_home",           // Click takes you to home position
+      HOME_STATE = "home_state"      // At home position, click makes logo big
+    }
+
+    // Determine current state
+    const getCurrentState = (): LogoState => {
+      // If not on root route, always go home
+      if (animate === AnimationMode.DontAnimate) {
+        return LogoState.GO_HOME;
+      }
+
+      // Check if we're at the home position (logo small, description visible)
+      const isAtHomePosition = Math.abs(currentScrollY - containerHeight) < 10;
+
+      return isAtHomePosition ? LogoState.HOME_STATE : LogoState.GO_HOME;
+    };
+
+    const currentState = getCurrentState();
+
+    // State machine transitions
+    switch (currentState) {
+      case LogoState.GO_HOME:
+        // Take user to home position or navigate to root route
+        if (animate === AnimationMode.DontAnimate) {
+          onNavigate(); // Navigate to root route
+        } else {
+          // Scroll to home position (logo small, description visible)
+          window.scrollTo({
+            top: containerHeight,
+            behavior: 'smooth'
+          });
+        }
+        break;
+
+      case LogoState.HOME_STATE:
+        // User is at home, scroll up to make logo big (enter scroll-dependent state)
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+        break;
+    }
+  };
+
+  // Expose click handler through ref
+  useEffect(() => {
+    if (logoClickTriggerRef) {
+      logoClickTriggerRef.current = handleLogoClick;
+    }
+  }, [animate, onNavigate, logoClickTriggerRef]);
+
   return (
     <>
       {logoPositions.isReady && (
@@ -150,55 +212,7 @@ export default function LogoRenderer({ animate, onNavigate }: LogoRendererProps)
               const img = event.currentTarget;
               setAspectRatio(img.naturalWidth / img.naturalHeight);
             }}
-            onClick={() => {
-              // Simplified 2-State Logo State Machine
-              const containerHeight = containerRef.current?.offsetHeight || 0;
-              const currentScrollY = window.scrollY;
-
-              enum LogoState {
-                GO_HOME = "go_home",           // Click takes you to home position
-                HOME_STATE = "home_state"      // At home position, click makes logo big
-              }
-
-              // Determine current state
-              const getCurrentState = (): LogoState => {
-                // If not on root route, always go home
-                if (animate === AnimationMode.DontAnimate) {
-                  return LogoState.GO_HOME;
-                }
-                
-                // Check if we're at the home position (logo small, description visible)
-                const isAtHomePosition = Math.abs(currentScrollY - containerHeight) < 10;
-                
-                return isAtHomePosition ? LogoState.HOME_STATE : LogoState.GO_HOME;
-              };
-
-              const currentState = getCurrentState();
-
-              // State machine transitions
-              switch (currentState) {
-                case LogoState.GO_HOME:
-                  // Take user to home position or navigate to root route
-                  if (animate === AnimationMode.DontAnimate) {
-                    onNavigate(); // Navigate to root route
-                  } else {
-                    // Scroll to home position (logo small, description visible)
-                    window.scrollTo({
-                      top: containerHeight,
-                      behavior: 'smooth'
-                    });
-                  }
-                  break;
-
-                case LogoState.HOME_STATE:
-                  // User is at home, scroll up to make logo big (enter scroll-dependent state)
-                  window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                  });
-                  break;
-              }
-            }}
+            onClick={handleLogoClick}
           />
         </motion.div>
       )}

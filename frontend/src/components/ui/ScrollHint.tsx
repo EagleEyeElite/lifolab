@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
+import { strings } from '@/config/siteConfig';
 
 interface ScrollHintProps {
   shouldShow: boolean;
@@ -22,7 +23,7 @@ export default function ScrollHint({ shouldShow }: ScrollHintProps) {
     >
       <div className="flex flex-col items-center justify-center space-y-2">
         <p className="text-gray-600 text-base font-medium text-center px-4">
-          Scrollen um zu erkunden
+          {strings.navigation.scrollToExplore}
         </p>
         <motion.div
           animate={{ y: [0, 8, 0] }}
