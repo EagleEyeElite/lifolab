@@ -19,10 +19,10 @@ export default function DropdownMenu({ navigationLinks }: DropdownMenuProps) {
           {navigationLinks.map((link) => {
             const IconComponent = link.icon;
             return (
-              <li key={link.href} className="py-3 pl-2">
+              <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="flex gap-2 text-sm hover:opacity-70 transition-opacity"
+                  className="flex gap-2 py-3 pl-2 text-sm hover:opacity-70 transition-opacity"
                 >
                   <IconComponent size={16} />
                   {link.name}
