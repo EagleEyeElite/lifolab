@@ -103,7 +103,7 @@ export default function ProjectCardClient({
         <SubHeading>{title}</SubHeading>
       </div>
     </Link>
-    <div className="font-heading pt-3 relative z-10 group-hover:blur-xs duration-200">
+    <div className="font-heading pt-3 relative z-10">
       {tagList}
     </div>
     </div>
