@@ -131,7 +131,6 @@ export default function TagsWithProjects({ selectedTagSlug }: TagsWithProjectsPr
                 <ProjectCard
                   key={project.id}
                   id={project.id}
-                  imageSize="medium"
                 />
               ))
             ) : (

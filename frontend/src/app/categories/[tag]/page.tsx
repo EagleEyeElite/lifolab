@@ -77,18 +77,11 @@ export default async function TagPage({ params }: TagPageProps) {
     </div>
   </>
 
-  const imageSizes = [
-    "massive", "tiny", "tiny", "tiny", "tiny", "tiny", "tiny",
-    "large", "medium", "huge", "tiny", "small", "massive"
-  ];
-
-  const projectCards = projects?.edges?.map(({ node: project }, index) => {
-    const size = imageSizes[index % imageSizes.length];
+  const projectCards = projects?.edges?.map(({ node: project }) => {
     return (
       <ProjectCard
         key={project.id}
         id={project.id!}
-        imageSize={size as 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive'}
       />
     );
   }) || [];

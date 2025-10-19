@@ -6,25 +6,6 @@ import Image from "next/image";
 import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 import SubHeading from "@/components/ui/SubHeading";
 
-const getImageClassName = (size: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive') => {
-  switch (size) {
-    case 'tiny':
-      return "w-full h-32";
-    case 'small':
-      return "w-full h-44";
-    case 'medium':
-      return "w-full h-64";
-    case 'large':
-      return "w-full h-80";
-    case 'huge':
-      return "w-full h-96";
-    case 'massive':
-      return "w-full h-[28rem]";
-    default:
-      return "w-full h-64";
-  }
-};
-
 /**
  *
  * https://tympanus.net/codrops/2013/07/02/loading-effects-for-grid-items-with-css-animations/
@@ -35,25 +16,24 @@ const getImageClassName = (size: 'tiny' | 'small' | 'medium' | 'large' | 'huge' 
 interface ProjectCardClientProps {
   title: string;
   href: string;
-  whenAndWhere?: string;
-  excerpt?: string;
   image: string;
-  imageSize: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive';
+  imageWidth: number;
+  imageHeight: number;
   tagList?: React.ReactNode;
 }
 
-export default function ProjectCardClient({ 
-  title, 
-  href, 
-  whenAndWhere, 
-  excerpt,
-  image, 
-  imageSize,
+export default function ProjectCardClient({
+  title,
+  href,
+  image,
+  imageWidth,
+  imageHeight,
   tagList,
 }: ProjectCardClientProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     const element = cardRef.current;
@@ -90,12 +70,13 @@ export default function ProjectCardClient({
       }`}
     >
     <Link href={href} className="relative z-10">
-      <div className={`relative duration-200 ${getImageClassName(imageSize)}`}>
+      <div className="relative rounded-primary group-hover:blur-xs duration-200 w-full max-h-[800px] overflow-hidden">
         <Image
           src={image}
           alt={title}
-          fill
-          className="object-cover rounded-primary group-hover:blur-xs duration-200"
+          width={imageWidth}
+          height={imageHeight}
+          className="object-cover"
           sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"
         />
       </div>

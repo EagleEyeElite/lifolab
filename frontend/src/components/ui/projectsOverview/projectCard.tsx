@@ -17,6 +17,10 @@ const GetProjectCard = gql`
                 node {
                     sourceUrl
                     altText
+                    mediaDetails {
+                        width
+                        height
+                    }
                 }
             }
             tags {
@@ -37,10 +41,9 @@ const GetProjectCard = gql`
 
 interface ProjectCardProps {
   id: string;
-  imageSize: 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive';
 }
 
-export default async function ProjectCard({ id, imageSize }: ProjectCardProps) {
+export default async function ProjectCard({ id }: ProjectCardProps) {
   const data = await graphqlClient.request<GetProjectCardQuery, GetProjectCardQueryVariables>(
     GetProjectCard, { id }
   );
@@ -52,14 +55,16 @@ export default async function ProjectCard({ id, imageSize }: ProjectCardProps) {
   // Extract tag IDs from the project
   const tagIds = project.tags?.edges?.map(({ node }) => node.id) || [];
 
+  const imageWidth = project.featuredImage?.node?.mediaDetails?.width || 800;
+  const imageHeight = project.featuredImage?.node?.mediaDetails?.height || 600;
+
   return (
     <ProjectCardClient
       title={project.title!}
       href={`/${project.slug!}`}
-      whenAndWhere={project.projectDetails?.whenAndWhere || undefined}
-      excerpt={project.excerpt || undefined}
       image={project.featuredImage?.node?.sourceUrl || ''}
-      imageSize={imageSize}
+      imageWidth={imageWidth}
+      imageHeight={imageHeight}
       tagList={<CategoryList tagIds={tagIds} />}
     />
   );

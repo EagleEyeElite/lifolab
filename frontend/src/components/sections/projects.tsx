@@ -26,27 +26,16 @@ export default async function Projects() {
 
   const projects = data?.projects?.edges?.map(edge => edge.node) || [];
 
-  // Simplified array with only imageSize
-  const imageSizes = [
-    "massive", "tiny", "tiny", "tiny", "tiny", "tiny", "tiny",
-    "large", "medium", "huge", "tiny", "small", "massive"
-  ];
-
-  // Generate 13 project cards, cycling through available projects
-  const projectCards = imageSizes.map((size, index) => {
-    // Cycle through projects if we have fewer projects than cards needed
-    const projectIndex = projects.length > 0 ? index % projects.length : 0;
-    const currentProject = projects[projectIndex];
-
-    if (!currentProject || !currentProject.id) {
-      throw new Error(`Project "${currentProject}" with slug not found`);
+  // Show each project once
+  const projectCards = projects.map((project) => {
+    if (!project || !project.id) {
+      return null;
     }
 
     return (
       <ProjectCard
-        key={index}
-        id={currentProject.id}
-        imageSize={size as 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'massive'}
+        key={project.id}
+        id={project.id}
       />
     );
   }).filter(Boolean);

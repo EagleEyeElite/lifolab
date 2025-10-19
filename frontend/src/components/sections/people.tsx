@@ -35,21 +35,7 @@ export default async function People() {
     if (slug) {
       if (edge.node.personProfile?.coreMember === true) {
         teamMemberSlugs.push(slug);
-        teamMemberSlugs.push(slug);
-        teamMemberSlugs.push(slug);
-        teamMemberSlugs.push(slug);
-        teamMemberSlugs.push(slug);
-        teamMemberSlugs.push(slug);
       } else {
-        collaborationSlugs.push(slug);
-        collaborationSlugs.push(slug);
-        collaborationSlugs.push(slug);
-        collaborationSlugs.push(slug);
-        collaborationSlugs.push(slug);
-        collaborationSlugs.push(slug);
-        collaborationSlugs.push(slug);
-        collaborationSlugs.push(slug);
-        collaborationSlugs.push(slug);
         collaborationSlugs.push(slug);
       }
     }
