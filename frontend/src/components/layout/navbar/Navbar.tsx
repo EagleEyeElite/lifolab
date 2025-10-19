@@ -1,18 +1,41 @@
 "use client"
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ScrollAnimatedLogo from "@/components/layout/navbar/ScrollAnimatedLogo";
 import DesktopNavigation from "@/components/layout/navbar/DesktopNavigation";
 import MobileNavigation from "@/components/layout/navbar/MobileNavigation";
 
 import { navbar } from "@/config/siteConfig";
 
+type LayoutMode = 'mobile' | 'tablet' | 'desktop';
+
 export default function Navbar() {
-  const { livingTheForestLab: navigationLivingTheForestLab, activities: navigationActivities } = navbar;
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [layoutMode, setLayoutMode] = useState<LayoutMode>('desktop');
   const showButtonBackground = scrollProgress >= 1;
   const showFullScreenOverlay = scrollProgress === 0;
   const logoClickTriggerRef = useRef<(() => void) | null>(null);
+
+  useEffect(() => {
+    const styles = getComputedStyle(document.documentElement);
+    const tabletBreakpoint = parseFloat(styles.getPropertyValue('--breakpoint-tablet'));
+    const desktopBreakpoint = parseFloat(styles.getPropertyValue('--breakpoint-desktop'));
+
+    const updateLayout = () => {
+      const width = window.innerWidth;
+      if (width >= desktopBreakpoint) {
+        setLayoutMode('desktop');
+      } else if (width >= tabletBreakpoint) {
+        setLayoutMode('tablet');
+      } else {
+        setLayoutMode('mobile');
+      }
+    };
+
+    updateLayout();
+    window.addEventListener('resize', updateLayout);
+    return () => window.removeEventListener('resize', updateLayout);
+  }, []);
 
   return (
     <>
@@ -39,19 +62,14 @@ export default function Navbar() {
 
       {/* Layer 3: Links with backgrounds (highest) */}
       <nav className="fixed top-0 h-navbar w-full pointer-events-none">
-        <div className="hidden md:block">
+        {layoutMode === 'mobile' ? (
+          <MobileNavigation showButtonBackground={showButtonBackground} />
+        ) : (
           <DesktopNavigation
-            navigationLivingTheForestLab={navigationLivingTheForestLab}
-            navigationActivities={navigationActivities}
             showButtonBackground={showButtonBackground}
+            mode={layoutMode}
           />
-        </div>
-        <div className="md:hidden">
-          <MobileNavigation
-            navigationLivingTheForestLab={navigationLivingTheForestLab}
-            navigationActivities={navigationActivities}
-          />
-        </div>
+        )}
       </nav>
     </>
   );

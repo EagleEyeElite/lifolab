@@ -66,18 +66,24 @@ const pageConfigs: Record<string, PageConfig> = {
 
 export const siteConfig = {
   navbar: {
-    livingTheForestLab: [
-      pageConfigs.about,
-      pageConfigs.people,
-      pageConfigs.places,
-      pageConfigs.contact
-    ] as NavigationItem[],
-
-    activities: [
-      pageConfigs.projects,
-      pageConfigs.tags,
-      { name: "LiFo-Cyclopedia", href: pageConfigs.cyclopedia.href, icon: pageConfigs.cyclopedia.icon }
-    ] as NavigationItem[]
+    livingTheForestLab: {
+      title: "Living the Forest Lab",
+      links: [
+        pageConfigs.about,
+        pageConfigs.people,
+        pageConfigs.places,
+        pageConfigs.contact
+      ] as NavigationItem[]
+    },
+    activities: {
+      title: "Activities",
+      links: [
+        pageConfigs.projects,
+        pageConfigs.tags,
+        { name: "LiFo-Cyclopedia", href: pageConfigs.cyclopedia.href, icon: pageConfigs.cyclopedia.icon }
+      ] as NavigationItem[]
+    },
+    menu: "Menu"
   },
 
   sections: pageConfigs,

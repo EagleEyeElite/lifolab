@@ -3,22 +3,13 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Plus } from "lucide-react";
-
-interface NavigationLink {
-  name: string;
-  href: string;
-  icon: React.ComponentType<{ size?: number }>;
-}
+import { navbar } from "@/config/siteConfig";
 
 interface MobileNavigationProps {
-  navigationLivingTheForestLab: NavigationLink[];
-  navigationActivities: NavigationLink[];
+  showButtonBackground?: boolean;
 }
 
-export default function MobileNavigation({
-                                           navigationLivingTheForestLab,
-                                           navigationActivities,
-                                         }: MobileNavigationProps) {
+export default function MobileNavigation({ showButtonBackground = false }: MobileNavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -36,9 +27,11 @@ export default function MobileNavigation({
       <div className="flex justify-end px-8">
         <button
           onClick={toggle}
-          className="flex items-center gap-2 px-4 py-2 mt-4 bg-primary rounded-primary hover:opacity-70 transition-opacity pointer-events-auto"
+          className={`flex items-center gap-2 px-4 py-2 mt-4 rounded-primary hover:opacity-70 transition-all pointer-events-auto ${
+            showButtonBackground ? 'bg-primary' : ''
+          }`}
         >
-          <span className={isOpen ? '' : 'underline'}>Menu</span>
+          <span>{navbar.menu}</span>
           <Plus size={16} className={`transition-transform ${isOpen ? 'rotate-45' : ''}`} />
         </button>
       </div>
@@ -51,10 +44,10 @@ export default function MobileNavigation({
           {/* Living the Forest Lab */}
           <div className="mb-6">
             <h3 className="font-bold text-sm text-black/80 mb-2 pb-2 border-b border-black/20">
-              Living the Forest Lab
+              {navbar.livingTheForestLab.title}
             </h3>
             <ul>
-              {navigationLivingTheForestLab.map((link) => (
+              {navbar.livingTheForestLab.links.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -72,10 +65,10 @@ export default function MobileNavigation({
           {/* Activities */}
           <div>
             <h3 className="font-bold text-sm text-black/80 mb-2 pb-2 border-b border-black/20">
-              Aktivitäten
+              {navbar.activities.title}
             </h3>
             <ul>
-              {navigationActivities.map((link) => (
+              {navbar.activities.links.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}

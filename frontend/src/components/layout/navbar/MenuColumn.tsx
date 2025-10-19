@@ -4,17 +4,25 @@ import React from "react";
 import { Plus } from "lucide-react";
 import DropdownMenu from "./DropdownMenu";
 
+export interface NavigationLink {
+  name: string;
+  href: string;
+  icon: React.ComponentType<{ size?: number }>;
+}
+
+export interface NavigationSection {
+  title: string;
+  links: NavigationLink[];
+}
+
 interface MenuColumnProps {
   title: string;
-  navigationLinks: Array<{
-    name: string;
-    href: string;
-    icon: React.ComponentType<{ size?: number }>;
-  }>;
+  navigationLinks?: NavigationLink[];
+  sections?: NavigationSection[];
   showButtonBackground: boolean;
 }
 
-export default function MenuColumn({ title, navigationLinks, showButtonBackground }: MenuColumnProps) {
+export default function MenuColumn({ title, navigationLinks, sections, showButtonBackground }: MenuColumnProps) {
 
   return (
     <div className="relative w-full h-full group">
@@ -37,7 +45,7 @@ export default function MenuColumn({ title, navigationLinks, showButtonBackgroun
             <Plus size={16} className="invisible" />
           </div>
           {/* Dropdown menu */}
-          <DropdownMenu navigationLinks={navigationLinks} />
+          <DropdownMenu navigationLinks={navigationLinks} sections={sections} />
         </div>
       </div>
 
