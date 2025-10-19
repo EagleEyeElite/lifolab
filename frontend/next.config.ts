@@ -1,13 +1,6 @@
 import type { NextConfig } from "next";
 import {schema} from "@/env";
-import dotenv from 'dotenv';
 import {cleanEnv} from "envalid";
-
-if (process.env.NODE_ENV === 'development') {
-  dotenv.config({
-    path: ['.env', '../.env', '../.env.local']
-  });
-}
 
 const env = cleanEnv(process.env, schema)
 

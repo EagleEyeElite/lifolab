@@ -1,9 +1,7 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
-import dotenv from 'dotenv';
+import { loadEnvFiles } from './src/loadEnv';
 
-dotenv.config({
-  path: ['.env', '../.env', '../.env.local']
-});
+loadEnvFiles();
 
 const config: CodegenConfig = {
   schema: [

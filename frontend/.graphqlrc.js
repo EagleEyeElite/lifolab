@@ -1,8 +1,6 @@
-const dotenv = require('dotenv');
+const { loadEnvFiles } = require('./src/loadEnv');
 
-dotenv.config({
-    path: ['../.env.local', '../.env', '../.env.local']
-});
+loadEnvFiles();
 
 module.exports = {
     schema: [

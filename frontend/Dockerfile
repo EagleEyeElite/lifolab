@@ -19,7 +19,14 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Disable telemetry during the build
+# Accept build args for environment variables needed during build
+ARG WORDPRESS_CMS_PUBLIC_URL
+ARG FRONTEND_NEXTJS_PASSWORD
+
+# Set environment variables for the build
+ENV WORDPRESS_CMS_PUBLIC_URL=$WORDPRESS_CMS_PUBLIC_URL
+ENV FRONTEND_NEXTJS_PASSWORD=$FRONTEND_NEXTJS_PASSWORD
+ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Build

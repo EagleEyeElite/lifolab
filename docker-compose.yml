@@ -1,8 +1,12 @@
 services:
+  # Lifolab website
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - WORDPRESS_CMS_PUBLIC_URL=http://wordpress:80
+        - FRONTEND_NEXTJS_PASSWORD=${FRONTEND_NEXTJS_PASSWORD}
     platform: linux/amd64  # lightning css not compatible with arm
     environment:
       - WORDPRESS_CMS_PUBLIC_URL=http://wordpress:80
@@ -11,7 +15,10 @@ services:
     ports:
        - ${FRONTEND_EXPOSE_PORT}:3000
     depends_on:
-      - wordpress
+      wordpress:
+        condition: service_started
+      wp-setup:
+        condition: service_completed_successfully
     restart: always
 
   # WordPress cms
