@@ -16,13 +16,14 @@ export default function PostImage({ image, title }: PostImageProps) {
   }
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 relative w-full max-h-[500px] overflow-hidden rounded-primary flex items-center justify-center">
       <Image
         src={image.node.sourceUrl}
         alt={image.node.altText || title || strings.altText.featuredImage}
         width={800}
-        height={600}
-        className="w-full h-auto rounded-primary"
+        height={400}
+        className="w-full min-h-full object-cover rounded-primary"
+        style={{ objectPosition: 'center center' }}
         priority
       />
     </div>

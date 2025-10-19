@@ -36,12 +36,14 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
 
   return (
     <Section title={project.title || ""}>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div className="lg:col-span-4">
-          <ProjectOverview id={project.id} whenAndWhere={project.projectDetails?.whenAndWhere} />
-        </div>
-        <div className="lg:col-span-6 pb-responsive-lg">
-          <ProjectContent slug={slug} />
+      <div className="max-w-lg lg:max-w-none mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="max-w-lg lg:mr-auto">
+            <ProjectOverview id={project.id} whenAndWhere={project.projectDetails?.whenAndWhere} />
+          </div>
+          <div className="max-w-xl lg:mx-auto pb-responsive-lg w-full">
+            <ProjectContent slug={slug} />
+          </div>
         </div>
       </div>
     </Section>

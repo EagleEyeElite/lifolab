@@ -63,7 +63,7 @@ export default async function ProjectOverview({ id, whenAndWhere }: ProjectOverv
   const tagIds = project.tags?.edges?.map(({ node }) => node.id) || [];
   
   return (
-    <>
+    <div className="w-full">
       {whenAndWhere && (
         <div className="font-heading text-sm pb-4 text-black">
           {whenAndWhere}
@@ -71,7 +71,7 @@ export default async function ProjectOverview({ id, whenAndWhere }: ProjectOverv
       )}
       {project.excerpt && (
         <div className="pb-8">
-            <HTMLRenderer className={"text-black"} content={project.excerpt} />
+            <HTMLRenderer className={"text-black !max-w-none"} content={project.excerpt} />
         </div>
       )}
       <PostTags tags={tagIds} />
@@ -79,6 +79,6 @@ export default async function ProjectOverview({ id, whenAndWhere }: ProjectOverv
         title={siteConfig.strings.postOverView.collaborators}
         personSlugs={personSlugs}
       />
-    </>
+    </div>
   );
 }

@@ -38,10 +38,10 @@ export default async function ProjectContent({ slug }: ProjectContentProps) {
 
   return (
     <>
-      <div className="pb-8">
-        <PostImage image={project.featuredImage} title={project.title} />
+      <PostImage image={project.featuredImage} title={project.title} />
+      <div className="prose prose-lg max-w-none">
+        <HTMLRenderer  className="" content={project.content} />
       </div>
-      <HTMLRenderer  className="prose-lg" content={project.content} />
     </>
   );
 }
