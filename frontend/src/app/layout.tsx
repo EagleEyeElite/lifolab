@@ -5,6 +5,8 @@ import Navbar from "@/components/layout/navbar/Navbar";
 import Footer from "@/components/layout/footer/footer";
 import { siteConfig } from "@/config/siteConfig";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: siteConfig.metadata.title,
   description: siteConfig.metadata.description,

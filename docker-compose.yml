@@ -1,14 +1,17 @@
 services:
   frontend:
-    build: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     platform: linux/amd64  # lightning css not compatible with arm
-    profiles: ["frontend"]
     environment:
-      - WORDPRESS_CMS_PUBLIC_URL=${WORDPRESS_CMS_PUBLIC_URL}
+      - WORDPRESS_CMS_PUBLIC_URL=http://wordpress:80
       - WORDPRESS_ADMIN_PASSWORD=${WORDPRESS_ADMIN_PASSWORD}
       - FRONTEND_NEXTJS_PASSWORD=${FRONTEND_NEXTJS_PASSWORD}
     ports:
        - ${FRONTEND_EXPOSE_PORT}:3000
+    depends_on:
+      - wordpress
     restart: always
 
   # WordPress cms
