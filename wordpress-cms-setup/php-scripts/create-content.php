@@ -25,26 +25,40 @@ echo "Setting up categories...\n";
 wp_insert_term('Project', 'post_tag');
 wp_insert_term('Workshop', 'post_tag');
 
-// Max Mustermann - not core member, role: musterrolle
+// Max Mustermann - not core member
 $max_id = wp_insert_post(array(
     'post_type' => 'people',
     'post_title' => 'Max Mustermann',
     'post_content' => '<p>info text</p>',
     'post_status' => 'publish',
     'meta_input' => array(
-        'roles' => 'musterrolle',
+        'roles' => 'Musterrolle',
         'core_member' => 0
     )
 ));
 
-// Conrad Klaus - core member, roles: developer | designer
+// Conrad Klaus - developer of this site
+$conrad_content = str_replace("\n", ' ', '
+<p>Hey there 👋,</p>
+<p>I am a software engineer, studying Computer Engineering at TU Berlin. I enjoy everything from bringing
+integrated systems to life with low-level code up to designing full-fledged applications to deliver the
+best user experience.</p>
+<p>From time to time, I tinker with custom printed circuit boards (PCB). But recently I\'ve spent more and more time
+developing my own AI solutions, from fine-tuning base models up to building entire models from the
+ground up with custom architectures.</p>
+<p>I believe in open software at heart. I publish everything I\'m allowed to on Github. Feel free to
+reach out if you have a question about a project or ideas to bring my projects to the next
+level.</p>
+<p>Want to connect? Check out <a href="https://qr.conrad-klaus.de/c5zQz">my latest info</a> for all the ways to reach me.</p>
+<p>I\'d be honored if you\'d like to follow me on Github!🚀</p>
+');
 $conrad_id = wp_insert_post(array(
     'post_type' => 'people',
     'post_title' => 'Conrad Klaus',
-    'post_content' => '<p>info text</p>',
+    'post_content' => $conrad_content,
     'post_status' => 'publish',
     'meta_input' => array(
-        'roles' => 'developer | designer',
+        'roles' => 'Developer | Designer',
         'core_member' => 1
     )
 ));
@@ -276,7 +290,10 @@ $group_titles = [
     ['Gamma', 'Delta'],
     ['Epsilon', 'Zeta']
 ];
-$lorem_content = '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>';
+$lorem_content = '
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
+aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+';
 $create_item = fn($title) => ['title' => "Expandable $title", 'content' => $lorem_content];
 $create_group = fn($titles) => ['expandable_info' => array_map($create_item, $titles)];
 $about_expandable_info_groups = array_map($create_group, $group_titles);

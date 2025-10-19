@@ -6,6 +6,7 @@ import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import { GetImprintContentQuery, GetImprintContentQueryVariables } from "@/graphql/generatedTypes";
 import { strings } from '@/config/siteConfig';
+import CustomLink from '@/components/ui/customLink';
 
 const GetImprintContent = gql`
     query GetImprintContent {
@@ -69,6 +70,14 @@ export default async function ImprintSection() {
 
         <p className="font-heading text-responsive-xs">
          {strings.brand.copyright}
+        </p>
+
+        <p className="font-heading text-responsive-xs">
+          Developed by{' '}
+          <CustomLink
+            link={{ href: "https://qr.conrad-klaus.de/dC46q", children: "Conrad Klaus" }}
+            className="underline hover:no-underline"
+          />
         </p>
       </div>
     </div>
