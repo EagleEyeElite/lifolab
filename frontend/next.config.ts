@@ -20,9 +20,15 @@ const nextConfig: NextConfig = {
       { protocol: "http", hostname: new URL(env.WORDPRESS_CMS_PUBLIC_URL).hostname},
       { protocol: "https", hostname: new URL(env.WORDPRESS_CMS_PUBLIC_URL).hostname},
     ],
-    // Disable optimization for now - images will be served directly
-    unoptimized: true,
-  }
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/wp-proxy/:path*',
+        destination: 'http://wordpress:80/wp-content/:path*',
+      },
+    ];
+  },
 };
 
 export default nextConfig;
