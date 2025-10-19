@@ -13,9 +13,21 @@ const nextConfig: NextConfig = {
       { protocol: "http", hostname: new URL(env.WORDPRESS_CMS_PUBLIC_URL).hostname},
       { protocol: "https", hostname: new URL(env.WORDPRESS_CMS_PUBLIC_URL).hostname},
     ],
-    // Disable optimization for now - images will be served directly
-    unoptimized: true,
-  }
+  },
+  async rewrites() {
+    // In development, proxy to the actual WordPress CMS URL
+    // In production, proxy to the internal Docker container
+    const destination = process.env.NODE_ENV === 'production'
+      ? 'http://wordpress:80/wp-content/:path*'
+      : `${env.WORDPRESS_CMS_PUBLIC_URL}/wp-content/:path*`;
+
+    return [
+      {
+        source: '/wp-proxy/:path*',
+        destination,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
