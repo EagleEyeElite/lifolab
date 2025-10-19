@@ -4,6 +4,7 @@ import CustomLink from "@/components/ui/customLink";
 import EmblaCarousel from "@/components/ui/renderHtml/embla-carousel/EmblaCarousel";
 import {EmblaOptionsType} from "embla-carousel";
 import React from "react";
+import { strings } from '@/config/siteConfig';
 
 
 
@@ -71,11 +72,11 @@ export default function HTMLRenderer({ content, className, style }: HTMLRenderer
               src={src}
               width={Number.parseInt(width)}
               height={Number.parseInt(height)}
-              alt={alt || 'image'}
+              alt={alt || strings.altText.genericImage}
               style={{ objectFit: 'cover' }}
               className={`
                 mt-2 w-full h-auto max-w-full
-                [&.alignfull]:w-full 
+                [&.alignfull]:w-full
                 [&.alignwide]:w-full
                 [&.alignleft]:float-left [&.alignleft]:mr-4 [&.alignleft]:w-auto [&.alignleft]:max-w-[50%]
                 [&.alignright]:float-right [&.alignright]:ml-4 [&.alignright]:w-auto [&.alignright]:max-w-[50%]

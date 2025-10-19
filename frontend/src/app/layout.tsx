@@ -3,13 +3,11 @@ import React from "react";
 import "@/app/globals.css";
 import Navbar from "@/components/layout/navbar/Navbar";
 import Footer from "@/components/layout/footer/footer";
+import { siteConfig } from "@/config/siteConfig";
 
 export const metadata: Metadata = {
-  title: "Living the Forest Lab",
-  description: `Living the Forest Lab ist eine Forschungsinitiative der Fakultät für Elektrotechnik und Informatik der TU Berlin, 
-   die transdisziplinären Waldschutz durch experimentelle Projekte fördert, die Open-Source-Communities 
-   mit Studierenden und Experten verbinden, um Prototyplösungen für den Klimawandel 
-   und den Erhalt der Artenvielfalt zu entwickeln.`,
+  title: siteConfig.metadata.title,
+  description: siteConfig.metadata.description,
 };
 
 export default async function RootLayout({children}: {

@@ -8,6 +8,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import {useScroll} from "motion/react"
 import Match from '@public/match.svg'
 import ScrollHint from "@/components/ui/ScrollHint";
+import { strings } from '@/config/siteConfig';
 
 interface LogoPositions {
   isReady: boolean;
@@ -205,7 +206,7 @@ export default function LogoRenderer({ animate, onNavigate, onScrollProgressChan
         >
           <Image
             src={Match}
-            alt="Living the Forest Lab"
+            alt={strings.altText.logo}
             className="size-full"
             priority
             onLoad={(event) => {

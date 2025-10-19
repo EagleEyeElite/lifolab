@@ -12,6 +12,7 @@ import {
   GetProjectsByTagQuery,
   GetProjectsByTagQueryVariables
 } from '@/graphql/generatedTypes';
+import { strings } from '@/config/siteConfig';
 
 const GetAllTagsWithDetails = gql`
     query GetAllTagsWithDetails {
@@ -94,7 +95,7 @@ export default function TagsWithProjects({ selectedTagSlug }: TagsWithProjectsPr
   };
 
   if (loading) {
-    return <div>Laden...</div>;
+    return <div>{strings.ui.loading}</div>;
   }
 
   return (
@@ -102,7 +103,7 @@ export default function TagsWithProjects({ selectedTagSlug }: TagsWithProjectsPr
       <div className="max-w-xl w-full pb-10">
         <div className="flex items-center">
           <div className="pr-2">
-            <SubHeading>Kategorien:</SubHeading>
+            <SubHeading>{strings.ui.categoriesLabel}</SubHeading>
           </div>
           <div className="flex flex-wrap gap-1">
             {tags.map((tag) => (
@@ -134,7 +135,7 @@ export default function TagsWithProjects({ selectedTagSlug }: TagsWithProjectsPr
                 />
               ))
             ) : (
-              <p className="text-gray-500 font-body">Keine Projekte für diese Kategorie gefunden.</p>
+              <p className="text-gray-500 font-body">{strings.ui.noCategoryProjects}</p>
             )}
           </div>
         </div>

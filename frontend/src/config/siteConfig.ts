@@ -65,6 +65,17 @@ const pageConfigs: Record<string, PageConfig> = {
 } as const;
 
 export const siteConfig = {
+  metadata: {
+    title: "Living the Forest Lab",
+    description: `
+    Living the Forest Lab is a research initiative of the Faculty of 
+    Electrical Engineering and Computer Science at TU Berlin, promoting 
+    transdisciplinary forest conservation through experimental projects that 
+    connect open-source communities with students and experts to develop 
+    prototype solutions for climate change and biodiversity preservation.
+  `.replace(/\s+/g, ' ').trim()
+  },
+
   navbar: {
     livingTheForestLab: {
       title: "Living the Forest Lab",
@@ -89,6 +100,13 @@ export const siteConfig = {
   sections: pageConfigs,
 
   strings: {
+    // Brand and company information
+    brand: {
+      name: "Living the Forest Lab",
+      fullName: "Living the Forest Lab | Reallabor Wald",
+      copyright: "Copyright: Living the Forest Lab | Reallabor Wald"
+    },
+
     // Section-specific strings
     people: {
       teamTitle: "Living the Forest Lab Team",
@@ -110,10 +128,33 @@ export const siteConfig = {
     },
     navigation: {
       scrollToExplore: "Scroll to explore"
+    },
+
+    // Footer strings
+    footer: {
+      addressNotAvailable: "Address not available"
+    },
+
+    // UI component strings
+    ui: {
+      loading: "Loading...",
+      categoriesLabel: "Categories:",
+      noCategoryProjects: "No projects found for this category.",
+      showMore: "Show more",
+      showLess: "Show less"
+    },
+
+    // Accessibility / Alt text strings
+    altText: {
+      logo: "Living the Forest Lab",
+      featuredImage: "Featured image",
+      genericImage: "image",
+      cyclopediaEntry: "Cyclopedia entry",
+      imprintImage: "Imprint Image"
     }
   }
 } as const;
 
 // Export individual configs for convenience
-export const { navbar, sections, strings } = siteConfig;
+export const { metadata, navbar, sections, strings } = siteConfig;
 export { pageConfigs };

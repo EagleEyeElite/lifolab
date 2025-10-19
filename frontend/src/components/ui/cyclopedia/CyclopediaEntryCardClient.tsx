@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
+import { strings } from '@/config/siteConfig';
 
 
 interface CyclopediaEntryCardProps {
@@ -98,7 +99,7 @@ export default function CyclopediaEntryCardClient({ id, title, content, slug, fe
       if (placeholder) {
         const button = document.createElement('button');
         button.className = 'text-black font-heading text-sm underline hover:no-underline transition-all ml-1';
-        button.textContent = 'Show more';
+        button.textContent = strings.ui.showMore;
         button.onclick = () => setIsExpanded(true);
         placeholder.replaceWith(button);
       }
@@ -112,7 +113,7 @@ export default function CyclopediaEntryCardClient({ id, title, content, slug, fe
           <div className="relative w-full h-48">
             <Image
               src={entry.featuredImage.node.sourceUrl}
-              alt={entry.featuredImage.node.altText || entry.title || 'Cyclopedia entry'}
+              alt={entry.featuredImage.node.altText || entry.title || strings.altText.cyclopediaEntry}
               fill
               className="object-contain"
             />
@@ -138,7 +139,7 @@ export default function CyclopediaEntryCardClient({ id, title, content, slug, fe
                 onClick={() => setIsExpanded(false)}
                 className="text-black font-heading text-sm underline hover:no-underline transition-all"
               >
-                Show less
+                {strings.ui.showLess}
               </button>
             )}
           </div>

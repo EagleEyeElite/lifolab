@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { strings } from '@/config/siteConfig';
 
 interface PostImageProps {
   image?: any;
@@ -18,7 +19,7 @@ export default function PostImage({ image, title }: PostImageProps) {
     <div className="mb-8">
       <Image
         src={image.node.sourceUrl}
-        alt={image.node.altText || title || 'Featured image'}
+        alt={image.node.altText || title || strings.altText.featuredImage}
         width={800}
         height={600}
         className="w-full h-auto rounded-primary"

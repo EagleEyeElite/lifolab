@@ -5,6 +5,7 @@ import Link from "next/link";
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import { GetImprintContentQuery, GetImprintContentQueryVariables } from "@/graphql/generatedTypes";
+import { strings } from '@/config/siteConfig';
 
 const GetImprintContent = gql`
     query GetImprintContent {
@@ -56,7 +57,7 @@ export default async function ImprintSection() {
               >
                 <Image
                   src={sourceUrl}
-                  alt={altText || 'Imprint Image'}
+                  alt={altText || strings.altText.imprintImage}
                   width={100}
                   height={40}
                   className="object-contain sm:w-[120px] sm:h-[48px]"
@@ -67,7 +68,7 @@ export default async function ImprintSection() {
         </div>
 
         <p className="font-heading text-responsive-xs">
-         Copyright: Living the Forest Lab | Reallabor Wald
+         {strings.brand.copyright}
         </p>
       </div>
     </div>

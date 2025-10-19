@@ -5,6 +5,7 @@ import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import { GetContactContentQuery, GetContactContentQueryVariables } from "@/graphql/generatedTypes";
 import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
+import { strings } from '@/config/siteConfig';
 
 const GetContactContent = gql`
     query GetContactContent {
@@ -51,7 +52,7 @@ export default async function ContactSection() {
     throw new Error('Contact data not found');
   }
 
-  const projectName = contactData.info1 || "Living the Forest Lab | Reallabor Wald";
+  const projectName = contactData.info1 || strings.brand.fullName;
 
   if (!contactData.infosContactPerson || contactData.infosContactPerson.length === 0) {
     throw new Error('No contact persons found');
@@ -91,7 +92,7 @@ export default async function ContactSection() {
         </div>
 
         <address className="flex-1 font-heading text-responsive-xs not-italic">
-          <HTMLRenderer content={contactData.address || "Adresse nicht verfügbar"} className="text-black text-responsive-xs"/>
+          <HTMLRenderer content={contactData.address || strings.footer.addressNotAvailable} className="text-black text-responsive-xs"/>
         </address>
       </div>
     </div>
