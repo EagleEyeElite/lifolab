@@ -32,3 +32,6 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+
+// TODO fix, that .env.local is needed in this folder, also check for parent .env :))
