@@ -12,8 +12,9 @@ interface ExpandableContentProps {
 
 function Expandable({ isExpanded, children }: { isExpanded: boolean; children: React.ReactNode }) {
   const transitionClasses = isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0";
+  const marginClass = !isExpanded ? "-mb-[2px]" : "mb-0";
   return (
-    <div className={`duration-300 ease-out grid ${transitionClasses}`}>
+    <div className={`duration-300 ease-out grid ${transitionClasses} ${marginClass}`}>
       <div className="overflow-hidden">
         {children}
       </div>
@@ -49,9 +50,11 @@ export default function ExpandableContent({ item, isExpanded }: ExpandableConten
           isExpanded ? 'translate-y-0' : '-translate-y-2'
         }`}>
           {/* 1. Role first */}
-          <div className="pb-3 @[600px]:hidden">
-            <Role role={item.role} />
-          </div>
+          {item.role && (
+            <div className="pb-3 @[600px]:hidden">
+              <Role role={item.role} />
+            </div>
+          )}
 
           {/* 2. Info text second */}
           <HTMLRenderer content={item.content} className="text-black"/>
