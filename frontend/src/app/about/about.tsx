@@ -52,7 +52,7 @@ export default async function About() {
           <h1 className="text-5xl font-normal leading-none text-black tracking-normal mb-8 inline-block">
             {aboutData?.aboutTitle || "Living the Forest Lab"}
           </h1>
-          <HTMLRenderer content={aboutData?.aboutContentText} className="text-lg leading-tight text-black font-normal text-justify" />
+          <HTMLRenderer content={aboutData?.aboutContentText} className="text-lg leading-tight text-black font-normal text-justify max-w-none" />
         </div>
 
         {/* Expandable Info - Links */}
