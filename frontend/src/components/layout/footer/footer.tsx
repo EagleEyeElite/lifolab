@@ -1,15 +1,16 @@
 import React from 'react';
 import ContactSection from "@/components/layout/footer/ContactSection";
 import ImprintSection from "@/components/layout/footer/ImprintSection";
+import FooterWrapper from "@/components/layout/footer/FooterWrapper";
 
 
 export default function Footer() {
   return (
-    <footer className="bg-primary rounded-t-primary border border-black border-b-0 p-responsive-sm" id="footer">
+    <FooterWrapper>
       <div className="flex flex-col sm:flex-row gap-responsive">
         <ContactSection />
         <ImprintSection />
       </div>
-    </footer>
+    </FooterWrapper>
   );
 }

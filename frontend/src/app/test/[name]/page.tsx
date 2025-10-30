@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { getLifoIndexColors } from '@/lib/getSiteColors';
 
 enum AnimationMode {
   StartBig= "startBig",
@@ -17,6 +18,7 @@ export default async function TestPage({params, searchParams}: {
   }
 
   const { name } = await params;
+  const { secondaryColor } = await getLifoIndexColors();
   // const resolvedSearchParams = await searchParams;
   // const paramAnimationMode = typeof resolvedSearchParams?.animationMode === "string"
   //   ? resolvedSearchParams.animationMode
@@ -32,5 +34,5 @@ export default async function TestPage({params, searchParams}: {
   if (name === 'id3') {
     return <Link href={`/test/id1?animationMode=${AnimationMode.StartBig}`}>Go to /test/id1</Link>;
   }
-  return <div className="w-full h-10 bg-secondary"/>;
+  return <div className="w-full h-10" style={{ backgroundColor: secondaryColor }}/>;
 }

@@ -3,8 +3,11 @@ import Section from '@/components/ui/Section';
 import { AlertTriangle } from 'lucide-react';
 import { strings } from '@/config/siteConfig';
 import SubHeading from "@/components/ui/SubHeading";
+import { getLifoIndexColors } from '@/lib/getSiteColors';
 
-export default function NotFound() {
+export default async function NotFound() {
+  const { primaryColor } = await getLifoIndexColors();
+
   return (
     <Section title={strings.notFound.title} icon={AlertTriangle}>
       <div className="flex flex-col items-center pt-6 text-center">
@@ -18,7 +21,8 @@ export default function NotFound() {
           <div className="pt-4">
             <Link
               href="/"
-              className="inline-flex items-center px-4 py-2 text-sm font-heading bg-primary text-gray-800 rounded-primary"
+              className="inline-flex items-center px-4 py-2 text-sm font-heading text-gray-800 rounded-primary"
+              style={{ backgroundColor: primaryColor }}
             >
               {strings.notFound.backToHome}
             </Link>

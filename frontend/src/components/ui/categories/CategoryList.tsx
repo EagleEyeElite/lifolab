@@ -3,6 +3,7 @@ import { gql } from 'graphql-request';
 import Link from 'next/link';
 import { GetTagsByIdsQuery, GetTagsByIdsQueryVariables } from '@/graphql/generatedTypes';
 import SelectableCategoryList from '@/components/ui/categories/SelectableCategoryList';
+import { getLifoIndexColors } from '@/lib/getSiteColors';
 
 const GetTagsByIds = gql`
     query GetTagsByIds($ids: [ID!]!) {
@@ -24,6 +25,7 @@ export default async function CategoryList({ tagIds, selectedTagSlug, selectable
   selectable?: boolean;
 }) {
   const { tags } = await graphqlClient.request<GetTagsByIdsQuery, GetTagsByIdsQueryVariables>(GetTagsByIds, { ids: tagIds });
+  const { primaryColor } = await getLifoIndexColors();
 
   if (!tags?.edges?.length) {
     throw new Error(`Error fetching tags for tags ${tagIds}`);
@@ -47,11 +49,12 @@ export default async function CategoryList({ tagIds, selectedTagSlug, selectable
           <Link
             key={tag.id}
             href={`/categories/${tag.slug}`}
-            className={`inline-flex items-center px-2 py-1 text-xs font-heading rounded-full bg-primary ${
+            className={`inline-flex items-center px-2 py-1 text-xs font-heading rounded-full ${
               isSelected
                 ? 'text-black'
                 : 'text-black'
             }`}
+            style={{ backgroundColor: primaryColor }}
           >
             {tag.name}
           </Link>

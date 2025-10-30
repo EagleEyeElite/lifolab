@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSiteColors } from '@/contexts/ColorContext';
 
 interface Tag {
   id: string;
@@ -17,6 +18,7 @@ interface SelectableCategoryListProps {
 export default function SelectableCategoryList({ tags, currentTagSlug }: SelectableCategoryListProps) {
   const [selectedTag, setSelectedTag] = useState<string | null>(currentTagSlug || null);
   const router = useRouter();
+  const { primaryColor } = useSiteColors();
 
   useEffect(() => {
     setSelectedTag(currentTagSlug || null);
@@ -45,8 +47,9 @@ export default function SelectableCategoryList({ tags, currentTagSlug }: Selecta
             className={`inline-flex items-center px-2 py-1 text-xs font-heading rounded-full border-2 transition-colors ${
               isSelected
                 ? 'bg-red-500 text-white border-black shadow-md'
-                : 'bg-primary text-black border-transparent hover:bg-red-500 hover:text-white hover:border-gray-300'
+                : 'text-black border-transparent hover:bg-red-500 hover:text-white hover:border-gray-300'
             }`}
+            style={!isSelected ? { backgroundColor: primaryColor } : undefined}
           >
             {tag.name}
           </button>

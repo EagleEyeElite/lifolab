@@ -1,9 +1,12 @@
+'use client';
+
 import React from "react";
 import Link from "next/link";
 import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 import { ArrowUpRight } from "lucide-react";
 import { ExpandableRowItem } from "./ExpandableRows";
 import Role from "./Role";
+import { useSiteColors } from "@/contexts/ColorContext";
 
 interface ExpandableContentProps {
   item: ExpandableRowItem;
@@ -43,12 +46,17 @@ function ReferencedLinks({ links }: { links?: Array<{ slug: string; title: strin
 
 
 export default function ExpandableContent({ item, isExpanded }: ExpandableContentProps) {
+  const { secondaryColor } = useSiteColors();
+
   return (
     <Expandable isExpanded={isExpanded}>
       <div className="@container pt-2 pb-3">
-        <div className={`p-4 rounded-primary text-sm leading-relaxed transition-all duration-300 ease-out bg-secondary ${
-          isExpanded ? 'translate-y-0' : '-translate-y-2'
-        }`}>
+        <div
+          className={`p-4 rounded-primary text-sm leading-relaxed transition-all duration-300 ease-out ${
+            isExpanded ? 'translate-y-0' : '-translate-y-2'
+          }`}
+          style={{ backgroundColor: secondaryColor }}
+        >
           {/* 1. Role first */}
           {item.role && (
             <div className="pb-3 @[600px]:hidden">

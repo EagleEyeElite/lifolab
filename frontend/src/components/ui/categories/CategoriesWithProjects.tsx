@@ -13,6 +13,7 @@ import {
   GetProjectsByTagQueryVariables
 } from '@/graphql/generatedTypes';
 import { strings } from '@/config/siteConfig';
+import { useSiteColors } from '@/contexts/ColorContext';
 
 const GetAllTagsWithDetails = gql`
     query GetAllTagsWithDetails {
@@ -50,6 +51,7 @@ export default function TagsWithProjects({ selectedTagSlug }: TagsWithProjectsPr
   const [projects, setProjects] = useState<any[]>([]);
   const [selectedTag, setSelectedTag] = useState<string | null>(selectedTagSlug || null);
   const [loading, setLoading] = useState(true);
+  const { secondaryColor } = useSiteColors();
 
   useEffect(() => {
     async function fetchTags() {
@@ -113,8 +115,9 @@ export default function TagsWithProjects({ selectedTagSlug }: TagsWithProjectsPr
                 className={`inline-flex items-center px-2 py-1 text-xs font-heading border border-gray-500 rounded-full transition-colors ${
                   selectedTag === tag.slug
                     ? 'bg-gray-500 text-white'
-                    : 'bg-secondary text-gray-500 hover:bg-gray-100'
+                    : 'text-gray-500 hover:bg-gray-100'
                 }`}
+                style={selectedTag !== tag.slug ? { backgroundColor: secondaryColor } : undefined}
               >
                 {tag.name}
               </button>

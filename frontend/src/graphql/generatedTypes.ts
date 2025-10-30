@@ -8149,7 +8149,7 @@ export type RootMutationUpdateUserArgs = {
 };
 
 /** The root entry point into the Graph */
-export type RootQuery = WithAcfOptionsPageAboutSettings & WithAcfOptionsPageDescriptionSettings & WithAcfOptionsPageFooterSettings & {
+export type RootQuery = WithAcfOptionsPageAboutSettings & WithAcfOptionsPageDescriptionSettings & WithAcfOptionsPageFooterSettings & WithAcfOptionsPageSiteColorSettings & {
   __typename?: 'RootQuery';
   aboutSettings?: Maybe<AboutSettings>;
   /** Entry point to get all settings for the site */
@@ -8276,6 +8276,7 @@ export type RootQuery = WithAcfOptionsPageAboutSettings & WithAcfOptionsPageDesc
   registeredStylesheets?: Maybe<RootQueryToEnqueuedStylesheetConnection>;
   /** Connection between the RootQuery type and the ContentNode type */
   revisions?: Maybe<RootQueryToRevisionsConnection>;
+  siteColorSettings?: Maybe<SiteColorSettings>;
   /** A 0bject */
   tag?: Maybe<Tag>;
   /** Connection between the RootQuery type and the tag type */
@@ -10443,6 +10444,67 @@ export type Settings = {
   writingSettingsDefaultPostFormat?: Maybe<Scalars['String']['output']>;
   /** Settings of the the boolean Settings Group */
   writingSettingsUseSmilies?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type SiteColorSettings = AcfOptionsPage & Node & WithAcfSiteColors & {
+  __typename?: 'SiteColorSettings';
+  /** The globally unique ID for the object */
+  id: Scalars['ID']['output'];
+  menuTitle?: Maybe<Scalars['String']['output']>;
+  pageTitle?: Maybe<Scalars['String']['output']>;
+  parentId?: Maybe<Scalars['String']['output']>;
+  /** Fields of the SiteColors ACF Field Group */
+  siteColors?: Maybe<SiteColors>;
+};
+
+/** The &quot;SiteColors&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SiteColors = AcfFieldGroup & AcfFieldGroupFields & SiteColors_Fields & {
+  __typename?: 'SiteColors';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Color options for LiFo Index components */
+  lifoIndexColors?: Maybe<SiteColorsLifoIndexColors>;
+};
+
+/** The &quot;SiteColorsLifoIndexColors&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SiteColorsLifoIndexColors = AcfFieldGroup & AcfFieldGroupFields & SiteColorsLifoIndexColors_Fields & {
+  __typename?: 'SiteColorsLifoIndexColors';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Primary color for LiFo Index elements */
+  primaryColor?: Maybe<Scalars['String']['output']>;
+  /** Secondary color for LiFo Index elements */
+  secondaryColor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;SiteColorsLifoIndexColors&quot; Field Group */
+export type SiteColorsLifoIndexColors_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Primary color for LiFo Index elements */
+  primaryColor?: Maybe<Scalars['String']['output']>;
+  /** Secondary color for LiFo Index elements */
+  secondaryColor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;SiteColors&quot; Field Group */
+export type SiteColors_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Color options for LiFo Index components */
+  lifoIndexColors?: Maybe<SiteColorsLifoIndexColors>;
 };
 
 /** A taxonomy term used to organize and classify content. Tags do not have a hierarchy and are generally used for more specific classifications. */
@@ -12723,6 +12785,11 @@ export type WithAcfOptionsPageFooterSettings = {
   footerSettings?: Maybe<FooterSettings>;
 };
 
+/** Access point for the &quot;SiteColorSettings&quot; ACF Options Page */
+export type WithAcfOptionsPageSiteColorSettings = {
+  siteColorSettings?: Maybe<SiteColorSettings>;
+};
+
 /** Provides access to fields of the &quot;PersonProfile&quot; ACF Field Group via the &quot;personProfile&quot; field */
 export type WithAcfPersonProfile = {
   /** Fields of the PersonProfile ACF Field Group */
@@ -12733,6 +12800,12 @@ export type WithAcfPersonProfile = {
 export type WithAcfProjectDetails = {
   /** Fields of the ProjectDetails ACF Field Group */
   projectDetails?: Maybe<ProjectDetails>;
+};
+
+/** Provides access to fields of the &quot;SiteColors&quot; ACF Field Group via the &quot;siteColors&quot; field */
+export type WithAcfSiteColors = {
+  /** Fields of the SiteColors ACF Field Group */
+  siteColors?: Maybe<SiteColors>;
 };
 
 /** The writing setting type */
@@ -12871,6 +12944,11 @@ type AuthorDetailsFields_Page_Fragment = { __typename?: 'Page', author?: { __typ
 type AuthorDetailsFields_Post_Fragment = { __typename?: 'Post', author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } } | null };
 
 export type AuthorDetailsFieldsFragment = AuthorDetailsFields_MediaItem_Fragment | AuthorDetailsFields_Page_Fragment | AuthorDetailsFields_Post_Fragment;
+
+export type GetSiteColorsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSiteColorsQuery = { __typename?: 'RootQuery', siteColorSettings?: { __typename?: 'SiteColorSettings', siteColors?: { __typename?: 'SiteColors', lifoIndexColors?: { __typename?: 'SiteColorsLifoIndexColors', primaryColor?: string | null, secondaryColor?: string | null } | null } | null } | null };
 
 export const AuthorDetailsFieldsFragmentDoc = gql`
     fragment AuthorDetailsFields on NodeWithAuthor {
@@ -13231,6 +13309,18 @@ export const GetProjectCardDocument = gql`
   }
 }
     `;
+export const GetSiteColorsDocument = gql`
+    query GetSiteColors {
+  siteColorSettings {
+    siteColors {
+      lifoIndexColors {
+        primaryColor
+        secondaryColor
+      }
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -13298,6 +13388,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetProjectCard(variables: GetProjectCardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectCardQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectCardQuery>({ document: GetProjectCardDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectCard', 'query', variables);
+    },
+    GetSiteColors(variables?: GetSiteColorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetSiteColorsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetSiteColorsQuery>({ document: GetSiteColorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetSiteColors', 'query', variables);
     }
   };
 }

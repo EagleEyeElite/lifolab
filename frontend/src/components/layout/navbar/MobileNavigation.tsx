@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { navbar } from "@/config/siteConfig";
+import { useSiteColors } from "@/contexts/ColorContext";
 
 interface MobileNavigationProps {
   showButtonBackground?: boolean;
@@ -11,6 +12,7 @@ interface MobileNavigationProps {
 
 export default function MobileNavigation({ showButtonBackground = false }: MobileNavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { primaryColor } = useSiteColors();
 
   const toggle = () => setIsOpen(!isOpen);
   const close = () => setIsOpen(false);
@@ -27,19 +29,21 @@ export default function MobileNavigation({ showButtonBackground = false }: Mobil
       <div className="flex justify-end px-8">
         <button
           onClick={toggle}
-          className={`flex items-center gap-2 px-4 py-2 mt-4 rounded-primary hover:opacity-70 transition-all pointer-events-auto ${
-            showButtonBackground ? 'bg-primary' : ''
-          }`}
+          className="flex items-center gap-2 px-4 py-2 mt-4 rounded-primary hover:opacity-70 transition-all pointer-events-auto"
+          style={showButtonBackground ? { backgroundColor: primaryColor } : undefined}
         >
           <span>{navbar.menu}</span>
           <Plus size={16} className={`transition-transform ${isOpen ? 'rotate-45' : ''}`} />
         </button>
       </div>
-      <div className={`absolute top-full left-8 right-8 sm:left-auto sm:right-8 sm:w-80 mt-2 bg-primary rounded-primary backdrop-blur-sm pointer-events-auto transition-all duration-300 transform-gpu ${
-        isOpen
-          ? 'opacity-100 scale-100 translate-y-0'
-          : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
-      }`}>
+      <div
+        className={`absolute top-full left-8 right-8 sm:left-auto sm:right-8 sm:w-80 mt-2 rounded-primary backdrop-blur-sm pointer-events-auto transition-all duration-300 transform-gpu ${
+          isOpen
+            ? 'opacity-100 scale-100 translate-y-0'
+            : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
+        }`}
+        style={{ backgroundColor: primaryColor }}
+      >
         <div className="p-6">
           {/* Living the Forest Lab */}
           <div className="mb-6">

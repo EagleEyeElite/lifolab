@@ -3,6 +3,7 @@
 import React from "react";
 import { Plus } from "lucide-react";
 import DropdownMenu from "./DropdownMenu";
+import { useSiteColors } from "@/contexts/ColorContext";
 
 export interface NavigationLink {
   name: string;
@@ -23,6 +24,7 @@ interface MenuColumnProps {
 }
 
 export default function MenuColumn({ title, navigationLinks, sections, showButtonBackground }: MenuColumnProps) {
+  const { primaryColor, secondaryColor } = useSiteColors();
 
   return (
     <div className="relative w-full h-full group">
@@ -31,14 +33,15 @@ export default function MenuColumn({ title, navigationLinks, sections, showButto
 
       {/* Button background (visible when logo is at 100%) */}
       <div
-        className={`absolute left-0 right-0 top-1/2 -translate-y-1/2 h-10 bg-primary/90 backdrop-blur-sm rounded-primary transition-opacity duration-300 ${
+        className={`absolute left-0 right-0 top-1/2 -translate-y-1/2 h-10 backdrop-blur-sm rounded-primary transition-opacity duration-300 ${
           showButtonBackground ? 'opacity-100' : 'opacity-0'
         }`}
+        style={{ backgroundColor: `${primaryColor}e6` }}
       />
 
       {/* Dropdown background wrapper */}
       <div className="absolute left-0 right-0 top-0 transition-all duration-300 ease-out origin-top scale-y-0 opacity-0 group-hover:scale-y-100 group-hover:opacity-100 z-10">
-        <div className="bg-secondary rounded-b-primary backdrop-blur-sm">
+        <div className="rounded-b-primary backdrop-blur-sm" style={{ backgroundColor: secondaryColor }}>
           {/* Title area inside background - full navbar height */}
           <div className="flex items-center justify-between px-4 w-full h-navbar">
             <span className="invisible">{title}</span>

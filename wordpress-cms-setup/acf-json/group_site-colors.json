@@ -1,0 +1,96 @@
+{
+  "key": "group_site_colors",
+  "title": "Site Colors",
+  "fields": [
+    {
+      "key": "field_lifo_index_colors",
+      "label": "LiFo Index Colors",
+      "name": "lifo_index_colors",
+      "aria-label": "",
+      "type": "group",
+      "instructions": "Define color options for LiFo Index entries and chapters.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "block",
+      "show_in_graphql": 1,
+      "graphql_description": "Color options for LiFo Index components",
+      "graphql_field_name": "lifoIndexColors",
+      "graphql_non_null": 0,
+      "sub_fields": [
+        {
+          "key": "field_lifo_primary_color",
+          "label": "Primary Color",
+          "name": "primary_color",
+          "aria-label": "",
+          "type": "color_picker",
+          "instructions": "Primary color for LiFo Index elements.",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "#d2ff17",
+          "enable_opacity": 0,
+          "return_format": "string",
+          "allow_in_bindings": 0,
+          "show_in_graphql": 1,
+          "graphql_description": "Primary color for LiFo Index elements",
+          "graphql_field_name": "primaryColor",
+          "graphql_non_null": 0
+        },
+        {
+          "key": "field_lifo_secondary_color",
+          "label": "Secondary Color",
+          "name": "secondary_color",
+          "aria-label": "",
+          "type": "color_picker",
+          "instructions": "Secondary color for LiFo Index elements.",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "#cc3636",
+          "enable_opacity": 0,
+          "return_format": "string",
+          "allow_in_bindings": 0,
+          "show_in_graphql": 1,
+          "graphql_description": "Secondary color for LiFo Index elements",
+          "graphql_field_name": "secondaryColor",
+          "graphql_non_null": 0
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "options_page",
+        "operator": "==",
+        "value": "site-colors"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "seamless",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "show_in_graphql": 1,
+  "graphql_field_name": "siteColors",
+  "map_graphql_types_from_location_rules": 0,
+  "graphql_types": ""
+}
