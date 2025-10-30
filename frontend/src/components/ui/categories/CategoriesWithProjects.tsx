@@ -13,7 +13,19 @@ import {
   GetProjectsByTagQueryVariables
 } from '@/graphql/generatedTypes';
 import { strings } from '@/config/siteConfig';
-import { useSiteColors } from '@/contexts/ColorContext';
+
+const GetSiteColors = gql`
+  query GetSiteColors {
+    siteColorSettings {
+      siteColors {
+        lifoIndexColors {
+          primaryColor
+          secondaryColor
+        }
+      }
+    }
+  }
+`;
 
 const GetAllTagsWithDetails = gql`
     query GetAllTagsWithDetails {
@@ -51,7 +63,25 @@ export default function TagsWithProjects({ selectedTagSlug }: TagsWithProjectsPr
   const [projects, setProjects] = useState<any[]>([]);
   const [selectedTag, setSelectedTag] = useState<string | null>(selectedTagSlug || null);
   const [loading, setLoading] = useState(true);
-  const { secondaryColor } = useSiteColors();
+  const [colors, setColors] = useState<{ primaryColor: string; secondaryColor: string } | null>(null);
+
+  useEffect(() => {
+    async function fetchColors() {
+      try {
+        const data: any = await graphqlClient.request(GetSiteColors);
+        const siteColors = data.siteColorSettings?.siteColors?.lifoIndexColors;
+        if (siteColors?.primaryColor && siteColors?.secondaryColor) {
+          setColors({
+            primaryColor: siteColors.primaryColor,
+            secondaryColor: siteColors.secondaryColor,
+          });
+        }
+      } catch (error) {
+        console.error('Failed to fetch site colors:', error);
+      }
+    }
+    fetchColors();
+  }, []);
 
   useEffect(() => {
     async function fetchTags() {
@@ -96,7 +126,7 @@ export default function TagsWithProjects({ selectedTagSlug }: TagsWithProjectsPr
     }
   };
 
-  if (loading) {
+  if (loading || !colors) {
     return <div>{strings.ui.loading}</div>;
   }
 
@@ -117,7 +147,7 @@ export default function TagsWithProjects({ selectedTagSlug }: TagsWithProjectsPr
                     ? 'bg-gray-500 text-white'
                     : 'text-gray-500 hover:bg-gray-100'
                 }`}
-                style={selectedTag !== tag.slug ? { backgroundColor: secondaryColor } : undefined}
+                style={selectedTag !== tag.slug ? { backgroundColor: colors.secondaryColor } : undefined}
               >
                 {tag.name}
               </button>

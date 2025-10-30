@@ -4,15 +4,15 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { navbar } from "@/config/siteConfig";
-import { useSiteColors } from "@/contexts/ColorContext";
 
 interface MobileNavigationProps {
   showButtonBackground?: boolean;
+  primaryColor: string;
+  secondaryColor: string;
 }
 
-export default function MobileNavigation({ showButtonBackground = false }: MobileNavigationProps) {
+export default function MobileNavigation({ showButtonBackground = false, primaryColor, secondaryColor }: MobileNavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { primaryColor } = useSiteColors();
 
   const toggle = () => setIsOpen(!isOpen);
   const close = () => setIsOpen(false);

@@ -7,11 +7,15 @@ import { navbar } from "@/config/siteConfig";
 interface DesktopNavigationProps {
   showButtonBackground: boolean;
   mode: 'desktop' | 'tablet';
+  primaryColor: string;
+  secondaryColor: string;
 }
 
 export default function DesktopNavigation({
   showButtonBackground,
   mode,
+  primaryColor,
+  secondaryColor,
 }: DesktopNavigationProps) {
   const isDesktop = mode === 'desktop';
 
@@ -54,6 +58,8 @@ export default function DesktopNavigation({
             title={isDesktop ? navbar.livingTheForestLab.title : navbar.menu}
             sections={isDesktop ? livingTheForestLabSections : tabletSections}
             showButtonBackground={showButtonBackground}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
           />
         </div>
 
@@ -63,6 +69,8 @@ export default function DesktopNavigation({
               title={navbar.activities.title}
               sections={activitiesSections}
               showButtonBackground={showButtonBackground}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
             />
           </div>
         )}

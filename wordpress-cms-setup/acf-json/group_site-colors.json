@@ -4,11 +4,11 @@
   "fields": [
     {
       "key": "field_lifo_index_colors",
-      "label": "LiFo Index Colors",
+      "label": "Lifolab Colour Palette",
       "name": "lifo_index_colors",
       "aria-label": "",
       "type": "group",
-      "instructions": "Define color options for LiFo Index entries and chapters.",
+      "instructions": "",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -18,7 +18,7 @@
       },
       "layout": "block",
       "show_in_graphql": 1,
-      "graphql_description": "Color options for LiFo Index components",
+      "graphql_description": "Lifolab colour palette for site-wide theming",
       "graphql_field_name": "lifoIndexColors",
       "graphql_non_null": 0,
       "sub_fields": [
@@ -28,7 +28,7 @@
           "name": "primary_color",
           "aria-label": "",
           "type": "color_picker",
-          "instructions": "Primary color for LiFo Index elements.",
+          "instructions": "Main accent color used throughout the site for interactive elements, highlights, and key visual elements.",
           "required": 0,
           "conditional_logic": 0,
           "wrapper": {
@@ -36,12 +36,12 @@
             "class": "",
             "id": ""
           },
-          "default_value": "#d2ff17",
+          "default_value": "#b4f83b",
           "enable_opacity": 0,
           "return_format": "string",
           "allow_in_bindings": 0,
           "show_in_graphql": 1,
-          "graphql_description": "Primary color for LiFo Index elements",
+          "graphql_description": "Primary accent color for the site",
           "graphql_field_name": "primaryColor",
           "graphql_non_null": 0
         },
@@ -51,7 +51,7 @@
           "name": "secondary_color",
           "aria-label": "",
           "type": "color_picker",
-          "instructions": "Secondary color for LiFo Index elements.",
+          "instructions": "Complementary color used for contrast, secondary highlights, and to balance the primary color.",
           "required": 0,
           "conditional_logic": 0,
           "wrapper": {
@@ -59,12 +59,12 @@
             "class": "",
             "id": ""
           },
-          "default_value": "#cc3636",
+          "default_value": "#ff7733",
           "enable_opacity": 0,
           "return_format": "string",
           "allow_in_bindings": 0,
           "show_in_graphql": 1,
-          "graphql_description": "Secondary color for LiFo Index elements",
+          "graphql_description": "Secondary accent color for the site",
           "graphql_field_name": "secondaryColor",
           "graphql_non_null": 0
         }

@@ -16,13 +16,13 @@ const GetSiteColorsQuery = gql`
 `;
 
 // Types for the color data structure
-export interface LifoIndexColors {
+export interface LifolabColors {
   primaryColor?: string | null;
   secondaryColor?: string | null;
 }
 
 export interface SiteColors {
-  lifoIndexColors?: LifoIndexColors | null;
+  lifoIndexColors?: LifolabColors | null;
 }
 
 export interface SiteColorSettings {
@@ -55,8 +55,8 @@ export async function getSiteColors(): Promise<SiteColorSettings | null> {
 }
 
 /**
- * Gets LiFo Index colors from WordPress CMS
- * @returns LiFo Index color configuration
+ * Gets Lifolab colour palette from WordPress CMS
+ * @returns Lifolab color configuration
  * @throws Error if colors are not configured in WordPress
  */
 export async function getLifoIndexColors(): Promise<{ primaryColor: string; secondaryColor: string }> {

@@ -7,9 +7,11 @@ import { ExpandableRowItem } from "./ExpandableRows";
 interface ThreeColumnExpandableRowsProps {
   items: ExpandableRowItem[];
   columns?: number;
+  primaryColor: string;
+  secondaryColor: string;
 }
 
-export default function ThreeColumnExpandableRows({ items }: ThreeColumnExpandableRowsProps) {
+export default function ThreeColumnExpandableRows({ items, primaryColor, secondaryColor }: ThreeColumnExpandableRowsProps) {
   const [numColumns, setNumColumns] = useState(1);
 
   useEffect(() => {
@@ -65,6 +67,8 @@ export default function ThreeColumnExpandableRows({ items }: ThreeColumnExpandab
                   role={item.role}
                   content={item.content}
                   referencedLinks={item.referencedLinks}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
                 />
               </li>
             ))}

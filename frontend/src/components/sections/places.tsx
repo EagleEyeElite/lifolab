@@ -6,6 +6,7 @@ import { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows
 import { GetAllPlacesQuery, GetAllPlacesQueryVariables } from "@/graphql/generatedTypes";
 import Section from "@/components/ui/Section";
 import { sections } from "@/config/siteConfig";
+import { getLifoIndexColors } from '@/lib/getSiteColors';
 
 const GetAllPlaces = gql`
     query GetAllPlaces {
@@ -24,6 +25,7 @@ const GetAllPlaces = gql`
 
 export default async function Places() {
   const data = await graphqlClient.request<GetAllPlacesQuery, GetAllPlacesQueryVariables>(GetAllPlaces);
+  const { primaryColor, secondaryColor } = await getLifoIndexColors();
 
   const items: ExpandableRowItem[] = data?.places?.edges?.flatMap(
     (edge) => {
@@ -41,7 +43,7 @@ export default async function Places() {
   return (
     <Section title={sections.places.name} icon={sections.places.icon} id={sections.places.id}>
       <div className="pb-8">
-        <ThreeColumnExpandableRows items={items} />
+        <ThreeColumnExpandableRows items={items} primaryColor={primaryColor} secondaryColor={secondaryColor} />
       </div>
     </Section>
   );

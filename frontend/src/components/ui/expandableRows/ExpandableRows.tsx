@@ -1,5 +1,6 @@
 import React from "react";
 import ExpandableRow from "./ExpandableRow";
+import { getLifoIndexColors } from '@/lib/getSiteColors';
 
 export interface ExpandableRowItem {
   name: string;
@@ -15,7 +16,9 @@ interface ExpandableRowsProps {
   items: ExpandableRowItem[];
 }
 
-export default function ExpandableRows({items}: ExpandableRowsProps) {
+export default async function ExpandableRows({items}: ExpandableRowsProps) {
+  const { primaryColor, secondaryColor } = await getLifoIndexColors();
+
   return <>
     <ul className="divide-y divide-black/75 border-y border-black/75">
       {items.map((item, index) => (
@@ -25,6 +28,8 @@ export default function ExpandableRows({items}: ExpandableRowsProps) {
             role={item.role}
             content={item.content}
             referencedLinks={item.referencedLinks}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
           />
         </li>
       ))}

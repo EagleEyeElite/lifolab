@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 import SubHeading from "@/components/ui/SubHeading";
-import { useSiteColors } from "@/contexts/ColorContext";
 
 /**
  *
@@ -21,6 +20,8 @@ interface ProjectCardClientProps {
   imageWidth: number;
   imageHeight: number;
   tagList?: React.ReactNode;
+  primaryColor: string;
+  secondaryColor: string;
 }
 
 export default function ProjectCardClient({
@@ -30,12 +31,13 @@ export default function ProjectCardClient({
   imageWidth,
   imageHeight,
   tagList,
+  primaryColor,
+  secondaryColor,
 }: ProjectCardClientProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-  const { secondaryColor } = useSiteColors();
-
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const element = cardRef.current;
@@ -82,7 +84,12 @@ export default function ProjectCardClient({
           sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"
         />
       </div>
-      <div className="pt-2 transition-colors" style={{ color: 'inherit' }} onMouseEnter={(e) => e.currentTarget.style.color = secondaryColor} onMouseLeave={(e) => e.currentTarget.style.color = 'inherit'}>
+      <div
+        className="pt-2 transition-colors"
+        style={{ color: isHovered ? secondaryColor : 'inherit' }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <SubHeading>{title}</SubHeading>
       </div>
     </Link>

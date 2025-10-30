@@ -6,11 +6,12 @@ import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 import { ArrowUpRight } from "lucide-react";
 import { ExpandableRowItem } from "./ExpandableRows";
 import Role from "./Role";
-import { useSiteColors } from "@/contexts/ColorContext";
 
 interface ExpandableContentProps {
   item: ExpandableRowItem;
   isExpanded: boolean;
+  primaryColor: string;
+  secondaryColor: string;
 }
 
 function Expandable({ isExpanded, children }: { isExpanded: boolean; children: React.ReactNode }) {
@@ -45,8 +46,7 @@ function ReferencedLinks({ links }: { links?: Array<{ slug: string; title: strin
 }
 
 
-export default function ExpandableContent({ item, isExpanded }: ExpandableContentProps) {
-  const { secondaryColor } = useSiteColors();
+export default function ExpandableContent({ item, isExpanded, primaryColor, secondaryColor }: ExpandableContentProps) {
 
   return (
     <Expandable isExpanded={isExpanded}>

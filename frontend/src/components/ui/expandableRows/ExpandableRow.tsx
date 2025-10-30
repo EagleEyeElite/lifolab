@@ -4,7 +4,12 @@ import Row from "@/components/ui/expandableRows/Row";
 import ExpandableContent from "./ExpandableContent";
 import { ExpandableRowItem } from "./ExpandableRows";
 
-export default function ExpandableRow(item: ExpandableRowItem) {
+interface ExpandableRowProps extends ExpandableRowItem {
+  primaryColor: string;
+  secondaryColor: string;
+}
+
+export default function ExpandableRow({ primaryColor, secondaryColor, ...item }: ExpandableRowProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return <div>
@@ -16,6 +21,8 @@ export default function ExpandableRow(item: ExpandableRowItem) {
       <ExpandableContent
         item={item}
         isExpanded={isExpanded}
+        primaryColor={primaryColor}
+        secondaryColor={secondaryColor}
       />
   </div>
 }

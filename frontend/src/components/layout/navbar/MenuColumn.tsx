@@ -3,7 +3,6 @@
 import React from "react";
 import { Plus } from "lucide-react";
 import DropdownMenu from "./DropdownMenu";
-import { useSiteColors } from "@/contexts/ColorContext";
 
 export interface NavigationLink {
   name: string;
@@ -21,10 +20,11 @@ interface MenuColumnProps {
   navigationLinks?: NavigationLink[];
   sections?: NavigationSection[];
   showButtonBackground: boolean;
+  primaryColor: string;
+  secondaryColor: string;
 }
 
-export default function MenuColumn({ title, navigationLinks, sections, showButtonBackground }: MenuColumnProps) {
-  const { primaryColor, secondaryColor } = useSiteColors();
+export default function MenuColumn({ title, navigationLinks, sections, showButtonBackground, primaryColor, secondaryColor }: MenuColumnProps) {
 
   return (
     <div className="relative w-full h-full group">

@@ -10465,7 +10465,7 @@ export type SiteColors = AcfFieldGroup & AcfFieldGroupFields & SiteColors_Fields
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Color options for LiFo Index components */
+  /** Lifolab colour palette for site-wide theming */
   lifoIndexColors?: Maybe<SiteColorsLifoIndexColors>;
 };
 
@@ -10477,9 +10477,9 @@ export type SiteColorsLifoIndexColors = AcfFieldGroup & AcfFieldGroupFields & Si
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Primary color for LiFo Index elements */
+  /** Primary accent color for the site */
   primaryColor?: Maybe<Scalars['String']['output']>;
-  /** Secondary color for LiFo Index elements */
+  /** Secondary accent color for the site */
   secondaryColor?: Maybe<Scalars['String']['output']>;
 };
 
@@ -10490,9 +10490,9 @@ export type SiteColorsLifoIndexColors_Fields = {
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Primary color for LiFo Index elements */
+  /** Primary accent color for the site */
   primaryColor?: Maybe<Scalars['String']['output']>;
-  /** Secondary color for LiFo Index elements */
+  /** Secondary accent color for the site */
   secondaryColor?: Maybe<Scalars['String']['output']>;
 };
 
@@ -10503,7 +10503,7 @@ export type SiteColors_Fields = {
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Color options for LiFo Index components */
+  /** Lifolab colour palette for site-wide theming */
   lifoIndexColors?: Maybe<SiteColorsLifoIndexColors>;
 };
 
@@ -12878,6 +12878,11 @@ export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetProjectsQuery = { __typename?: 'RootQuery', projects?: { __typename?: 'RootQueryToProjectConnection', edges: Array<{ __typename?: 'RootQueryToProjectConnectionEdge', node: { __typename?: 'Project', id: string } }> } | null };
 
+export type GetSiteColorsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSiteColorsQuery = { __typename?: 'RootQuery', siteColorSettings?: { __typename?: 'SiteColorSettings', siteColors?: { __typename?: 'SiteColors', lifoIndexColors?: { __typename?: 'SiteColorsLifoIndexColors', primaryColor?: string | null, secondaryColor?: string | null } | null } | null } | null };
+
 export type GetAllTagsWithDetailsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -12944,11 +12949,6 @@ type AuthorDetailsFields_Page_Fragment = { __typename?: 'Page', author?: { __typ
 type AuthorDetailsFields_Post_Fragment = { __typename?: 'Post', author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } } | null };
 
 export type AuthorDetailsFieldsFragment = AuthorDetailsFields_MediaItem_Fragment | AuthorDetailsFields_Page_Fragment | AuthorDetailsFields_Post_Fragment;
-
-export type GetSiteColorsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetSiteColorsQuery = { __typename?: 'RootQuery', siteColorSettings?: { __typename?: 'SiteColorSettings', siteColors?: { __typename?: 'SiteColors', lifoIndexColors?: { __typename?: 'SiteColorsLifoIndexColors', primaryColor?: string | null, secondaryColor?: string | null } | null } | null } | null };
 
 export const AuthorDetailsFieldsFragmentDoc = gql`
     fragment AuthorDetailsFields on NodeWithAuthor {
@@ -13136,6 +13136,18 @@ export const GetProjectsDocument = gql`
   }
 }
     `;
+export const GetSiteColorsDocument = gql`
+    query GetSiteColors {
+  siteColorSettings {
+    siteColors {
+      lifoIndexColors {
+        primaryColor
+        secondaryColor
+      }
+    }
+  }
+}
+    `;
 export const GetAllTagsWithDetailsDocument = gql`
     query GetAllTagsWithDetails {
   tags {
@@ -13309,18 +13321,6 @@ export const GetProjectCardDocument = gql`
   }
 }
     `;
-export const GetSiteColorsDocument = gql`
-    query GetSiteColors {
-  siteColorSettings {
-    siteColors {
-      lifoIndexColors {
-        primaryColor
-        secondaryColor
-      }
-    }
-  }
-}
-    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -13362,6 +13362,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetProjects(variables?: GetProjectsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectsQuery>({ document: GetProjectsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjects', 'query', variables);
     },
+    GetSiteColors(variables?: GetSiteColorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetSiteColorsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetSiteColorsQuery>({ document: GetSiteColorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetSiteColors', 'query', variables);
+    },
     GetAllTagsWithDetails(variables?: GetAllTagsWithDetailsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllTagsWithDetailsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllTagsWithDetailsQuery>({ document: GetAllTagsWithDetailsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllTagsWithDetails', 'query', variables);
     },
@@ -13388,9 +13391,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetProjectCard(variables: GetProjectCardQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProjectCardQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectCardQuery>({ document: GetProjectCardDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProjectCard', 'query', variables);
-    },
-    GetSiteColors(variables?: GetSiteColorsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetSiteColorsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetSiteColorsQuery>({ document: GetSiteColorsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetSiteColors', 'query', variables);
     }
   };
 }

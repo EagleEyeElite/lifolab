@@ -9,7 +9,12 @@ import { navbar } from "@/config/siteConfig";
 
 type LayoutMode = 'mobile' | 'tablet' | 'desktop';
 
-export default function Navbar() {
+interface NavbarProps {
+  primaryColor: string;
+  secondaryColor: string;
+}
+
+export default function Navbar({ primaryColor, secondaryColor }: NavbarProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [layoutMode, setLayoutMode] = useState<LayoutMode>('desktop');
   const showButtonBackground = scrollProgress >= 1;
@@ -63,11 +68,17 @@ export default function Navbar() {
       {/* Layer 3: Links with backgrounds (highest) */}
       <nav className="fixed top-0 h-navbar w-full pointer-events-none">
         {layoutMode === 'mobile' ? (
-          <MobileNavigation showButtonBackground={showButtonBackground} />
+          <MobileNavigation
+            showButtonBackground={showButtonBackground}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+          />
         ) : (
           <DesktopNavigation
             showButtonBackground={showButtonBackground}
             mode={layoutMode}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
           />
         )}
       </nav>

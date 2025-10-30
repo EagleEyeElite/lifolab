@@ -5,6 +5,7 @@ import ThreeColumnExpandableRows from "@/components/ui/expandableRows/ThreeColum
 import ExpandableRows, { ExpandableRowItem } from "@/components/ui/expandableRows/ExpandableRows";
 import { GetAllPeopleQuery, GetAllPeopleQueryVariables } from "@/graphql/generatedTypes";
 import SubHeading from "@/components/ui/SubHeading";
+import { getLifoIndexColors } from '@/lib/getSiteColors';
 
 const GetAllPeople = gql`
     query GetAllPeople {
@@ -42,6 +43,7 @@ interface PersonSectionProps {
 
 export default async function PeopleSection({ title, personSlugs, columns = 1 }: PersonSectionProps) {
   const data = await graphqlClient.request<GetAllPeopleQuery, GetAllPeopleQueryVariables>(GetAllPeople);
+  const { primaryColor, secondaryColor } = await getLifoIndexColors();
 
   const items: ExpandableRowItem[] = personSlugs
     .flatMap(slug => {
@@ -69,7 +71,7 @@ export default async function PeopleSection({ title, personSlugs, columns = 1 }:
     {columns === 1 ? (
       <ExpandableRows items={items} />
     ) : (
-      <ThreeColumnExpandableRows items={items} />
+      <ThreeColumnExpandableRows items={items} primaryColor={primaryColor} secondaryColor={secondaryColor} />
     )}
   </>
 }

@@ -25,7 +25,7 @@ export default async function CategoryList({ tagIds, selectedTagSlug, selectable
   selectable?: boolean;
 }) {
   const { tags } = await graphqlClient.request<GetTagsByIdsQuery, GetTagsByIdsQueryVariables>(GetTagsByIds, { ids: tagIds });
-  const { primaryColor } = await getLifoIndexColors();
+  const { primaryColor, secondaryColor } = await getLifoIndexColors();
 
   if (!tags?.edges?.length) {
     throw new Error(`Error fetching tags for tags ${tagIds}`);
@@ -38,7 +38,7 @@ export default async function CategoryList({ tagIds, selectedTagSlug, selectable
   }));
 
   if (selectable) {
-    return <SelectableCategoryList tags={tagData} currentTagSlug={selectedTagSlug} />;
+    return <SelectableCategoryList tags={tagData} currentTagSlug={selectedTagSlug} primaryColor={primaryColor} secondaryColor={secondaryColor} />;
   }
 
   return (
@@ -49,11 +49,7 @@ export default async function CategoryList({ tagIds, selectedTagSlug, selectable
           <Link
             key={tag.id}
             href={`/categories/${tag.slug}`}
-            className={`inline-flex items-center px-2 py-1 text-xs font-heading rounded-full ${
-              isSelected
-                ? 'text-black'
-                : 'text-black'
-            }`}
+            className="inline-flex items-center px-2 py-1 text-xs font-heading rounded-full text-black"
             style={{ backgroundColor: primaryColor }}
           >
             {tag.name}

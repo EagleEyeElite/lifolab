@@ -4,6 +4,7 @@ import { gql } from 'graphql-request';
 import ProjectCardClient from './ProjectCardClient';
 import CategoryList from '@/components/ui/categories/CategoryList';
 import {GetProjectCardQuery, GetProjectCardQueryVariables} from "@/graphql/generatedTypes";
+import { getLifoIndexColors } from '@/lib/getSiteColors';
 
 const GetProjectCard = gql`
     query GetProjectCard($id: ID!) {
@@ -47,6 +48,7 @@ export default async function ProjectCard({ id }: ProjectCardProps) {
   const data = await graphqlClient.request<GetProjectCardQuery, GetProjectCardQueryVariables>(
     GetProjectCard, { id }
   );
+  const { primaryColor, secondaryColor } = await getLifoIndexColors();
   const project = data.project;
   if (!project) {
     throw new Error(`Project with id "${id}" not found`);
@@ -66,6 +68,8 @@ export default async function ProjectCard({ id }: ProjectCardProps) {
       imageWidth={imageWidth}
       imageHeight={imageHeight}
       tagList={<CategoryList tagIds={tagIds} />}
+      primaryColor={primaryColor}
+      secondaryColor={secondaryColor}
     />
   );
 }
