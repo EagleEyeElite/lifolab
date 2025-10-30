@@ -113,7 +113,7 @@ export type AboutSettings = AcfOptionsPage & Node & WithAcfAboutOptions & {
   parentId?: Maybe<Scalars['String']['output']>;
 };
 
-/** Connection between the CyclopediaChapterDetails_Fields type and the ContentNode type */
+/** Connection between the LifoIndexChapterDetails_Fields type and the ContentNode type */
 export type AcfContentNodeConnection = Connection & ContentNodeConnection & {
   __typename?: 'AcfContentNodeConnection';
   /** Edges for the AcfContentNodeConnection connection */
@@ -1485,9 +1485,9 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Attachment = 'ATTACHMENT',
   /** The Type of Content object */
-  CyclopediaChapter = 'CYCLOPEDIA_CHAPTER',
+  LifoIndexChapter = 'LIFO_INDEX_CHAPTER',
   /** The Type of Content object */
-  CyclopediaEntry = 'CYCLOPEDIA_ENTRY',
+  LifoIndexEntry = 'LIFO_INDEX_ENTRY',
   /** The Type of Content object */
   Page = 'PAGE',
   /** The Type of Content object */
@@ -1696,8 +1696,8 @@ export type CreateCommentPayload = {
   success?: Maybe<Scalars['Boolean']['output']>;
 };
 
-/** Input for the createCyclopediaChapter mutation. */
-export type CreateCyclopediaChapterInput = {
+/** Input for the createLifoIndexChapter mutation. */
+export type CreateLifoIndexChapterInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
@@ -1714,17 +1714,17 @@ export type CreateCyclopediaChapterInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** The payload for the createCyclopediaChapter mutation. */
-export type CreateCyclopediaChapterPayload = {
-  __typename?: 'CreateCyclopediaChapterPayload';
+/** The payload for the createLifoIndexChapter mutation. */
+export type CreateLifoIndexChapterPayload = {
+  __typename?: 'CreateLifoIndexChapterPayload';
   /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The Post object mutation type. */
-  cyclopediaChapter?: Maybe<CyclopediaChapter>;
+  lifoIndexChapter?: Maybe<LifoIndexChapter>;
 };
 
-/** Input for the createCyclopediaEntry mutation. */
-export type CreateCyclopediaEntryInput = {
+/** Input for the createLifoIndexEntry mutation. */
+export type CreateLifoIndexEntryInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** The content of the object */
@@ -1743,13 +1743,13 @@ export type CreateCyclopediaEntryInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** The payload for the createCyclopediaEntry mutation. */
-export type CreateCyclopediaEntryPayload = {
-  __typename?: 'CreateCyclopediaEntryPayload';
+/** The payload for the createLifoIndexEntry mutation. */
+export type CreateLifoIndexEntryPayload = {
+  __typename?: 'CreateLifoIndexEntryPayload';
   /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The Post object mutation type. */
-  cyclopediaEntry?: Maybe<CyclopediaEntry>;
+  lifoIndexEntry?: Maybe<LifoIndexEntry>;
 };
 
 /** Input for the createMediaItem mutation. */
@@ -2063,556 +2063,6 @@ export type CreateUserPayload = {
   user?: Maybe<User>;
 };
 
-/** The cyclopediaChapter type */
-export type CyclopediaChapter = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCyclopediaChapterDetails & {
-  __typename?: 'CyclopediaChapter';
-  /**
-   * The ancestors of the content node.
-   * @deprecated This content type is not hierarchical and typically will not have ancestors
-   */
-  ancestors?: Maybe<CyclopediaChapterToCyclopediaChapterConnection>;
-  /** Connection between the ContentNode type and the ContentType type */
-  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
-  /** The name of the Content Type the node belongs to */
-  contentTypeName: Scalars['String']['output'];
-  /** Fields of the CyclopediaChapterDetails ACF Field Group */
-  cyclopediaChapterDetails?: Maybe<CyclopediaChapterDetails>;
-  /**
-   * The id field matches the WP_Post-&gt;ID field.
-   * @deprecated Deprecated in favor of the databaseId field
-   */
-  cyclopediaChapterId: Scalars['Int']['output'];
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** Post publishing date. */
-  date?: Maybe<Scalars['String']['output']>;
-  /** The publishing date set in GMT. */
-  dateGmt?: Maybe<Scalars['String']['output']>;
-  /** The desired slug of the post */
-  desiredSlug?: Maybe<Scalars['String']['output']>;
-  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
-  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
-  /** The RSS enclosure for the object */
-  enclosure?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
-  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
-  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
-  guid?: Maybe<Scalars['String']['output']>;
-  /** Whether the cyclopedia-chapter object is password protected. */
-  hasPassword?: Maybe<Scalars['Boolean']['output']>;
-  /** The globally unique identifier of the cyclopedia-chapter object. */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Comment */
-  isComment: Scalars['Boolean']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether the node represents the front page. */
-  isFrontPage: Scalars['Boolean']['output'];
-  /** Whether  the node represents the blog page. */
-  isPostsPage: Scalars['Boolean']['output'];
-  /** Whether the object is a node in the preview state */
-  isPreview?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** The user that most recently edited the node */
-  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
-  /** The permalink of the post */
-  link?: Maybe<Scalars['String']['output']>;
-  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
-  modified?: Maybe<Scalars['String']['output']>;
-  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
-  modifiedGmt?: Maybe<Scalars['String']['output']>;
-  /**
-   * The parent of the content node.
-   * @deprecated This content type is not hierarchical and typically will not have a parent
-   */
-  parent?: Maybe<CyclopediaChapterToParentConnectionEdge>;
-  /** The password for the cyclopedia-chapter object. */
-  password?: Maybe<Scalars['String']['output']>;
-  /** Connection between the cyclopediaChapter type and the cyclopediaChapter type */
-  preview?: Maybe<CyclopediaChapterToPreviewConnectionEdge>;
-  /** The database id of the preview node */
-  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** Whether the object is a node in the preview state */
-  previewRevisionId?: Maybe<Scalars['ID']['output']>;
-  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
-  slug?: Maybe<Scalars['String']['output']>;
-  /** The current status of the object */
-  status?: Maybe<Scalars['String']['output']>;
-  /** The template assigned to the node */
-  template?: Maybe<ContentTemplate>;
-  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
-  title?: Maybe<Scalars['String']['output']>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** The cyclopediaChapter type */
-export type CyclopediaChapterAncestorsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-/** The cyclopediaChapter type */
-export type CyclopediaChapterEnqueuedScriptsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-/** The cyclopediaChapter type */
-export type CyclopediaChapterEnqueuedStylesheetsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-/** The cyclopediaChapter type */
-export type CyclopediaChapterTitleArgs = {
-  format?: InputMaybe<PostObjectFieldFormatEnum>;
-};
-
-/** A paginated collection of cyclopediaChapter Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of cyclopediaChapter Nodes */
-export type CyclopediaChapterConnection = {
-  /** A list of edges (relational context) between RootQuery and connected cyclopediaChapter Nodes */
-  edges: Array<CyclopediaChapterConnectionEdge>;
-  /** A list of connected cyclopediaChapter Nodes */
-  nodes: Array<CyclopediaChapter>;
-  /** Information about pagination in a connection. */
-  pageInfo: CyclopediaChapterConnectionPageInfo;
-};
-
-/** Represents a connection to a cyclopediaChapter. Contains both the cyclopediaChapter Node and metadata about the relationship. */
-export type CyclopediaChapterConnectionEdge = {
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The connected cyclopediaChapter Node */
-  node: CyclopediaChapter;
-};
-
-/** Pagination metadata specific to &quot;CyclopediaChapterConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CyclopediaChapterConnectionEdge&quot; Nodes. */
-export type CyclopediaChapterConnectionPageInfo = {
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** The &quot;CyclopediaChapterDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type CyclopediaChapterDetails = AcfFieldGroup & AcfFieldGroupFields & CyclopediaChapterDetails_Fields & {
-  __typename?: 'CyclopediaChapterDetails';
-  /** The background color for this chapter&#039;s entries */
-  backgroundColor: Scalars['String']['output'];
-  /** The display order for this chapter */
-  chapterOrder: Scalars['Float']['output'];
-  /** Select and order cyclopedia entries for this chapter */
-  entries?: Maybe<AcfContentNodeConnection>;
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** The &quot;CyclopediaChapterDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type CyclopediaChapterDetailsEntriesArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Interface representing fields of the ACF &quot;CyclopediaChapterDetails&quot; Field Group */
-export type CyclopediaChapterDetails_Fields = {
-  /** The background color for this chapter&#039;s entries */
-  backgroundColor: Scalars['String']['output'];
-  /** The display order for this chapter */
-  chapterOrder: Scalars['Float']['output'];
-  /** Select and order cyclopedia entries for this chapter */
-  entries?: Maybe<AcfContentNodeConnection>;
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** Interface representing fields of the ACF &quot;CyclopediaChapterDetails&quot; Field Group */
-export type CyclopediaChapterDetails_FieldsEntriesArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Identifier types for retrieving a specific CyclopediaChapter. Specifies which unique attribute is used to find an exact CyclopediaChapter. */
-export enum CyclopediaChapterIdType {
-  /** Identify a resource by the Database ID. */
-  DatabaseId = 'DATABASE_ID',
-  /** Identify a resource by the (hashed) Global ID. */
-  Id = 'ID',
-  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
-  Slug = 'SLUG',
-  /** Identify a resource by the URI. */
-  Uri = 'URI'
-}
-
-/** Connection between the cyclopediaChapter type and the cyclopediaChapter type */
-export type CyclopediaChapterToCyclopediaChapterConnection = Connection & CyclopediaChapterConnection & {
-  __typename?: 'CyclopediaChapterToCyclopediaChapterConnection';
-  /** Edges for the CyclopediaChapterToCyclopediaChapterConnection connection */
-  edges: Array<CyclopediaChapterToCyclopediaChapterConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<CyclopediaChapter>;
-  /** Information about pagination in a connection. */
-  pageInfo: CyclopediaChapterToCyclopediaChapterConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type CyclopediaChapterToCyclopediaChapterConnectionEdge = CyclopediaChapterConnectionEdge & Edge & {
-  __typename?: 'CyclopediaChapterToCyclopediaChapterConnectionEdge';
-  /**
-   * A cursor for use in pagination
-   * @deprecated This content type is not hierarchical and typically will not have ancestors
-   */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /**
-   * The item at the end of the edge
-   * @deprecated This content type is not hierarchical and typically will not have ancestors
-   */
-  node: CyclopediaChapter;
-};
-
-/** Pagination metadata specific to &quot;CyclopediaChapterToCyclopediaChapterConnection&quot; collections. Provides cursors and flags for navigating through sets of CyclopediaChapterToCyclopediaChapterConnection Nodes. */
-export type CyclopediaChapterToCyclopediaChapterConnectionPageInfo = CyclopediaChapterConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'CyclopediaChapterToCyclopediaChapterConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Connection between the cyclopediaChapter type and the cyclopediaChapter type */
-export type CyclopediaChapterToParentConnectionEdge = CyclopediaChapterConnectionEdge & Edge & OneToOneConnection & {
-  __typename?: 'CyclopediaChapterToParentConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /**
-   * The node of the connection, without the edges
-   * @deprecated This content type is not hierarchical and typically will not have a parent
-   */
-  node: CyclopediaChapter;
-};
-
-/** Connection between the cyclopediaChapter type and the cyclopediaChapter type */
-export type CyclopediaChapterToPreviewConnectionEdge = CyclopediaChapterConnectionEdge & Edge & OneToOneConnection & {
-  __typename?: 'CyclopediaChapterToPreviewConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: CyclopediaChapter;
-};
-
-/** The cyclopediaEntry type */
-export type CyclopediaEntry = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCyclopediaEntryDetails & {
-  __typename?: 'CyclopediaEntry';
-  /**
-   * The ancestors of the content node.
-   * @deprecated This content type is not hierarchical and typically will not have ancestors
-   */
-  ancestors?: Maybe<CyclopediaEntryToCyclopediaEntryConnection>;
-  /** The content of the post. */
-  content?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the ContentType type */
-  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
-  /** The name of the Content Type the node belongs to */
-  contentTypeName: Scalars['String']['output'];
-  /** Fields of the CyclopediaEntryDetails ACF Field Group */
-  cyclopediaEntryDetails?: Maybe<CyclopediaEntryDetails>;
-  /**
-   * The id field matches the WP_Post-&gt;ID field.
-   * @deprecated Deprecated in favor of the databaseId field
-   */
-  cyclopediaEntryId: Scalars['Int']['output'];
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** Post publishing date. */
-  date?: Maybe<Scalars['String']['output']>;
-  /** The publishing date set in GMT. */
-  dateGmt?: Maybe<Scalars['String']['output']>;
-  /** The desired slug of the post */
-  desiredSlug?: Maybe<Scalars['String']['output']>;
-  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
-  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
-  /** The RSS enclosure for the object */
-  enclosure?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
-  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
-  /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
-  featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
-  /** The database identifier for the featured image node assigned to the content node */
-  featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** Globally unique ID of the featured image assigned to the node */
-  featuredImageId?: Maybe<Scalars['ID']['output']>;
-  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
-  guid?: Maybe<Scalars['String']['output']>;
-  /** Whether the cyclopedia-entry object is password protected. */
-  hasPassword?: Maybe<Scalars['Boolean']['output']>;
-  /** The globally unique identifier of the cyclopedia-entry object. */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Comment */
-  isComment: Scalars['Boolean']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether the node represents the front page. */
-  isFrontPage: Scalars['Boolean']['output'];
-  /** Whether  the node represents the blog page. */
-  isPostsPage: Scalars['Boolean']['output'];
-  /** Whether the object is a node in the preview state */
-  isPreview?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** The user that most recently edited the node */
-  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
-  /** The permalink of the post */
-  link?: Maybe<Scalars['String']['output']>;
-  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
-  modified?: Maybe<Scalars['String']['output']>;
-  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
-  modifiedGmt?: Maybe<Scalars['String']['output']>;
-  /**
-   * The parent of the content node.
-   * @deprecated This content type is not hierarchical and typically will not have a parent
-   */
-  parent?: Maybe<CyclopediaEntryToParentConnectionEdge>;
-  /** The password for the cyclopedia-entry object. */
-  password?: Maybe<Scalars['String']['output']>;
-  /** Connection between the cyclopediaEntry type and the cyclopediaEntry type */
-  preview?: Maybe<CyclopediaEntryToPreviewConnectionEdge>;
-  /** The database id of the preview node */
-  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** Whether the object is a node in the preview state */
-  previewRevisionId?: Maybe<Scalars['ID']['output']>;
-  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
-  slug?: Maybe<Scalars['String']['output']>;
-  /** The current status of the object */
-  status?: Maybe<Scalars['String']['output']>;
-  /** The template assigned to the node */
-  template?: Maybe<ContentTemplate>;
-  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
-  title?: Maybe<Scalars['String']['output']>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** The cyclopediaEntry type */
-export type CyclopediaEntryAncestorsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-/** The cyclopediaEntry type */
-export type CyclopediaEntryContentArgs = {
-  format?: InputMaybe<PostObjectFieldFormatEnum>;
-};
-
-
-/** The cyclopediaEntry type */
-export type CyclopediaEntryEnqueuedScriptsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-/** The cyclopediaEntry type */
-export type CyclopediaEntryEnqueuedStylesheetsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-/** The cyclopediaEntry type */
-export type CyclopediaEntryTitleArgs = {
-  format?: InputMaybe<PostObjectFieldFormatEnum>;
-};
-
-/** A paginated collection of cyclopediaEntry Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of cyclopediaEntry Nodes */
-export type CyclopediaEntryConnection = {
-  /** A list of edges (relational context) between RootQuery and connected cyclopediaEntry Nodes */
-  edges: Array<CyclopediaEntryConnectionEdge>;
-  /** A list of connected cyclopediaEntry Nodes */
-  nodes: Array<CyclopediaEntry>;
-  /** Information about pagination in a connection. */
-  pageInfo: CyclopediaEntryConnectionPageInfo;
-};
-
-/** Represents a connection to a cyclopediaEntry. Contains both the cyclopediaEntry Node and metadata about the relationship. */
-export type CyclopediaEntryConnectionEdge = {
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The connected cyclopediaEntry Node */
-  node: CyclopediaEntry;
-};
-
-/** Pagination metadata specific to &quot;CyclopediaEntryConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CyclopediaEntryConnectionEdge&quot; Nodes. */
-export type CyclopediaEntryConnectionPageInfo = {
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** The &quot;CyclopediaEntryDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type CyclopediaEntryDetails = AcfFieldGroup & AcfFieldGroupFields & CyclopediaEntryDetails_Fields & {
-  __typename?: 'CyclopediaEntryDetails';
-  /** Select which chapters this entry appears in */
-  chapters?: Maybe<AcfContentNodeConnection>;
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** The &quot;CyclopediaEntryDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type CyclopediaEntryDetailsChaptersArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Interface representing fields of the ACF &quot;CyclopediaEntryDetails&quot; Field Group */
-export type CyclopediaEntryDetails_Fields = {
-  /** Select which chapters this entry appears in */
-  chapters?: Maybe<AcfContentNodeConnection>;
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** Interface representing fields of the ACF &quot;CyclopediaEntryDetails&quot; Field Group */
-export type CyclopediaEntryDetails_FieldsChaptersArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Identifier types for retrieving a specific CyclopediaEntry. Specifies which unique attribute is used to find an exact CyclopediaEntry. */
-export enum CyclopediaEntryIdType {
-  /** Identify a resource by the Database ID. */
-  DatabaseId = 'DATABASE_ID',
-  /** Identify a resource by the (hashed) Global ID. */
-  Id = 'ID',
-  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
-  Slug = 'SLUG',
-  /** Identify a resource by the URI. */
-  Uri = 'URI'
-}
-
-/** Connection between the cyclopediaEntry type and the cyclopediaEntry type */
-export type CyclopediaEntryToCyclopediaEntryConnection = Connection & CyclopediaEntryConnection & {
-  __typename?: 'CyclopediaEntryToCyclopediaEntryConnection';
-  /** Edges for the CyclopediaEntryToCyclopediaEntryConnection connection */
-  edges: Array<CyclopediaEntryToCyclopediaEntryConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<CyclopediaEntry>;
-  /** Information about pagination in a connection. */
-  pageInfo: CyclopediaEntryToCyclopediaEntryConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type CyclopediaEntryToCyclopediaEntryConnectionEdge = CyclopediaEntryConnectionEdge & Edge & {
-  __typename?: 'CyclopediaEntryToCyclopediaEntryConnectionEdge';
-  /**
-   * A cursor for use in pagination
-   * @deprecated This content type is not hierarchical and typically will not have ancestors
-   */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /**
-   * The item at the end of the edge
-   * @deprecated This content type is not hierarchical and typically will not have ancestors
-   */
-  node: CyclopediaEntry;
-};
-
-/** Pagination metadata specific to &quot;CyclopediaEntryToCyclopediaEntryConnection&quot; collections. Provides cursors and flags for navigating through sets of CyclopediaEntryToCyclopediaEntryConnection Nodes. */
-export type CyclopediaEntryToCyclopediaEntryConnectionPageInfo = CyclopediaEntryConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'CyclopediaEntryToCyclopediaEntryConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Connection between the cyclopediaEntry type and the cyclopediaEntry type */
-export type CyclopediaEntryToParentConnectionEdge = CyclopediaEntryConnectionEdge & Edge & OneToOneConnection & {
-  __typename?: 'CyclopediaEntryToParentConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /**
-   * The node of the connection, without the edges
-   * @deprecated This content type is not hierarchical and typically will not have a parent
-   */
-  node: CyclopediaEntry;
-};
-
-/** Connection between the cyclopediaEntry type and the cyclopediaEntry type */
-export type CyclopediaEntryToPreviewConnectionEdge = CyclopediaEntryConnectionEdge & Edge & OneToOneConnection & {
-  __typename?: 'CyclopediaEntryToPreviewConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: CyclopediaEntry;
-};
-
 /** An object that has a unique numeric identifier in the database. Provides consistent access to the database ID across different object types. */
 export type DatabaseIdentifier = {
   /** The unique identifier stored in the database */
@@ -2706,50 +2156,50 @@ export type DeleteCommentPayload = {
   deletedId?: Maybe<Scalars['ID']['output']>;
 };
 
-/** Input for the deleteCyclopediaChapter mutation. */
-export type DeleteCyclopediaChapterInput = {
+/** Input for the deleteLifoIndexChapter mutation. */
+export type DeleteLifoIndexChapterInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** Whether the object should be force deleted instead of being moved to the trash */
   forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The ID of the cyclopediaChapter to delete */
+  /** The ID of the lifoIndexChapter to delete */
   id: Scalars['ID']['input'];
   /** Override the edit lock when another user is editing the post */
   ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** The payload for the deleteCyclopediaChapter mutation. */
-export type DeleteCyclopediaChapterPayload = {
-  __typename?: 'DeleteCyclopediaChapterPayload';
+/** The payload for the deleteLifoIndexChapter mutation. */
+export type DeleteLifoIndexChapterPayload = {
+  __typename?: 'DeleteLifoIndexChapterPayload';
   /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** The object before it was deleted */
-  cyclopediaChapter?: Maybe<CyclopediaChapter>;
   /** The ID of the deleted object */
   deletedId?: Maybe<Scalars['ID']['output']>;
+  /** The object before it was deleted */
+  lifoIndexChapter?: Maybe<LifoIndexChapter>;
 };
 
-/** Input for the deleteCyclopediaEntry mutation. */
-export type DeleteCyclopediaEntryInput = {
+/** Input for the deleteLifoIndexEntry mutation. */
+export type DeleteLifoIndexEntryInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** Whether the object should be force deleted instead of being moved to the trash */
   forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The ID of the cyclopediaEntry to delete */
+  /** The ID of the lifoIndexEntry to delete */
   id: Scalars['ID']['input'];
   /** Override the edit lock when another user is editing the post */
   ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** The payload for the deleteCyclopediaEntry mutation. */
-export type DeleteCyclopediaEntryPayload = {
-  __typename?: 'DeleteCyclopediaEntryPayload';
+/** The payload for the deleteLifoIndexEntry mutation. */
+export type DeleteLifoIndexEntryPayload = {
+  __typename?: 'DeleteLifoIndexEntryPayload';
   /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** The object before it was deleted */
-  cyclopediaEntry?: Maybe<CyclopediaEntry>;
   /** The ID of the deleted object */
   deletedId?: Maybe<Scalars['ID']['output']>;
+  /** The object before it was deleted */
+  lifoIndexEntry?: Maybe<LifoIndexEntry>;
 };
 
 /** Input for the deleteMediaItem mutation. */
@@ -3675,6 +3125,556 @@ export type HierarchicalTermNodeEnqueuedStylesheetsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
+/** The lifoIndexChapter type */
+export type LifoIndexChapter = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfLifoIndexChapterDetails & {
+  __typename?: 'LifoIndexChapter';
+  /**
+   * The ancestors of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  ancestors?: Maybe<LifoIndexChapterToLifoIndexChapterConnection>;
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String']['output'];
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int']['output'];
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']['output']>;
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']['output']>;
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']['output']>;
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the lifo-index-chapter object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
+  /** The globally unique identifier of the lifo-index-chapter object. */
+  id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']['output'];
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+  /** Fields of the LifoIndexChapterDetails ACF Field Group */
+  lifoIndexChapterDetails?: Maybe<LifoIndexChapterDetails>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of the databaseId field
+   */
+  lifoIndexChapterId: Scalars['Int']['output'];
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']['output']>;
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']['output']>;
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /**
+   * The parent of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  parent?: Maybe<LifoIndexChapterToParentConnectionEdge>;
+  /** The password for the lifo-index-chapter object. */
+  password?: Maybe<Scalars['String']['output']>;
+  /** Connection between the lifoIndexChapter type and the lifoIndexChapter type */
+  preview?: Maybe<LifoIndexChapterToPreviewConnectionEdge>;
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']['output']>;
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']['output']>;
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']['output']>;
+  /** The template assigned to the node */
+  template?: Maybe<ContentTemplate>;
+  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+  title?: Maybe<Scalars['String']['output']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The lifoIndexChapter type */
+export type LifoIndexChapterAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The lifoIndexChapter type */
+export type LifoIndexChapterEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The lifoIndexChapter type */
+export type LifoIndexChapterEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The lifoIndexChapter type */
+export type LifoIndexChapterTitleArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+/** A paginated collection of lifoIndexChapter Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of lifoIndexChapter Nodes */
+export type LifoIndexChapterConnection = {
+  /** A list of edges (relational context) between RootQuery and connected lifoIndexChapter Nodes */
+  edges: Array<LifoIndexChapterConnectionEdge>;
+  /** A list of connected lifoIndexChapter Nodes */
+  nodes: Array<LifoIndexChapter>;
+  /** Information about pagination in a connection. */
+  pageInfo: LifoIndexChapterConnectionPageInfo;
+};
+
+/** Represents a connection to a lifoIndexChapter. Contains both the lifoIndexChapter Node and metadata about the relationship. */
+export type LifoIndexChapterConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The connected lifoIndexChapter Node */
+  node: LifoIndexChapter;
+};
+
+/** Pagination metadata specific to &quot;LifoIndexChapterConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;LifoIndexChapterConnectionEdge&quot; Nodes. */
+export type LifoIndexChapterConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;LifoIndexChapterDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type LifoIndexChapterDetails = AcfFieldGroup & AcfFieldGroupFields & LifoIndexChapterDetails_Fields & {
+  __typename?: 'LifoIndexChapterDetails';
+  /** The background color for this chapter&#039;s entries */
+  backgroundColor: Scalars['String']['output'];
+  /** The display order for this chapter */
+  chapterOrder: Scalars['Float']['output'];
+  /** Select and order lifo-index entries for this chapter */
+  entries?: Maybe<AcfContentNodeConnection>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The &quot;LifoIndexChapterDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type LifoIndexChapterDetailsEntriesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Interface representing fields of the ACF &quot;LifoIndexChapterDetails&quot; Field Group */
+export type LifoIndexChapterDetails_Fields = {
+  /** The background color for this chapter&#039;s entries */
+  backgroundColor: Scalars['String']['output'];
+  /** The display order for this chapter */
+  chapterOrder: Scalars['Float']['output'];
+  /** Select and order lifo-index entries for this chapter */
+  entries?: Maybe<AcfContentNodeConnection>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Interface representing fields of the ACF &quot;LifoIndexChapterDetails&quot; Field Group */
+export type LifoIndexChapterDetails_FieldsEntriesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Identifier types for retrieving a specific LifoIndexChapter. Specifies which unique attribute is used to find an exact LifoIndexChapter. */
+export enum LifoIndexChapterIdType {
+  /** Identify a resource by the Database ID. */
+  DatabaseId = 'DATABASE_ID',
+  /** Identify a resource by the (hashed) Global ID. */
+  Id = 'ID',
+  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
+  Slug = 'SLUG',
+  /** Identify a resource by the URI. */
+  Uri = 'URI'
+}
+
+/** Connection between the lifoIndexChapter type and the lifoIndexChapter type */
+export type LifoIndexChapterToLifoIndexChapterConnection = Connection & LifoIndexChapterConnection & {
+  __typename?: 'LifoIndexChapterToLifoIndexChapterConnection';
+  /** Edges for the LifoIndexChapterToLifoIndexChapterConnection connection */
+  edges: Array<LifoIndexChapterToLifoIndexChapterConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<LifoIndexChapter>;
+  /** Information about pagination in a connection. */
+  pageInfo: LifoIndexChapterToLifoIndexChapterConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type LifoIndexChapterToLifoIndexChapterConnectionEdge = Edge & LifoIndexChapterConnectionEdge & {
+  __typename?: 'LifoIndexChapterToLifoIndexChapterConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  node: LifoIndexChapter;
+};
+
+/** Pagination metadata specific to &quot;LifoIndexChapterToLifoIndexChapterConnection&quot; collections. Provides cursors and flags for navigating through sets of LifoIndexChapterToLifoIndexChapterConnection Nodes. */
+export type LifoIndexChapterToLifoIndexChapterConnectionPageInfo = LifoIndexChapterConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'LifoIndexChapterToLifoIndexChapterConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Connection between the lifoIndexChapter type and the lifoIndexChapter type */
+export type LifoIndexChapterToParentConnectionEdge = Edge & LifoIndexChapterConnectionEdge & OneToOneConnection & {
+  __typename?: 'LifoIndexChapterToParentConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The node of the connection, without the edges
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  node: LifoIndexChapter;
+};
+
+/** Connection between the lifoIndexChapter type and the lifoIndexChapter type */
+export type LifoIndexChapterToPreviewConnectionEdge = Edge & LifoIndexChapterConnectionEdge & OneToOneConnection & {
+  __typename?: 'LifoIndexChapterToPreviewConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: LifoIndexChapter;
+};
+
+/** The lifoIndexEntry type */
+export type LifoIndexEntry = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfLifoIndexEntryDetails & {
+  __typename?: 'LifoIndexEntry';
+  /**
+   * The ancestors of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  ancestors?: Maybe<LifoIndexEntryToLifoIndexEntryConnection>;
+  /** The content of the post. */
+  content?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String']['output'];
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int']['output'];
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']['output']>;
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']['output']>;
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']['output']>;
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+  /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+  featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
+  /** The database identifier for the featured image node assigned to the content node */
+  featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Globally unique ID of the featured image assigned to the node */
+  featuredImageId?: Maybe<Scalars['ID']['output']>;
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the lifo-index-entry object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
+  /** The globally unique identifier of the lifo-index-entry object. */
+  id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']['output'];
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+  /** Fields of the LifoIndexEntryDetails ACF Field Group */
+  lifoIndexEntryDetails?: Maybe<LifoIndexEntryDetails>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of the databaseId field
+   */
+  lifoIndexEntryId: Scalars['Int']['output'];
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']['output']>;
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']['output']>;
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /**
+   * The parent of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  parent?: Maybe<LifoIndexEntryToParentConnectionEdge>;
+  /** The password for the lifo-index-entry object. */
+  password?: Maybe<Scalars['String']['output']>;
+  /** Connection between the lifoIndexEntry type and the lifoIndexEntry type */
+  preview?: Maybe<LifoIndexEntryToPreviewConnectionEdge>;
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']['output']>;
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']['output']>;
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']['output']>;
+  /** The template assigned to the node */
+  template?: Maybe<ContentTemplate>;
+  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+  title?: Maybe<Scalars['String']['output']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The lifoIndexEntry type */
+export type LifoIndexEntryAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The lifoIndexEntry type */
+export type LifoIndexEntryContentArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The lifoIndexEntry type */
+export type LifoIndexEntryEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The lifoIndexEntry type */
+export type LifoIndexEntryEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The lifoIndexEntry type */
+export type LifoIndexEntryTitleArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+/** A paginated collection of lifoIndexEntry Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of lifoIndexEntry Nodes */
+export type LifoIndexEntryConnection = {
+  /** A list of edges (relational context) between RootQuery and connected lifoIndexEntry Nodes */
+  edges: Array<LifoIndexEntryConnectionEdge>;
+  /** A list of connected lifoIndexEntry Nodes */
+  nodes: Array<LifoIndexEntry>;
+  /** Information about pagination in a connection. */
+  pageInfo: LifoIndexEntryConnectionPageInfo;
+};
+
+/** Represents a connection to a lifoIndexEntry. Contains both the lifoIndexEntry Node and metadata about the relationship. */
+export type LifoIndexEntryConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The connected lifoIndexEntry Node */
+  node: LifoIndexEntry;
+};
+
+/** Pagination metadata specific to &quot;LifoIndexEntryConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;LifoIndexEntryConnectionEdge&quot; Nodes. */
+export type LifoIndexEntryConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;LifoIndexEntryDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type LifoIndexEntryDetails = AcfFieldGroup & AcfFieldGroupFields & LifoIndexEntryDetails_Fields & {
+  __typename?: 'LifoIndexEntryDetails';
+  /** Select which chapters this entry appears in */
+  chapters?: Maybe<AcfContentNodeConnection>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The &quot;LifoIndexEntryDetails&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type LifoIndexEntryDetailsChaptersArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Interface representing fields of the ACF &quot;LifoIndexEntryDetails&quot; Field Group */
+export type LifoIndexEntryDetails_Fields = {
+  /** Select which chapters this entry appears in */
+  chapters?: Maybe<AcfContentNodeConnection>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Interface representing fields of the ACF &quot;LifoIndexEntryDetails&quot; Field Group */
+export type LifoIndexEntryDetails_FieldsChaptersArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Identifier types for retrieving a specific LifoIndexEntry. Specifies which unique attribute is used to find an exact LifoIndexEntry. */
+export enum LifoIndexEntryIdType {
+  /** Identify a resource by the Database ID. */
+  DatabaseId = 'DATABASE_ID',
+  /** Identify a resource by the (hashed) Global ID. */
+  Id = 'ID',
+  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
+  Slug = 'SLUG',
+  /** Identify a resource by the URI. */
+  Uri = 'URI'
+}
+
+/** Connection between the lifoIndexEntry type and the lifoIndexEntry type */
+export type LifoIndexEntryToLifoIndexEntryConnection = Connection & LifoIndexEntryConnection & {
+  __typename?: 'LifoIndexEntryToLifoIndexEntryConnection';
+  /** Edges for the LifoIndexEntryToLifoIndexEntryConnection connection */
+  edges: Array<LifoIndexEntryToLifoIndexEntryConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<LifoIndexEntry>;
+  /** Information about pagination in a connection. */
+  pageInfo: LifoIndexEntryToLifoIndexEntryConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type LifoIndexEntryToLifoIndexEntryConnectionEdge = Edge & LifoIndexEntryConnectionEdge & {
+  __typename?: 'LifoIndexEntryToLifoIndexEntryConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  node: LifoIndexEntry;
+};
+
+/** Pagination metadata specific to &quot;LifoIndexEntryToLifoIndexEntryConnection&quot; collections. Provides cursors and flags for navigating through sets of LifoIndexEntryToLifoIndexEntryConnection Nodes. */
+export type LifoIndexEntryToLifoIndexEntryConnectionPageInfo = LifoIndexEntryConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'LifoIndexEntryToLifoIndexEntryConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Connection between the lifoIndexEntry type and the lifoIndexEntry type */
+export type LifoIndexEntryToParentConnectionEdge = Edge & LifoIndexEntryConnectionEdge & OneToOneConnection & {
+  __typename?: 'LifoIndexEntryToParentConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The node of the connection, without the edges
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  node: LifoIndexEntry;
+};
+
+/** Connection between the lifoIndexEntry type and the lifoIndexEntry type */
+export type LifoIndexEntryToPreviewConnectionEdge = Edge & LifoIndexEntryConnectionEdge & OneToOneConnection & {
+  __typename?: 'LifoIndexEntryToPreviewConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: LifoIndexEntry;
+};
+
 /** File details for a Media Item */
 export type MediaDetails = {
   __typename?: 'MediaDetails';
@@ -4336,7 +4336,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkable Interface */
-export type MenuItemObjectUnion = Category | CyclopediaChapter | CyclopediaEntry | Page | Person | Place | Post | PostFormat | Project | Tag;
+export type MenuItemObjectUnion = Category | LifoIndexChapter | LifoIndexEntry | Page | Person | Place | Post | PostFormat | Project | Tag;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = Edge & MenuConnectionEdge & OneToOneConnection & {
@@ -7790,10 +7790,10 @@ export type RootMutation = {
   createCategory?: Maybe<CreateCategoryPayload>;
   /** The createComment mutation */
   createComment?: Maybe<CreateCommentPayload>;
-  /** The createCyclopediaChapter mutation */
-  createCyclopediaChapter?: Maybe<CreateCyclopediaChapterPayload>;
-  /** The createCyclopediaEntry mutation */
-  createCyclopediaEntry?: Maybe<CreateCyclopediaEntryPayload>;
+  /** The createLifoIndexChapter mutation */
+  createLifoIndexChapter?: Maybe<CreateLifoIndexChapterPayload>;
+  /** The createLifoIndexEntry mutation */
+  createLifoIndexEntry?: Maybe<CreateLifoIndexEntryPayload>;
   /** The createMediaItem mutation */
   createMediaItem?: Maybe<CreateMediaItemPayload>;
   /** The createPage mutation */
@@ -7816,10 +7816,10 @@ export type RootMutation = {
   deleteCategory?: Maybe<DeleteCategoryPayload>;
   /** The deleteComment mutation */
   deleteComment?: Maybe<DeleteCommentPayload>;
-  /** The deleteCyclopediaChapter mutation */
-  deleteCyclopediaChapter?: Maybe<DeleteCyclopediaChapterPayload>;
-  /** The deleteCyclopediaEntry mutation */
-  deleteCyclopediaEntry?: Maybe<DeleteCyclopediaEntryPayload>;
+  /** The deleteLifoIndexChapter mutation */
+  deleteLifoIndexChapter?: Maybe<DeleteLifoIndexChapterPayload>;
+  /** The deleteLifoIndexEntry mutation */
+  deleteLifoIndexEntry?: Maybe<DeleteLifoIndexEntryPayload>;
   /** The deleteMediaItem mutation */
   deleteMediaItem?: Maybe<DeleteMediaItemPayload>;
   /** The deletePage mutation */
@@ -7852,10 +7852,10 @@ export type RootMutation = {
   updateCategory?: Maybe<UpdateCategoryPayload>;
   /** The updateComment mutation */
   updateComment?: Maybe<UpdateCommentPayload>;
-  /** The updateCyclopediaChapter mutation */
-  updateCyclopediaChapter?: Maybe<UpdateCyclopediaChapterPayload>;
-  /** The updateCyclopediaEntry mutation */
-  updateCyclopediaEntry?: Maybe<UpdateCyclopediaEntryPayload>;
+  /** The updateLifoIndexChapter mutation */
+  updateLifoIndexChapter?: Maybe<UpdateLifoIndexChapterPayload>;
+  /** The updateLifoIndexEntry mutation */
+  updateLifoIndexEntry?: Maybe<UpdateLifoIndexEntryPayload>;
   /** The updateMediaItem mutation */
   updateMediaItem?: Maybe<UpdateMediaItemPayload>;
   /** The updatePage mutation */
@@ -7892,14 +7892,14 @@ export type RootMutationCreateCommentArgs = {
 
 
 /** The root mutation */
-export type RootMutationCreateCyclopediaChapterArgs = {
-  input: CreateCyclopediaChapterInput;
+export type RootMutationCreateLifoIndexChapterArgs = {
+  input: CreateLifoIndexChapterInput;
 };
 
 
 /** The root mutation */
-export type RootMutationCreateCyclopediaEntryArgs = {
-  input: CreateCyclopediaEntryInput;
+export type RootMutationCreateLifoIndexEntryArgs = {
+  input: CreateLifoIndexEntryInput;
 };
 
 
@@ -7970,14 +7970,14 @@ export type RootMutationDeleteCommentArgs = {
 
 
 /** The root mutation */
-export type RootMutationDeleteCyclopediaChapterArgs = {
-  input: DeleteCyclopediaChapterInput;
+export type RootMutationDeleteLifoIndexChapterArgs = {
+  input: DeleteLifoIndexChapterInput;
 };
 
 
 /** The root mutation */
-export type RootMutationDeleteCyclopediaEntryArgs = {
-  input: DeleteCyclopediaEntryInput;
+export type RootMutationDeleteLifoIndexEntryArgs = {
+  input: DeleteLifoIndexEntryInput;
 };
 
 
@@ -8078,14 +8078,14 @@ export type RootMutationUpdateCommentArgs = {
 
 
 /** The root mutation */
-export type RootMutationUpdateCyclopediaChapterArgs = {
-  input: UpdateCyclopediaChapterInput;
+export type RootMutationUpdateLifoIndexChapterArgs = {
+  input: UpdateLifoIndexChapterInput;
 };
 
 
 /** The root mutation */
-export type RootMutationUpdateCyclopediaEntryArgs = {
-  input: UpdateCyclopediaEntryInput;
+export type RootMutationUpdateLifoIndexEntryArgs = {
+  input: UpdateLifoIndexEntryInput;
 };
 
 
@@ -8170,30 +8170,30 @@ export type RootQuery = WithAcfOptionsPageAboutSettings & WithAcfOptionsPageDesc
   contentType?: Maybe<ContentType>;
   /** Connection between the RootQuery type and the ContentType type */
   contentTypes?: Maybe<RootQueryToContentTypeConnection>;
-  /** An object of the cyclopediaChapter Type.  */
-  cyclopediaChapter?: Maybe<CyclopediaChapter>;
-  /**
-   * A cyclopediaChapter object
-   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
-   */
-  cyclopediaChapterBy?: Maybe<CyclopediaChapter>;
-  /** Connection between the RootQuery type and the cyclopediaChapter type */
-  cyclopediaChapters?: Maybe<RootQueryToCyclopediaChapterConnection>;
-  /** Connection between the RootQuery type and the cyclopediaEntry type */
-  cyclopediaEntries?: Maybe<RootQueryToCyclopediaEntryConnection>;
-  /** An object of the cyclopediaEntry Type.  */
-  cyclopediaEntry?: Maybe<CyclopediaEntry>;
-  /**
-   * A cyclopediaEntry object
-   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
-   */
-  cyclopediaEntryBy?: Maybe<CyclopediaEntry>;
   descriptionSettings?: Maybe<DescriptionSettings>;
   /** Fields of the &#039;DiscussionSettings&#039; settings group */
   discussionSettings?: Maybe<DiscussionSettings>;
   footerSettings?: Maybe<FooterSettings>;
   /** Fields of the &#039;GeneralSettings&#039; settings group */
   generalSettings?: Maybe<GeneralSettings>;
+  /** An object of the lifoIndexChapter Type.  */
+  lifoIndexChapter?: Maybe<LifoIndexChapter>;
+  /**
+   * A lifoIndexChapter object
+   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+   */
+  lifoIndexChapterBy?: Maybe<LifoIndexChapter>;
+  /** Connection between the RootQuery type and the lifoIndexChapter type */
+  lifoIndexChapters?: Maybe<RootQueryToLifoIndexChapterConnection>;
+  /** Connection between the RootQuery type and the lifoIndexEntry type */
+  lifoIndexEntries?: Maybe<RootQueryToLifoIndexEntryConnection>;
+  /** An object of the lifoIndexEntry Type.  */
+  lifoIndexEntry?: Maybe<LifoIndexEntry>;
+  /**
+   * A lifoIndexEntry object
+   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+   */
+  lifoIndexEntryBy?: Maybe<LifoIndexEntry>;
   /** An object of the mediaItem Type.  */
   mediaItem?: Maybe<MediaItem>;
   /**
@@ -8377,54 +8377,54 @@ export type RootQueryContentTypesArgs = {
 
 
 /** The root entry point into the Graph */
-export type RootQueryCyclopediaChapterArgs = {
+export type RootQueryLifoIndexChapterArgs = {
   asPreview?: InputMaybe<Scalars['Boolean']['input']>;
   id: Scalars['ID']['input'];
-  idType?: InputMaybe<CyclopediaChapterIdType>;
+  idType?: InputMaybe<LifoIndexChapterIdType>;
 };
 
 
 /** The root entry point into the Graph */
-export type RootQueryCyclopediaChapterByArgs = {
-  cyclopediaChapterId?: InputMaybe<Scalars['Int']['input']>;
+export type RootQueryLifoIndexChapterByArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
+  lifoIndexChapterId?: InputMaybe<Scalars['Int']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   uri?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 /** The root entry point into the Graph */
-export type RootQueryCyclopediaChaptersArgs = {
+export type RootQueryLifoIndexChaptersArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<RootQueryToCyclopediaChapterConnectionWhereArgs>;
+  where?: InputMaybe<RootQueryToLifoIndexChapterConnectionWhereArgs>;
 };
 
 
 /** The root entry point into the Graph */
-export type RootQueryCyclopediaEntriesArgs = {
+export type RootQueryLifoIndexEntriesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<RootQueryToCyclopediaEntryConnectionWhereArgs>;
+  where?: InputMaybe<RootQueryToLifoIndexEntryConnectionWhereArgs>;
 };
 
 
 /** The root entry point into the Graph */
-export type RootQueryCyclopediaEntryArgs = {
+export type RootQueryLifoIndexEntryArgs = {
   asPreview?: InputMaybe<Scalars['Boolean']['input']>;
   id: Scalars['ID']['input'];
-  idType?: InputMaybe<CyclopediaEntryIdType>;
+  idType?: InputMaybe<LifoIndexEntryIdType>;
 };
 
 
 /** The root entry point into the Graph */
-export type RootQueryCyclopediaEntryByArgs = {
-  cyclopediaEntryId?: InputMaybe<Scalars['Int']['input']>;
+export type RootQueryLifoIndexEntryByArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
+  lifoIndexEntryId?: InputMaybe<Scalars['Int']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   uri?: InputMaybe<Scalars['String']['input']>;
 };
@@ -9073,148 +9073,6 @@ export type RootQueryToContentTypeConnectionPageInfo = ContentTypeConnectionPage
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
-/** Connection between the RootQuery type and the cyclopediaChapter type */
-export type RootQueryToCyclopediaChapterConnection = Connection & CyclopediaChapterConnection & {
-  __typename?: 'RootQueryToCyclopediaChapterConnection';
-  /** Edges for the RootQueryToCyclopediaChapterConnection connection */
-  edges: Array<RootQueryToCyclopediaChapterConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<CyclopediaChapter>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToCyclopediaChapterConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type RootQueryToCyclopediaChapterConnectionEdge = CyclopediaChapterConnectionEdge & Edge & {
-  __typename?: 'RootQueryToCyclopediaChapterConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: CyclopediaChapter;
-};
-
-/** Pagination metadata specific to &quot;RootQueryToCyclopediaChapterConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCyclopediaChapterConnection Nodes. */
-export type RootQueryToCyclopediaChapterConnectionPageInfo = CyclopediaChapterConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToCyclopediaChapterConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Arguments for filtering the RootQueryToCyclopediaChapterConnection connection */
-export type RootQueryToCyclopediaChapterConnectionWhereArgs = {
-  /** Filter the connection based on dates */
-  dateQuery?: InputMaybe<DateQueryInput>;
-  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
-  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Specific database ID of the object */
-  id?: InputMaybe<Scalars['Int']['input']>;
-  /** Array of IDs for the objects to retrieve */
-  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Get objects with a specific mimeType property */
-  mimeType?: InputMaybe<MimeTypeEnum>;
-  /** Slug / post_name of the object */
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** Specify objects to retrieve. Use slugs */
-  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What parameter to use to order the objects by. */
-  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
-  /** Use ID to return only children. Use 0 to return only top-level items */
-  parent?: InputMaybe<Scalars['ID']['input']>;
-  /** Specify objects whose parent is in an array */
-  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Specify posts whose parent is not in an array */
-  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Show posts with a specific password. */
-  password?: InputMaybe<Scalars['String']['input']>;
-  /** Show Posts based on a keyword search */
-  search?: InputMaybe<Scalars['String']['input']>;
-  /** Retrieve posts where post status is in an array. */
-  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
-  /** Show posts with a specific status. */
-  status?: InputMaybe<PostStatusEnum>;
-  /** Title of the object */
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** Connection between the RootQuery type and the cyclopediaEntry type */
-export type RootQueryToCyclopediaEntryConnection = Connection & CyclopediaEntryConnection & {
-  __typename?: 'RootQueryToCyclopediaEntryConnection';
-  /** Edges for the RootQueryToCyclopediaEntryConnection connection */
-  edges: Array<RootQueryToCyclopediaEntryConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<CyclopediaEntry>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToCyclopediaEntryConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type RootQueryToCyclopediaEntryConnectionEdge = CyclopediaEntryConnectionEdge & Edge & {
-  __typename?: 'RootQueryToCyclopediaEntryConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: CyclopediaEntry;
-};
-
-/** Pagination metadata specific to &quot;RootQueryToCyclopediaEntryConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCyclopediaEntryConnection Nodes. */
-export type RootQueryToCyclopediaEntryConnectionPageInfo = CyclopediaEntryConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToCyclopediaEntryConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Arguments for filtering the RootQueryToCyclopediaEntryConnection connection */
-export type RootQueryToCyclopediaEntryConnectionWhereArgs = {
-  /** Filter the connection based on dates */
-  dateQuery?: InputMaybe<DateQueryInput>;
-  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
-  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Specific database ID of the object */
-  id?: InputMaybe<Scalars['Int']['input']>;
-  /** Array of IDs for the objects to retrieve */
-  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Get objects with a specific mimeType property */
-  mimeType?: InputMaybe<MimeTypeEnum>;
-  /** Slug / post_name of the object */
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** Specify objects to retrieve. Use slugs */
-  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What parameter to use to order the objects by. */
-  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
-  /** Use ID to return only children. Use 0 to return only top-level items */
-  parent?: InputMaybe<Scalars['ID']['input']>;
-  /** Specify objects whose parent is in an array */
-  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Specify posts whose parent is not in an array */
-  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Show posts with a specific password. */
-  password?: InputMaybe<Scalars['String']['input']>;
-  /** Show Posts based on a keyword search */
-  search?: InputMaybe<Scalars['String']['input']>;
-  /** Retrieve posts where post status is in an array. */
-  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
-  /** Show posts with a specific status. */
-  status?: InputMaybe<PostStatusEnum>;
-  /** Title of the object */
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
 /** Connection between the RootQuery type and the EnqueuedScript type */
 export type RootQueryToEnqueuedScriptConnection = Connection & EnqueuedScriptConnection & {
   __typename?: 'RootQueryToEnqueuedScriptConnection';
@@ -9279,6 +9137,148 @@ export type RootQueryToEnqueuedStylesheetConnectionPageInfo = EnqueuedStylesheet
   hasPreviousPage: Scalars['Boolean']['output'];
   /** When paginating backwards, the cursor to continue. */
   startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Connection between the RootQuery type and the lifoIndexChapter type */
+export type RootQueryToLifoIndexChapterConnection = Connection & LifoIndexChapterConnection & {
+  __typename?: 'RootQueryToLifoIndexChapterConnection';
+  /** Edges for the RootQueryToLifoIndexChapterConnection connection */
+  edges: Array<RootQueryToLifoIndexChapterConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<LifoIndexChapter>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToLifoIndexChapterConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToLifoIndexChapterConnectionEdge = Edge & LifoIndexChapterConnectionEdge & {
+  __typename?: 'RootQueryToLifoIndexChapterConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: LifoIndexChapter;
+};
+
+/** Pagination metadata specific to &quot;RootQueryToLifoIndexChapterConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToLifoIndexChapterConnection Nodes. */
+export type RootQueryToLifoIndexChapterConnectionPageInfo = LifoIndexChapterConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToLifoIndexChapterConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the RootQueryToLifoIndexChapterConnection connection */
+export type RootQueryToLifoIndexChapterConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Connection between the RootQuery type and the lifoIndexEntry type */
+export type RootQueryToLifoIndexEntryConnection = Connection & LifoIndexEntryConnection & {
+  __typename?: 'RootQueryToLifoIndexEntryConnection';
+  /** Edges for the RootQueryToLifoIndexEntryConnection connection */
+  edges: Array<RootQueryToLifoIndexEntryConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<LifoIndexEntry>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToLifoIndexEntryConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToLifoIndexEntryConnectionEdge = Edge & LifoIndexEntryConnectionEdge & {
+  __typename?: 'RootQueryToLifoIndexEntryConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: LifoIndexEntry;
+};
+
+/** Pagination metadata specific to &quot;RootQueryToLifoIndexEntryConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToLifoIndexEntryConnection Nodes. */
+export type RootQueryToLifoIndexEntryConnectionPageInfo = LifoIndexEntryConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToLifoIndexEntryConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the RootQueryToLifoIndexEntryConnection connection */
+export type RootQueryToLifoIndexEntryConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Connection between the RootQuery type and the mediaItem type */
@@ -11372,13 +11372,13 @@ export type UpdateCommentPayload = {
   success?: Maybe<Scalars['Boolean']['output']>;
 };
 
-/** Input for the updateCyclopediaChapter mutation. */
-export type UpdateCyclopediaChapterInput = {
+/** Input for the updateLifoIndexChapter mutation. */
+export type UpdateLifoIndexChapterInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
-  /** The ID of the cyclopediaChapter object */
+  /** The ID of the lifoIndexChapter object */
   id: Scalars['ID']['input'];
   /** Override the edit lock when another user is editing the post */
   ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
@@ -11394,24 +11394,24 @@ export type UpdateCyclopediaChapterInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** The payload for the updateCyclopediaChapter mutation. */
-export type UpdateCyclopediaChapterPayload = {
-  __typename?: 'UpdateCyclopediaChapterPayload';
+/** The payload for the updateLifoIndexChapter mutation. */
+export type UpdateLifoIndexChapterPayload = {
+  __typename?: 'UpdateLifoIndexChapterPayload';
   /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The Post object mutation type. */
-  cyclopediaChapter?: Maybe<CyclopediaChapter>;
+  lifoIndexChapter?: Maybe<LifoIndexChapter>;
 };
 
-/** Input for the updateCyclopediaEntry mutation. */
-export type UpdateCyclopediaEntryInput = {
+/** Input for the updateLifoIndexEntry mutation. */
+export type UpdateLifoIndexEntryInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** The content of the object */
   content?: InputMaybe<Scalars['String']['input']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
-  /** The ID of the cyclopediaEntry object */
+  /** The ID of the lifoIndexEntry object */
   id: Scalars['ID']['input'];
   /** Override the edit lock when another user is editing the post */
   ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
@@ -11427,13 +11427,13 @@ export type UpdateCyclopediaEntryInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** The payload for the updateCyclopediaEntry mutation. */
-export type UpdateCyclopediaEntryPayload = {
-  __typename?: 'UpdateCyclopediaEntryPayload';
+/** The payload for the updateLifoIndexEntry mutation. */
+export type UpdateLifoIndexEntryPayload = {
+  __typename?: 'UpdateLifoIndexEntryPayload';
   /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The Post object mutation type. */
-  cyclopediaEntry?: Maybe<CyclopediaEntry>;
+  lifoIndexEntry?: Maybe<LifoIndexEntry>;
 };
 
 /** Input for the updateMediaItem mutation. */
@@ -12684,18 +12684,6 @@ export type WithAcfAboutOptions = {
   aboutOptions?: Maybe<AboutOptions>;
 };
 
-/** Provides access to fields of the &quot;CyclopediaChapterDetails&quot; ACF Field Group via the &quot;cyclopediaChapterDetails&quot; field */
-export type WithAcfCyclopediaChapterDetails = {
-  /** Fields of the CyclopediaChapterDetails ACF Field Group */
-  cyclopediaChapterDetails?: Maybe<CyclopediaChapterDetails>;
-};
-
-/** Provides access to fields of the &quot;CyclopediaEntryDetails&quot; ACF Field Group via the &quot;cyclopediaEntryDetails&quot; field */
-export type WithAcfCyclopediaEntryDetails = {
-  /** Fields of the CyclopediaEntryDetails ACF Field Group */
-  cyclopediaEntryDetails?: Maybe<CyclopediaEntryDetails>;
-};
-
 /** Provides access to fields of the &quot;DescriptionOptions&quot; ACF Field Group via the &quot;descriptionOptions&quot; field */
 export type WithAcfDescriptionOptions = {
   /** Fields of the DescriptionOptions ACF Field Group */
@@ -12706,6 +12694,18 @@ export type WithAcfDescriptionOptions = {
 export type WithAcfFrontendContent = {
   /** Fields of the FrontendContent ACF Field Group */
   frontendContent?: Maybe<FrontendContent>;
+};
+
+/** Provides access to fields of the &quot;LifoIndexChapterDetails&quot; ACF Field Group via the &quot;lifoIndexChapterDetails&quot; field */
+export type WithAcfLifoIndexChapterDetails = {
+  /** Fields of the LifoIndexChapterDetails ACF Field Group */
+  lifoIndexChapterDetails?: Maybe<LifoIndexChapterDetails>;
+};
+
+/** Provides access to fields of the &quot;LifoIndexEntryDetails&quot; ACF Field Group via the &quot;lifoIndexEntryDetails&quot; field */
+export type WithAcfLifoIndexEntryDetails = {
+  /** Fields of the LifoIndexEntryDetails ACF Field Group */
+  lifoIndexEntryDetails?: Maybe<LifoIndexEntryDetails>;
 };
 
 /** Access point for the &quot;AboutSettings&quot; ACF Options Page */
@@ -12770,10 +12770,10 @@ export type GetAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetAllTagsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string } }> } | null };
 
-export type GetCyclopediaChaptersQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetLifoIndexChaptersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCyclopediaChaptersQuery = { __typename?: 'RootQuery', cyclopediaChapters?: { __typename?: 'RootQueryToCyclopediaChapterConnection', edges: Array<{ __typename?: 'RootQueryToCyclopediaChapterConnectionEdge', node: { __typename?: 'CyclopediaChapter', id: string, cyclopediaChapterDetails?: { __typename?: 'CyclopediaChapterDetails', chapterOrder: number, backgroundColor: string } | null } }> } | null };
+export type GetLifoIndexChaptersQuery = { __typename?: 'RootQuery', lifoIndexChapters?: { __typename?: 'RootQueryToLifoIndexChapterConnection', edges: Array<{ __typename?: 'RootQueryToLifoIndexChapterConnectionEdge', node: { __typename?: 'LifoIndexChapter', id: string, lifoIndexChapterDetails?: { __typename?: 'LifoIndexChapterDetails', chapterOrder: number, backgroundColor: string } | null } }> } | null };
 
 export type GetContactContentQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12824,24 +12824,24 @@ export type GetTagsByIdsQueryVariables = Exact<{
 
 export type GetTagsByIdsQuery = { __typename?: 'RootQuery', tags?: { __typename?: 'RootQueryToTagConnection', edges: Array<{ __typename?: 'RootQueryToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null };
 
-export type GetChapterWithEntryIdsQueryVariables = Exact<{
+export type GetLifoIndexChapterWithEntryIdsQueryVariables = Exact<{
   chapterId: Scalars['ID']['input'];
 }>;
 
 
-export type GetChapterWithEntryIdsQuery = { __typename?: 'RootQuery', cyclopediaChapter?: { __typename?: 'CyclopediaChapter', id: string, title?: string | null, cyclopediaChapterDetails?: { __typename?: 'CyclopediaChapterDetails', entries?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename?: 'CyclopediaChapter' } | { __typename: 'CyclopediaEntry', id: string } | { __typename?: 'MediaItem' } | { __typename?: 'Page' } | { __typename?: 'Person' } | { __typename?: 'Place' } | { __typename?: 'Post' } | { __typename?: 'Project' }> } | null } | null } | null };
+export type GetLifoIndexChapterWithEntryIdsQuery = { __typename?: 'RootQuery', lifoIndexChapter?: { __typename?: 'LifoIndexChapter', id: string, title?: string | null, lifoIndexChapterDetails?: { __typename?: 'LifoIndexChapterDetails', entries?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename?: 'LifoIndexChapter' } | { __typename: 'LifoIndexEntry', id: string } | { __typename?: 'MediaItem' } | { __typename?: 'Page' } | { __typename?: 'Person' } | { __typename?: 'Place' } | { __typename?: 'Post' } | { __typename?: 'Project' }> } | null } | null } | null };
 
-export type GetCyclopediaEntryQueryVariables = Exact<{
+export type GetLifoIndexEntryQueryVariables = Exact<{
   entryId: Scalars['ID']['input'];
 }>;
 
 
-export type GetCyclopediaEntryQuery = { __typename?: 'RootQuery', cyclopediaEntry?: { __typename?: 'CyclopediaEntry', id: string, title?: string | null, content?: string | null, slug?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null } | null };
+export type GetLifoIndexEntryQuery = { __typename?: 'RootQuery', lifoIndexEntry?: { __typename?: 'LifoIndexEntry', id: string, title?: string | null, content?: string | null, slug?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null, altText?: string | null } } | null } | null };
 
 export type GetAllPeopleQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllPeopleQuery = { __typename?: 'RootQuery', people?: { __typename?: 'RootQueryToPersonConnection', edges: Array<{ __typename?: 'RootQueryToPersonConnectionEdge', node: { __typename?: 'Person', id: string, title?: string | null, content?: string | null, slug?: string | null, personProfile?: { __typename?: 'PersonProfile', coreMember?: boolean | null, roles: string, referencedProjects?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'CyclopediaChapter' } | { __typename: 'CyclopediaEntry' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Person' } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project', title?: string | null, slug?: string | null }> } | null } | null } }> } | null };
+export type GetAllPeopleQuery = { __typename?: 'RootQuery', people?: { __typename?: 'RootQueryToPersonConnection', edges: Array<{ __typename?: 'RootQueryToPersonConnectionEdge', node: { __typename?: 'Person', id: string, title?: string | null, content?: string | null, slug?: string | null, personProfile?: { __typename?: 'PersonProfile', coreMember?: boolean | null, roles: string, referencedProjects?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'LifoIndexChapter' } | { __typename: 'LifoIndexEntry' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Person' } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project', title?: string | null, slug?: string | null }> } | null } | null } }> } | null };
 
 export type GetProjectDetailsQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -12855,7 +12855,7 @@ export type GetProjectOverviewQueryVariables = Exact<{
 }>;
 
 
-export type GetProjectOverviewQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', title?: string | null, excerpt?: string | null, tags?: { __typename?: 'ProjectToTagConnection', edges: Array<{ __typename?: 'ProjectToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null, projectDetails?: { __typename?: 'ProjectDetails', referencedPeople?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'CyclopediaChapter' } | { __typename: 'CyclopediaEntry' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Person', slug?: string | null } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project' }> } | null } | null } | null };
+export type GetProjectOverviewQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', title?: string | null, excerpt?: string | null, tags?: { __typename?: 'ProjectToTagConnection', edges: Array<{ __typename?: 'ProjectToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null, projectDetails?: { __typename?: 'ProjectDetails', referencedPeople?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'LifoIndexChapter' } | { __typename: 'LifoIndexEntry' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Person', slug?: string | null } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project' }> } | null } | null } | null };
 
 export type GetProjectCardQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -12962,13 +12962,13 @@ export const GetAllTagsDocument = gql`
   }
 }
     `;
-export const GetCyclopediaChaptersDocument = gql`
-    query GetCyclopediaChapters {
-  cyclopediaChapters(first: 50) {
+export const GetLifoIndexChaptersDocument = gql`
+    query GetLifoIndexChapters {
+  lifoIndexChapters(first: 50) {
     edges {
       node {
         id
-        cyclopediaChapterDetails {
+        lifoIndexChapterDetails {
           chapterOrder
           backgroundColor
         }
@@ -13096,15 +13096,15 @@ export const GetTagsByIdsDocument = gql`
   }
 }
     `;
-export const GetChapterWithEntryIdsDocument = gql`
-    query GetChapterWithEntryIds($chapterId: ID!) {
-  cyclopediaChapter(id: $chapterId) {
+export const GetLifoIndexChapterWithEntryIdsDocument = gql`
+    query GetLifoIndexChapterWithEntryIds($chapterId: ID!) {
+  lifoIndexChapter(id: $chapterId) {
     id
     title
-    cyclopediaChapterDetails {
+    lifoIndexChapterDetails {
       entries {
         nodes {
-          ... on CyclopediaEntry {
+          ... on LifoIndexEntry {
             __typename
             id
           }
@@ -13114,9 +13114,9 @@ export const GetChapterWithEntryIdsDocument = gql`
   }
 }
     `;
-export const GetCyclopediaEntryDocument = gql`
-    query GetCyclopediaEntry($entryId: ID!) {
-  cyclopediaEntry(id: $entryId) {
+export const GetLifoIndexEntryDocument = gql`
+    query GetLifoIndexEntry($entryId: ID!) {
+  lifoIndexEntry(id: $entryId) {
     id
     title
     content
@@ -13251,8 +13251,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetAllTags(variables?: GetAllTagsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllTagsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllTagsQuery>({ document: GetAllTagsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllTags', 'query', variables);
     },
-    GetCyclopediaChapters(variables?: GetCyclopediaChaptersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCyclopediaChaptersQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetCyclopediaChaptersQuery>({ document: GetCyclopediaChaptersDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCyclopediaChapters', 'query', variables);
+    GetLifoIndexChapters(variables?: GetLifoIndexChaptersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetLifoIndexChaptersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetLifoIndexChaptersQuery>({ document: GetLifoIndexChaptersDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetLifoIndexChapters', 'query', variables);
     },
     GetContactContent(variables?: GetContactContentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetContactContentQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetContactContentQuery>({ document: GetContactContentDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetContactContent', 'query', variables);
@@ -13281,11 +13281,11 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetTagsByIds(variables: GetTagsByIdsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetTagsByIdsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetTagsByIdsQuery>({ document: GetTagsByIdsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTagsByIds', 'query', variables);
     },
-    GetChapterWithEntryIds(variables: GetChapterWithEntryIdsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetChapterWithEntryIdsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetChapterWithEntryIdsQuery>({ document: GetChapterWithEntryIdsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetChapterWithEntryIds', 'query', variables);
+    GetLifoIndexChapterWithEntryIds(variables: GetLifoIndexChapterWithEntryIdsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetLifoIndexChapterWithEntryIdsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetLifoIndexChapterWithEntryIdsQuery>({ document: GetLifoIndexChapterWithEntryIdsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetLifoIndexChapterWithEntryIds', 'query', variables);
     },
-    GetCyclopediaEntry(variables: GetCyclopediaEntryQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCyclopediaEntryQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetCyclopediaEntryQuery>({ document: GetCyclopediaEntryDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCyclopediaEntry', 'query', variables);
+    GetLifoIndexEntry(variables: GetLifoIndexEntryQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetLifoIndexEntryQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetLifoIndexEntryQuery>({ document: GetLifoIndexEntryDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetLifoIndexEntry', 'query', variables);
     },
     GetAllPeople(variables?: GetAllPeopleQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetAllPeopleQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllPeopleQuery>({ document: GetAllPeopleDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetAllPeople', 'query', variables);

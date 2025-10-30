@@ -1,6 +1,6 @@
 {
   "key": "group_68a36ecac57c0",
-  "title": "Cyclopedia Entry Details",
+  "title": "LiFo-Index Entry Details",
   "fields": [
     {
       "key": "field_68a36ecacbb69",
@@ -17,7 +17,7 @@
         "id": ""
       },
       "post_type": [
-        "cyclopedia-chapter"
+        "lifo-index-chapter"
       ],
       "post_status": "",
       "taxonomy": "",
@@ -43,7 +43,7 @@
       {
         "param": "post_type",
         "operator": "==",
-        "value": "cyclopedia-entry"
+        "value": "lifo-index-entry"
       }
     ]
   ],
@@ -57,7 +57,7 @@
   "description": "",
   "show_in_rest": 0,
   "show_in_graphql": 1,
-  "graphql_field_name": "cyclopediaEntryDetails",
+  "graphql_field_name": "lifoIndexEntryDetails",
   "map_graphql_types_from_location_rules": 0,
   "graphql_types": ""
 }

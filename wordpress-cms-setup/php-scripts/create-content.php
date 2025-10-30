@@ -1,7 +1,7 @@
 <?php
 /**
  * Create sample content for WordPress CMS
- * This script creates people, posts, and cyclopedia entries with proper relationships
+ * This script creates people, posts, and lifo-index entries with proper relationships
  */
 
 function get_attachment_id($filename) {
@@ -181,10 +181,10 @@ $place1_id = wp_insert_post(array(
     'post_status' => 'publish',
 ));
 
-// Cyclopedia Entries
+// Lifo-index Entries
 $chapter1_id = wp_insert_post(array(
-    'post_type' => 'cyclopedia-chapter',
-    'post_title' => 'Cyclopedia Chapter Alpha',
+    'post_type' => 'lifo-index-chapter',
+    'post_title' => 'Index Chapter Alpha',
     'post_status' => 'publish',
     'meta_input' => array(
         'chapter_order' => 1,
@@ -192,7 +192,7 @@ $chapter1_id = wp_insert_post(array(
     )
 ));
 
-$cyclopedia_content_1 = '
+$index_content_1 = '
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
 aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
@@ -203,20 +203,20 @@ Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
 Voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt.</p>
 ';
 
-$cyclopedia1_id = wp_insert_post(array(
-    'post_type' => 'cyclopedia-entry',
-    'post_title' => 'Cyclopedia Entry Alpha',
-    'post_content' => $cyclopedia_content_1,
+$index1_id = wp_insert_post(array(
+    'post_type' => 'lifo-index-entry',
+    'post_title' => 'Index Entry Alpha',
+    'post_content' => $index_content_1,
     'post_status' => 'publish',
     'meta_input' => array(
         '_thumbnail_id' => $image_1_id
     )
 ));
 
-$cyclopedia2_id = wp_insert_post(array(
-    'post_type' => 'cyclopedia-entry',
-    'post_title' => 'Cyclopedia Entry Beta',
-    'post_content' => $cyclopedia_content_1,
+$index2_id = wp_insert_post(array(
+    'post_type' => 'lifo-index-entry',
+    'post_title' => 'Index Entry Beta',
+    'post_content' => $index_content_1,
     'post_status' => 'publish',
     'meta_input' => array(
         '_thumbnail_id' => $image_2_id
@@ -224,8 +224,8 @@ $cyclopedia2_id = wp_insert_post(array(
 ));
 
 $chapter2_id = wp_insert_post(array(
-    'post_type' => 'cyclopedia-chapter',
-    'post_title' => 'Cyclopedia Chapter Beta',
+    'post_type' => 'lifo-index-chapter',
+    'post_title' => 'Index Chapter Beta',
     'post_status' => 'publish',
     'meta_input' => array(
         'chapter_order' => 2,
@@ -233,10 +233,10 @@ $chapter2_id = wp_insert_post(array(
     )
 ));
 
-$cyclopedia3_id = wp_insert_post(array(
-    'post_type' => 'cyclopedia-entry',
-    'post_title' => 'Cyclopedia Entry Gamma',
-    'post_content' => $cyclopedia_content_1,
+$index3_id = wp_insert_post(array(
+    'post_type' => 'lifo-index-entry',
+    'post_title' => 'Index Entry Gamma',
+    'post_content' => $index_content_1,
     'post_status' => 'publish',
     'meta_input' => array(
         '_thumbnail_id' => $image_3_id
@@ -245,10 +245,10 @@ $cyclopedia3_id = wp_insert_post(array(
 
 // Set up many-to-many relationships
 // Chapter Alpha: Alpha, Beta, Gamma entries
-update_field('entries', array($cyclopedia1_id, $cyclopedia2_id, $cyclopedia3_id), $chapter1_id);
+update_field('entries', array($index1_id, $index2_id, $index3_id), $chapter1_id);
 
 // Chapter Beta: Beta entry only
-update_field('entries', array($cyclopedia2_id), $chapter2_id);
+update_field('entries', array($index2_id), $chapter2_id);
 
 // The bidirectional sync will automatically set the chapters field on each entry
 
@@ -282,7 +282,7 @@ update_field('description_content', $description_content, 'option');
 // Set up About options page content
 update_field('about_title', 'Living the Forest Lab', 'option');
 
-update_field('about_content_text', $cyclopedia_content_1, 'option');
+update_field('about_content_text', $index_content_1, 'option');
 
 // Define expandable info
 $group_titles = [

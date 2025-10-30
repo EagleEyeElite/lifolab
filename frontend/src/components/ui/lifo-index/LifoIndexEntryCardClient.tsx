@@ -6,7 +6,7 @@ import HTMLRenderer from "@/components/ui/renderHtml/htmlRenderer";
 import { strings } from '@/config/siteConfig';
 
 
-interface CyclopediaEntryCardProps {
+interface LifoIndexEntryCardProps {
   id: string;
   title?: string | null;
   content?: string | null;
@@ -75,7 +75,7 @@ function truncateHtmlToWords(html: string, wordLimit: number): { truncated: stri
   return { truncated: result, isTruncated: true };
 }
 
-export default function CyclopediaEntryCardClient({ id, title, content, slug, featuredImage, backgroundColor }: CyclopediaEntryCardProps) {
+export default function LifoIndexEntryCardClient({ id, title, content, slug, featuredImage, backgroundColor }: LifoIndexEntryCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const contentRef = React.useRef<HTMLDivElement>(null);
   
@@ -113,7 +113,7 @@ export default function CyclopediaEntryCardClient({ id, title, content, slug, fe
           <div className="relative w-full h-48">
             <Image
               src={entry.featuredImage.node.sourceUrl}
-              alt={entry.featuredImage.node.altText || entry.title || strings.altText.cyclopediaEntry}
+              alt={entry.featuredImage.node.altText || entry.title || strings.altText.indexEntry}
               fill
               className="object-contain"
             />

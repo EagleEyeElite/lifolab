@@ -47,10 +47,10 @@ const pageConfigs: Record<string, PageConfig> = {
     href: "/#projects",
     id: "projects"
   },
-  cyclopedia: {
-    name: "LiFo-Cyclopedia",
+  index: {
+    name: "LiFo-Index",
     icon: BookOpen,
-    href: "/cyclopedia"
+    href: "/lifo-index"
   },
   contact: {
     name: "Contact",
@@ -91,7 +91,7 @@ export const siteConfig = {
       links: [
         pageConfigs.projects,
         pageConfigs.tags,
-        { name: "LiFo-Cyclopedia", href: pageConfigs.cyclopedia.href, icon: pageConfigs.cyclopedia.icon }
+        { name: "LiFo-Index", href: pageConfigs.index.href, icon: pageConfigs.index.icon }
       ] as NavigationItem[]
     },
     menu: "Menu"
@@ -149,7 +149,7 @@ export const siteConfig = {
       logo: "Living the Forest Lab",
       featuredImage: "Featured image",
       genericImage: "image",
-      cyclopediaEntry: "Cyclopedia entry",
+      indexEntry: "Index entry",
       imprintImage: "Imprint Image"
     }
   }

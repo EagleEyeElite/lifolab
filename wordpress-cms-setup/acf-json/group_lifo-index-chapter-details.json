@@ -1,6 +1,6 @@
 {
   "key": "group_68b01f960c586",
-  "title": "Cyclopedia Chapter Details",
+  "title": "LiFo-Index Chapter Details",
   "fields": [
     {
       "key": "field_68b0240b39415",
@@ -58,7 +58,7 @@
       "name": "entries",
       "aria-label": "",
       "type": "relationship",
-      "instructions": "Select and order cyclopedia entries for this chapter",
+      "instructions": "Select and order lifo-index entries for this chapter",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -67,7 +67,7 @@
         "id": ""
       },
       "post_type": [
-        "cyclopedia-entry"
+        "lifo-index-entry"
       ],
       "post_status": "",
       "taxonomy": "",
@@ -94,7 +94,7 @@
       {
         "param": "post_type",
         "operator": "==",
-        "value": "cyclopedia-chapter"
+        "value": "lifo-index-chapter"
       }
     ]
   ],
@@ -108,7 +108,7 @@
   "description": "",
   "show_in_rest": 0,
   "show_in_graphql": 1,
-  "graphql_field_name": "cyclopediaChapterDetails",
+  "graphql_field_name": "lifoIndexChapterDetails",
   "map_graphql_types_from_location_rules": 0,
   "graphql_types": ""
 }
