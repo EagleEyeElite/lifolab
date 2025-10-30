@@ -37,7 +37,6 @@ export default function ProjectCardClient({
   const [isVisible, setIsVisible] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const element = cardRef.current;
@@ -72,6 +71,7 @@ export default function ProjectCardClient({
       className={`group relative ${shouldAnimate ? 'duration-200 ease-out' : ''} ${
         isVisible ? 'opacity-100 translate-y-0' : shouldAnimate ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
       }`}
+      style={{ '--secondary-color': secondaryColor } as React.CSSProperties}
     >
     <Link href={href} className="relative z-10">
       <div className="relative rounded-primary group-hover:blur-xs duration-200 w-full max-h-[800px] overflow-hidden">
@@ -84,12 +84,7 @@ export default function ProjectCardClient({
           sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"
         />
       </div>
-      <div
-        className="pt-2 transition-colors"
-        style={{ color: isHovered ? secondaryColor : 'inherit' }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
+      <div className="pt-2 transition-colors group-hover:[color:var(--secondary-color)]">
         <SubHeading>{title}</SubHeading>
       </div>
     </Link>
