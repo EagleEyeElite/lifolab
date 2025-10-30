@@ -3,8 +3,8 @@
 
 @theme {
     /* Global */
-    --color-primary: #d2ff17;
-    --color-secondary: #cc3636;
+    --color-primary: #ff614d;
+    --color-secondary: #ff614d;
     --font-heading: 'Menlo', 'Monaco', 'Consolas', monospace;
     --font-body: theme(fontFamily.sans);
     --radius-primary: theme(borderRadius.xl);
