@@ -1,0 +1,30 @@
+---
+services:
+  swag:
+    image: lscr.io/linuxserver/swag
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+      - URL=lifolab.de
+      - SUBDOMAINS=www,cms
+      - VALIDATION=http
+      - EMAIL=xxx@xxx
+      - ONLY_SUBDOMAINS=false
+      - EXTRA_DOMAINS=lifolab.com,www.lifolab.com,cms.lifolab.com
+      - STAGING=false
+    volumes:
+      - ./config:/config
+    network_mode: "host"
+    ports:
+      - 443:443
+      - 80:80
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
