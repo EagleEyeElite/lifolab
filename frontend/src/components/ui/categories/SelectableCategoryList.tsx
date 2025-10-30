@@ -42,10 +42,10 @@ export default function SelectableCategoryList({ tags, currentTagSlug }: Selecta
           <button
             key={tag.id}
             onClick={() => handleTagClick(tag.slug)}
-            className={`inline-flex items-center px-2 py-1 text-xs font-heading rounded-full border-2 bg-primary text-black ${
+            className={`inline-flex items-center px-2 py-1 text-xs font-heading rounded-full border-2 transition-colors ${
               isSelected
-                ? 'border-black shadow-md'
-                : 'border-transparent hover:border-gray-300'
+                ? 'bg-red-500 text-white border-black shadow-md'
+                : 'bg-primary text-black border-transparent hover:bg-red-500 hover:text-white hover:border-gray-300'
             }`}
           >
             {tag.name}
