@@ -61,7 +61,7 @@ export default async function ProjectOverview({ id, whenAndWhere }: ProjectOverv
 
   // Extract tag IDs from the project tags
   const tagIds = project.tags?.edges?.map(({ node }) => node.id) || [];
-  
+
   return (
     <div className="w-full">
       {whenAndWhere && (
@@ -71,7 +71,7 @@ export default async function ProjectOverview({ id, whenAndWhere }: ProjectOverv
       )}
       {project.excerpt && (
         <div className="pb-8">
-            <HTMLRenderer className={"text-black !max-w-none"} content={project.excerpt} />
+            <HTMLRenderer className={"text-lg leading-tight text-black font-normal text-justify max-w-none"} content={project.excerpt} />
         </div>
       )}
       <PostTags tags={tagIds} />

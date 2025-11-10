@@ -39,9 +39,7 @@ export default async function ProjectContent({ slug }: ProjectContentProps) {
   return (
     <>
       <PostImage image={project.featuredImage} title={project.title} />
-      <div className="prose prose-lg max-w-none">
-        <HTMLRenderer  className="" content={project.content} />
-      </div>
+      <HTMLRenderer content={project.content} className="text-lg leading-tight text-black font-normal text-justify max-w-none" />
     </>
   );
 }

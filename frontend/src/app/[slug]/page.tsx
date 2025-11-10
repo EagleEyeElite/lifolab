@@ -41,7 +41,7 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
           <div className="max-w-lg lg:mr-auto">
             <ProjectOverview id={project.id} whenAndWhere={project.projectDetails?.whenAndWhere} />
           </div>
-          <div className="max-w-xl lg:mx-auto pb-responsive-lg w-full">
+          <div className="max-w-xl pb-responsive-lg w-full lg:col-span-2 lg:col-start-2">
             <ProjectContent slug={slug} />
           </div>
         </div>
