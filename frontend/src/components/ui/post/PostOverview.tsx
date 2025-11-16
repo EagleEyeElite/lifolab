@@ -71,7 +71,7 @@ export default async function ProjectOverview({ id, whenAndWhere }: ProjectOverv
       )}
       {project.excerpt && (
         <div className="pb-8">
-            <HTMLRenderer className={"text-lg leading-tight text-black font-normal text-justify max-w-none"} content={project.excerpt} />
+            <HTMLRenderer className={"text-lg leading-snug text-black font-normal text-left max-w-none"} content={project.excerpt} />
         </div>
       )}
       <PostTags tags={tagIds} />
