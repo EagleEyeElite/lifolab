@@ -13276,7 +13276,7 @@ export const GetProjectOverviewDocument = gql`
       }
     }
     projectDetails {
-      referencedPeople {
+      referencedPeople(first: 100) {
         nodes {
           __typename
           ... on Person {
