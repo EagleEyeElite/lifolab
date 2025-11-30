@@ -23,6 +23,10 @@
     [id] {
     @apply scroll-mt-navbar;
     }
+
+    .prose img {
+    @apply rounded-primary;
+    }
 }
 
 @layer utilities {
