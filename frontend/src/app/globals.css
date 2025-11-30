@@ -27,6 +27,14 @@
     .prose img {
     @apply rounded-primary;
     }
+
+    .prose figcaption,
+    .wp-element-caption {
+    @apply font-heading;
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+    margin-top: -2rem !important;
+    }
 }
 
 @layer utilities {
