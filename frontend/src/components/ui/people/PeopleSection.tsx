@@ -62,6 +62,12 @@ export default async function PeopleSection({ title, personSlugs, columns = 1 }:
           slug: project.slug
         })) || []
       }];
+    })
+    .sort((a, b) => {
+      // Extract first name (first word) from full name
+      const firstNameA = a.name.split(' ')[0]?.toLowerCase() || '';
+      const firstNameB = b.name.split(' ')[0]?.toLowerCase() || '';
+      return firstNameA.localeCompare(firstNameB);
     });
 
   return <>
