@@ -5,7 +5,7 @@ function loadEnvFiles() {
     const paths = process.env.NODE_ENV === 'production'
         ? ['../.env']
         : ['.env.local', '.env', '../.env'];
-    dotenv.config({ path: paths });
+    dotenv.config({ path: paths, quiet: true });
 }
 
 module.exports = { loadEnvFiles };
