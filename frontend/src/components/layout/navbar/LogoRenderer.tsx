@@ -75,6 +75,8 @@ export default function LogoRenderer({ animate, onNavigate, onScrollProgressChan
   }, [animate]);
 
   useEffect(() => {
+    if (aspectRatio === 0) return;
+
     const updateDimensions = () => {
       // client width/height is equivalent to lvh and lvw
       // on mobile when the address bears scrolls away; that stays constant (no jumps)
@@ -199,6 +201,19 @@ export default function LogoRenderer({ animate, onNavigate, onScrollProgressChan
 
   return (
     <>
+      {/* Hidden image to measure aspect ratio before logo is positioned */}
+      {!logoPositions.isReady && (
+        <Image
+          src={Match}
+          alt={strings.altText.logo}
+          className="invisible fixed"
+          priority
+          onLoad={(event) => {
+            const img = event.currentTarget;
+            setAspectRatio(img.naturalWidth / img.naturalHeight);
+          }}
+        />
+      )}
       {logoPositions.isReady && (
         <motion.div
           className="fixed -translate-x-1/2 -translate-y-1/2 cursor-pointer"
@@ -209,10 +224,6 @@ export default function LogoRenderer({ animate, onNavigate, onScrollProgressChan
             alt={strings.altText.logo}
             className="size-full"
             priority
-            onLoad={(event) => {
-              const img = event.currentTarget;
-              setAspectRatio(img.naturalWidth / img.naturalHeight);
-            }}
             onClick={handleLogoClick}
           />
         </motion.div>
