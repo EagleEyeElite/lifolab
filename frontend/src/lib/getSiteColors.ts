@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 
@@ -43,6 +44,9 @@ export interface GetSiteColorsQueryResponse {
  * ```
  */
 export async function getSiteColors(): Promise<SiteColorSettings | null> {
+  'use cache';
+  cacheLife('cms');
+
   try {
     const response = await graphqlClient.request<GetSiteColorsQueryResponse>(
       GetSiteColorsQuery

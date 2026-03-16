@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import {
@@ -10,8 +11,6 @@ import { Tag } from 'lucide-react';
 import React from "react";
 import SubHeading from '@/components/ui/SubHeading';
 import { strings } from '@/config/siteConfig';
-
-export const revalidate = 10;
 
 const GetAllTags = gql`
     query GetAllTags {
@@ -26,6 +25,8 @@ const GetAllTags = gql`
 `;
 
 export default async function TagsPage() {
+  'use cache';
+  cacheLife('cms');
   const { tags } = await graphqlClient.request<GetAllTagsQuery, GetAllTagsQueryVariables>(GetAllTags);
   const ids = tags?.edges?.map(({ node: tag }) => (
     tag.id!

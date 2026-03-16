@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import { notFound } from 'next/navigation';
@@ -8,8 +9,6 @@ import {
   GetProjectWhenAndWhereQueryVariables,
 } from "@/graphql/generatedTypes";
 import Section from '@/components/ui/Section';
-
-export const revalidate = 10;
 
 const GetProjectWhenAndWhere = gql`
     query GetProjectWhenAndWhere($id: ID!) {
@@ -24,6 +23,9 @@ const GetProjectWhenAndWhere = gql`
 `;
 
 export default async function Project({ params }: { params: Promise<{ slug: string }> }) {
+  'use cache';
+  cacheLife('cms');
+
   const { slug } = await params;
   const { project } = await graphqlClient.request<GetProjectWhenAndWhereQuery, GetProjectWhenAndWhereQueryVariables>(
     GetProjectWhenAndWhere,

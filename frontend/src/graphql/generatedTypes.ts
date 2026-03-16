@@ -12907,7 +12907,16 @@ export type GetLifoIndexChapterWithEntryIdsQueryVariables = Exact<{
 }>;
 
 
-export type GetLifoIndexChapterWithEntryIdsQuery = { __typename?: 'RootQuery', lifoIndexChapter?: { __typename?: 'LifoIndexChapter', id: string, title?: string | null, lifoIndexChapterDetails?: { __typename?: 'LifoIndexChapterDetails', entries?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename?: 'LifoIndexChapter' } | { __typename: 'LifoIndexEntry', id: string } | { __typename?: 'MediaItem' } | { __typename?: 'Page' } | { __typename?: 'Person' } | { __typename?: 'Place' } | { __typename?: 'Post' } | { __typename?: 'Project' }> } | null } | null } | null };
+export type GetLifoIndexChapterWithEntryIdsQuery = { __typename?: 'RootQuery', lifoIndexChapter?: { __typename?: 'LifoIndexChapter', id: string, title?: string | null, lifoIndexChapterDetails?: { __typename?: 'LifoIndexChapterDetails', entries?: { __typename?: 'AcfContentNodeConnection', nodes: Array<
+          | { __typename?: 'LifoIndexChapter' }
+          | { __typename: 'LifoIndexEntry', id: string }
+          | { __typename?: 'MediaItem' }
+          | { __typename?: 'Page' }
+          | { __typename?: 'Person' }
+          | { __typename?: 'Place' }
+          | { __typename?: 'Post' }
+          | { __typename?: 'Project' }
+        > } | null } | null } | null };
 
 export type GetLifoIndexEntryQueryVariables = Exact<{
   entryId: Scalars['ID']['input'];
@@ -12919,7 +12928,16 @@ export type GetLifoIndexEntryQuery = { __typename?: 'RootQuery', lifoIndexEntry?
 export type GetAllPeopleQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllPeopleQuery = { __typename?: 'RootQuery', people?: { __typename?: 'RootQueryToPersonConnection', edges: Array<{ __typename?: 'RootQueryToPersonConnectionEdge', node: { __typename?: 'Person', id: string, title?: string | null, content?: string | null, slug?: string | null, personProfile?: { __typename?: 'PersonProfile', coreMember?: boolean | null, roles: string, referencedProjects?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'LifoIndexChapter' } | { __typename: 'LifoIndexEntry' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Person' } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project', title?: string | null, slug?: string | null }> } | null } | null } }> } | null };
+export type GetAllPeopleQuery = { __typename?: 'RootQuery', people?: { __typename?: 'RootQueryToPersonConnection', edges: Array<{ __typename?: 'RootQueryToPersonConnectionEdge', node: { __typename?: 'Person', id: string, title?: string | null, content?: string | null, slug?: string | null, personProfile?: { __typename?: 'PersonProfile', coreMember?: boolean | null, roles: string, referencedProjects?: { __typename?: 'AcfContentNodeConnection', nodes: Array<
+              | { __typename: 'LifoIndexChapter' }
+              | { __typename: 'LifoIndexEntry' }
+              | { __typename: 'MediaItem' }
+              | { __typename: 'Page' }
+              | { __typename: 'Person' }
+              | { __typename: 'Place' }
+              | { __typename: 'Post' }
+              | { __typename: 'Project', title?: string | null, slug?: string | null }
+            > } | null } | null } }> } | null };
 
 export type GetProjectDetailsQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -12933,7 +12951,16 @@ export type GetProjectOverviewQueryVariables = Exact<{
 }>;
 
 
-export type GetProjectOverviewQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', title?: string | null, excerpt?: string | null, tags?: { __typename?: 'ProjectToTagConnection', edges: Array<{ __typename?: 'ProjectToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null, projectDetails?: { __typename?: 'ProjectDetails', referencedPeople?: { __typename?: 'AcfContentNodeConnection', nodes: Array<{ __typename: 'LifoIndexChapter' } | { __typename: 'LifoIndexEntry' } | { __typename: 'MediaItem' } | { __typename: 'Page' } | { __typename: 'Person', slug?: string | null } | { __typename: 'Place' } | { __typename: 'Post' } | { __typename: 'Project' }> } | null } | null } | null };
+export type GetProjectOverviewQuery = { __typename?: 'RootQuery', project?: { __typename?: 'Project', title?: string | null, excerpt?: string | null, tags?: { __typename?: 'ProjectToTagConnection', edges: Array<{ __typename?: 'ProjectToTagConnectionEdge', node: { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null } }> } | null, projectDetails?: { __typename?: 'ProjectDetails', referencedPeople?: { __typename?: 'AcfContentNodeConnection', nodes: Array<
+          | { __typename: 'LifoIndexChapter' }
+          | { __typename: 'LifoIndexEntry' }
+          | { __typename: 'MediaItem' }
+          | { __typename: 'Page' }
+          | { __typename: 'Person', slug?: string | null }
+          | { __typename: 'Place' }
+          | { __typename: 'Post' }
+          | { __typename: 'Project' }
+        > } | null } | null } | null };
 
 export type GetProjectCardQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -12948,7 +12975,11 @@ type AuthorDetailsFields_Page_Fragment = { __typename?: 'Page', author?: { __typ
 
 type AuthorDetailsFields_Post_Fragment = { __typename?: 'Post', author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } } | null };
 
-export type AuthorDetailsFieldsFragment = AuthorDetailsFields_MediaItem_Fragment | AuthorDetailsFields_Page_Fragment | AuthorDetailsFields_Post_Fragment;
+export type AuthorDetailsFieldsFragment =
+  | AuthorDetailsFields_MediaItem_Fragment
+  | AuthorDetailsFields_Page_Fragment
+  | AuthorDetailsFields_Post_Fragment
+;
 
 export const AuthorDetailsFieldsFragmentDoc = gql`
     fragment AuthorDetailsFields on NodeWithAuthor {

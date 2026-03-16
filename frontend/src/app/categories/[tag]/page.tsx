@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { graphqlClient } from '@/graphql/client';
 import { gql } from 'graphql-request';
 import ProjectCard from '@/components/ui/projectsOverview/projectCard';
@@ -13,8 +14,6 @@ import SubHeading from '@/components/ui/SubHeading';
 import { strings } from '@/config/siteConfig';
 import { notFound } from 'next/navigation';
 import MasonryLayout from '@/components/ui/projectsOverview/masonryLayout';
-
-export const revalidate = 10;
 
 const GetTagWithProjectsAndAllTags = gql`
     query GetTagWithProjectsAndAllTags($slug: [String]) {
@@ -52,6 +51,8 @@ interface TagPageProps {
 }
 
 export default async function TagPage({ params }: TagPageProps) {
+  'use cache';
+  cacheLife('cms');
   const { tag } = await params;
 
   // Get both tag information and projects in a single query

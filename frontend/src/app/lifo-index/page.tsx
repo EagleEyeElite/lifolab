@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import React from "react";
 import { graphqlClient } from "@/graphql/client";
 import { gql } from "graphql-request";
@@ -22,9 +23,9 @@ const GetLifoIndexChapters = gql`
   }
 `;
 
-export const revalidate = 10;
-
 export default async function LifoIndex() {
+  'use cache';
+  cacheLife('cms');
   // Fetch chapters only
   const { lifoIndexChapters } = await graphqlClient.request<any>(
     GetLifoIndexChapters

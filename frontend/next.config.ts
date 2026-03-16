@@ -5,6 +5,14 @@ import {cleanEnv} from "envalid";
 const env = cleanEnv(process.env, schema)
 
 const nextConfig: NextConfig = {
+  cacheComponents: true,
+  cacheLife: {
+    cms: {
+      stale: 30,
+      revalidate: 10,
+      expire: Infinity,
+    },
+  },
   output: 'standalone',
   images: {
     remotePatterns: [
