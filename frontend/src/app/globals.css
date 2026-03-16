@@ -15,8 +15,8 @@
     --spacing-three-column-gap: theme(spacing.6);
 
     /* Breakpoints */
-    --breakpoint-tablet: 600;
-    --breakpoint-desktop: 1000;
+    --breakpoint-tablet: 768;
+    --breakpoint-desktop: 1024;
 }
 
 @layer base {

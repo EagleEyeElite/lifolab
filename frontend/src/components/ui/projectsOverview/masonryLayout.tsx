@@ -13,8 +13,8 @@ export default function MasonryLayout({ children }: MasonryLayoutProps) {
   // Responsive breakpoints
   const breakpoints = {
     mobile: 0,
-    tablet: 600,
-    desktop: 1000
+    tablet: 768,
+    desktop: 1024
   };
 
   useEffect(() => {
