@@ -65,14 +65,14 @@ export default async function ContactSection() {
     })).filter(contact => contact.email);
 
   return (
-    <div className="flex-2 space-y-responsive">
+    <div className="lg:col-span-2 space-y-responsive">
       <div className={`border-y border-black py-responsive-sm`}>
         <h2 className={`text-responsive-xs pl-responsive font-heading tracking-wide flex items-center gap-2`}>
           Contact <Mic size={16} />
         </h2>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-responsive">
+      <div className="flex flex-col md:flex-row gap-responsive">
         <div className="flex-1 space-y-responsive">
           <p className="font-heading text-responsive-xs font-medium">
             {projectName}

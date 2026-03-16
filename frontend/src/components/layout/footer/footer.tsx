@@ -13,7 +13,7 @@ export default async function Footer() {
       id="footer"
       style={{ backgroundColor: primaryColor }}
     >
-      <div className="flex flex-col sm:flex-row gap-responsive">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-responsive">
         <ContactSection />
         <ImprintSection />
       </div>

@@ -34,7 +34,7 @@ export default async function ImprintSection() {
   const imprintImages = footerSettings?.frontendContent?.imprint?.imprintImages?.nodes || [];
 
   return (
-    <div className="flex-1 space-y-responsive">
+    <div className="space-y-responsive">
       <div className={`border-y border-black py-responsive-sm`}>
         <h2 className={`text-responsive-xs pl-responsive font-heading tracking-wide flex items-center gap-2`}>
           Imprint <FolderClosed size={16} />
