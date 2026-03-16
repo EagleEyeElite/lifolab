@@ -10,7 +10,7 @@ const GetLifoIndexChapterWithEntryIds = gql`
             id
             title
             lifoIndexChapterDetails {
-                entries {
+                entries(first: 100) {
                     nodes {
                         ... on LifoIndexEntry {
                             __typename

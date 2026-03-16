@@ -20,25 +20,23 @@ interface LifoIndexEntryCardProps {
   backgroundColor: string;
 }
 
-// Helper function to truncate HTML content to a specific word count and add inline show more button
+// Helper function to truncate HTML content to a specific word count
 function truncateHtmlToWords(html: string, wordLimit: number): { truncated: string; isTruncated: boolean } {
-  // Remove HTML tags to count words, but preserve the structure for truncation
   const textContent = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   const words = textContent.split(' ');
-  
+
   if (words.length <= wordLimit) {
     return { truncated: html, isTruncated: false };
   }
-  
-  // Create truncated version by counting words while preserving HTML structure
+
   let wordCount = 0;
   let result = '';
   let inTag = false;
   let currentWord = '';
-  
+
   for (let i = 0; i < html.length; i++) {
     const char = html[i];
-    
+
     if (char === '<') {
       if (currentWord.trim()) {
         result += currentWord;
@@ -63,57 +61,34 @@ function truncateHtmlToWords(html: string, wordLimit: number): { truncated: stri
       currentWord += char;
     }
   }
-  
-  // Add remaining word if we haven't reached the limit
+
   if (currentWord.trim() && wordCount < wordLimit) {
     result += currentWord;
   }
-  
-  // Add ellipsis and placeholder for show more button
-  result += '... <span class="show-more-placeholder"></span>';
-  
+
+  // Close any open tags and add ellipsis with a placeholder for the inline show-more button
+  result += '… <button data-show-more="true"></button>';
+
   return { truncated: result, isTruncated: true };
 }
 
+const indexProseClassName = "text-black text-sm [&_h2]:text-base [&_h2]:font-heading [&_h2]:font-semibold [&_h2]:mt-3 [&_h2]:mb-1";
+
 export default function LifoIndexEntryCardClient({ id, title, content, slug, featuredImage, backgroundColor }: LifoIndexEntryCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const contentRef = React.useRef<HTMLDivElement>(null);
-  
-  // Use the props directly as entry data
-  const entry = {
-    id,
-    title,
-    content,
-    slug,
-    featuredImage
-  };
-  
-  const { truncated, isTruncated } = entry.content 
-    ? truncateHtmlToWords(entry.content, 50)
-    : { truncated: '', isTruncated: false };
 
-  // Replace the placeholder with the "Show more" button after render
-  React.useEffect(() => {
-    if (contentRef.current && isTruncated && !isExpanded) {
-      const placeholder = contentRef.current.querySelector('.show-more-placeholder');
-      if (placeholder) {
-        const button = document.createElement('button');
-        button.className = 'text-black font-heading text-sm underline hover:no-underline transition-all ml-1';
-        button.textContent = strings.ui.showMore;
-        button.onclick = () => setIsExpanded(true);
-        placeholder.replaceWith(button);
-      }
-    }
-  }, [isExpanded, isTruncated]);
+  const { truncated, isTruncated } = content
+    ? truncateHtmlToWords(content, 50)
+    : { truncated: '', isTruncated: false };
 
   return (
     <div className="rounded-primary overflow-hidden" style={{ backgroundColor }}>
-      {entry.featuredImage?.node?.sourceUrl && (
+      {featuredImage?.node?.sourceUrl && (
         <div className="pt-3">
           <div className="relative w-full h-48">
             <Image
-              src={entry.featuredImage.node.sourceUrl}
-              alt={entry.featuredImage.node.altText || entry.title || strings.altText.indexEntry}
+              src={featuredImage.node.sourceUrl}
+              alt={featuredImage.node.altText || title || strings.altText.indexEntry}
               fill
               className="object-contain"
             />
@@ -121,19 +96,19 @@ export default function LifoIndexEntryCardClient({ id, title, content, slug, fea
         </div>
       )}
       <div className="p-4 space-y-3">
-        {entry.title && (
+        {title && (
           <h3 className="font-heading text-lg font-medium">
-            {entry.title}
+            {title}
           </h3>
         )}
-        {entry.content && (
+        {content && (
           <div className="text-sm space-y-2">
-            <div ref={contentRef}>
-              <HTMLRenderer 
-                content={isExpanded ? entry.content : truncated} 
-                className="text-black text-sm" 
-              />
-            </div>
+            <HTMLRenderer
+              content={isExpanded ? content : truncated}
+              className={indexProseClassName}
+              style={{ '--tw-prose-bullets': 'black', '--tw-prose-counters': 'black' } as React.CSSProperties}
+              onShowMore={isTruncated && !isExpanded ? () => setIsExpanded(true) : undefined}
+            />
             {isTruncated && isExpanded && (
               <button
                 onClick={() => setIsExpanded(false)}

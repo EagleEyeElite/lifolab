@@ -47,9 +47,10 @@ interface HTMLRendererProps {
   content: string | null | undefined;
   className?: string;
   style?: React.CSSProperties;
+  onShowMore?: (() => void) | undefined;
 }
 
-export default function HTMLRenderer({ content, className, style }: HTMLRendererProps) {
+export default function HTMLRenderer({ content, className, style, onShowMore }: HTMLRendererProps) {
   if (!content) {
     return null;
   }
@@ -58,6 +59,18 @@ export default function HTMLRenderer({ content, className, style }: HTMLRenderer
     replace(domNode) {
       if (!(domNode instanceof Element)) {
         return;
+      }
+
+      // Replace show-more placeholder with a real React button
+      if (domNode.name === 'button' && domNode.attribs?.['data-show-more'] && onShowMore) {
+        return (
+          <button
+            onClick={onShowMore}
+            className="text-black font-heading text-sm underline hover:no-underline transition-all ml-1"
+          >
+            {strings.ui.showMore}
+          </button>
+        );
       }
 
       const classes = domNode.attribs?.class || '';
