@@ -42,30 +42,33 @@ export default function Navbar({ primaryColor, secondaryColor }: NavbarProps) {
     return () => window.removeEventListener('resize', updateLayout);
   }, []);
 
+  // Stacking order: DOM order = visual order (bottom → top).
+  // Parent stacking context (layout.tsx isolate) isolates from page content.
+  // No z-indices needed — last element paints on top.
   return (
     <>
-      {/* Layer 0: Full-screen clickable overlay (lowest, only visible when logo is big) */}
+      {/* 1. Full-screen clickable overlay (bottom, only when logo is big) */}
       {showFullScreenOverlay && (
         <div
-          className="fixed inset-0 z-0"
+          className="fixed inset-0"
           onClick={() => logoClickTriggerRef.current?.()}
           aria-label="Scroll to explore"
         />
       )}
 
-      {/* Layer 1: Blur backdrop */}
+      {/* 2. Blur backdrop (visual only) */}
       <div
-        className="fixed top-0 w-full backdrop-blur-sm bg-gradient-to-b from-white/80 via-white/20 to-transparent [mask-image:linear-gradient(to_bottom,black_0%,black_60%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_60%,transparent_100%)]"
+        className="fixed top-0 w-full pointer-events-none backdrop-blur-sm bg-gradient-to-b from-white/80 via-white/20 to-transparent [mask-image:linear-gradient(to_bottom,black_0%,black_60%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_60%,transparent_100%)]"
         style={{ height: 'calc(var(--spacing-navbar) + 2rem)' }}
       />
 
-      {/* Layer 2: Logo (middle) */}
+      {/* 3. Logo */}
       <ScrollAnimatedLogo
         onScrollProgressChange={setScrollProgress}
         logoClickTriggerRef={logoClickTriggerRef}
       />
 
-      {/* Layer 3: Links with backgrounds (highest) */}
+      {/* 4. Navigation (top, always accessible) */}
       <nav className="fixed top-0 h-navbar w-full pointer-events-none">
         {layoutMode === 'mobile' ? (
           <MobileNavigation

@@ -16,12 +16,14 @@ export default async function RootLayout({children}: {
   return (
     <html lang="en" suppressHydrationWarning>
     <body>
-      <div className="relative z-10">
+      {/* Navbar needs z-[1] to stack above content that may create stacking contexts
+          (transforms, opacity, etc). This is the only z-index in the app. */}
+      <div className="relative z-[1]">
         <Suspense>
           <NavbarWithColors/>
         </Suspense>
       </div>
-      <div className="relative z-0 px-container">
+      <div className="px-container">
         <main className="min-h-screen pt-navbar pb-responsive-lg">
           <Suspense>
             {children}
