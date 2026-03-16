@@ -27,7 +27,7 @@ export default function MasonryLayout({ children }: MasonryLayoutProps) {
   }, []);
 
   const cards = React.Children.map(children, (child, index) => (
-      <div className="pb-3">
+      <div className="pb-3 min-w-0">
         {child}
       </div>
     ))

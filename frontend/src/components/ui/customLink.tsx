@@ -16,9 +16,9 @@ export default function CustomLink({ link, className = "" }: CustomLinkProps) {
   const externalAttrs = isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
   return (
-    <Link href={link.href} {...externalAttrs} className={`inline-flex items-center ${className}`}>
+    <Link href={link.href} {...externalAttrs} className={`inline break-all ${className}`}>
       {link.children}
-      {isExternal && <ArrowUpRight size={16} />}
+      {isExternal && <ArrowUpRight size={16} className="inline align-text-bottom" />}
     </Link>
   );
 }

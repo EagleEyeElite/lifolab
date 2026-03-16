@@ -82,7 +82,7 @@ export default function LifoIndexEntryCardClient({ id, title, content, slug, fea
     : { truncated: '', isTruncated: false };
 
   return (
-    <div className="rounded-primary overflow-hidden" style={{ backgroundColor }}>
+    <div className="rounded-primary overflow-hidden break-words overflow-wrap-anywhere" style={{ backgroundColor }}>
       {featuredImage?.node?.sourceUrl && (
         <div className="pt-3">
           <div className="relative w-full h-48">
