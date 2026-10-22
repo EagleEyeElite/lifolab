@@ -4,8 +4,10 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      # build runs outside the compose network, so reach WordPress via its host port
+      network: host
       args:
-        - WORDPRESS_CMS_PUBLIC_URL=http://wordpress:80
+        - WORDPRESS_CMS_PUBLIC_URL=http://127.0.0.1:${WORDPRESS_EXPOSE_PORT}
         - FRONTEND_NEXTJS_PASSWORD=${FRONTEND_NEXTJS_PASSWORD}
     platform: linux/amd64  # lightning css not compatible with arm
     environment:
