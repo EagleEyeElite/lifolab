@@ -23,9 +23,9 @@ const nextConfig: NextConfig = {
     ],
   },
   async rewrites() {
-    // In development, proxy to the actual WordPress CMS URL
-    // In production, proxy to the internal Docker container
-    const destination = process.env.NODE_ENV === 'production'
+    // In development and on Vercel, proxy to the actual WordPress CMS URL
+    // In production (Docker), proxy to the internal Docker container
+    const destination = process.env.NODE_ENV === 'production' && !process.env.VERCEL
       ? 'http://wordpress:80/wp-content/:path*'
       : `${env.WORDPRESS_CMS_PUBLIC_URL}/wp-content/:path*`;
 
